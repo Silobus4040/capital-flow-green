@@ -2002,39 +2002,6 @@ Requirements:
 Processing Time: 45-60 days`
   },
   {
-    id: "adc-loan",
-    name: "Acquisition, Development and Construction Loan",
-    interestRate: "10% - 16%",
-    minimumLoanAmount: "$500,000",
-    description: "Comprehensive financing for land acquisition, development, and construction projects.",
-    terms: `ADC LOAN TERMS
-
-Interest Rate: 10% - 16%
-Loan Term: 12-36 months
-Minimum Loan Amount: $500,000
-Maximum LTV: 75% (including land, development, and construction costs)
-
-Project Types:
-- Commercial developments
-- Mixed-use projects
-- Industrial developments
-- Residential developments
-
-Features:
-- Single close financing
-- Interest-only payments during construction
-- Staged funding based on milestones
-- Experienced construction lending team
-
-Requirements:
-- Detailed development plan
-- Licensed general contractor
-- Market feasibility study
-- Developer experience
-
-Processing Time: 45-60 days`
-  },
-  {
     id: "business-loan",
     name: "Business Loan",
     interestRate: "9% - 18%",
