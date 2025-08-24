@@ -14,7 +14,252 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_submissions: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          message: string
+          phone: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          message: string
+          phone?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          message?: string
+          phone?: string | null
+        }
+        Relationships: []
+      }
+      document_submissions: {
+        Row: {
+          created_at: string
+          document_name: string
+          file_name: string
+          file_path: string
+          file_size: number | null
+          file_type: string | null
+          id: string
+          notes: string | null
+          upload_slot: number | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          document_name: string
+          file_name: string
+          file_path: string
+          file_size?: number | null
+          file_type?: string | null
+          id?: string
+          notes?: string | null
+          upload_slot?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          document_name?: string
+          file_name?: string
+          file_path?: string
+          file_size?: number | null
+          file_type?: string | null
+          id?: string
+          notes?: string | null
+          upload_slot?: number | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      draw_requests: {
+        Row: {
+          contractor_email: string | null
+          contractor_name: string | null
+          contractor_phone: string | null
+          created_at: string
+          draw_number: number
+          id: string
+          invoice_amount: number | null
+          notes: string | null
+          percentage_complete: number | null
+          project_name: string
+          requested_amount: number
+          status: string | null
+          updated_at: string
+          user_id: string | null
+          work_completed: string
+        }
+        Insert: {
+          contractor_email?: string | null
+          contractor_name?: string | null
+          contractor_phone?: string | null
+          created_at?: string
+          draw_number: number
+          id?: string
+          invoice_amount?: number | null
+          notes?: string | null
+          percentage_complete?: number | null
+          project_name: string
+          requested_amount: number
+          status?: string | null
+          updated_at?: string
+          user_id?: string | null
+          work_completed: string
+        }
+        Update: {
+          contractor_email?: string | null
+          contractor_name?: string | null
+          contractor_phone?: string | null
+          created_at?: string
+          draw_number?: number
+          id?: string
+          invoice_amount?: number | null
+          notes?: string | null
+          percentage_complete?: number | null
+          project_name?: string
+          requested_amount?: number
+          status?: string | null
+          updated_at?: string
+          user_id?: string | null
+          work_completed?: string
+        }
+        Relationships: []
+      }
+      loan_applications: {
+        Row: {
+          borrower_email: string
+          borrower_name: string
+          borrower_phone: string
+          city: string
+          created_at: string
+          id: string
+          loan_amount: number
+          loan_program: string
+          project_address: string
+          project_description: string | null
+          project_name: string
+          property_type: string
+          state: string
+          status: string | null
+          updated_at: string
+          user_id: string | null
+          zip_code: string
+        }
+        Insert: {
+          borrower_email: string
+          borrower_name: string
+          borrower_phone: string
+          city: string
+          created_at?: string
+          id?: string
+          loan_amount: number
+          loan_program: string
+          project_address: string
+          project_description?: string | null
+          project_name: string
+          property_type: string
+          state: string
+          status?: string | null
+          updated_at?: string
+          user_id?: string | null
+          zip_code: string
+        }
+        Update: {
+          borrower_email?: string
+          borrower_name?: string
+          borrower_phone?: string
+          city?: string
+          created_at?: string
+          id?: string
+          loan_amount?: number
+          loan_program?: string
+          project_address?: string
+          project_description?: string | null
+          project_name?: string
+          property_type?: string
+          state?: string
+          status?: string | null
+          updated_at?: string
+          user_id?: string | null
+          zip_code?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          phone: string | null
+          role: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          role?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          role?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      referral_signups: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string
+          experience_level: string | null
+          full_name: string
+          id: string
+          phone: string | null
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email: string
+          experience_level?: string | null
+          full_name: string
+          id?: string
+          phone?: string | null
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string
+          experience_level?: string | null
+          full_name?: string
+          id?: string
+          phone?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
