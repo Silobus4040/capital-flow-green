@@ -2140,7 +2140,7 @@ export const loanPrograms: LoanProgram[] = [
 
   <div class="bg-white rounded-lg p-6 shadow-lg">
     <h3 class="text-2xl font-bold text-green-800 mb-4">6. 100% Financing</h3>
-    <p class="text-gray-700 mb-4">We offer industry-leading 100% financing options for qualified deals. To qualify for zero down investment property loans, applicants must meet the following enhanced criteria:</p>
+    <p class="text-gray-700 mb-4">We offer industry-leading 100% financing options for qualified deals. To qualify for zero down investment property loans, applicants must meet <strong>at least 2 of the following 6 enhanced criteria:</strong></p>
     
     <div class="bg-green-50 p-6 rounded-lg">
       <h4 class="text-xl font-bold text-green-800 mb-4">Primary Qualifications</h4>
