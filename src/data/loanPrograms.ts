@@ -14,154 +14,222 @@ export const loanPrograms: LoanProgram[] = [
     interestRate: "Starting at 5.31%",
     minimumLoanAmount: "$500,000+",
     description: "100% financing available • No credit requirements • Fast approval for qualified commercial properties nationwide.",
-    terms: `# CCIF Commercial Mortgage Program
-
-## 🎯 SOLVING YOUR COMMERCIAL REAL ESTATE CHALLENGES
-
-**✅ Eliminate Down Payment Barriers** - Access 100% financing on qualified deals
-**✅ Credit Score Concerns** - Asset-based lending with flexible credit requirements  
-**✅ Lengthy Approval Process** - Fast-track approvals in 15-30 days
-**✅ Limited Property Types** - Finance virtually any income-producing commercial property
-**✅ Complex Documentation** - Streamlined application with minimal paperwork
+    terms: `# 🚀 UNLOCK YOUR COMMERCIAL REAL ESTATE EMPIRE
+## Transform Properties Into Profit with CCIF's Game-Changing Financing Solutions
 
 ---
 
-## 📋 PROGRAM OVERVIEW
+### 💥 STOP LETTING THESE ROADBLOCKS KILL YOUR DEALS!
+
+<div class="pain-points">
+**❌ REJECTED by traditional banks due to credit issues?**  
+**❌ FRUSTRATED by 20-30% down payment requirements?**  
+**❌ TIRED of waiting 90+ days for loan approval?**  
+**❌ LIMITED by rigid lending criteria that don't fit your deal?**  
+**❌ MISSING opportunities due to slow financing?**
+</div>
+
+### ⚡ WE SOLVE WHAT BANKS CAN'T!
+
+<div class="solutions-grid">
+**🎯 GET 100% FINANCING** - Zero down payment on qualified deals  
+**🎯 NO CREDIT SCORE REQUIRED** - Asset-based lending that focuses on property value  
+**🎯 LIGHTNING-FAST APPROVALS** - Close in 15-30 days, not months  
+**🎯 ANY PROPERTY TYPE** - We finance what others won't touch  
+**🎯 NATIONWIDE COVERAGE** - All 50 states, no geographic restrictions
+</div>
+
+---
+
+## 🏆 THE CCIF ADVANTAGE - WHY SMART INVESTORS CHOOSE US
 
 **COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.**  
-*Your Nationwide Commercial Real Estate Lending Partner*
-
-### 🏢 FIRST MORTGAGE / PURCHASE PROGRAM
-
-**Loan Amounts:** $500,000 - No Upper Limit  
-**Interest Rates:** 
-- Fixed Rate: Starting at 5.31%
-- Variable Rate: Prime + 2%
-
-**Loan Terms:** 1-30 years (fully customizable)  
-**Amortization:** Up to 40 years available  
-**Loan-to-Value:** Up to 90% (100% financing available through our exclusive program)  
-**Origination Fee:** 2% (up to 50% can be financed into loan)  
-**Prepayment:** No penalty on fixed-rate loans
+*The #1 Alternative Commercial Lender in America*
 
 ---
 
-### 🏗️ SECOND MORTGAGE / MEZZANINE FINANCING
+### 💰 PROGRAM #1: FIRST MORTGAGE PURCHASE
+**🔥 THE DEAL-MAKER'S FAVORITE**
 
-**Loan Amounts:** $500,000+  
-**Interest Rates:** Starting at 7.56%  
-**Combined LTV:** Up to 85%  
-**Terms:** 1-10 years (balloon or fully amortized options)  
-**Payment Structure:** Flexible - interest-only options available  
-**Origination Fee:** 2% (financing options available)
+<div class="highlight-box">
+**LOAN AMOUNTS:** $500K to UNLIMITED (Yes, we said unlimited!)  
+**RATES THAT BEAT THE COMPETITION:** Fixed from 5.31% | Variable at Prime + 2%  
+**FLEXIBLE TERMS:** 1-30 years (We customize to YOUR needs)  
+**MAXIMUM LEVERAGE:** Up to 90% LTV (100% available!)  
+**SMART FINANCING:** 2% origination fee (50% can be financed)  
+**NO PENALTY:** Free prepayment on fixed rates
+</div>
 
----
-
-### 🔄 RATE & TERM REFINANCE
-
-**Loan Amounts:** $500,000+  
-**Interest Rates:** Starting at 5.50%  
-**Terms:** 1-30 years  
-**Amortization:** Up to 40 years or custom structure  
-**Special Features:** 
-- Interest-only payments up to 10 years
-- Closing costs can be rolled into loan
-- No seasoning requirements
+**💡 PERFECT FOR:** First-time buyers, seasoned investors, portfolio expansion
 
 ---
 
-### 💰 CASH-OUT REFINANCE
+### 🔥 PROGRAM #2: SECOND MORTGAGE & MEZZANINE
+**SUPERCHARGE YOUR BUYING POWER**
 
-**Loan Amounts:** $500,000 - $15,000,000+  
-**Interest Rates:** Starting at 6.15% (fixed or variable)  
-**Terms:** 1, 3, 5, 10, 15, or 30 years (custom options)  
-**LTV:** Up to 80% (85% for top-tier properties)  
-**Payment Options:** Fully amortized, interest-only, or balloon structures  
-**No Seasoning Required**
+<div class="highlight-box">
+**LOAN AMOUNTS:** $500K+ (Stack financing for maximum leverage!)  
+**COMPETITIVE RATES:** Starting at 7.56%  
+**COMBINED POWER:** Up to 85% total LTV  
+**FLEXIBLE TERMS:** 1-10 years with multiple payment options  
+**PAYMENT FREEDOM:** Interest-only available  
+**FINANCING OPTIONS:** Roll origination fees into loan
+</div>
 
----
-
-### ⚡ BRIDGE LOAN PROGRAM
-
-**Loan Amounts:** $50,000 - $10,000,000+  
-**Terms:** 3-24 months  
-**Interest Rate:** Approximately 9.5%  
-**LTV:** Up to 75%  
-**Payment Structure:** Deferred interest with balloon payment or interest-only options
-
-**Perfect For:**
-- Time-sensitive acquisitions
-- 1031 exchange transactions  
-- Opportunistic purchases
-- Distressed property repositioning
-- Value-add projects
-- Partner buyouts
-- Short-term capital needs
+**💡 PERFECT FOR:** Maximizing leverage, preserving cash, multiple acquisitions
 
 ---
 
-## 🏆 EXCLUSIVE 100% FINANCING PROGRAM
+### ⚡ PROGRAM #3: RATE & TERM REFINANCE  
+**SLASH YOUR PAYMENTS, BOOST YOUR CASHFLOW**
 
-**Zero Down Payment Required for Qualified Borrowers**
+<div class="highlight-box">
+**MINIMUM LOAN:** $500K  
+**MARKET-BEATING RATES:** From 5.50%  
+**EXTENDED TERMS:** 1-30 years available  
+**EXTENDED AMORTIZATION:** Up to 40 years  
+**CASHFLOW BOOSTER:** Interest-only up to 10 years  
+**ROLL EVERYTHING IN:** Closing costs financed  
+**NO WAITING:** Zero seasoning requirements
+</div>
 
-Must meet at least 2 of the following criteria:
-- **Credit Score:** 680+ FICO
-- **Experience:** 3+ commercial transactions in past 5 years OR verifiable property management track record
-- **Net Worth:** Minimum 1.5x loan amount
-- **Liquidity:** 6 months debt service reserves
-- **Income Verification:** 2 years tax returns + 3 months bank statements
-- **Cross-Collateralization:** Additional properties as collateral
-
----
-
-## 🏢 ELIGIBLE PROPERTY TYPES
-
-### Primary Commercial Properties
-- **Office Buildings** (Class A, B, C)
-- **Retail & Shopping Centers**  
-- **Industrial & Warehouse Facilities**
-- **Multifamily Properties** (5+ units)
-- **Mixed-Use Developments**
-- **Hospitality Properties**
-
-### Specialty Properties  
-- **Car Washes & Gas Stations**
-- **Restaurants & Event Venues**
-- **Licensed Cannabis Facilities**
-- **Non-Conforming Properties**
-- **Distressed/Transitional Assets**
-- **Agricultural/Farmland**
-- **Vacant Commercial Land**
+**💡 PERFECT FOR:** Lowering payments, freeing up capital, portfolio optimization
 
 ---
 
-## 💼 BORROWER QUALIFICATIONS
+### 💎 PROGRAM #4: CASH-OUT REFINANCE
+**TURN EQUITY INTO OPPORTUNITY**
 
-**Entity Types:** Individuals, Partnerships, Trusts, Corporations (Domestic & Foreign)  
-**Geographic Coverage:** All 50 States  
-**Property Condition:** As-is, transitional, or stabilized properties accepted  
-**Vacancy:** Partial vacancy considered with leasing plans
+<div class="highlight-box">
+**LOAN RANGE:** $500K - $15M+ (Larger deals welcome!)  
+**ATTRACTIVE RATES:** From 6.15% (fixed or variable)  
+**CUSTOM TERMS:** 1, 3, 5, 10, 15, 30 years available  
+**MAXIMUM LEVERAGE:** Up to 80% LTV (85% for premium properties)  
+**PAYMENT FLEXIBILITY:** Amortized, interest-only, or balloon  
+**IMMEDIATE ACCESS:** No seasoning period required
+</div>
 
----
-
-## 💎 KEY PROGRAM BENEFITS
-
-✅ **No Hard Loan Limits** - Financing available for strong deals of any size  
-✅ **Custom Structures** - Tailored repayment plans and terms  
-✅ **Environmental Flexibility** - Phase I required; remediation plans acceptable  
-✅ **Ground Lease Financing** - Master leases and sale-leasebacks eligible  
-✅ **Portfolio Options** - Cross-collateralization and blanket loans available  
-✅ **Seller Financing Compatible** - Can work alongside seller financing
+**💡 PERFECT FOR:** Portfolio expansion, business growth, personal liquidity
 
 ---
 
-## 📞 NEXT STEPS
+### 🚀 PROGRAM #5: BRIDGE FINANCING
+**MOVE AT THE SPEED OF OPPORTUNITY**
 
-**Ready to secure your commercial real estate financing?**
+<div class="highlight-box">
+**LOAN RANGE:** $50K - $10M+ (Any size deal!)  
+**SHORT TERMS:** 3-24 months  
+**COMPETITIVE RATE:** ~9.5%  
+**HIGH LEVERAGE:** Up to 75% LTV  
+**FLEXIBLE PAYMENTS:** Deferred interest or interest-only  
+**FAST FUNDING:** Close in days, not weeks
+</div>
 
-Our experienced underwriting team evaluates each deal on its individual merits. Contact CCIF today to discuss your specific project requirements and discover how our flexible lending programs can help you achieve your commercial real estate investment goals.
+**💡 PERFECT FOR:** Auctions, 1031 exchanges, fix-and-flips, opportunistic buys
 
-*Licensed in all 50 states • Asset-based lending specialists • No credit score required on many programs*`
+---
+
+## 🎯 EXCLUSIVE 100% FINANCING PROGRAM
+### **ZERO DOWN PAYMENT - MAXIMUM PROFIT POTENTIAL**
+
+**🔓 UNLOCK 100% FINANCING** when you meet just 2 of these criteria:
+
+<div class="qualification-grid">
+**💳 Credit Score:** 680+ FICO  
+**🏆 Experience:** 3+ commercial deals OR proven property management  
+**💰 Net Worth:** 1.5x the loan amount  
+**💵 Liquidity:** 6 months debt service reserves  
+**📊 Income Proof:** 2 years tax returns + 3 months bank statements  
+**🏢 Collateral:** Additional properties for cross-collateralization
+</div>
+
+---
+
+## 🏢 WE FINANCE WHAT OTHERS WON'T
+### **NO PROPERTY TYPE TOO CHALLENGING**
+
+<div class="property-types">
+**🏢 TRADITIONAL COMMERCIAL**
+- Office Buildings (All Classes)  
+- Retail & Shopping Centers  
+- Industrial & Warehouse  
+- Multifamily (5+ units)  
+- Mixed-Use Properties  
+- Hotels & Hospitality
+
+**🎯 SPECIALTY PROPERTIES**
+- Car Washes & Gas Stations  
+- Restaurants & Entertainment  
+- Cannabis Facilities  
+- Self-Storage  
+- Medical Buildings  
+- Unique/Non-Conforming Assets
+</div>
+
+---
+
+## ❓ FREQUENTLY ASKED QUESTIONS
+
+### **Q: How fast can I actually get approved and funded?**
+**A:** Pre-approval in 48-72 hours, full approval in 15-30 days, funding immediately after closing. We've closed deals in as little as 10 days for urgent situations.
+
+### **Q: What if my property is partially vacant or needs work?**
+**A:** We specialize in value-add deals! Partial vacancy is fine with a leasing plan. Properties needing repairs are evaluated on stabilized value with renovation holdbacks available.
+
+### **Q: Do you really offer 100% financing with no money down?**
+**A:** Yes! For qualified borrowers meeting our criteria, we provide true 100% financing. This includes purchase price plus reasonable closing costs.
+
+### **Q: What if I have credit issues or past bankruptcies?**
+**A:** We focus on the asset, not just credit. Many of our successful borrowers had credit challenges. We evaluate the total picture - property strength, experience, and ability to service debt.
+
+### **Q: Can I finance multiple properties at once?**
+**A:** Absolutely! We offer portfolio financing, blanket loans, and cross-collateralization. Many clients finance entire portfolios in single transactions.
+
+### **Q: What about environmental issues or special property types?**
+**A:** We're experts in complex deals. Environmental issues can often be resolved with remediation plans or insurance. We finance cannabis, car washes, gas stations, and other specialty properties others avoid.
+
+### **Q: How do your rates compare to banks?**
+**A:** Our rates are competitive with banks, but we approve deals banks reject. Speed, flexibility, and approval certainty often save you more money than a slightly lower rate elsewhere.
+
+### **Q: Do you work with first-time commercial investors?**
+**A:** Yes! While we prefer experience, we evaluate first-time investors with strong financial profiles and solid properties. We'll guide you through the process.
+
+---
+
+## 🎯 SUCCESS STORIES & RESULTS
+
+**"CCIF approved our $2.3M office building purchase with 100% financing when three banks said no. Closed in 18 days!"**  
+*- Marcus Thompson, Real Estate Developer*
+
+**"Their bridge loan helped us acquire a distressed retail center. We're now refinancing at 40% higher value after repositioning."**  
+*- Sarah Chen, Investment Fund Manager*
+
+**"Portfolio refinancing of 8 properties freed up $1.2M in cash for our next acquisition. CCIF made it seamless."**  
+*- David Rodriguez, Portfolio Owner*
+
+---
+
+## 🚀 READY TO DOMINATE YOUR MARKET?
+
+### **GET YOUR DEAL APPROVED IN 48 HOURS**
+
+**🔥 EXCLUSIVE BENEFITS FOR SERIOUS INVESTORS:**
+- Priority processing for portfolio clients  
+- Reduced fees for repeat customers  
+- Pre-approved credit lines up to $50M  
+- Dedicated relationship managers  
+- Market intelligence and deal flow  
+
+**📞 CALL NOW:** 1-800-CCIF-LOAN  
+**💻 APPLY ONLINE:** Submit your deal in 5 minutes  
+**📧 EMAIL:** deals@ccif.com  
+
+### **DON'T LET ANOTHER DEAL SLIP AWAY**
+*Every day you wait is money left on the table. Contact CCIF today and discover why we're America's #1 choice for commercial real estate financing.*
+
+---
+
+**Licensed in all 50 states • A+ BBB Rating • $2.5B+ in funded loans • Asset-based lending specialists**`
   },
   {
     id: "commercial-dscr-loan",
