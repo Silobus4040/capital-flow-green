@@ -1647,7 +1647,7 @@ export const loanPrograms: LoanProgram[] = [
   <div class="text-center">
     <h1 class="text-4xl font-bold text-green-800 mb-4">Mobile Home Park Financing</h1>
     <p class="text-xl text-green-700 mb-2">Welcome to our comprehensive Mobile Home Park Financing Program!</p>
-    <p class="text-lg text-green-600">Sundry Capital Solutions specialize in delivering tailored financial solutions for mobile home park investors.</p>
+    <p class="text-lg text-green-600">We specialize in delivering tailored financial solutions for mobile home park investors.</p>
   </div>
 
   <div class="bg-white rounded-lg p-6 shadow-lg">
@@ -1859,7 +1859,7 @@ export const loanPrograms: LoanProgram[] = [
 
   <div class="bg-white rounded-lg p-6 shadow-lg">
     <h3 class="text-2xl font-bold text-green-800 mb-4">6. 100% Financing</h3>
-    <p class="text-gray-700 mb-4">Sundry Capital Solutions offers industry-leading 100% financing options for qualified deals. To qualify for zero down investment property loans, applicants must meet the following enhanced criteria:</p>
+    <p class="text-gray-700 mb-4">We offer industry-leading 100% financing options for qualified deals. To qualify for zero down investment property loans, applicants must meet the following enhanced criteria:</p>
     
     <div class="bg-green-50 p-6 rounded-lg">
       <h4 class="text-xl font-bold text-green-800 mb-4">Primary Qualifications</h4>

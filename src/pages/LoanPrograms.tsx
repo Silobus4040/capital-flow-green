@@ -11,6 +11,7 @@ import commercialMortgageImage from "@/assets/commercial-mortgage.jpg";
 import commercialDscrImage from "@/assets/commercial-dscr-rental.jpg";
 import rehabPropertyImage from "@/assets/rehab-property.jpg";
 import rvParkImage from "@/assets/rv-park-campground.jpg";
+import mobileHomeParkImage from "@/assets/mobile-home-park.jpg";
 
 export default function LoanPrograms() {
   const [selectedProgram, setSelectedProgram] = useState<LoanProgram | null>(null);
@@ -130,6 +131,16 @@ export default function LoanPrograms() {
                           <img 
                             src={rehabPropertyImage} 
                             alt="Property Needing Rehabilitation and Renovation" 
+                            className="w-full h-48 object-cover rounded-lg shadow-lg"
+                          />
+                        </div>
+                      )}
+                      
+                      {selectedProgram?.id === "mobile-home-park-financing" && (
+                        <div className="mb-4">
+                          <img 
+                            src={mobileHomeParkImage} 
+                            alt="Mobile Home Park Community with Well-Maintained Manufactured Homes" 
                             className="w-full h-48 object-cover rounded-lg shadow-lg"
                           />
                         </div>
