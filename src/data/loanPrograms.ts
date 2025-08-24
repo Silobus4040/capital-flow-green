@@ -1638,38 +1638,6 @@ export const loanPrograms: LoanProgram[] = [
 </div>`
   },
   {
-    id: "rv-park-financing",
-    name: "RV Park Financing",
-    interestRate: "8.5% - 13%",
-    minimumLoanAmount: "$500,000",
-    description: "Specialized financing for RV parks and recreational vehicle facilities.",
-    terms: `RV PARK FINANCING TERMS
-
-Interest Rate: 8.5% - 13%
-Loan Term: Up to 25 years
-Minimum Loan Amount: $500,000
-Maximum LTV: 75%
-
-Property Features:
-- RV parks and campgrounds
-- Manufactured housing communities
-- Recreational facilities
-
-Key Benefits:
-- Experienced in RV park financing
-- Flexible underwriting
-- Quick closing process
-- Competitive rates
-
-Requirements:
-- Operating history preferred
-- Market analysis
-- Environmental assessment
-- Management experience
-
-Processing Time: 30-45 days`
-  },
-  {
     id: "mobile-home-park-financing",
     name: "Mobile Home Park Financing",
     interestRate: "8% - 12.5%",
