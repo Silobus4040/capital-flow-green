@@ -10,10 +10,13 @@ export default function HomePage() {
       <section className="relative py-20 px-4 bg-gradient-to-br from-primary to-primary-dark text-primary-foreground">
         <div className="container mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Commercial Capital & Investment Finance
+            100% Commercial Real Estate Financing
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
-            Your Trusted Asset-Based Commercial Real Estate Lender
+          <p className="text-xl md:text-2xl mb-4 max-w-3xl mx-auto opacity-90">
+            Asset-Based Lending for Real Estate Developers & Commercial Investors
+          </p>
+          <p className="text-lg md:text-xl mb-8 max-w-4xl mx-auto opacity-80">
+            No credit requirements • 100% financing available • Fast approval process • Serving all 50 states
           </p>
           
           {/* Key Value Propositions */}
@@ -21,12 +24,12 @@ export default function HomePage() {
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
               <CreditCard className="h-8 w-8 mx-auto mb-4" />
               <h3 className="text-lg font-semibold mb-2">No Credit Requirements</h3>
-              <p className="text-sm opacity-90">Asset-based lending focused on property value, not credit scores</p>
+              <p className="text-sm opacity-90">Asset-based lending focused on property value and cash flow, not personal credit scores</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
               <DollarSign className="h-8 w-8 mx-auto mb-4" />
               <h3 className="text-lg font-semibold mb-2">100% Financing Available</h3>
-              <p className="text-sm opacity-90">Complete financing solutions for qualified commercial properties</p>
+              <p className="text-sm opacity-90">Complete financing solutions for qualified commercial real estate projects nationwide</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
               <TrendingUp className="h-8 w-8 mx-auto mb-4" />
@@ -50,9 +53,9 @@ export default function HomePage() {
       <section className="py-16 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Asset-Based Commercial Lending</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Asset-Based Commercial Real Estate Lending</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We specialize in asset-based lending, focusing on the value and cash flow potential of your commercial property rather than traditional credit requirements.
+              Specializing in asset-based lending for commercial real estate developers and investors across all 50 states. Our financing decisions are based on property value and income potential, not personal credit history.
             </p>
           </div>
 
@@ -62,7 +65,7 @@ export default function HomePage() {
                 <CheckCircle className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-lg font-semibold mb-2">No Credit Requirements</h3>
                 <p className="text-sm text-muted-foreground">
-                  Approval based on property value and income potential
+                  Loan approval based on commercial property value and income potential for developers and investors
                 </p>
               </CardContent>
             </Card>

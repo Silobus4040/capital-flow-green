@@ -13,6 +13,8 @@ import ReferralProgram from "./pages/ReferralProgram";
 import AboutUs from "./pages/AboutUs";
 import DrawRequest from "./pages/DrawRequest";
 import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,8 @@ const App = () => (
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/draw-request" element={<DrawRequest />} />
             <Route path="/document-submission" element={<DocumentSubmission />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>

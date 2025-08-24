@@ -30,8 +30,11 @@ export default function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <img src={ccifLogo} alt="CCIF Logo" className="h-12 w-12" />
-            <div className="text-xl font-bold text-primary">
+            <div className="text-xl font-bold text-primary hidden sm:block">
               COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.
+            </div>
+            <div className="text-lg font-bold text-primary sm:hidden">
+              CCIF
             </div>
           </Link>
 
