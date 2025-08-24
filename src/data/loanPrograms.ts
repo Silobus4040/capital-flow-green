@@ -1638,323 +1638,298 @@ export const loanPrograms: LoanProgram[] = [
 </div>`
   },
   {
-    id: "mobile-home-park-financing",
-    name: "Mobile Home Park Financing",
-    interestRate: "5.00% - 7.00%",
-    minimumLoanAmount: "$150,000",
-    description: "Comprehensive Mobile Home Park Financing Program with tailored financial solutions for mobile home park investors.",
+    id: "acquisition-development-construction",
+    name: "Acquisition Development & Construction",
+    interestRate: "6.25% - 8.50%",
+    minimumLoanAmount: "$200,000",
+    description: "Comprehensive financing solutions for real estate developers nationwide spanning the entire project lifecycle.",
     terms: `<div class="space-y-8 bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl">
   <div class="text-center">
-    <h1 class="text-4xl font-bold text-green-800 mb-4">Mobile Home Park Financing</h1>
-    <p class="text-xl text-green-700 mb-2">Welcome to our comprehensive Mobile Home Park Financing Program!</p>
-    <p class="text-lg text-green-600">We specialize in delivering tailored financial solutions for mobile home park investors.</p>
+    <h1 class="text-4xl font-bold text-green-800 mb-4">Development & Construction Financing</h1>
+    <p class="text-xl text-green-700 mb-2">We empower Real Estate Developers nationwide with tailored, flexible financing options spanning the entire project lifecycle.</p>
+    <p class="text-lg text-green-600">Our expertise, speed, and direct approach help ensure your development gets the right capital at the right time.</p>
   </div>
 
   <div class="bg-white rounded-lg p-6 shadow-lg">
-    <h2 class="text-3xl font-bold text-green-800 mb-6 text-center">Financing Options</h2>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-      <div class="bg-green-100 p-4 rounded-lg text-center">
-        <div class="text-lg font-semibold text-green-800">1. Standard Purchase Loan</div>
+    <h2 class="text-2xl font-bold text-green-800 mb-4">Why Choose Us?</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="space-y-2">
+        <div class="flex items-center">
+          <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+          <span class="text-gray-700"><strong>Industry-Leading Speed:</strong> 10-30 business days funding</span>
+        </div>
+        <div class="flex items-center">
+          <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+          <span class="text-gray-700"><strong>Superior Leverage:</strong> Best leverage ratios in market</span>
+        </div>
+        <div class="flex items-center">
+          <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+          <span class="text-gray-700"><strong>Flexible Underwriting:</strong> Complex projects welcome</span>
+        </div>
       </div>
-      <div class="bg-green-100 p-4 rounded-lg text-center">
-        <div class="text-lg font-semibold text-green-800">2. Rate and Term Refinance</div>
-      </div>
-      <div class="bg-green-100 p-4 rounded-lg text-center">
-        <div class="text-lg font-semibold text-green-800">3. Purchase with DSCR Loan</div>
-      </div>
-      <div class="bg-green-100 p-4 rounded-lg text-center">
-        <div class="text-lg font-semibold text-green-800">4. Cash-out Refinance</div>
-      </div>
-      <div class="bg-green-100 p-4 rounded-lg text-center">
-        <div class="text-lg font-semibold text-green-800">5. Bridge Loan</div>
-      </div>
-      <div class="bg-green-100 p-4 rounded-lg text-center">
-        <div class="text-lg font-semibold text-green-800">6. 100% Financing Program</div>
+      <div class="space-y-2">
+        <div class="flex items-center">
+          <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+          <span class="text-gray-700"><strong>Direct Approach:</strong> Work with decision-makers</span>
+        </div>
+        <div class="flex items-center">
+          <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+          <span class="text-gray-700"><strong>Nationwide Reach:</strong> Local expertise, national platform</span>
+        </div>
+        <div class="flex items-center">
+          <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+          <span class="text-gray-700"><strong>Transparent Fees:</strong> No hidden costs</span>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="bg-white rounded-lg p-6 shadow-lg">
-    <h3 class="text-2xl font-bold text-green-800 mb-4">1. Standard Purchase Term</h3>
+    <h2 class="text-3xl font-bold text-green-800 mb-6 text-center">Comprehensive Loan Programs</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">1. Acquisition & Development</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">2. Development-Only</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">3. Construction-Only</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">4. Construction-to-Permanent</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">1. Acquisition & Development Loan</h3>
+    <p class="text-gray-700 mb-4">For purchasing raw land and developing infrastructure including utilities, roads, and lot improvements.</p>
     <div class="grid md:grid-cols-2 gap-6">
       <div class="space-y-3">
+        <h4 class="text-lg font-bold text-green-700">Core Parameters</h4>
         <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Minimum Loan Amount:</span>
-          <span class="text-green-700 font-bold">$250,000</span>
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">$250,000 - $15M</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTC:</span>
+          <span class="text-green-700 font-bold">Up to 80% (85% enhanced)</span>
         </div>
         <div class="flex justify-between border-b pb-2">
           <span class="font-semibold text-gray-700">Interest Rate:</span>
-          <span class="text-green-700 font-bold">Starting at 6.25%</span>
+          <span class="text-green-700 font-bold">Starting Prime + 2.50% (6.75%)</span>
         </div>
         <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Loan Term:</span>
-          <span class="text-green-700 font-bold">3 to 30 years</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">LTV:</span>
-          <span class="text-green-700 font-bold">Up to 80% stabilized / 70% improvements</span>
+          <span class="font-semibold text-gray-700">Term:</span>
+          <span class="text-green-700 font-bold">12-36 months</span>
         </div>
       </div>
       <div class="space-y-3">
+        <h4 class="text-lg font-bold text-green-700">Fees & Requirements</h4>
         <div class="flex justify-between border-b pb-2">
           <span class="font-semibold text-gray-700">Origination Fee:</span>
-          <span class="text-green-700 font-bold">2% (50% financing available)</span>
+          <span class="text-green-700 font-bold">1.00-2.50% (financing available)</span>
         </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Prepayment Penalty:</span>
-          <span class="text-green-700 font-bold">1% if paid off in first 3 years</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Repayment Options:</span>
-          <span class="text-green-700 font-bold">Monthly amortization, interest-only first 12 months</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="bg-white rounded-lg p-6 shadow-lg">
-    <h3 class="text-2xl font-bold text-green-800 mb-4">2. Rate and Term Refinance</h3>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="space-y-3">
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Eligible Properties:</span>
-          <span class="text-green-700 font-bold">1+ year operational history</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Interest Rate:</span>
-          <span class="text-green-700 font-bold">Starts at 5.00%</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">LTV:</span>
-          <span class="text-green-700 font-bold">Up to 75%</span>
-        </div>
-      </div>
-      <div class="space-y-3">
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Origination Fee:</span>
-          <span class="text-green-700 font-bold">2% (50% financing available)</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Repayment:</span>
-          <span class="text-green-700 font-bold">Monthly amortization, fixed rate</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Prepayment:</span>
-          <span class="text-green-700 font-bold">No penalty after 3 years</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="bg-white rounded-lg p-6 shadow-lg">
-    <h3 class="text-2xl font-bold text-green-800 mb-4">3. Purchase with Debt Service Coverage Ratio (DSCR)</h3>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="space-y-3">
         <div class="flex justify-between border-b pb-2">
           <span class="font-semibold text-gray-700">Minimum DSCR:</span>
-          <span class="text-green-700 font-bold">1.15x required</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Minimum Loan Amount:</span>
-          <span class="text-green-700 font-bold">$200,000</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Interest Rate:</span>
-          <span class="text-green-700 font-bold">Starting at 5.5%</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">LTV:</span>
-          <span class="text-green-700 font-bold">Up to 75%</span>
-        </div>
-      </div>
-      <div class="space-y-3">
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Origination Fee:</span>
-          <span class="text-green-700 font-bold">2% (50% financing available)</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Repayment:</span>
-          <span class="text-green-700 font-bold">Customized based on performance</span>
-        </div>
-      </div>
-    </div>
-    <div class="mt-4 bg-yellow-50 p-4 rounded-lg">
-      <p class="text-sm text-gray-700"><strong>Income Guidelines:</strong> Only pad/site rental income counted as effective income. Park-owned home rents counted at 25–50% haircut. Homes on rent-to-own or lease-option subject to further discount. Reduced DSCR minimums available for all-rental pad income or top-tier locations.</p>
-    </div>
-  </div>
-
-  <div class="bg-white rounded-lg p-6 shadow-lg">
-    <h3 class="text-2xl font-bold text-green-800 mb-4">4. Cash-Out Refinance</h3>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="space-y-3">
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Eligible Properties:</span>
-          <span class="text-green-700 font-bold">1+ year operational history</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Minimum Loan Amount:</span>
-          <span class="text-green-700 font-bold">$150,000</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Interest Rate:</span>
-          <span class="text-green-700 font-bold">Starting at 6.50%</span>
-        </div>
-      </div>
-      <div class="space-y-3">
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">LTV:</span>
-          <span class="text-green-700 font-bold">Up to 80%</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Origination Fee:</span>
-          <span class="text-green-700 font-bold">2% (50% financing available)</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Prepayment Penalty:</span>
-          <span class="text-green-700 font-bold">1% if paid off in first 2 years</span>
-        </div>
-      </div>
-    </div>
-    <div class="mt-4">
-      <p class="text-sm text-gray-700"><strong>Repayment Structures:</strong> Flexible repayment options, including monthly amortization schedules and interest-only payments available for the first 12 months.</p>
-    </div>
-  </div>
-
-  <div class="bg-white rounded-lg p-6 shadow-lg">
-    <h3 class="text-2xl font-bold text-green-800 mb-4">5. Bridge Financing</h3>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="space-y-3">
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Minimum Loan Amount:</span>
-          <span class="text-green-700 font-bold">$250,000</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Interest Rate:</span>
-          <span class="text-green-700 font-bold">7%</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Maximum Term:</span>
-          <span class="text-green-700 font-bold">24 months</span>
-        </div>
-      </div>
-      <div class="space-y-3">
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">LTV:</span>
-          <span class="text-green-700 font-bold">Up to 75%</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Payment Structure:</span>
-          <span class="text-green-700 font-bold">Interest-Only</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Origination Fee:</span>
-          <span class="text-green-700 font-bold">2% (50% financing available)</span>
-        </div>
-      </div>
-    </div>
-    <div class="mt-4 bg-blue-50 p-4 rounded-lg">
-      <p class="text-sm text-gray-700"><strong>Flexible Terms:</strong> Tailored exit strategies to ensure smooth transitions.</p>
-    </div>
-  </div>
-
-  <div class="bg-white rounded-lg p-6 shadow-lg">
-    <h3 class="text-2xl font-bold text-green-800 mb-4">6. 100% Financing</h3>
-    <p class="text-gray-700 mb-4">We offer industry-leading 100% financing options for qualified deals. To qualify for zero down investment property loans, applicants must meet the following enhanced criteria:</p>
-    
-    <div class="bg-green-50 p-6 rounded-lg">
-      <h4 class="text-xl font-bold text-green-800 mb-4">Primary Qualifications</h4>
-      <div class="space-y-3">
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Minimum FICO:</span>
-          <span class="text-green-700 font-bold">680</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Experience:</span>
-          <span class="text-green-700 font-bold">3+ commercial transactions in 5 years OR management track record</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Net Worth:</span>
-          <span class="text-green-700 font-bold">Minimum 1.5x loan amount</span>
+          <span class="text-green-700 font-bold">1.10x projected</span>
         </div>
         <div class="flex justify-between border-b pb-2">
           <span class="font-semibold text-gray-700">Liquidity:</span>
-          <span class="text-green-700 font-bold">6 months debt service in reserves</span>
+          <span class="text-green-700 font-bold">10% of loan amount</span>
         </div>
         <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Income Verification:</span>
-          <span class="text-green-700 font-bold">2 years tax returns + 3 months bank statements</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="font-semibold text-gray-700">Cross-collateralization:</span>
-          <span class="text-green-700 font-bold">Additional properties as collateral</span>
+          <span class="font-semibold text-gray-700">Extensions:</span>
+          <span class="text-green-700 font-bold">Two 6-month (0.50% each)</span>
         </div>
       </div>
     </div>
   </div>
 
   <div class="bg-white rounded-lg p-6 shadow-lg">
-    <h3 class="text-2xl font-bold text-green-800 mb-4">Requirements</h3>
-    <p class="text-gray-700 mb-6">This requirements guide is provided to foster teamwork and flexible underwriting. We advise you reach out to us if you have difficulty in meeting any of the requirement based on your unique situation.</p>
-    
-    <div class="space-y-6">
-      <div class="border-l-4 border-green-500 pl-4">
-        <h4 class="text-lg font-bold text-green-800 mb-2">1. Property Information</h4>
-        <p class="text-gray-700">General community description (address, site map, lot count, zoning status). Breakdown of Park-Owned Homes (POH): list each POH with make, model, and current condition. Photos and appraisals are useful but can be supplied during the process if not immediately available.</p>
+    <h3 class="text-2xl font-bold text-green-800 mb-4">2. Development-Only Loan</h3>
+    <p class="text-gray-700 mb-4">For developers who own land and need financing for site improvements, utilities, and infrastructure.</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">$200,000 - $10M</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTC:</span>
+          <span class="text-green-700 font-bold">Up to 85% (90% enhanced)</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting Prime + 2.00% (6.50%)</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Term:</span>
+          <span class="text-green-700 font-bold">12-24 months</span>
+        </div>
       </div>
-
-      <div class="border-l-4 border-green-500 pl-4">
-        <h4 class="text-lg font-bold text-green-800 mb-2">2. Rent Roll and Occupancy</h4>
-        <p class="text-gray-700">Current rent roll with tenant spaces, rental amounts, and lease terms. Summary of occupancy rates over the last year or any available period.</p>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Origination Fee:</span>
+          <span class="text-green-700 font-bold">1% (50% financing available)</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Liquidity:</span>
+          <span class="text-green-700 font-bold">5% of loan amount</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Guarantees:</span>
+          <span class="text-green-700 font-bold">Full recourse with step-downs</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Payment:</span>
+          <span class="text-green-700 font-bold">Interest-only monthly</span>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <div class="border-l-4 border-green-500 pl-4">
-        <h4 class="text-lg font-bold text-green-800 mb-2">3. Tenant Leases and Rules</h4>
-        <p class="text-gray-700">Sample lease agreements and a summary of park rules. Please confirm leases are current and in line with local regulations. If standardization or updates are needed, we can discuss solutions during the process.</p>
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">3. Construction-Only Loan</h3>
+    <p class="text-gray-700 mb-4">For ground-up construction on developed lots, including residential, multifamily, and commercial buildings.</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">$500,000 - $25M</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTC:</span>
+          <span class="text-green-700 font-bold">Up to 90% (95% enhanced)</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting Prime + 1.75% (6.25%)</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Term:</span>
+          <span class="text-green-700 font-bold">12-24 months</span>
+        </div>
       </div>
-
-      <div class="border-l-4 border-green-500 pl-4">
-        <h4 class="text-lg font-bold text-green-800 mb-2">4. Financial Analysis</h4>
-        <p class="text-gray-700">Trailing 12-Month Operating Statement: Itemized income and expenses. Budget/Pro Forma: Three-year forecast, including impact of planned capital improvements. Bank Statements: Past twelve months for operating accounts.</p>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Origination Fee:</span>
+          <span class="text-green-700 font-bold">1.00-2.00%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Liquidity:</span>
+          <span class="text-green-700 font-bold">15% of loan amount</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Extensions:</span>
+          <span class="text-green-700 font-bold">Up to three 6-month</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Payment:</span>
+          <span class="text-green-700 font-bold">Interest-only on disbursed funds</span>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <div class="border-l-4 border-green-500 pl-4">
-        <h4 class="text-lg font-bold text-green-800 mb-2">5. Infrastructure and Physical Assessment</h4>
-        <p class="text-gray-700">Overview of infrastructure: roads, utility systems, and all common areas and amenities. Third-party reports are helpful, but descriptive summaries or contractor estimates are welcome as a starting point. List any planned repairs or deferred maintenance so we can collaborate on budgeting and timelines.</p>
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">4. Construction-to-Permanent Loan</h3>
+    <p class="text-gray-700 mb-4">Single-close loan that converts to permanent financing upon completion without separate takeout financing.</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <h4 class="text-lg font-bold text-green-700">Construction Phase</h4>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">$750,000 - $20M</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTC:</span>
+          <span class="text-green-700 font-bold">Up to 85%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Prime + 2.00% (6.50-8.50%)</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Term:</span>
+          <span class="text-green-700 font-bold">Up to 24 months</span>
+        </div>
       </div>
-
-      <div class="border-l-4 border-green-500 pl-4">
-        <h4 class="text-lg font-bold text-green-800 mb-2">6. Environmental Due Diligence</h4>
-        <p class="text-gray-700">Please provide a recent Phase I Environmental Site Assessment (ESA) if available. If needed, we can help coordinate ordering a new ESA during due diligence. If the property is in a flood zone or has other environmental requirements, supply related documents or insurance information.</p>
+      <div class="space-y-3">
+        <h4 class="text-lg font-bold text-green-700">Permanent Phase</h4>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Term Options:</span>
+          <span class="text-green-700 font-bold">5, 7, or 10 years</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Fixed Rates:</span>
+          <span class="text-green-700 font-bold">5.50% - 6.00%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Amortization:</span>
+          <span class="text-green-700 font-bold">20-30 years</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Conversion Fee:</span>
+          <span class="text-green-700 font-bold">0.50% of balance</span>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <div class="border-l-4 border-green-500 pl-4">
-        <h4 class="text-lg font-bold text-green-800 mb-2">7. Title and Zoning</h4>
-        <p class="text-gray-700">Copy of the title report and survey, plus evidence of proper zoning and permits. If documents are missing, we will assist in obtaining them during diligence.</p>
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">Additional Program Features</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-4">
+        <div class="border-l-4 border-green-500 pl-4">
+          <h4 class="text-lg font-bold text-green-800 mb-2">Relationship Pricing</h4>
+          <p class="text-sm text-gray-700">• 0.25-0.50% rate reduction for repeat borrowers<br>• Volume incentives for multiple projects<br>• Cross-collateralization benefits<br>• Extended rate locks for relationship clients</p>
+        </div>
+        <div class="border-l-4 border-green-500 pl-4">
+          <h4 class="text-lg font-bold text-green-800 mb-2">Specialty Enhancements</h4>
+          <p class="text-sm text-gray-700">• Green building incentives (0.25% reduction)<br>• Affordable housing bonus terms<br>• Opportunity Zone advantages<br>• Historic renovation expertise</p>
+        </div>
       </div>
-
-      <div class="border-l-4 border-green-500 pl-4">
-        <h4 class="text-lg font-bold text-green-800 mb-2">8. Insurance</h4>
-        <p class="text-gray-700">Property Insurance: Evidence of hazard and, if required, flood insurance. Liability Insurance: General liability and, if applicable, environmental liability. POH Insurance: If POHs are included as collateral, certificates of insurance for each.</p>
+      <div class="space-y-4">
+        <div class="border-l-4 border-green-500 pl-4">
+          <h4 class="text-lg font-bold text-green-800 mb-2">Expedited Processing</h4>
+          <p class="text-sm text-gray-700">• 24-hour initial response<br>• 3-5 day commitment letters<br>• 10-14 day rapid closing<br>• 24-48 hour express draws</p>
+        </div>
+        <div class="border-l-4 border-green-500 pl-4">
+          <h4 class="text-lg font-bold text-green-800 mb-2">Creative Solutions</h4>
+          <p class="text-sm text-gray-700">• Interest rate buydowns<br>• Equity co-investment opportunities<br>• Mezzanine debt options<br>• Forward commitments available</p>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <div class="border-l-4 border-green-500 pl-4">
-        <h4 class="text-lg font-bold text-green-800 mb-2">9. Regulatory and Compliance</h4>
-        <p class="text-gray-700">Licenses/Permits: Copies of all operating licenses and permits required. Rent Control: If subject to rent control or stabilization ordinances, documentation of requirements.</p>
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">Frequently Asked Questions</h3>
+    <div class="space-y-4">
+      <div class="border-b pb-3">
+        <h4 class="font-bold text-green-700 mb-2">How quickly can you fund my loan?</h4>
+        <p class="text-sm text-gray-700">Maximum 4 weeks from complete application to funding.</p>
       </div>
-
-      <div class="border-l-4 border-green-500 pl-4">
-        <h4 class="text-lg font-bold text-green-800 mb-2">10. Future Capital Improvements</h4>
-        <p class="text-gray-700">Improvement Plan: Description and cost estimates for proposed improvements such as upgrades to infrastructure, amenities, roads, landscaping, or adding pads. Financing Structure: Clarification if the improvements are to be funded by the loan proceeds or by borrower equity. Impact Statement: Narrative on how improvements will enhance park value, occupancy, or rent potential. Timeline: Schedule for completion.</p>
+      <div class="border-b pb-3">
+        <h4 class="font-bold text-green-700 mb-2">What if my project timeline exceeds the initial term?</h4>
+        <p class="text-sm text-gray-700">All programs include extension options (typically two 6-month extensions) for 0.50% fee each, subject to project good standing.</p>
       </div>
-
-      <div class="border-l-4 border-green-500 pl-4">
-        <h4 class="text-lg font-bold text-green-800 mb-2">11. Appraisal</h4>
-        <p class="text-gray-700">Third-Party Appraisal Report detailing As-is valuation, As-stabilized valuation (if improvements are planned) and Separate valuation for park, improvements, and POHs as needed. We can coordinate an appraisal as part of underwriting if you do not have it available.</p>
+      <div class="border-b pb-3">
+        <h4 class="font-bold text-green-700 mb-2">How are interest reserves managed?</h4>
+        <p class="text-sm text-gray-700">Calculated based on projected draw schedule plus 3-6 month cushion, included in loan amount with automatic monthly draws.</p>
       </div>
-
-      <div class="border-l-4 border-green-500 pl-4">
-        <h4 class="text-lg font-bold text-green-800 mb-2">12. Exit Strategy</h4>
-        <p class="text-gray-700">Refinance/Sale Plan: If loan is bridge or shorter term, outline intended exit such as sale, refinance, or permanent take-out.</p>
+      <div class="border-b pb-3">
+        <h4 class="font-bold text-green-700 mb-2">What if construction costs increase?</h4>
+        <p class="text-sm text-gray-700">Hard cost contingency required (5-10%). Budget reallocations up to 10% per line item permitted. Additional solutions available for overruns.</p>
+      </div>
+      <div class="border-b pb-3">
+        <h4 class="font-bold text-green-700 mb-2">Can I get a loan with limited experience?</h4>
+        <p class="text-sm text-gray-700">Partner Program available for less experienced developers with experienced partners, enhanced guarantees, or additional equity requirements.</p>
+      </div>
+      <div class="pb-3">
+        <h4 class="font-bold text-green-700 mb-2">How do recourse guarantees work?</h4>
+        <p class="text-sm text-gray-700">Step-down structure: 100% initially, reducing to 50% at milestones (50-75% completion), with potential for further reduction or full release at completion.</p>
       </div>
     </div>
   </div>
