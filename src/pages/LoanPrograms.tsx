@@ -4,9 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { loanPrograms, LoanProgram } from "@/data/loanPrograms";
 import { useToast } from "@/hooks/use-toast";
+import commercialMortgageImage from "@/assets/commercial-mortgage.jpg";
 
 export default function LoanPrograms() {
   const [selectedProgram, setSelectedProgram] = useState<LoanProgram | null>(null);
@@ -84,34 +85,53 @@ export default function LoanPrograms() {
                         View Full Terms
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                    <DialogContent className="max-w-6xl max-h-[90vh]">
                       <DialogHeader>
-                        <DialogTitle>{selectedProgram?.name} - Full Terms</DialogTitle>
+                        <DialogTitle className="text-2xl font-bold text-primary">
+                          {selectedProgram?.name} - Complete Terms & Conditions
+                        </DialogTitle>
                       </DialogHeader>
-                      <div className="mt-4">
-                        <Textarea
-                          value={selectedProgram?.terms || ""}
-                          onChange={(e) => {
-                            if (selectedProgram) {
-                              const updatedProgram = { ...selectedProgram, terms: e.target.value };
-                              setSelectedProgram(updatedProgram);
-                              // In a real app, you'd save this to a database
-                            }
-                          }}
-                          className="min-h-[400px] font-mono text-sm"
-                          placeholder="Edit loan terms here..."
-                        />
-                        <div className="flex justify-end mt-4">
-                          <Button onClick={() => {
-                            toast({
-                              title: "Terms Updated",
-                              description: "Loan terms have been saved successfully.",
-                            });
-                          }}>
-                            Save Terms
-                          </Button>
+                      
+                      {selectedProgram?.id === "commercial-mortgage" && (
+                        <div className="mb-4">
+                          <img 
+                            src={commercialMortgageImage} 
+                            alt="Commercial Real Estate Property" 
+                            className="w-full h-48 object-cover rounded-lg shadow-lg"
+                          />
                         </div>
-                      </div>
+                      )}
+                      
+                      <ScrollArea className="max-h-[60vh] pr-4">
+                        <div className="prose prose-sm max-w-none dark:prose-invert">
+                          <div 
+                            className="whitespace-pre-wrap text-sm leading-relaxed"
+                            dangerouslySetInnerHTML={{
+                              __html: selectedProgram?.terms
+                                .replace(/^# (.*$)/gm, '<h1 class="text-2xl font-bold text-primary mb-4 mt-6">$1</h1>')
+                                .replace(/^## (.*$)/gm, '<h2 class="text-xl font-semibold text-primary mb-3 mt-5">$1</h2>')
+                                .replace(/^### (.*$)/gm, '<h3 class="text-lg font-semibold mb-2 mt-4">$1</h3>')
+                                .replace(/^\*\*(.*?)\*\*/gm, '<strong class="font-semibold text-primary">$1</strong>')
+                                .replace(/^✅ (.*$)/gm, '<div class="flex items-start gap-2 mb-2"><span class="text-green-500 font-bold">✅</span><span>$1</span></div>')
+                                .replace(/^🎯 (.*$)/gm, '<div class="flex items-center gap-2 mb-3 text-lg font-semibold"><span>🎯</span><span>$1</span></div>')
+                                .replace(/^📋 (.*$)/gm, '<div class="flex items-center gap-2 mb-3 text-lg font-semibold"><span>📋</span><span>$1</span></div>')
+                                .replace(/^🏢 (.*$)/gm, '<div class="flex items-center gap-2 mb-2 font-semibold"><span>🏢</span><span>$1</span></div>')
+                                .replace(/^🏗️ (.*$)/gm, '<div class="flex items-center gap-2 mb-2 font-semibold"><span>🏗️</span><span>$1</span></div>')
+                                .replace(/^🔄 (.*$)/gm, '<div class="flex items-center gap-2 mb-2 font-semibold"><span>🔄</span><span>$1</span></div>')
+                                .replace(/^💰 (.*$)/gm, '<div class="flex items-center gap-2 mb-2 font-semibold"><span>💰</span><span>$1</span></div>')
+                                .replace(/^⚡ (.*$)/gm, '<div class="flex items-center gap-2 mb-2 font-semibold"><span>⚡</span><span>$1</span></div>')
+                                .replace(/^🏆 (.*$)/gm, '<div class="flex items-center gap-2 mb-2 font-semibold"><span>🏆</span><span>$1</span></div>')
+                                .replace(/^💼 (.*$)/gm, '<div class="flex items-center gap-2 mb-2 font-semibold"><span>💼</span><span>$1</span></div>')
+                                .replace(/^💎 (.*$)/gm, '<div class="flex items-center gap-2 mb-2 font-semibold"><span>💎</span><span>$1</span></div>')
+                                .replace(/^📞 (.*$)/gm, '<div class="flex items-center gap-2 mb-2 font-semibold"><span>📞</span><span>$1</span></div>')
+                                .replace(/^---$/gm, '<hr class="border-border my-6">')
+                                .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>')
+                                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                                .replace(/\n\n/g, '<br/><br/>')
+                            }}
+                          />
+                        </div>
+                      </ScrollArea>
                     </DialogContent>
                   </Dialog>
 

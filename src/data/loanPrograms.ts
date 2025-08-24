@@ -11,32 +11,157 @@ export const loanPrograms: LoanProgram[] = [
   {
     id: "commercial-mortgage",
     name: "Commercial Mortgage",
-    interestRate: "7.5% - 12%",
-    minimumLoanAmount: "$1,000,000",
-    description: "Traditional commercial real estate financing for established properties.",
-    terms: `COMMERCIAL MORTGAGE LOAN TERMS
+    interestRate: "Starting at 5.31%",
+    minimumLoanAmount: "$500,000+",
+    description: "100% financing available • No credit requirements • Fast approval for qualified commercial properties nationwide.",
+    terms: `# CCIF Commercial Mortgage Program
 
-Interest Rate: 7.5% - 12% (varies based on property type and borrower qualifications)
-Loan Term: Up to 30 years
-Minimum Loan Amount: $1,000,000
-Maximum LTV: 80%
-Amortization: Up to 30 years
+## 🎯 SOLVING YOUR COMMERCIAL REAL ESTATE CHALLENGES
 
-Property Types:
-- Office buildings
-- Retail centers
-- Industrial properties
-- Mixed-use developments
-- Warehouses
+**✅ Eliminate Down Payment Barriers** - Access 100% financing on qualified deals
+**✅ Credit Score Concerns** - Asset-based lending with flexible credit requirements  
+**✅ Lengthy Approval Process** - Fast-track approvals in 15-30 days
+**✅ Limited Property Types** - Finance virtually any income-producing commercial property
+**✅ Complex Documentation** - Streamlined application with minimal paperwork
 
-Requirements:
-- Minimum 1.25 DSCR
-- Property appraisal required
-- Environmental Phase I required
-- Borrower financial statements
+---
 
-Processing Time: 30-45 days
-Prepayment: Available with penalty structure`
+## 📋 PROGRAM OVERVIEW
+
+**COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.**  
+*Your Nationwide Commercial Real Estate Lending Partner*
+
+### 🏢 FIRST MORTGAGE / PURCHASE PROGRAM
+
+**Loan Amounts:** $500,000 - No Upper Limit  
+**Interest Rates:** 
+- Fixed Rate: Starting at 5.31%
+- Variable Rate: Prime + 2%
+
+**Loan Terms:** 1-30 years (fully customizable)  
+**Amortization:** Up to 40 years available  
+**Loan-to-Value:** Up to 90% (100% financing available through our exclusive program)  
+**Origination Fee:** 2% (up to 50% can be financed into loan)  
+**Prepayment:** No penalty on fixed-rate loans
+
+---
+
+### 🏗️ SECOND MORTGAGE / MEZZANINE FINANCING
+
+**Loan Amounts:** $500,000+  
+**Interest Rates:** Starting at 7.56%  
+**Combined LTV:** Up to 85%  
+**Terms:** 1-10 years (balloon or fully amortized options)  
+**Payment Structure:** Flexible - interest-only options available  
+**Origination Fee:** 2% (financing options available)
+
+---
+
+### 🔄 RATE & TERM REFINANCE
+
+**Loan Amounts:** $500,000+  
+**Interest Rates:** Starting at 5.50%  
+**Terms:** 1-30 years  
+**Amortization:** Up to 40 years or custom structure  
+**Special Features:** 
+- Interest-only payments up to 10 years
+- Closing costs can be rolled into loan
+- No seasoning requirements
+
+---
+
+### 💰 CASH-OUT REFINANCE
+
+**Loan Amounts:** $500,000 - $15,000,000+  
+**Interest Rates:** Starting at 6.15% (fixed or variable)  
+**Terms:** 1, 3, 5, 10, 15, or 30 years (custom options)  
+**LTV:** Up to 80% (85% for top-tier properties)  
+**Payment Options:** Fully amortized, interest-only, or balloon structures  
+**No Seasoning Required**
+
+---
+
+### ⚡ BRIDGE LOAN PROGRAM
+
+**Loan Amounts:** $50,000 - $10,000,000+  
+**Terms:** 3-24 months  
+**Interest Rate:** Approximately 9.5%  
+**LTV:** Up to 75%  
+**Payment Structure:** Deferred interest with balloon payment or interest-only options
+
+**Perfect For:**
+- Time-sensitive acquisitions
+- 1031 exchange transactions  
+- Opportunistic purchases
+- Distressed property repositioning
+- Value-add projects
+- Partner buyouts
+- Short-term capital needs
+
+---
+
+## 🏆 EXCLUSIVE 100% FINANCING PROGRAM
+
+**Zero Down Payment Required for Qualified Borrowers**
+
+Must meet at least 2 of the following criteria:
+- **Credit Score:** 680+ FICO
+- **Experience:** 3+ commercial transactions in past 5 years OR verifiable property management track record
+- **Net Worth:** Minimum 1.5x loan amount
+- **Liquidity:** 6 months debt service reserves
+- **Income Verification:** 2 years tax returns + 3 months bank statements
+- **Cross-Collateralization:** Additional properties as collateral
+
+---
+
+## 🏢 ELIGIBLE PROPERTY TYPES
+
+### Primary Commercial Properties
+- **Office Buildings** (Class A, B, C)
+- **Retail & Shopping Centers**  
+- **Industrial & Warehouse Facilities**
+- **Multifamily Properties** (5+ units)
+- **Mixed-Use Developments**
+- **Hospitality Properties**
+
+### Specialty Properties  
+- **Car Washes & Gas Stations**
+- **Restaurants & Event Venues**
+- **Licensed Cannabis Facilities**
+- **Non-Conforming Properties**
+- **Distressed/Transitional Assets**
+- **Agricultural/Farmland**
+- **Vacant Commercial Land**
+
+---
+
+## 💼 BORROWER QUALIFICATIONS
+
+**Entity Types:** Individuals, Partnerships, Trusts, Corporations (Domestic & Foreign)  
+**Geographic Coverage:** All 50 States  
+**Property Condition:** As-is, transitional, or stabilized properties accepted  
+**Vacancy:** Partial vacancy considered with leasing plans
+
+---
+
+## 💎 KEY PROGRAM BENEFITS
+
+✅ **No Hard Loan Limits** - Financing available for strong deals of any size  
+✅ **Custom Structures** - Tailored repayment plans and terms  
+✅ **Environmental Flexibility** - Phase I required; remediation plans acceptable  
+✅ **Ground Lease Financing** - Master leases and sale-leasebacks eligible  
+✅ **Portfolio Options** - Cross-collateralization and blanket loans available  
+✅ **Seller Financing Compatible** - Can work alongside seller financing
+
+---
+
+## 📞 NEXT STEPS
+
+**Ready to secure your commercial real estate financing?**
+
+Our experienced underwriting team evaluates each deal on its individual merits. Contact CCIF today to discuss your specific project requirements and discover how our flexible lending programs can help you achieve your commercial real estate investment goals.
+
+*Licensed in all 50 states • Asset-based lending specialists • No credit score required on many programs*`
   },
   {
     id: "commercial-dscr-loan",
