@@ -9,6 +9,7 @@ import { loanPrograms, LoanProgram } from "@/data/loanPrograms";
 import { useToast } from "@/hooks/use-toast";
 import commercialMortgageImage from "@/assets/commercial-mortgage.jpg";
 import commercialDscrImage from "@/assets/commercial-dscr-rental.jpg";
+import rehabPropertyImage from "@/assets/rehab-property.jpg";
 
 export default function LoanPrograms() {
   const [selectedProgram, setSelectedProgram] = useState<LoanProgram | null>(null);
@@ -113,6 +114,15 @@ export default function LoanPrograms() {
                         </div>
                       )}
                       
+                      {selectedProgram?.id === "rehab-loan" && (
+                        <div className="mb-4">
+                          <img 
+                            src={rehabPropertyImage} 
+                            alt="Property Needing Rehabilitation and Renovation" 
+                            className="w-full h-48 object-cover rounded-lg shadow-lg"
+                          />
+                        </div>
+                      )}
                       <ScrollArea className="max-h-[65vh] pr-4">
                         <div className="space-y-6">
                           <div 

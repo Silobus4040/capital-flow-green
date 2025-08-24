@@ -799,33 +799,363 @@ export const loanPrograms: LoanProgram[] = [
   {
     id: "rehab-loan",
     name: "Rehab Loan",
-    interestRate: "9% - 15%",
+    interestRate: "Starting at 6.49%",
     minimumLoanAmount: "$500,000",
-    description: "Financing for property renovation and rehabilitation projects.",
-    terms: `REHAB LOAN TERMS
+    description: "Financing for property renovation and rehabilitation projects • Fix-and-flip • Fix-and-hold • 100% rehab financing available.",
+    terms: `<div style="background: linear-gradient(135deg, #7c2d12 0%, #ea580c 50%, #f97316 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
-Interest Rate: 9% - 15%
-Loan Term: 6-24 months
-Minimum Loan Amount: $500,000
-Maximum LTV: 70% of ARV (After Repair Value)
+<div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
+  <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+    REHABILITATION FINANCING PROGRAM
+  </h1>
+  <h2 style="font-size: 1.5rem; font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem;">
+    COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.
+  </h2>
+  <p style="font-size: 1.1rem; color: #e5e7eb; font-weight: 500;">
+    Transform Properties Into Profitable Investments
+  </p>
+</div>
 
-Features:
-- Interest-only payments during construction
-- Staged funding based on completion
-- No seasoning requirements
-- Fast approval process
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+    <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🚫 Traditional Rehab Financing Challenges</h3>
+    <ul style="color: #fecaca; list-style: none; padding: 0;">
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        Limited renovation financing options
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        Strict credit and income requirements
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        Complex draw process and delays
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        High down payment requirements
+      </li>
+    </ul>
+  </div>
 
-Property Types:
-- Commercial buildings
-- Mixed-use properties
-- Investment properties
+  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+    <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🎯 CCIF Rehab Loan Advantages</h3>
+    <ul style="color: #a7f3d0; list-style: none; padding: 0;">
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        100% Renovation Financing Available
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        Fast Approvals & Quick Funding
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        Flexible Draw Schedules
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        Multiple Program Options
+      </li>
+    </ul>
+  </div>
+</div>
 
-Requirements:
-- Detailed rehab budget
-- Licensed contractor
-- Property appraisal (as-is and ARV)
+<div style="margin-bottom: 3rem;">
+  <h2 style="font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 2rem; color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+    REHABILITATION LOAN PROGRAMS
+  </h2>
 
-Processing Time: 14-21 days`
+  <div style="display: grid; gap: 2rem;">
+    
+    <!-- Fix-and-Flip Program -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        PROGRAM #1
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+          Fix-and-Flip Loan Program
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Transform Properties Faster with Lightning-Fast Approvals
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting at 6.99%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LOAN TERM</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">6-18 Months</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">90% Purchase + 100% Rehab</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 KEY FEATURES:</div>
+          <div style="color: #a7f3d0;">Interest-only payments • Deferred payment options • Portfolio financing • Extension options available</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fix-and-Hold Program -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        PROGRAM #2
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+          Fix-and-Hold Loan Program
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Seamless Transition to Long-Term Mortgage Without Refinancing
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting at 6.49%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 80% Stabilized Value</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">PAYMENT STRUCTURE</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Interest-Only to Full Amortization</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #7c3aed, #8b5cf6); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">🏆 SPECIAL FEATURES:</div>
+          <div style="color: #c4b5fd;">One-time closing • Staged conversion program • Performance-based discounts • Short-term holding costs available</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rehab-Only Program -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        PROGRAM #3
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+          Rehab-Only Loan Program
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Fast, Flexible Financing Based on Property Potential After Repairs
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">FOCUS</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Property Potential</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">APPROVAL</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Quick & Flexible</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">DRAW SCHEDULE</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Convenient & Flexible</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
+          <div style="color: #a7f3d0;">Property value enhancement • Single property improvements • Portfolio building • Value-add projects</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 100% Financing Program -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #10b981; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #10b981; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        100% FINANCING
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #10b981; margin-bottom: 0.5rem;">
+          Zero Down Payment Program
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Industry-Leading 100% Financing for New and Experienced Investors
+        </p>
+        
+        <div style="background: rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <h4 style="color: #10b981; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
+            Qualify by Meeting At Least 2 of These Requirements:
+          </h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+            <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #10b981;">
+              <div style="color: #10b981; font-weight: 700; font-size: 0.9rem;">💳 CREDIT SCORE</div>
+              <div style="color: white; font-size: 1.1rem; font-weight: 600;">Minimum 680 FICO</div>
+            </div>
+            <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #10b981;">
+              <div style="color: #10b981; font-weight: 700; font-size: 0.9rem;">🏆 EXPERIENCE</div>
+              <div style="color: white; font-size: 1.1rem; font-weight: 600;">3+ Successful Projects</div>
+            </div>
+            <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #10b981;">
+              <div style="color: #10b981; font-weight: 700; font-size: 0.9rem;">🏠 COLLATERAL</div>
+              <div style="color: white; font-size: 1.1rem; font-weight: 600;">Cross-Collateralization</div>
+            </div>
+            <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #10b981;">
+              <div style="color: #10b981; font-weight: 700; font-size: 0.9rem;">💰 RESERVES</div>
+              <div style="color: white; font-size: 1.1rem; font-weight: 600;">6 Months Interest Reserve</div>
+            </div>
+          </div>
+          <div style="background: rgba(16, 185, 129, 0.2); padding: 1rem; border-radius: 6px; margin-top: 1rem; text-align: center;">
+            <div style="color: #10b981; font-weight: 700; font-size: 0.9rem;">MAXIMUM LTV</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">65% Loan-to-ARV</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div style="background: linear-gradient(45deg, #1f2937, #374151); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+  <h2 style="color: #fbbf24; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
+    🏢 ELIGIBLE PROPERTY TYPES
+  </h2>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏠 RESIDENTIAL PROPERTIES</h3>
+      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+        <li>• Single Family Homes</li>
+        <li>• Duplexes, Triplexes, Quadplexes</li>
+        <li>• Townhomes and Condominiums</li>
+        <li>• Non-owner occupied dwellings only</li>
+      </ul>
+    </div>
+    
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏢 MULTIFAMILY & COMMERCIAL</h3>
+      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+        <li>• Multifamily Residences (5+ units)</li>
+        <li>• Mixed-use properties</li>
+        <li>• Commercial renovation projects</li>
+        <li>• Experience required for larger properties</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+  <h2 style="color: white; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
+    🔧 RENOVATION REQUIREMENTS
+  </h2>
+  
+  <div style="display: grid; gap: 1.5rem;">
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        📋 Documentation Requirements
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        Detailed scope of work required for all projects • Licensed contractors required for major work • All renovations must comply with local building codes
+      </p>
+    </div>
+    
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        🔍 Inspection Process
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        Progress inspections required before each draw • Maximum renovation period based on loan term • Final inspection required at project completion
+      </p>
+    </div>
+    
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        📊 Budget & Planning
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        Budget contingency of up to 5% recommended • Changes to scope must be approved • Line-item cost breakdown required
+      </p>
+    </div>
+  </div>
+</div>
+
+<div style="background: linear-gradient(45deg, #1f2937, #374151); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+  <h2 style="color: #fbbf24; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
+    📄 DOCUMENT CHECKLIST
+  </h2>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">📋 PROPERTY DOCUMENTATION</h3>
+      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+        <li>• Purchase contract/agreement</li>
+        <li>• Clear, color photos (interior & exterior)</li>
+        <li>• Detailed scope of work with costs</li>
+        <li>• Contractor bids/estimates</li>
+        <li>• Comparable property sales data</li>
+      </ul>
+    </div>
+    
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🆔 PERSONAL & ENTITY DOCS</h3>
+      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+        <li>• Government-issued photo ID</li>
+        <li>• Proof of funds for down payment</li>
+        <li>• Entity formation documents</li>
+        <li>• LLC/Corp Articles & Operating Agreement</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div style="background: linear-gradient(45deg, #fbbf24, #f59e0b); padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center; color: #1f2937;">
+  <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">
+    🚀 READY TO TRANSFORM PROPERTIES?
+  </h2>
+  <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem;">
+    FAST APPROVAL & FLEXIBLE FINANCING IN 14-21 DAYS
+  </p>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+    <div style="background: rgba(31, 41, 55, 0.1); padding: 1rem; border-radius: 8px;">
+      <div style="font-weight: 700; font-size: 1.1rem;">📞 CALL NOW</div>
+      <div style="font-size: 1.2rem; font-weight: 800;">1-800-CCIF-LOAN</div>
+    </div>
+    <div style="background: rgba(31, 41, 55, 0.1); padding: 1rem; border-radius: 8px;">
+      <div style="font-weight: 700; font-size: 1.1rem;">📧 EMAIL</div>
+      <div style="font-size: 1.2rem; font-weight: 800;">rehab@ccif.com</div>
+    </div>
+  </div>
+  
+  <p style="font-size: 1rem; font-weight: 600; margin-top: 1.5rem;">
+    <strong>Turn Fixer-Uppers Into Profit Centers</strong><br>
+    Fast approvals • Flexible draws • Multiple programs • Up to 100% renovation financing
+  </p>
+</div>
+
+<div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+  <p style="color: #d1d5db; font-size: 0.9rem; line-height: 1.6;">
+    <strong>Rehabilitation Financing Specialists • Licensed in all 50 states • $2.5B+ in funded loans • Property transformation experts</strong>
+  </p>
+</div>
+
+</div>`
   },
   {
     id: "rv-park-financing",
