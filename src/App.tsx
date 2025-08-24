@@ -9,6 +9,9 @@ import LoanPrograms from "./pages/LoanPrograms";
 import InvestorsPortal from "./pages/InvestorsPortal";
 import ContactUs from "./pages/ContactUs";
 import DocumentSubmission from "./pages/DocumentSubmission";
+import ReferralProgram from "./pages/ReferralProgram";
+import AboutUs from "./pages/AboutUs";
+import DrawRequest from "./pages/DrawRequest";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,10 +28,10 @@ const App = () => (
             <Route path="/loan-programs" element={<LoanPrograms />} />
             {/* Placeholder routes - will be implemented */}
             <Route path="/investors-portal" element={<InvestorsPortal />} />
-            <Route path="/referral-program" element={<div className="p-8 text-center">Referral Program - Coming Soon</div>} />
-            <Route path="/about-us" element={<div className="p-8 text-center">About Us - Coming Soon</div>} />
+            <Route path="/referral-program" element={<ReferralProgram />} />
+            <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/draw-request" element={<div className="p-8 text-center">Draw Request - Coming Soon</div>} />
+            <Route path="/draw-request" element={<DrawRequest />} />
             <Route path="/document-submission" element={<DocumentSubmission />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
