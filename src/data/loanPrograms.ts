@@ -14,7 +14,7 @@ export const loanPrograms: LoanProgram[] = [
     interestRate: "Starting at 5.31%",
     minimumLoanAmount: "$500,000",
     description: "100% financing available • No credit requirements • Fast approval for qualified commercial properties nationwide.",
-    terms: `<div style="background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    terms: `<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
 <div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
   <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">
@@ -279,6 +279,72 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
+<div style="background: linear-gradient(45deg, #7c3aed, #8b5cf6); padding: 2rem; border-radius: 12px; margin-top: 3rem; text-align: center;">
+  <h2 style="color: #fbbf24; font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">
+    🎯 EXCLUSIVE 100% FINANCING PROGRAM
+  </h2>
+  <p style="color: white; font-size: 1.2rem; margin-bottom: 1.5rem;">
+    Zero Down Payment - Maximum Profit Potential
+  </p>
+  
+  <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+    <h3 style="color: #fbbf24; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">
+      🔓 UNLOCK 100% FINANCING - Meet Just 2 of These Criteria:
+    </h3>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+      <div style="background: rgba(251, 191, 36, 0.2); padding: 1rem; border-radius: 6px; text-align: left;">
+        <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💳 CREDIT SCORE</div>
+        <div style="color: white; font-size: 1.1rem; font-weight: 600;">680+ FICO</div>
+      </div>
+      <div style="background: rgba(251, 191, 36, 0.2); padding: 1rem; border-radius: 6px; text-align: left;">
+        <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">🏆 EXPERIENCE</div>
+        <div style="color: white; font-size: 1.1rem; font-weight: 600;">3+ commercial deals</div>
+      </div>
+      <div style="background: rgba(251, 191, 36, 0.2); padding: 1rem; border-radius: 6px; text-align: left;">
+        <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💰 NET WORTH</div>
+        <div style="color: white; font-size: 1.1rem; font-weight: 600;">1.5x loan amount</div>
+      </div>
+      <div style="background: rgba(251, 191, 36, 0.2); padding: 1rem; border-radius: 6px; text-align: left;">
+        <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💵 LIQUIDITY</div>
+        <div style="color: white; font-size: 1.1rem; font-weight: 600;">6 months reserves</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="background: linear-gradient(45deg, #1f2937, #374151); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+  <h2 style="color: #fbbf24; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
+    🏢 COMPREHENSIVE PROPERTY COVERAGE
+  </h2>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏢 TRADITIONAL COMMERCIAL</h3>
+      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+        <li>• Office Buildings (All Classes)</li>
+        <li>• Retail & Shopping Centers</li>
+        <li>• Industrial & Warehouse</li>
+        <li>• Multifamily (5+ units)</li>
+        <li>• Mixed-Use Properties</li>
+        <li>• Hotels & Hospitality</li>
+      </ul>
+    </div>
+    
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🎯 SPECIALTY PROPERTIES</h3>
+      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+        <li>• Car Washes & Gas Stations</li>
+        <li>• Restaurants & Entertainment</li>
+        <li>• Cannabis Facilities</li>
+        <li>• Self-Storage</li>
+        <li>• Medical Buildings</li>
+        <li>• Unique/Non-Conforming Assets</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
   <h2 style="color: white; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
     ❓ FREQUENTLY ASKED QUESTIONS
@@ -311,6 +377,33 @@ export const loanPrograms: LoanProgram[] = [
         <strong>A:</strong> We focus on the asset, not just credit. Many of our successful borrowers had credit challenges. We evaluate the total picture - property strength, experience, and ability to service debt.
       </p>
     </div>
+    
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        Q: How do your rates compare to banks?
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        <strong>A:</strong> Our rates are competitive with banks, but we approve deals banks reject. Speed, flexibility, and approval certainty often save you more money than a slightly lower rate elsewhere.
+      </p>
+    </div>
+    
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        Q: Can I finance multiple properties at once?
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        <strong>A:</strong> Absolutely! We offer portfolio financing, blanket loans, and cross-collateralization. Many clients finance entire portfolios in single transactions.
+      </p>
+    </div>
+    
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        Q: What about environmental issues or special property types?
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        <strong>A:</strong> We're experts in complex deals. Environmental issues can often be resolved with remediation plans or insurance. We finance cannabis, car washes, gas stations, and other specialty properties others avoid.
+      </p>
+    </div>
   </div>
 </div>
 
@@ -332,6 +425,17 @@ export const loanPrograms: LoanProgram[] = [
       <div style="font-size: 1.2rem; font-weight: 800;">deals@ccif.com</div>
     </div>
   </div>
+  
+  <p style="font-size: 1rem; font-weight: 600; margin-top: 1.5rem;">
+    <strong>Don't Let Another Deal Slip Away</strong><br>
+    Every day you wait is money left on the table. Contact CCIF today and discover why we're America's #1 choice for commercial real estate financing.
+  </p>
+</div>
+
+<div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+  <p style="color: #d1d5db; font-size: 0.9rem; line-height: 1.6;">
+    <strong>Licensed in all 50 states • A+ BBB Rating • $2.5B+ in funded loans • Asset-based lending specialists</strong>
+  </p>
 </div>
 
 </div>`
