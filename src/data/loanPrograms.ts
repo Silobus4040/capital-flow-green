@@ -2211,36 +2211,297 @@ export const loanPrograms: LoanProgram[] = [
   },
   {
     id: "senior-living-financing",
-    name: "Senior Living Financing",
-    interestRate: "8% - 13%",
-    minimumLoanAmount: "$500,000",
-    description: "Financing for senior living facilities, assisted living, and memory care properties.",
-    terms: `SENIOR LIVING FINANCING TERMS
+    name: "Senior Living & Care Facility Financing",
+    interestRate: "5.31% - 9.50%",
+    minimumLoanAmount: "$100,000",
+    description: "All-inclusive financing program for assisted living, memory care, residential care, and related senior housing facilities.",
+    terms: `<div class="space-y-8 bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl">
+  <div class="text-center">
+    <h1 class="text-4xl font-bold text-green-800 mb-4">Senior Living & Care Facility Financing</h1>
+    <p class="text-xl text-green-700 mb-2">We offer all-inclusive financing program for assisted living, memory care, residential care, and related senior housing or group living facilities.</p>
+    <p class="text-lg text-green-600">Below are ALL details, terms, requirements, eligibility, and options available.</p>
+  </div>
 
-Interest Rate: 8% - 13%
-Loan Term: Up to 30 years
-Minimum Loan Amount: $500,000
-Maximum LTV: 75%
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h2 class="text-2xl font-bold text-green-800 mb-4">Who We Serve</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="space-y-2">
+        <div class="flex items-start">
+          <span class="w-2 h-2 bg-green-500 rounded-full mr-3 mt-2"></span>
+          <span class="text-gray-700"><strong>Property Owners:</strong> Acquiring, building, or refinancing facilities</span>
+        </div>
+        <div class="flex items-start">
+          <span class="w-2 h-2 bg-green-500 rounded-full mr-3 mt-2"></span>
+          <span class="text-gray-700"><strong>Business Operators:</strong> Running facilities with or without property ownership</span>
+        </div>
+      </div>
+      <div class="space-y-2">
+        <div class="flex items-start">
+          <span class="w-2 h-2 bg-green-500 rounded-full mr-3 mt-2"></span>
+          <span class="text-gray-700"><strong>All Stages:</strong> Start-ups, seasoned operators, expansions, turnarounds</span>
+        </div>
+        <div class="flex items-start">
+          <span class="w-2 h-2 bg-green-500 rounded-full mr-3 mt-2"></span>
+          <span class="text-gray-700"><strong>Geography:</strong> Programs available in all 50 U.S. states</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-Property Types:
-- Assisted living facilities
-- Memory care facilities
-- Independent living
-- Skilled nursing facilities
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h2 class="text-2xl font-bold text-green-800 mb-4">Eligibility at a Glance</h2>
+    <div class="space-y-3">
+      <div class="flex items-center">
+        <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+        <span class="text-gray-700">Organized U.S. entity in good standing (Corp, LLC, LP, trust, or not-for-profit)</span>
+      </div>
+      <div class="flex items-center">
+        <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+        <span class="text-gray-700">Licensed facility for six (6) or more beds</span>
+      </div>
+      <div class="flex items-center">
+        <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+        <span class="text-gray-700">Verifiable experience OR qualified third-party operator</span>
+      </div>
+      <div class="flex items-center">
+        <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+        <span class="text-gray-700">No FICO requirement (exceptions for 100% financing)</span>
+      </div>
+      <div class="flex items-center">
+        <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+        <span class="text-gray-700">DSCR target ≥ 1.25× on stabilized cash flow</span>
+      </div>
+    </div>
+  </div>
 
-Features:
-- Experienced healthcare lending team
-- Flexible terms
-- Construction and permanent financing
-- Competitive rates
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h2 class="text-2xl font-bold text-green-800 mb-4">Eligible Property Types</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">Assisted Living</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">Memory Care</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">Residential Care</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">Group Homes</div>
+      </div>
+    </div>
+  </div>
 
-Requirements:
-- Operating license
-- Management experience
-- Financial statements
-- Market analysis
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">Purchase Loan Program</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">$200,000 - $25M+</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Term:</span>
+          <span class="text-green-700 font-bold">30 years amort / 10 years balloon</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Fixed: 5.31% - 7.25%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Adjustable Rate:</span>
+          <span class="text-green-700 font-bold">SOFR + 3.75% (cap: 11.5%)</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV Base:</span>
+          <span class="text-green-700 font-bold">80%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV (5+ years exp):</span>
+          <span class="text-green-700 font-bold">85%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV (SNF/ALF hybrid):</span>
+          <span class="text-green-700 font-bold">90%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Minimum Beds:</span>
+          <span class="text-green-700 font-bold">10 licensed beds</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-Processing Time: 45-60 days`
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">100% Financing Requirements (Purchase)</h3>
+    <p class="text-gray-700 mb-4">Applicants must score ≥8 points on the underwriting scale to qualify for 100% financing:</p>
+    
+    <div class="bg-green-50 p-6 rounded-lg">
+      <div class="space-y-4">
+        <div class="flex justify-between items-center border-b pb-2">
+          <span class="font-semibold text-gray-700">A. FICO Score ≥ 760</span>
+          <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm font-bold">3 Points</span>
+        </div>
+        <div class="flex justify-between items-center border-b pb-2">
+          <span class="font-semibold text-gray-700">B. 3+ Projects Completed (last 5 years)</span>
+          <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm font-bold">4 Points</span>
+        </div>
+        <div class="flex justify-between items-center border-b pb-2">
+          <span class="font-semibold text-gray-700">C. Net Worth ≥ 2x Loan Amount</span>
+          <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm font-bold">3 Points</span>
+        </div>
+        <div class="flex justify-between items-center border-b pb-2">
+          <span class="font-semibold text-gray-700">D. 6-Month Cash Reserves (escrowed)</span>
+          <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm font-bold">2 Points</span>
+        </div>
+        <div class="flex justify-between items-center border-b pb-2">
+          <span class="font-semibold text-gray-700">E. Cross-Collateral (≥125% coverage)</span>
+          <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm font-bold">5 Points</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="font-semibold text-gray-700">F. CCRC Accreditation</span>
+          <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm font-bold">2 Points</span>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 bg-yellow-50 p-4 rounded-lg">
+      <p class="text-sm text-gray-700"><strong>Note:</strong> Deficiency plan available for applicants scoring 6-7 points (25 basis points add-on).</p>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">Refinance Program</h3>
+    <div class="space-y-4">
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">A. Rate/Term Refinance</h4>
+        <p class="text-sm text-gray-700">Maximum LTV: 85% • Rate Adjustment: +0.25% • DSCR: 1.20 minimum</p>
+      </div>
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">B. Light Cash-Out Refinance (Under $500K)</h4>
+        <p class="text-sm text-gray-700">Maximum LTV: 75% • Rate Adjustment: +0.75% • DSCR: 1.25 minimum</p>
+      </div>
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">C. Heavy Cash-Out Refinance</h4>
+        <p class="text-sm text-gray-700">Maximum LTV: 65% • Rate Adjustment: +1.50% • DSCR: 1.35 minimum</p>
+      </div>
+    </div>
+    <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+      <p class="text-sm text-gray-700"><strong>Additional Notes:</strong> Operating for less than 3 years adds 0.50% to rate. Facility inspection issues require remediation bond (1.5x estimated cost).</p>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">Bridge Loan Program</h3>
+    <p class="text-gray-700 mb-4">Short-term financing for time-sensitive opportunities and transitions</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">$250,000 - $15M</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Term Length:</span>
+          <span class="text-green-700 font-bold">3-24 months</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 9.5%</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 75% current / 80% improved</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Payment Structure:</span>
+          <span class="text-green-700 font-bold">Interest-only available</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Extensions:</span>
+          <span class="text-green-700 font-bold">Available</span>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <h4 class="font-bold text-green-700 mb-2">Ideal Use Cases:</h4>
+      <div class="text-sm text-gray-700 space-y-1">
+        <p>• Acquisitions: Secure properties quickly • Renovations: Fund improvements during operations</p>
+        <p>• 1031 exchanges: Facilitate like-kind swaps • Lease-up period: Support initial stabilization</p>
+        <p>• Distressed properties: Acquire and stabilize underperforming assets</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">Business Operation Loans</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <h4 class="text-lg font-bold text-green-700">Terms</h4>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">$100,000 - $10M</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 6.25%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Term:</span>
+          <span class="text-green-700 font-bold">Up to 10 years</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Minimum DSCR:</span>
+          <span class="text-green-700 font-bold">1.25</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <h4 class="text-lg font-bold text-green-700">Requirements</h4>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Operating History:</span>
+          <span class="text-green-700 font-bold">3 years preferred</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">FICO Minimum:</span>
+          <span class="text-green-700 font-bold">680</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Cash Reserves:</span>
+          <span class="text-green-700 font-bold">12 months debt service</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">Licensing & Compliance Requirements</h3>
+    <p class="text-gray-700 mb-4">Compliance is non-negotiable in this industry. To be eligible for financing, and throughout the life of the loan, your facility must meet all regulatory standards.</p>
+    <div class="space-y-4">
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">State Licensing</h4>
+        <p class="text-gray-700">Facility must hold appropriate state care licenses for providing services to seniors or individuals with disabilities.</p>
+      </div>
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Health & Safety Standards</h4>
+        <p class="text-gray-700">Properties must comply with health and safety standards mandated by local codes and regulations.</p>
+      </div>
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Zoning & Insurance</h4>
+        <p class="text-gray-700">Property must meet zoning laws for intended use. Adequate liability and property insurance required throughout loan term.</p>
+      </div>
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Staffing Requirements</h4>
+        <p class="text-gray-700">Facility must maintain 24/7 staffing, ensuring staff-to-resident ratio of no greater than 1:8 during daytime hours.</p>
+      </div>
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Environmental Standards</h4>
+        <p class="text-gray-700">Properties must provide compliance documentation related to environmental concerns—essential if any past issues have been noted.</p>
+      </div>
+    </div>
+  </div>
+</div>`
   },
   {
     id: "business-loan",
