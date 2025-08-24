@@ -14,118 +14,196 @@ export const loanPrograms: LoanProgram[] = [
     interestRate: "Starting at 5.31%",
     minimumLoanAmount: "$500,000+",
     description: "100% financing available • No credit requirements • Fast approval for qualified commercial properties nationwide.",
-    terms: `# 🚀 UNLOCK YOUR COMMERCIAL REAL ESTATE EMPIRE
-## Transform Properties Into Profit with CCIF's Game-Changing Financing Solutions
+    terms: `<div class="ccif-terms-container">
 
----
+## Commercial Real Estate Financing Solutions
+### Professional-Grade Lending for Serious Investors
 
-### 💥 STOP LETTING THESE ROADBLOCKS KILL YOUR DEALS!
-
-<div class="pain-points">
-**❌ REJECTED by traditional banks due to credit issues?**  
-**❌ FRUSTRATED by 20-30% down payment requirements?**  
-**❌ TIRED of waiting 90+ days for loan approval?**  
-**❌ LIMITED by rigid lending criteria that don't fit your deal?**  
-**❌ MISSING opportunities due to slow financing?**
+<div class="pain-points-section">
+<h3>Market Challenges We Eliminate</h3>
+<ul class="challenge-list">
+<li>Traditional bank rejections due to credit requirements</li>
+<li>Excessive down payment demands (20-30%)</li>
+<li>Extended approval timelines (90+ days)</li>
+<li>Rigid lending criteria limiting deal potential</li>
+<li>Geographic restrictions and limited property types</li>
+</ul>
 </div>
 
-### ⚡ WE SOLVE WHAT BANKS CAN'T!
-
-<div class="solutions-grid">
-**🎯 GET 100% FINANCING** - Zero down payment on qualified deals  
-**🎯 NO CREDIT SCORE REQUIRED** - Asset-based lending that focuses on property value  
-**🎯 LIGHTNING-FAST APPROVALS** - Close in 15-30 days, not months  
-**🎯 ANY PROPERTY TYPE** - We finance what others won't touch  
-**🎯 NATIONWIDE COVERAGE** - All 50 states, no geographic restrictions
+<div class="solutions-section">
+<h3>CCIF Strategic Advantages</h3>
+<ul class="advantage-list">
+<li><strong>100% Financing Available:</strong> Qualified transactions with zero down payment</li>
+<li><strong>Asset-Based Underwriting:</strong> Property value focus, not just credit scores</li>
+<li><strong>Accelerated Processing:</strong> 15-30 day closings standard</li>
+<li><strong>Comprehensive Property Coverage:</strong> All commercial real estate types</li>
+<li><strong>National Platform:</strong> Licensed in all 50 states</li>
+</ul>
 </div>
 
----
-
-## 🏆 THE CCIF ADVANTAGE - WHY SMART INVESTORS CHOOSE US
-
-**COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.**  
-*The #1 Alternative Commercial Lender in America*
-
----
-
-### 💰 PROGRAM #1: FIRST MORTGAGE PURCHASE
-**🔥 THE DEAL-MAKER'S FAVORITE**
-
-<div class="highlight-box">
-**LOAN AMOUNTS:** $500K to UNLIMITED (Yes, we said unlimited!)  
-**RATES THAT BEAT THE COMPETITION:** Fixed from 5.31% | Variable at Prime + 2%  
-**FLEXIBLE TERMS:** 1-30 years (We customize to YOUR needs)  
-**MAXIMUM LEVERAGE:** Up to 90% LTV (100% available!)  
-**SMART FINANCING:** 2% origination fee (50% can be financed)  
-**NO PENALTY:** Free prepayment on fixed rates
+<div class="company-header">
+<h2>COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.</h2>
+<p class="company-tagline">Premier Alternative Commercial Lending Institution</p>
 </div>
 
-**💡 PERFECT FOR:** First-time buyers, seasoned investors, portfolio expansion
+<div class="programs-section">
 
----
-
-### 🔥 PROGRAM #2: SECOND MORTGAGE & MEZZANINE
-**SUPERCHARGE YOUR BUYING POWER**
-
-<div class="highlight-box">
-**LOAN AMOUNTS:** $500K+ (Stack financing for maximum leverage!)  
-**COMPETITIVE RATES:** Starting at 7.56%  
-**COMBINED POWER:** Up to 85% total LTV  
-**FLEXIBLE TERMS:** 1-10 years with multiple payment options  
-**PAYMENT FREEDOM:** Interest-only available  
-**FINANCING OPTIONS:** Roll origination fees into loan
+<div class="program-card">
+<h3>First Mortgage Purchase Program</h3>
+<div class="program-details">
+<div class="detail-row">
+<span class="label">Minimum Loan Amount:</span>
+<span class="value">$500,000</span>
+</div>
+<div class="detail-row">
+<span class="label">Interest Rates:</span>
+<span class="value">Fixed from 5.31% | Variable at Prime + 2%</span>
+</div>
+<div class="detail-row">
+<span class="label">Loan Terms:</span>
+<span class="value">1-30 years (customizable)</span>
+</div>
+<div class="detail-row">
+<span class="label">Loan-to-Value:</span>
+<span class="value">Up to 90% (100% program available)</span>
+</div>
+<div class="detail-row">
+<span class="label">Origination Fee:</span>
+<span class="value">2% (50% financeable)</span>
+</div>
+<div class="detail-row">
+<span class="label">Prepayment:</span>
+<span class="value">No penalty on fixed rates</span>
+</div>
+</div>
+<p class="program-description">Ideal for: First-time commercial buyers, experienced investors, portfolio expansion</p>
 </div>
 
-**💡 PERFECT FOR:** Maximizing leverage, preserving cash, multiple acquisitions
-
----
-
-### ⚡ PROGRAM #3: RATE & TERM REFINANCE  
-**SLASH YOUR PAYMENTS, BOOST YOUR CASHFLOW**
-
-<div class="highlight-box">
-**MINIMUM LOAN:** $500K  
-**MARKET-BEATING RATES:** From 5.50%  
-**EXTENDED TERMS:** 1-30 years available  
-**EXTENDED AMORTIZATION:** Up to 40 years  
-**CASHFLOW BOOSTER:** Interest-only up to 10 years  
-**ROLL EVERYTHING IN:** Closing costs financed  
-**NO WAITING:** Zero seasoning requirements
+<div class="program-card">
+<h3>Second Mortgage & Mezzanine Program</h3>
+<div class="program-details">
+<div class="detail-row">
+<span class="label">Minimum Loan Amount:</span>
+<span class="value">$500,000</span>
+</div>
+<div class="detail-row">
+<span class="label">Interest Rates:</span>
+<span class="value">Starting at 7.56%</span>
+</div>
+<div class="detail-row">
+<span class="label">Combined LTV:</span>
+<span class="value">Up to 85%</span>
+</div>
+<div class="detail-row">
+<span class="label">Loan Terms:</span>
+<span class="value">1-10 years (balloon or fully amortized)</span>
+</div>
+<div class="detail-row">
+<span class="label">Payment Structure:</span>
+<span class="value">Interest-only available</span>
+</div>
+<div class="detail-row">
+<span class="label">Origination Fee:</span>
+<span class="value">2% (50% financeable)</span>
+</div>
+</div>
+<p class="program-description">Ideal for: Maximizing leverage, cash preservation, multiple acquisitions</p>
 </div>
 
-**💡 PERFECT FOR:** Lowering payments, freeing up capital, portfolio optimization
-
----
-
-### 💎 PROGRAM #4: CASH-OUT REFINANCE
-**TURN EQUITY INTO OPPORTUNITY**
-
-<div class="highlight-box">
-**LOAN RANGE:** $500K - $15M+ (Larger deals welcome!)  
-**ATTRACTIVE RATES:** From 6.15% (fixed or variable)  
-**CUSTOM TERMS:** 1, 3, 5, 10, 15, 30 years available  
-**MAXIMUM LEVERAGE:** Up to 80% LTV (85% for premium properties)  
-**PAYMENT FLEXIBILITY:** Amortized, interest-only, or balloon  
-**IMMEDIATE ACCESS:** No seasoning period required
+<div class="program-card">
+<h3>Rate & Term Refinance Program</h3>
+<div class="program-details">
+<div class="detail-row">
+<span class="label">Minimum Loan Amount:</span>
+<span class="value">$500,000</span>
+</div>
+<div class="detail-row">
+<span class="label">Interest Rates:</span>
+<span class="value">From 5.50%</span>
+</div>
+<div class="detail-row">
+<span class="label">Loan Terms:</span>
+<span class="value">1-30 years</span>
+</div>
+<div class="detail-row">
+<span class="label">Amortization:</span>
+<span class="value">Up to 40 years</span>
+</div>
+<div class="detail-row">
+<span class="label">Interest-Only Period:</span>
+<span class="value">Up to 10 years available</span>
+</div>
+<div class="detail-row">
+<span class="label">Closing Costs:</span>
+<span class="value">May be financed</span>
+</div>
+</div>
+<p class="program-description">Ideal for: Payment reduction, capital optimization, portfolio restructuring</p>
 </div>
 
-**💡 PERFECT FOR:** Portfolio expansion, business growth, personal liquidity
-
----
-
-### 🚀 PROGRAM #5: BRIDGE FINANCING
-**MOVE AT THE SPEED OF OPPORTUNITY**
-
-<div class="highlight-box">
-**LOAN RANGE:** $50K - $10M+ (Any size deal!)  
-**SHORT TERMS:** 3-24 months  
-**COMPETITIVE RATE:** ~9.5%  
-**HIGH LEVERAGE:** Up to 75% LTV  
-**FLEXIBLE PAYMENTS:** Deferred interest or interest-only  
-**FAST FUNDING:** Close in days, not weeks
+<div class="program-card">
+<h3>Cash-Out Refinance Program</h3>
+<div class="program-details">
+<div class="detail-row">
+<span class="label">Minimum Loan Amount:</span>
+<span class="value">$500,000</span>
+</div>
+<div class="detail-row">
+<span class="label">Interest Rates:</span>
+<span class="value">From 6.15% (fixed or variable)</span>
+</div>
+<div class="detail-row">
+<span class="label">Loan Terms:</span>
+<span class="value">1, 3, 5, 10, 15, or 30 years</span>
+</div>
+<div class="detail-row">
+<span class="label">Loan-to-Value:</span>
+<span class="value">Up to 80% (85% for premium properties)</span>
+</div>
+<div class="detail-row">
+<span class="label">Payment Structure:</span>
+<span class="value">Amortized, interest-only, or balloon</span>
+</div>
+<div class="detail-row">
+<span class="label">Seasoning:</span>
+<span class="value">No seasoning period required</span>
+</div>
+</div>
+<p class="program-description">Ideal for: Portfolio expansion, business growth, personal liquidity</p>
 </div>
 
-**💡 PERFECT FOR:** Auctions, 1031 exchanges, fix-and-flips, opportunistic buys
+<div class="program-card">
+<h3>Bridge Financing Program</h3>
+<div class="program-details">
+<div class="detail-row">
+<span class="label">Minimum Loan Amount:</span>
+<span class="value">$500,000</span>
+</div>
+<div class="detail-row">
+<span class="label">Loan Terms:</span>
+<span class="value">3-24 months</span>
+</div>
+<div class="detail-row">
+<span class="label">Interest Rate:</span>
+<span class="value">Approximately 9.5%</span>
+</div>
+<div class="detail-row">
+<span class="label">Loan-to-Value:</span>
+<span class="value">Up to 75%</span>
+</div>
+<div class="detail-row">
+<span class="label">Payment Options:</span>
+<span class="value">Deferred interest or interest-only</span>
+</div>
+<div class="detail-row">
+<span class="label">Funding Speed:</span>
+<span class="value">Close in days, not weeks</span>
+</div>
+</div>
+<p class="program-description">Ideal for: Auction purchases, 1031 exchanges, fix-and-flip projects, opportunistic acquisitions</p>
+</div>
+
+</div>
 
 ---
 
