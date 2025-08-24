@@ -2537,35 +2537,222 @@ Processing Time: 14-30 days`
   },
   {
     id: "residential-investment-loan",
-    name: "Residential Investment Loan",
-    interestRate: "8.5% - 14%",
-    minimumLoanAmount: "$500,000",
-    description: "Financing for residential investment properties and rental real estate.",
-    terms: `RESIDENTIAL INVESTMENT LOAN TERMS
+    name: "Private Residential Mortgage",
+    interestRate: "Starting at 5.00%",
+    minimumLoanAmount: "$50,000",
+    description: "Asset-based private lending providing flexible financing solutions for residential mortgage whether it's a primary residence or an investment property.",
+    terms: `# Private Residential Mortgage
 
-Interest Rate: 8.5% - 14%
-Loan Term: Up to 30 years
-Minimum Loan Amount: $500,000
-Maximum LTV: 80%
+<div class="hero-title">Sundry Capital Solutions - Asset-Based Private Lender</div>
 
-Property Types:
-- Single-family rentals
-- Multi-family properties (2-4 units)
-- Condominiums
-- Townhomes
+<div class="highlight-box">
+🏠 **Flexible financing solutions for residential mortgage whether it's a primary residence or an investment property**
+</div>
 
-Features:
-- No owner-occupancy required
-- Asset-based underwriting
-- Portfolio lending
-- Fast closing process
+---
 
-Requirements:
-- Property appraisal
-- Rental income analysis
-- Borrower financial statements
-- Property management plan (for larger portfolios)
+## 🔥 Financing Options Overview
 
-Processing Time: 21-30 days`
+The financing options we cover under our Residential Loan programs are outlined below in this particular order:
+
+💰 **1. First Mortgage/Purchase**
+💰 **2. Rate and Term Refinance** 
+💰 **3. Cash-out Refinance**
+💰 **4. Bridge Loan**
+💰 **5. 100% Financing Program**
+
+---
+
+## 1️⃣ First Mortgage/Purchase Terms
+
+<div class="qualification-grid">
+<div>
+💵 **Minimum Loan Amount:** $50,000<br>
+💵 **Maximum Loan Amount:** $5,000,000<br>
+⚡ **Interest Rate (Fixed):** Starting at 5.00% per annum<br>
+⚡ **Interest Rate (Variable):** Starting at Prime + 2.00%<br>
+🎯 **Term Length:** 15, 20, 30, or 40 years<br>
+🎯 **Loan-to-Value:** Up to 90% (100% financing available - See Primary Qualifications)
+</div>
+<div>
+📊 **Prepayment Penalty:** None - pay off anytime<br>
+💳 **Origination Fee:** 1-2% (financing available)
+</div>
+</div>
+
+### 💎 Payment Structure Options
+
+✅ **Fully Amortizing:** Principal and interest payments
+✅ **Interest-Only Period:** Available for 1-10 years  
+✅ **Interest-Only + Balloon:** For investment properties
+
+---
+
+## 2️⃣ Rate and Term Refinance
+
+<div class="highlight-box">
+💵 **Minimum Loan Amount:** $50,000<br>
+⚡ **Interest Rate (Fixed):** Starting at 5.27%<br>
+🎯 **Term Length:** 15 to 30 years<br>
+📊 **Prepayment Penalty:** No prepayment penalty
+</div>
+
+### 💎 Payment Structure Options
+✅ **Fully Amortizing:** Principal and interest payments
+✅ **Interest-Only Period:** Available for 1-7 years
+✅ **Interest-Only + Balloon:** For investment properties
+
+### 🎯 Ideal For:
+• Reducing monthly payments
+• Securing a better interest rate  
+• Converting adjustable to fixed rate
+• Changing loan terms
+
+---
+
+## 3️⃣ Cash-Out Refinance
+
+<div class="highlight-box">
+If you already own a property and are looking to tap into your equity, our cash-out refinance option may be perfect for you.
+</div>
+
+### 💰 Typical Terms:
+
+💵 **Maximum LTV Ratio:** Up to 85%<br>
+⚡ **Interest Rate (Fixed):** Starting at 5.77%<br>
+⚡ **Interest Rate (Variable):** Starting at Prime + 2.25%<br>
+🎯 **Term Length:** Up to 30 years<br>
+💎 **Cash-Out Amount:** Available for any use (no restrictions)<br>
+📊 **Seasoning Requirements:** None - refinance immediately after purchase
+
+### 💎 Payment Structure Options:
+✅ **Fully Amortizing:** Principal and interest payments
+✅ **Interest-Only Period:** Available for 1-5 years
+✅ **Interest-Only + Balloon:** For investment properties
+
+---
+
+## 4️⃣ Bridge Loan Program
+
+<div class="highlight-box">
+Our Bridge Loan product is designed to provide short-term financing solutions for clients who need immediate funds to bridge the gap between buying a new property and selling their existing one or other immediate financing needs such as investment opportunities.
+</div>
+
+💵 **Minimum Loan Amount:** $100,000<br>
+🎯 **Term Length:** 3 to 24 months<br>
+⚡ **Interest Rate:** 9.5%<br>
+📊 **LTV:** Up to 75%<br>
+💳 **Origination Fee:** 2% (up to 50% financing available unless you prefer to pay out of pocket at closing)
+
+### 💎 Payment Structure Options:
+✅ **Deferred interest with backend balloon payment**
+✅ **Interest-only payments**
+
+---
+
+## 5️⃣ 100% Financing Program
+
+<div class="highlight-box">
+🚀 **Industry-leading 100% financing options for qualified deals**
+</div>
+
+**To qualify for zero down investment property loans, applicants must meet any two of the following enhanced criteria:**
+
+<div class="qualification-grid">
+<div>
+🎯 **Minimum FICO:** 680 credit score<br>
+🏆 **Experience:** 3+ residential real estate transactions in last 5 years OR verifiable residential property management track record<br>
+💎 **Net Worth:** Minimum 1.5x the loan amount
+</div>
+<div>
+💰 **Liquidity:** 6 months of debt service payments in reserves<br>
+📊 **Income Verification:** 2 years tax returns and 3 months bank statements<br>
+🏢 **Cross-collateralization:** Additional properties offered as collateral
+</div>
+</div>
+
+---
+
+## 🏠 Eligible Property Types
+
+<div class="property-types">
+<div>
+🏢 Single-family homes<br>
+🏢 Condominiums<br>
+🏢 Townhouses<br>
+🏢 Multi-family homes (up to four units)<br>
+🏢 Modular homes
+</div>
+<div>
+🏢 Manufactured homes (mobile homes)<br>
+🏢 Co-ops (cooperative housing)<br>
+🏢 Mixed-use properties (with residential component)<br>
+🏢 Vacation properties & second homes<br>
+🏢 Residential investment properties
+</div>
+</div>
+
+---
+
+## 💎 Payment Structure Options at Sundry Capital Solutions
+
+We offer flexible payment structures to accommodate different financial strategies and cash flow needs:
+
+### **Fully Amortizing**
+✅ Principal and interest payments throughout loan term<br>
+✅ Loan is fully paid off at maturity<br>
+✅ Builds equity with each payment<br>
+✅ Available for all loan types<br>
+✅ Best for primary residences
+
+### **Interest-Only Period**
+✅ Interest-only payments for 1-10 years<br>
+✅ Converts to fully amortizing after interest-only period<br>
+✅ Lower initial payments<br>
+✅ Good for property improvement projects<br>
+✅ Available for all property types
+
+### **Interest-Only + Balloon**
+✅ Interest-only payments for entire term<br>
+✅ Principal due at maturity (balloon payment)<br>
+✅ Lowest monthly payments<br>
+✅ Ideal for investment properties
+
+---
+
+## 📋 Required Documentation
+
+💡 Government-issued ID<br>
+💡 Property details (address, type, size)<br>
+💡 Purchase agreement (for purchases)<br>
+💡 Current mortgage statement (for refinances)<br>
+💡 Proof of property insurance<br>
+💡 Recent property tax statement<br>
+💡 Most recent appraisal report (if available)
+
+---
+
+## ❓ Frequently Asked Questions (FAQ)
+
+### **Q: Can I close a deal if the property is currently tenant-occupied or leased?**
+**A:** Yes, but certain occupancy arrangements may affect eligibility and terms. We'll evaluate how existing leases impact collateral value and may request lease documentation or proof of tenant payments.
+
+### **Q: How is the origination fee structured?**
+**A:** We provide up to 50% financing (interest charged) unless applicant prefers to pay at closing.
+
+### **Q: What happens if my property is in the middle of major renovations, or if it's not fully habitable?**
+**A:** We review the current condition and scope of work. Funds for properties under renovation may have additional requirements, like a completion reserve or future inspection, and the initial LTV could be lower until work is completed.
+
+### **Q: What if there are title issues, such as liens, judgments, or boundary discrepancies?**
+**A:** All outstanding issues such as mechanic's liens, IRS liens, unpaid taxes, or encroachments must be resolved prior to closing. If discovered late, this may delay or jeopardize funding. Early title search is key.
+
+### **Q: Can I get a loan on an inherited property, or one with multiple heirs or owners?**
+**A:** Yes, but all owners must join the application, consent to the loan, and sign at closing. If probate is ongoing, loan funding may need official court clearance.
+
+### **Q: Are there limits or special conditions for mixed-use or non-traditional properties?**
+**A:** We lend on mixed-use so long as there's a residential component. We'll assess zoning compliance and the proportion of residential use. Unusual property types may take longer to review and may impact eligible LTV.
+
+### **Q: What happens if my existing property does not sell within the bridge loan term?**
+**A:** We work with you closely to assess exit strategies and may consider extensions based on your circumstances and collateral value.`
   }
 ];

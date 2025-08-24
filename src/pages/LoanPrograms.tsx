@@ -15,6 +15,7 @@ import mobileHomeParkImage from "@/assets/mobile-home-park.jpg";
 import constructionSiteImage from "@/assets/construction-site.jpg";
 import selfStorageImage from "@/assets/self-storage-facility.jpg";
 import seniorLivingImage from "@/assets/senior-living-facility.jpg";
+import residentialInvestmentImage from "@/assets/residential-investment.jpg";
 
 export default function LoanPrograms() {
   const [selectedProgram, setSelectedProgram] = useState<LoanProgram | null>(null);
@@ -169,15 +170,25 @@ export default function LoanPrograms() {
                           </div>
                          )}
                          
-                         {selectedProgram?.id === "senior-living-financing" && (
-                           <div className="mb-4">
-                             <img 
-                               src={seniorLivingImage} 
-                               alt="Senior Living Care Facility with Caring Staff and Comfortable Environment" 
-                               className="w-full h-48 object-cover rounded-lg shadow-lg"
-                             />
-                           </div>
-                         )}
+                          {selectedProgram?.id === "senior-living-financing" && (
+                            <div className="mb-4">
+                              <img 
+                                src={seniorLivingImage} 
+                                alt="Senior Living Care Facility with Caring Staff and Comfortable Environment" 
+                                className="w-full h-48 object-cover rounded-lg shadow-lg"
+                              />
+                            </div>
+                          )}
+                          
+                          {selectedProgram?.id === "residential-investment-loan" && (
+                            <div className="mb-4">
+                              <img 
+                                src={residentialInvestmentImage} 
+                                alt="Residential Investment Property Portfolio with Single-Family Homes and Rental Properties" 
+                                className="w-full h-48 object-cover rounded-lg shadow-lg"
+                              />
+                            </div>
+                          )}
                       <ScrollArea className="max-h-[65vh] pr-4">
                         <div className="space-y-6">
                           <div 
