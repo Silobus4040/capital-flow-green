@@ -1937,36 +1937,277 @@ export const loanPrograms: LoanProgram[] = [
   },
   {
     id: "self-storage-financing",
-    name: "Self Storage Financing",
-    interestRate: "7.5% - 12%",
-    minimumLoanAmount: "$500,000",
-    description: "Specialized financing for self-storage facilities and mini-storage properties.",
-    terms: `SELF STORAGE FINANCING TERMS
+    name: "Self Storage Facility Financing",
+    interestRate: "5.43% - 6.25%",
+    minimumLoanAmount: "$250,000",
+    description: "Specialized financial solutions exclusively focused on the self-storage industry with asset-based lending approach.",
+    terms: `<div class="space-y-8 bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl">
+  <div class="text-center">
+    <h1 class="text-4xl font-bold text-green-800 mb-4">Self Storage Facility Financing Program</h1>
+    <p class="text-xl text-green-700 mb-2">As an asset-based lender, we specialize in providing unique financial solutions exclusively focused on the self-storage industry.</p>
+    <p class="text-lg text-green-600">Our approach is simple: we evaluate the property's potential and performance, not your personal credit history. We understand the unique dynamics of self-storage facilities.</p>
+  </div>
 
-Interest Rate: 7.5% - 12%
-Loan Term: Up to 25 years
-Minimum Loan Amount: $500,000
-Maximum LTV: 80%
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h2 class="text-3xl font-bold text-green-800 mb-6 text-center">Financing Options</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">1. Standard Purchase Loan</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">2. Rate and Term Refinance</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">3. Purchase with DSCR Loan</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">4. Cash-out Refinance</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">5. Bridge Loan</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">6. 100% Financing Program</div>
+      </div>
+    </div>
+  </div>
 
-Property Types:
-- Self-storage facilities
-- Mini-storage properties
-- Climate-controlled storage
-- RV/boat storage
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">1. Standard Purchase Terms</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">Minimum $250,000</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 5.43%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Term:</span>
+          <span class="text-green-700 font-bold">3 to 30 years</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 85% stabilized / 80% improvements</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Origination Fee:</span>
+          <span class="text-green-700 font-bold">2% (50% financing available)</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Prepayment Penalty:</span>
+          <span class="text-green-700 font-bold">1% if paid off within first 3 years</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-Key Benefits:
-- Industry expertise
-- Flexible underwriting
-- Fast processing
-- Competitive terms
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">2. Rate and Term Refinance</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Eligible Properties:</span>
+          <span class="text-green-700 font-bold">1+ year operational history</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 5.43%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 80%</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Cash-out Option:</span>
+          <span class="text-green-700 font-bold">Available for renovations</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Origination Fee:</span>
+          <span class="text-green-700 font-bold">2% (50% financing available)</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-Requirements:
-- Operating history (preferred)
-- Market feasibility study
-- Management plan
-- Financial statements
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">3. Purchase with Debt Service Coverage Ratio (DSCR)</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Minimum DSCR:</span>
+          <span class="text-green-700 font-bold">1.25x for qualified properties</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 5.64%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 80%</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">Based on projected cash flow</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Origination Fee:</span>
+          <span class="text-green-700 font-bold">2% (50% financing available)</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Repayment:</span>
+          <span class="text-green-700 font-bold">Customized based on performance</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-Processing Time: 30-45 days`
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">4. Cash-Out Refinance</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Purpose:</span>
+          <span class="text-green-700 font-bold">Access equity for reinvestment</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 80%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 6.25%</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Minimum Loan:</span>
+          <span class="text-green-700 font-bold">$300,000</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Terms:</span>
+          <span class="text-green-700 font-bold">5 to 30 years fixed</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Origination Fee:</span>
+          <span class="text-green-700 font-bold">2% (50% financing available)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">5. Bridge Loan</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Purpose:</span>
+          <span class="text-green-700 font-bold">Short-term acquisition financing</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Term Length:</span>
+          <span class="text-green-700 font-bold">6 to 24 months</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">6%</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 85%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Origination Fee:</span>
+          <span class="text-green-700 font-bold">2% (50% financing available)</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Qualifications:</span>
+          <span class="text-green-700 font-bold">Cash flow projections required</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">6. 100% Financing</h3>
+    <p class="text-gray-700 mb-4">We offer industry-leading 100% financing options for qualified deals. To qualify for zero down investment property loans, applicants must meet the following enhanced criteria:</p>
+    
+    <div class="bg-green-50 p-6 rounded-lg">
+      <h4 class="text-xl font-bold text-green-800 mb-4">Primary Qualifications</h4>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Minimum FICO:</span>
+          <span class="text-green-700 font-bold">680</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Experience:</span>
+          <span class="text-green-700 font-bold">3+ comparable transactions in 5 years OR management track record</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Net Worth:</span>
+          <span class="text-green-700 font-bold">Minimum 1.5x loan amount</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Liquidity:</span>
+          <span class="text-green-700 font-bold">6 months debt service reserves</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Income Verification:</span>
+          <span class="text-green-700 font-bold">2 years tax returns + 3 months bank statements</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Cross-collateralization:</span>
+          <span class="text-green-700 font-bold">Additional properties as collateral</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">Requirements</h3>
+    <div class="space-y-6">
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Operational Status</h4>
+        <p class="text-gray-700">The facility must be operational and appropriately zoned for self-storage. We consider facilities in various stages, from stabilized to lease-up.</p>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Key Features</h4>
+        <p class="text-gray-700">Ideally, facilities should have security systems, climate-controlled units, and easy access to major roadways. However, we understand that not all facilities have all these features, and we can adjust our financing based on the specifics of your property.</p>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Size Requirements</h4>
+        <p class="text-gray-700">While we generally look for a minimum of 50 rental units or 25,000 square feet of total storage space, we are willing to discuss properties that are slightly below these thresholds, especially if there's a clear plan for growth.</p>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Stabilized Facilities</h4>
+        <p class="text-gray-700">For stabilized facilities with strong operating history, we review the trailing 12-month income and occupancy. While our target DSCR is around 1.25x, we can consider as low as 1.15x for highly stabilized assets with exceptional management and location.</p>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Lease-Up, Value-Add, and Expansion Deals</h4>
+        <p class="text-gray-700">We are excited to partner with you on lease-up, value-add, and expansion projects. These deals require pro forma underwriting with a feasibility study or third-party management contract. We will work with you to determine appropriate reserves and collateral requirements based on your specific project.</p>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Mixed-Use Facilities</h4>
+        <p class="text-gray-700">If your property includes a mix of storage, office, or retail space, we'll conduct a prorated Net Operating Income (NOI) evaluation by use type. We are open to creative financing solutions for mixed-use properties.</p>
+      </div>
+    </div>
+  </div>
+</div>`
   },
   {
     id: "senior-living-financing",

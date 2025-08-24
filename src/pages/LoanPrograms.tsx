@@ -13,6 +13,7 @@ import rehabPropertyImage from "@/assets/rehab-property.jpg";
 import rvParkImage from "@/assets/rv-park-campground.jpg";
 import mobileHomeParkImage from "@/assets/mobile-home-park.jpg";
 import constructionSiteImage from "@/assets/construction-site.jpg";
+import selfStorageImage from "@/assets/self-storage-facility.jpg";
 
 export default function LoanPrograms() {
   const [selectedProgram, setSelectedProgram] = useState<LoanProgram | null>(null);
@@ -155,7 +156,17 @@ export default function LoanPrograms() {
                              className="w-full h-48 object-cover rounded-lg shadow-lg"
                            />
                          </div>
-                       )}
+                        )}
+                        
+                        {selectedProgram?.id === "self-storage-financing" && (
+                          <div className="mb-4">
+                            <img 
+                              src={selfStorageImage} 
+                              alt="Modern Self Storage Facility with Security Features and Climate Control" 
+                              className="w-full h-48 object-cover rounded-lg shadow-lg"
+                            />
+                          </div>
+                        )}
                       <ScrollArea className="max-h-[65vh] pr-4">
                         <div className="space-y-6">
                           <div 
