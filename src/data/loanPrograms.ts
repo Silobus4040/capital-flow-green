@@ -12,302 +12,329 @@ export const loanPrograms: LoanProgram[] = [
     id: "commercial-mortgage",
     name: "Commercial Mortgage",
     interestRate: "Starting at 5.31%",
-    minimumLoanAmount: "$500,000+",
+    minimumLoanAmount: "$500,000",
     description: "100% financing available • No credit requirements • Fast approval for qualified commercial properties nationwide.",
-    terms: `<div class="ccif-terms-container">
+    terms: `<div style="background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
-## Commercial Real Estate Financing Solutions
-### Professional-Grade Lending for Serious Investors
-
-<div class="pain-points-section">
-<h3>Market Challenges We Eliminate</h3>
-<ul class="challenge-list">
-<li>Traditional bank rejections due to credit requirements</li>
-<li>Excessive down payment demands (20-30%)</li>
-<li>Extended approval timelines (90+ days)</li>
-<li>Rigid lending criteria limiting deal potential</li>
-<li>Geographic restrictions and limited property types</li>
-</ul>
+<div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
+  <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+    COMMERCIAL REAL ESTATE FINANCING
+  </h1>
+  <h2 style="font-size: 1.5rem; font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem;">
+    COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.
+  </h2>
+  <p style="font-size: 1.1rem; color: #e5e7eb; font-weight: 500;">
+    Premier Alternative Commercial Lending Institution
+  </p>
 </div>
 
-<div class="solutions-section">
-<h3>CCIF Strategic Advantages</h3>
-<ul class="advantage-list">
-<li><strong>100% Financing Available:</strong> Qualified transactions with zero down payment</li>
-<li><strong>Asset-Based Underwriting:</strong> Property value focus, not just credit scores</li>
-<li><strong>Accelerated Processing:</strong> 15-30 day closings standard</li>
-<li><strong>Comprehensive Property Coverage:</strong> All commercial real estate types</li>
-<li><strong>National Platform:</strong> Licensed in all 50 states</li>
-</ul>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+    <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🚫 Market Challenges We Eliminate</h3>
+    <ul style="color: #fecaca; list-style: none; padding: 0;">
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        Traditional bank rejections due to credit requirements
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        Excessive down payment demands (20-30%)
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        Extended approval timelines (90+ days)
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        Rigid lending criteria limiting deals
+      </li>
+    </ul>
+  </div>
+
+  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+    <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🎯 CCIF Strategic Advantages</h3>
+    <ul style="color: #a7f3d0; list-style: none; padding: 0;">
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        100% Financing Available
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        Asset-Based Underwriting
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        15-30 Day Closings Standard
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        All Commercial Property Types
+      </li>
+    </ul>
+  </div>
 </div>
 
-<div class="company-header">
-<h2>COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.</h2>
-<p class="company-tagline">Premier Alternative Commercial Lending Institution</p>
+<div style="margin-bottom: 3rem;">
+  <h2 style="font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 2rem; color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+    OUR FINANCING PROGRAMS
+  </h2>
+
+  <div style="display: grid; gap: 2rem;">
+    
+    <!-- Program 1 -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        PROGRAM #1
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+          First Mortgage Purchase Program
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          The Foundation Builder for Smart Investors
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">From 5.31%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">1-30 Years</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 90%</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
+          <div style="color: #a7f3d0;">First-time commercial buyers • Portfolio expansion • Seasoned investors</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Program 2 -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        PROGRAM #2
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+          Second Mortgage & Mezzanine Program
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Supercharge Your Buying Power
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">From 7.56%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">COMBINED LTV</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 85%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">1-10 Years</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
+          <div style="color: #a7f3d0;">Maximizing leverage • Cash preservation • Multiple acquisitions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Program 3 -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        PROGRAM #3
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+          Rate & Term Refinance Program
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Slash Your Payments, Boost Your Cashflow
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">From 5.50%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">1-30 Years</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">AMORTIZATION</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 40 Years</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
+          <div style="color: #a7f3d0;">Payment reduction • Capital optimization • Portfolio restructuring</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Program 4 -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        PROGRAM #4
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+          Cash-Out Refinance Program
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Turn Equity Into Opportunity
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">From 6.15%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 80%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">CUSTOM TERMS</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">1-30 Years</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
+          <div style="color: #a7f3d0;">Portfolio expansion • Business growth • Personal liquidity</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Program 5 -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        PROGRAM #5
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+          Bridge Financing Program
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Move At The Speed Of Opportunity
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">~9.5%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">3-24 Months</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 75%</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
+          <div style="color: #a7f3d0;">Auction purchases • 1031 exchanges • Fix-and-flip projects • Opportunistic acquisitions</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-<div class="programs-section">
-
-<div class="program-card">
-<h3>First Mortgage Purchase Program</h3>
-<div class="program-details">
-<div class="detail-row">
-<span class="label">Minimum Loan Amount:</span>
-<span class="value">$500,000</span>
-</div>
-<div class="detail-row">
-<span class="label">Interest Rates:</span>
-<span class="value">Fixed from 5.31% | Variable at Prime + 2%</span>
-</div>
-<div class="detail-row">
-<span class="label">Loan Terms:</span>
-<span class="value">1-30 years (customizable)</span>
-</div>
-<div class="detail-row">
-<span class="label">Loan-to-Value:</span>
-<span class="value">Up to 90% (100% program available)</span>
-</div>
-<div class="detail-row">
-<span class="label">Origination Fee:</span>
-<span class="value">2% (50% financeable)</span>
-</div>
-<div class="detail-row">
-<span class="label">Prepayment:</span>
-<span class="value">No penalty on fixed rates</span>
-</div>
-</div>
-<p class="program-description">Ideal for: First-time commercial buyers, experienced investors, portfolio expansion</p>
-</div>
-
-<div class="program-card">
-<h3>Second Mortgage & Mezzanine Program</h3>
-<div class="program-details">
-<div class="detail-row">
-<span class="label">Minimum Loan Amount:</span>
-<span class="value">$500,000</span>
-</div>
-<div class="detail-row">
-<span class="label">Interest Rates:</span>
-<span class="value">Starting at 7.56%</span>
-</div>
-<div class="detail-row">
-<span class="label">Combined LTV:</span>
-<span class="value">Up to 85%</span>
-</div>
-<div class="detail-row">
-<span class="label">Loan Terms:</span>
-<span class="value">1-10 years (balloon or fully amortized)</span>
-</div>
-<div class="detail-row">
-<span class="label">Payment Structure:</span>
-<span class="value">Interest-only available</span>
-</div>
-<div class="detail-row">
-<span class="label">Origination Fee:</span>
-<span class="value">2% (50% financeable)</span>
-</div>
-</div>
-<p class="program-description">Ideal for: Maximizing leverage, cash preservation, multiple acquisitions</p>
+<div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+  <h2 style="color: white; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
+    ❓ FREQUENTLY ASKED QUESTIONS
+  </h2>
+  
+  <div style="display: grid; gap: 1.5rem;">
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        Q: How fast can I actually get approved and funded?
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        <strong>A:</strong> Pre-approval in 48-72 hours, full approval in 15-30 days, funding immediately after closing. We've closed deals in as little as 10 days for urgent situations.
+      </p>
+    </div>
+    
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        Q: Do you really offer 100% financing with no money down?
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        <strong>A:</strong> Yes! For qualified borrowers meeting our criteria, we provide true 100% financing. This includes purchase price plus reasonable closing costs.
+      </p>
+    </div>
+    
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        Q: What if I have credit issues or past bankruptcies?
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        <strong>A:</strong> We focus on the asset, not just credit. Many of our successful borrowers had credit challenges. We evaluate the total picture - property strength, experience, and ability to service debt.
+      </p>
+    </div>
+  </div>
 </div>
 
-<div class="program-card">
-<h3>Rate & Term Refinance Program</h3>
-<div class="program-details">
-<div class="detail-row">
-<span class="label">Minimum Loan Amount:</span>
-<span class="value">$500,000</span>
-</div>
-<div class="detail-row">
-<span class="label">Interest Rates:</span>
-<span class="value">From 5.50%</span>
-</div>
-<div class="detail-row">
-<span class="label">Loan Terms:</span>
-<span class="value">1-30 years</span>
-</div>
-<div class="detail-row">
-<span class="label">Amortization:</span>
-<span class="value">Up to 40 years</span>
-</div>
-<div class="detail-row">
-<span class="label">Interest-Only Period:</span>
-<span class="value">Up to 10 years available</span>
-</div>
-<div class="detail-row">
-<span class="label">Closing Costs:</span>
-<span class="value">May be financed</span>
-</div>
-</div>
-<p class="program-description">Ideal for: Payment reduction, capital optimization, portfolio restructuring</p>
+<div style="background: linear-gradient(45deg, #fbbf24, #f59e0b); padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center; color: #1f2937;">
+  <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">
+    🚀 READY TO DOMINATE YOUR MARKET?
+  </h2>
+  <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem;">
+    GET YOUR DEAL APPROVED IN 48 HOURS
+  </p>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+    <div style="background: rgba(31, 41, 55, 0.1); padding: 1rem; border-radius: 8px;">
+      <div style="font-weight: 700; font-size: 1.1rem;">📞 CALL NOW</div>
+      <div style="font-size: 1.2rem; font-weight: 800;">1-800-CCIF-LOAN</div>
+    </div>
+    <div style="background: rgba(31, 41, 55, 0.1); padding: 1rem; border-radius: 8px;">
+      <div style="font-weight: 700; font-size: 1.1rem;">📧 EMAIL</div>
+      <div style="font-size: 1.2rem; font-weight: 800;">deals@ccif.com</div>
+    </div>
+  </div>
 </div>
 
-<div class="program-card">
-<h3>Cash-Out Refinance Program</h3>
-<div class="program-details">
-<div class="detail-row">
-<span class="label">Minimum Loan Amount:</span>
-<span class="value">$500,000</span>
-</div>
-<div class="detail-row">
-<span class="label">Interest Rates:</span>
-<span class="value">From 6.15% (fixed or variable)</span>
-</div>
-<div class="detail-row">
-<span class="label">Loan Terms:</span>
-<span class="value">1, 3, 5, 10, 15, or 30 years</span>
-</div>
-<div class="detail-row">
-<span class="label">Loan-to-Value:</span>
-<span class="value">Up to 80% (85% for premium properties)</span>
-</div>
-<div class="detail-row">
-<span class="label">Payment Structure:</span>
-<span class="value">Amortized, interest-only, or balloon</span>
-</div>
-<div class="detail-row">
-<span class="label">Seasoning:</span>
-<span class="value">No seasoning period required</span>
-</div>
-</div>
-<p class="program-description">Ideal for: Portfolio expansion, business growth, personal liquidity</p>
-</div>
-
-<div class="program-card">
-<h3>Bridge Financing Program</h3>
-<div class="program-details">
-<div class="detail-row">
-<span class="label">Minimum Loan Amount:</span>
-<span class="value">$500,000</span>
-</div>
-<div class="detail-row">
-<span class="label">Loan Terms:</span>
-<span class="value">3-24 months</span>
-</div>
-<div class="detail-row">
-<span class="label">Interest Rate:</span>
-<span class="value">Approximately 9.5%</span>
-</div>
-<div class="detail-row">
-<span class="label">Loan-to-Value:</span>
-<span class="value">Up to 75%</span>
-</div>
-<div class="detail-row">
-<span class="label">Payment Options:</span>
-<span class="value">Deferred interest or interest-only</span>
-</div>
-<div class="detail-row">
-<span class="label">Funding Speed:</span>
-<span class="value">Close in days, not weeks</span>
-</div>
-</div>
-<p class="program-description">Ideal for: Auction purchases, 1031 exchanges, fix-and-flip projects, opportunistic acquisitions</p>
-</div>
-
-</div>
-
----
-
-## 🎯 EXCLUSIVE 100% FINANCING PROGRAM
-### **ZERO DOWN PAYMENT - MAXIMUM PROFIT POTENTIAL**
-
-**🔓 UNLOCK 100% FINANCING** when you meet just 2 of these criteria:
-
-<div class="qualification-grid">
-**💳 Credit Score:** 680+ FICO  
-**🏆 Experience:** 3+ commercial deals OR proven property management  
-**💰 Net Worth:** 1.5x the loan amount  
-**💵 Liquidity:** 6 months debt service reserves  
-**📊 Income Proof:** 2 years tax returns + 3 months bank statements  
-**🏢 Collateral:** Additional properties for cross-collateralization
-</div>
-
----
-
-## 🏢 WE FINANCE WHAT OTHERS WON'T
-### **NO PROPERTY TYPE TOO CHALLENGING**
-
-<div class="property-types">
-**🏢 TRADITIONAL COMMERCIAL**
-- Office Buildings (All Classes)  
-- Retail & Shopping Centers  
-- Industrial & Warehouse  
-- Multifamily (5+ units)  
-- Mixed-Use Properties  
-- Hotels & Hospitality
-
-**🎯 SPECIALTY PROPERTIES**
-- Car Washes & Gas Stations  
-- Restaurants & Entertainment  
-- Cannabis Facilities  
-- Self-Storage  
-- Medical Buildings  
-- Unique/Non-Conforming Assets
-</div>
-
----
-
-## ❓ FREQUENTLY ASKED QUESTIONS
-
-### **Q: How fast can I actually get approved and funded?**
-**A:** Pre-approval in 48-72 hours, full approval in 15-30 days, funding immediately after closing. We've closed deals in as little as 10 days for urgent situations.
-
-### **Q: What if my property is partially vacant or needs work?**
-**A:** We specialize in value-add deals! Partial vacancy is fine with a leasing plan. Properties needing repairs are evaluated on stabilized value with renovation holdbacks available.
-
-### **Q: Do you really offer 100% financing with no money down?**
-**A:** Yes! For qualified borrowers meeting our criteria, we provide true 100% financing. This includes purchase price plus reasonable closing costs.
-
-### **Q: What if I have credit issues or past bankruptcies?**
-**A:** We focus on the asset, not just credit. Many of our successful borrowers had credit challenges. We evaluate the total picture - property strength, experience, and ability to service debt.
-
-### **Q: Can I finance multiple properties at once?**
-**A:** Absolutely! We offer portfolio financing, blanket loans, and cross-collateralization. Many clients finance entire portfolios in single transactions.
-
-### **Q: What about environmental issues or special property types?**
-**A:** We're experts in complex deals. Environmental issues can often be resolved with remediation plans or insurance. We finance cannabis, car washes, gas stations, and other specialty properties others avoid.
-
-### **Q: How do your rates compare to banks?**
-**A:** Our rates are competitive with banks, but we approve deals banks reject. Speed, flexibility, and approval certainty often save you more money than a slightly lower rate elsewhere.
-
-### **Q: Do you work with first-time commercial investors?**
-**A:** Yes! While we prefer experience, we evaluate first-time investors with strong financial profiles and solid properties. We'll guide you through the process.
-
----
-
-## 🎯 SUCCESS STORIES & RESULTS
-
-**"CCIF approved our $2.3M office building purchase with 100% financing when three banks said no. Closed in 18 days!"**  
-*- Marcus Thompson, Real Estate Developer*
-
-**"Their bridge loan helped us acquire a distressed retail center. We're now refinancing at 40% higher value after repositioning."**  
-*- Sarah Chen, Investment Fund Manager*
-
-**"Portfolio refinancing of 8 properties freed up $1.2M in cash for our next acquisition. CCIF made it seamless."**  
-*- David Rodriguez, Portfolio Owner*
-
----
-
-## 🚀 READY TO DOMINATE YOUR MARKET?
-
-### **GET YOUR DEAL APPROVED IN 48 HOURS**
-
-**🔥 EXCLUSIVE BENEFITS FOR SERIOUS INVESTORS:**
-- Priority processing for portfolio clients  
-- Reduced fees for repeat customers  
-- Pre-approved credit lines up to $50M  
-- Dedicated relationship managers  
-- Market intelligence and deal flow  
-
-**📞 CALL NOW:** 1-800-CCIF-LOAN  
-**💻 APPLY ONLINE:** Submit your deal in 5 minutes  
-**📧 EMAIL:** deals@ccif.com  
-
-### **DON'T LET ANOTHER DEAL SLIP AWAY**
-*Every day you wait is money left on the table. Contact CCIF today and discover why we're America's #1 choice for commercial real estate financing.*
-
----
-
-**Licensed in all 50 states • A+ BBB Rating • $2.5B+ in funded loans • Asset-based lending specialists**`
+</div>`
   },
   {
     id: "commercial-dscr-loan",
@@ -341,13 +368,13 @@ Processing Time: 21-30 days`
     id: "rehab-loan",
     name: "Rehab Loan",
     interestRate: "9% - 15%",
-    minimumLoanAmount: "$250,000",
+    minimumLoanAmount: "$500,000",
     description: "Financing for property renovation and rehabilitation projects.",
     terms: `REHAB LOAN TERMS
 
 Interest Rate: 9% - 15%
 Loan Term: 6-24 months
-Minimum Loan Amount: $250,000
+Minimum Loan Amount: $500,000
 Maximum LTV: 70% of ARV (After Repair Value)
 
 Features:
@@ -372,13 +399,13 @@ Processing Time: 14-21 days`
     id: "rv-park-financing",
     name: "RV Park Financing",
     interestRate: "8.5% - 13%",
-    minimumLoanAmount: "$1,000,000",
+    minimumLoanAmount: "$500,000",
     description: "Specialized financing for RV parks and recreational vehicle facilities.",
     terms: `RV PARK FINANCING TERMS
 
 Interest Rate: 8.5% - 13%
 Loan Term: Up to 25 years
-Minimum Loan Amount: $1,000,000
+Minimum Loan Amount: $500,000
 Maximum LTV: 75%
 
 Property Features:
@@ -404,13 +431,13 @@ Processing Time: 30-45 days`
     id: "mobile-home-park-financing",
     name: "Mobile Home Park Financing",
     interestRate: "8% - 12.5%",
-    minimumLoanAmount: "$1,500,000",
+    minimumLoanAmount: "$500,000",
     description: "Financing solutions for mobile home parks and manufactured housing communities.",
     terms: `MOBILE HOME PARK FINANCING TERMS
 
 Interest Rate: 8% - 12.5%
 Loan Term: Up to 30 years
-Minimum Loan Amount: $1,500,000
+Minimum Loan Amount: $500,000
 Maximum LTV: 75%
 
 Property Types:
@@ -437,13 +464,13 @@ Processing Time: 30-45 days`
     id: "self-storage-financing",
     name: "Self Storage Financing",
     interestRate: "7.5% - 12%",
-    minimumLoanAmount: "$1,000,000",
+    minimumLoanAmount: "$500,000",
     description: "Specialized financing for self-storage facilities and mini-storage properties.",
     terms: `SELF STORAGE FINANCING TERMS
 
 Interest Rate: 7.5% - 12%
 Loan Term: Up to 25 years
-Minimum Loan Amount: $1,000,000
+Minimum Loan Amount: $500,000
 Maximum LTV: 80%
 
 Property Types:
@@ -470,13 +497,13 @@ Processing Time: 30-45 days`
     id: "senior-living-financing",
     name: "Senior Living Financing",
     interestRate: "8% - 13%",
-    minimumLoanAmount: "$2,000,000",
+    minimumLoanAmount: "$500,000",
     description: "Financing for senior living facilities, assisted living, and memory care properties.",
     terms: `SENIOR LIVING FINANCING TERMS
 
 Interest Rate: 8% - 13%
 Loan Term: Up to 30 years
-Minimum Loan Amount: $2,000,000
+Minimum Loan Amount: $500,000
 Maximum LTV: 75%
 
 Property Types:
@@ -503,13 +530,13 @@ Processing Time: 45-60 days`
     id: "adc-loan",
     name: "Acquisition, Development and Construction Loan",
     interestRate: "10% - 16%",
-    minimumLoanAmount: "$1,000,000",
+    minimumLoanAmount: "$500,000",
     description: "Comprehensive financing for land acquisition, development, and construction projects.",
     terms: `ADC LOAN TERMS
 
 Interest Rate: 10% - 16%
 Loan Term: 12-36 months
-Minimum Loan Amount: $1,000,000
+Minimum Loan Amount: $500,000
 Maximum LTV: 75% (including land, development, and construction costs)
 
 Project Types:
@@ -536,14 +563,13 @@ Processing Time: 45-60 days`
     id: "business-loan",
     name: "Business Loan",
     interestRate: "9% - 18%",
-    minimumLoanAmount: "$250,000",
+    minimumLoanAmount: "$500,000",
     description: "Flexible business financing for working capital, equipment, and expansion needs.",
     terms: `BUSINESS LOAN TERMS
 
 Interest Rate: 9% - 18%
 Loan Term: 1-10 years
-Minimum Loan Amount: $250,000
-Maximum Loan Amount: $10,000,000
+Minimum Loan Amount: $500,000
 
 Loan Types:
 - Working capital loans
@@ -569,13 +595,13 @@ Processing Time: 14-30 days`
     id: "residential-investment-loan",
     name: "Residential Investment Loan",
     interestRate: "8.5% - 14%",
-    minimumLoanAmount: "$150,000",
+    minimumLoanAmount: "$500,000",
     description: "Financing for residential investment properties and rental real estate.",
     terms: `RESIDENTIAL INVESTMENT LOAN TERMS
 
 Interest Rate: 8.5% - 14%
 Loan Term: Up to 30 years
-Minimum Loan Amount: $150,000
+Minimum Loan Amount: $500,000
 Maximum LTV: 80%
 
 Property Types:
