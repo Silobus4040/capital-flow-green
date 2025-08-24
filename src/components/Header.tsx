@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import ccifLogo from "@/assets/ccif-logo.png";
 
 const navigationItems = [
   { name: "Home", href: "/" },
@@ -27,7 +28,8 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-3">
+            <img src={ccifLogo} alt="CCIF Logo" className="h-12 w-12" />
             <div className="text-xl font-bold text-primary">
               COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.
             </div>
