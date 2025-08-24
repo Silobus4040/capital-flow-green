@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import ccifLogo from "@/assets/ccif-logo.png";
+import ccifLogo from "@/assets/ccif-logo-enhanced.png";
 
 const navigationItems = [
   { name: "Home", href: "/" },
@@ -28,12 +28,23 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
-            <img src={ccifLogo} alt="CCIF Logo" className="h-12 w-12" />
-            <div className="text-xl font-bold text-primary hidden sm:block">
-              COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.
+          <Link to="/" className="flex items-center space-x-4">
+            <img 
+              src={ccifLogo} 
+              alt="CCIF - Commercial Capital & Investment Finance Logo" 
+              className="h-14 w-14 object-contain flex-shrink-0" 
+            />
+            <div className="hidden lg:block">
+              <div className="text-xl font-bold text-primary leading-tight whitespace-nowrap">
+                COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.
+              </div>
             </div>
-            <div className="text-lg font-bold text-primary sm:hidden">
+            <div className="hidden sm:block lg:hidden">
+              <div className="text-lg font-bold text-primary leading-tight whitespace-nowrap">
+                COMMERCIAL CAPITAL & INVESTMENT FINANCE
+              </div>
+            </div>
+            <div className="text-lg font-bold text-primary sm:hidden leading-tight">
               CCIF
             </div>
           </Link>
