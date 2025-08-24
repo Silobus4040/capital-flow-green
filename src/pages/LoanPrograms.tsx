@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import commercialMortgageImage from "@/assets/commercial-mortgage.jpg";
 import commercialDscrImage from "@/assets/commercial-dscr-rental.jpg";
 import rehabPropertyImage from "@/assets/rehab-property.jpg";
+import rvParkImage from "@/assets/rv-park-campground.jpg";
 
 export default function LoanPrograms() {
   const [selectedProgram, setSelectedProgram] = useState<LoanProgram | null>(null);
@@ -93,6 +94,16 @@ export default function LoanPrograms() {
                           {selectedProgram?.name} - Complete Terms & Conditions
                         </DialogTitle>
                       </DialogHeader>
+                      
+                      {selectedProgram?.id === "rv-park-financing" && (
+                        <div className="mb-4">
+                          <img 
+                            src={rvParkImage} 
+                            alt="RV Park and Campground Facility with Recreational Vehicles" 
+                            className="w-full h-48 object-cover rounded-lg shadow-lg"
+                          />
+                        </div>
+                      )}
                       
                       {selectedProgram?.id === "commercial-mortgage" && (
                         <div className="mb-4">
