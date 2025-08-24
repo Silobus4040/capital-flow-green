@@ -443,30 +443,358 @@ export const loanPrograms: LoanProgram[] = [
   {
     id: "commercial-dscr-loan",
     name: "Commercial DSCR Loan",
-    interestRate: "8% - 14%",
+    interestRate: "Starting at 6.57%",
     minimumLoanAmount: "$500,000",
-    description: "Debt Service Coverage Ratio loans for income-producing commercial properties.",
-    terms: `COMMERCIAL DSCR LOAN TERMS
+    description: "Cash flow-based financing without personal income verification • Portfolio loans available • Fast closings for income-producing properties.",
+    terms: `<div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
-Interest Rate: 8% - 14%
-Loan Term: 5-30 years
-Minimum Loan Amount: $500,000
-Maximum LTV: 75%
-Minimum DSCR: 1.20
+<div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
+  <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #3b82f6, #1d4ed8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+    COMMERCIAL DSCR FINANCING
+  </h1>
+  <h2 style="font-size: 1.5rem; font-weight: 600; color: #3b82f6; margin-bottom: 0.5rem;">
+    COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.
+  </h2>
+  <p style="font-size: 1.1rem; color: #e5e7eb; font-weight: 500;">
+    Cash Flow-Based Commercial Real Estate Lending
+  </p>
+</div>
 
-Property Types:
-- Rental properties
-- Office buildings
-- Retail properties
-- Industrial buildings
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
+    <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🚫 Traditional Lending Obstacles We Eliminate</h3>
+    <ul style="color: #fecaca; list-style: none; padding: 0;">
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #3b82f6;">✗</span>
+        Personal income verification requirements
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #3b82f6;">✗</span>
+        Restrictive credit score minimums
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #3b82f6;">✗</span>
+        Complex debt-to-income calculations
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #3b82f6;">✗</span>
+        Single property limitations
+      </li>
+    </ul>
+  </div>
 
-Key Features:
-- No personal income verification
-- Asset-based underwriting
-- Quick closing process
-- Flexible terms
+  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
+    <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🎯 CCIF DSCR Advantages</h3>
+    <ul style="color: #a7f3d0; list-style: none; padding: 0;">
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #3b82f6;">✓</span>
+        Property Cash Flow Focus Only
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #3b82f6;">✓</span>
+        No Personal Income Documentation
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #3b82f6;">✓</span>
+        Portfolio Financing Available
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #3b82f6;">✓</span>
+        Non-Recourse Structure Options
+      </li>
+    </ul>
+  </div>
+</div>
 
-Processing Time: 21-30 days`
+<div style="margin-bottom: 3rem;">
+  <h2 style="font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 2rem; color: #3b82f6; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+    DSCR LOAN PROGRAM FEATURES
+  </h2>
+
+  <div style="display: grid; gap: 2rem;">
+    
+    <!-- Core Program -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #3b82f6; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #3b82f6; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        CORE PROGRAM
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #3b82f6; margin-bottom: 0.5rem;">
+          Cash Flow-Based Financing
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Qualify Based on Property Performance, Not Personal Income
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
+            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          </div>
+          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
+            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting at 6.57%</div>
+          </div>
+          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
+            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">MINIMUM DSCR</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">1.15x</div>
+          </div>
+          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
+            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">LOAN-TO-VALUE</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 75%</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
+          <div style="color: #a7f3d0;">Rental properties • Apartment buildings • Commercial income properties • Real estate investors</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rate Structure -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #3b82f6; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #3b82f6; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        SMART PRICING
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #3b82f6; margin-bottom: 0.5rem;">
+          Performance-Based Rate Structure
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Better Cash Flow = Better Rates
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
+            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">DSCR 1.15-1.24</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Base Rate 6.57%</div>
+          </div>
+          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
+            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">DSCR 1.25-1.49</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Rate Discount -0.125%</div>
+          </div>
+          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
+            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">DSCR 1.50+</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Rate Discount -0.25%</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #7c3aed, #8b5cf6); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">🏆 REWARD PERFORMANCE:</div>
+          <div style="color: #c4b5fd;">Higher cash flow properties earn lower interest rates automatically</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terms & Structure -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #3b82f6; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #3b82f6; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        FLEXIBLE TERMS
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #3b82f6; margin-bottom: 0.5rem;">
+          Customizable Loan Structure
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Tailored to Your Investment Strategy
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
+            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">10-30 Years</div>
+          </div>
+          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
+            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">AMORTIZATION</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">20-30 Years</div>
+          </div>
+          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
+            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">INTEREST-ONLY</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 10 Years</div>
+          </div>
+          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
+            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">PREPAYMENT</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Flexible Options</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 PAYMENT OPTIONS:</div>
+          <div style="color: #a7f3d0;">Fixed payments • Interest-only periods • Balloon structures • Full amortization</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 100% Financing -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        100% FINANCING
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+          Zero Down Payment Program
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Qualified Investors Can Finance 100% of Purchase
+        </p>
+        
+        <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <h4 style="color: #fbbf24; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
+            Qualify by Meeting Any 2 of These Criteria:
+          </h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💳 CREDIT SCORE</div>
+              <div style="color: white; font-size: 1.1rem; font-weight: 600;">680+ FICO</div>
+            </div>
+            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">📊 PROPERTY DSCR</div>
+              <div style="color: white; font-size: 1.1rem; font-weight: 600;">1.35x or Higher</div>
+            </div>
+            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💰 NET WORTH</div>
+              <div style="color: white; font-size: 1.1rem; font-weight: 600;">1.5x Loan Amount</div>
+            </div>
+            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💵 LIQUIDITY</div>
+              <div style="color: white; font-size: 1.1rem; font-weight: 600;">6 Months Reserves</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div style="background: linear-gradient(45deg, #1f2937, #374151); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+  <h2 style="color: #3b82f6; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
+    🏢 ELIGIBLE INCOME-PRODUCING PROPERTIES
+  </h2>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+    <div style="background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
+      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏢 MULTIFAMILY PROPERTIES</h3>
+      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+        <li>• Apartment Buildings (5+ units)</li>
+        <li>• Apartment Complexes (up to 300 units)</li>
+        <li>• Multifamily Portfolios</li>
+        <li>• Student Housing</li>
+        <li>• Senior Housing</li>
+      </ul>
+    </div>
+    
+    <div style="background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
+      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏪 COMMERCIAL PROPERTIES</h3>
+      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+        <li>• Office Buildings</li>
+        <li>• Retail Centers</li>
+        <li>• Industrial Facilities</li>
+        <li>• Flex Space</li>
+        <li>• Mixed-Use Buildings</li>
+        <li>• Commercial Condos</li>
+      </ul>
+    </div>
+    
+    <div style="background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
+      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">📊 PORTFOLIO FINANCING</h3>
+      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+        <li>• 2-50+ Properties</li>
+        <li>• Cross-Collateralization</li>
+        <li>• Weighted Average DSCR</li>
+        <li>• Single Closing</li>
+        <li>• Streamlined Process</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div style="background: linear-gradient(45dc2626, #ef4444); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+  <h2 style="color: white; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
+    ❓ FREQUENTLY ASKED QUESTIONS
+  </h2>
+  
+  <div style="display: grid; gap: 1.5rem;">
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        Q: How is DSCR calculated and what does it mean?
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        <strong>A:</strong> DSCR = Net Operating Income ÷ Annual Debt Service. A 1.25 DSCR means the property generates 25% more income than needed to cover the loan payment, providing a safety cushion.
+      </p>
+    </div>
+    
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        Q: Do you require personal income verification?
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        <strong>A:</strong> No! DSCR loans qualify based solely on the property's cash flow performance. We don't require tax returns, W2s, or personal income documentation.
+      </p>
+    </div>
+    
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        Q: Can I finance multiple properties in one loan?
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        <strong>A:</strong> Yes! Our portfolio program allows you to finance 2-50+ properties in a single transaction with cross-collateralization benefits and streamlined processing.
+      </p>
+    </div>
+    
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        Q: What if my property is partially vacant?
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        <strong>A:</strong> We underwrite to both in-place income and pro forma rents. Partial vacancy is acceptable with appropriate DSCR adjustments and potential reserve requirements.
+      </p>
+    </div>
+    
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
+      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+        Q: Are there prepayment penalties?
+      </h3>
+      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+        <strong>A:</strong> We offer flexible prepayment options including step-down schedules (5-4-3-2-1 or 3-2-1) and no-penalty options with slight rate adjustments for 10+ year terms.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div style="background: linear-gradient(45deg, #3b82f6, #1d4ed8); padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center; color: white;">
+  <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">
+    🚀 READY TO UNLOCK YOUR PORTFOLIO'S POTENTIAL?
+  </h2>
+  <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem;">
+    STREAMLINED DSCR FINANCING IN 30 DAYS
+  </p>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+      <div style="font-weight: 700; font-size: 1.1rem;">📞 CALL NOW</div>
+      <div style="font-size: 1.2rem; font-weight: 800;">1-800-CCIF-LOAN</div>
+    </div>
+    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+      <div style="font-weight: 700; font-size: 1.1rem;">📧 EMAIL</div>
+      <div style="font-size: 1.2rem; font-weight: 800;">dscr@ccif.com</div>
+    </div>
+  </div>
+  
+  <p style="font-size: 1rem; font-weight: 600; margin-top: 1.5rem;">
+    <strong>Cash Flow-Based Financing Made Simple</strong><br>
+    No personal income verification • Portfolio solutions • Competitive rates based on property performance
+  </p>
+</div>
+
+<div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+  <p style="color: #d1d5db; font-size: 0.9rem; line-height: 1.6;">
+    <strong>Specialized DSCR Lending • Licensed in all 50 states • $2.5B+ in funded loans • Income property financing experts</strong>
+  </p>
+</div>
+
+</div>`
   },
   {
     id: "rehab-loan",

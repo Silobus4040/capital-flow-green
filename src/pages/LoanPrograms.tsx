@@ -8,6 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { loanPrograms, LoanProgram } from "@/data/loanPrograms";
 import { useToast } from "@/hooks/use-toast";
 import commercialMortgageImage from "@/assets/commercial-mortgage.jpg";
+import commercialDscrImage from "@/assets/commercial-dscr-rental.jpg";
 
 export default function LoanPrograms() {
   const [selectedProgram, setSelectedProgram] = useState<LoanProgram | null>(null);
@@ -97,6 +98,16 @@ export default function LoanPrograms() {
                           <img 
                             src={commercialMortgageImage} 
                             alt="Commercial Real Estate Property" 
+                            className="w-full h-48 object-cover rounded-lg shadow-lg"
+                          />
+                        </div>
+                      )}
+                      
+                      {selectedProgram?.id === "commercial-dscr-loan" && (
+                        <div className="mb-4">
+                          <img 
+                            src={commercialDscrImage} 
+                            alt="Commercial Rental Property for DSCR Loan" 
                             className="w-full h-48 object-cover rounded-lg shadow-lg"
                           />
                         </div>
