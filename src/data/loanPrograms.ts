@@ -22,7 +22,7 @@ export const loanPrograms: LoanProgram[] = [
     RV PARK & CAMPGROUND FINANCING
   </h1>
   <h2 style="font-size: 1.5rem; font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem;">
-    SUNDRY CAPITAL SOLUTIONS
+    COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC
   </h2>
   <p style="font-size: 1.1rem; color: #e5e7eb; font-weight: 500;">
     Asset-Based Lender Specializing in Recreational Property Financing
@@ -478,7 +478,7 @@ export const loanPrograms: LoanProgram[] = [
     📞 Ready to Discuss Your RV Park Financing?
   </h2>
   <p style="color: #e5e7eb; font-size: 1.1rem; margin-bottom: 1.5rem;">
-    Contact Sundry Capital Solutions today for a personalized consultation tailored to your specific RV park investment goals.
+    Contact Commercial Capital & Investment Finance, Inc today for a personalized consultation tailored to your specific RV park investment goals.
   </p>
   <div style="color: #fbbf24; font-size: 1.2rem; font-weight: 700;">
     🚀 Turn Your RV Park Vision Into Reality
@@ -2543,7 +2543,7 @@ Processing Time: 14-30 days`
     description: "Asset-based private lending providing flexible financing solutions for residential mortgage whether it's a primary residence or an investment property.",
     terms: `# Private Residential Mortgage
 
-<div class="hero-title">Sundry Capital Solutions - Asset-Based Private Lender</div>
+<div class="hero-title">Commercial Capital & Investment Finance, Inc - Asset-Based Private Lender</div>
 
 <div class="highlight-box">
 🏠 **Flexible financing solutions for residential mortgage whether it's a primary residence or an investment property**
@@ -2694,7 +2694,7 @@ Our Bridge Loan product is designed to provide short-term financing solutions fo
 
 ---
 
-## 💎 Payment Structure Options at Sundry Capital Solutions
+## 💎 Payment Structure Options at Commercial Capital & Investment Finance, Inc
 
 We offer flexible payment structures to accommodate different financial strategies and cash flow needs:
 
