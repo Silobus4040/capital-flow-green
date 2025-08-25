@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { CheckCircle, DollarSign, Clock, Users, Award } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import emailjs from '@emailjs/browser';
 
 const US_STATES = [
   "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
@@ -93,6 +94,22 @@ export default function ReferralProgram() {
         });
         return;
       }
+
+      // Send email notification
+      await emailjs.send(
+        'service_contact',
+        'template_referral',
+        {
+          to_email: 'sundrycapitalsolutions@gmail.com',
+          from_name: sanitizedData.full_name,
+          from_email: sanitizedData.email,
+          phone: sanitizedData.phone,
+          broker_type: sanitizedData.company,
+          address: sanitizedData.experience_level,
+          subject: 'New Referral Program Signup'
+        },
+        'user_public_key'
+      );
 
       setIsSubmitted(true);
 

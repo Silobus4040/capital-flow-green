@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import emailjs from '@emailjs/browser';
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -71,6 +72,21 @@ export default function ContactUs() {
         });
         return;
       }
+
+      // Send email notification
+      await emailjs.send(
+        'service_contact',
+        'template_contact',
+        {
+          to_email: 'sundrycapitalsolutions@gmail.com',
+          from_name: sanitizedData.full_name,
+          from_email: sanitizedData.email,
+          phone: sanitizedData.phone,
+          message: sanitizedData.message,
+          subject: 'New Contact Form Submission'
+        },
+        'user_public_key'
+      );
 
       toast({
         title: "Message Sent Successfully",

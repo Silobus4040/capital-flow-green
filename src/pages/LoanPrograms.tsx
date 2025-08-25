@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { loanPrograms, LoanProgram } from "@/data/loanPrograms";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from '@emailjs/browser';
 import commercialMortgageImage from "@/assets/commercial-mortgage.jpg";
 import commercialDscrImage from "@/assets/commercial-dscr-rental.jpg";
 import rehabPropertyImage from "@/assets/rehab-property.jpg";
@@ -27,7 +28,7 @@ export default function LoanPrograms() {
   });
   const { toast } = useToast();
 
-  const handleApplicationSubmit = (program: LoanProgram) => {
+  const handleApplicationSubmit = async (program: LoanProgram) => {
     if (!applicationForm.name || !applicationForm.phone || !applicationForm.email) {
       toast({
         title: "Missing Information",
@@ -37,19 +38,35 @@ export default function LoanPrograms() {
       return;
     }
 
-    // Here you would typically send the email
-    console.log("Application Request:", {
-      ...applicationForm,
-      program: program.name,
-      timestamp: new Date().toISOString()
-    });
+    try {
+      // Send email notification
+      await emailjs.send(
+        'service_contact',
+        'template_application',
+        {
+          to_email: 'sundrycapitalsolutions@gmail.com',
+          from_name: applicationForm.name,
+          from_email: applicationForm.email,
+          phone: applicationForm.phone,
+          program_name: program.name,
+          subject: `Loan Application Request - ${program.name}`
+        },
+        'user_public_key'
+      );
 
-    toast({
-      title: "Application Request Sent",
-      description: `Your request for ${program.name} application has been submitted successfully.`,
-    });
+      toast({
+        title: "Application Request Sent",
+        description: `Your request for ${program.name} application has been submitted successfully.`,
+      });
 
-    setApplicationForm({ name: "", phone: "", email: "", program: "" });
+      setApplicationForm({ name: "", phone: "", email: "", program: "" });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send application request. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
