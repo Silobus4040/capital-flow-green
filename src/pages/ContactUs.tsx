@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -19,7 +20,17 @@ export default function ContactUs() {
   });
   const { toast } = useToast();
 
-  const handleSubmit = () => {
+  // Input sanitization function
+  const sanitizeInput = (input: string) => {
+    return input.trim().replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+  };
+
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const handleSubmit = async () => {
+    // Validation
     if (!formData.name || !formData.email || !formData.phone) {
       toast({
         title: "Missing Information",
@@ -29,25 +40,62 @@ export default function ContactUs() {
       return;
     }
 
-    console.log("Contact Form Submission:", {
-      ...formData,
-      timestamp: new Date().toISOString()
-    });
+    if (!validateEmail(formData.email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
 
-    toast({
-      title: "Message Sent Successfully",
-      description: "Thank you for contacting us. We'll respond within 24 hours.",
-    });
+    try {
+      // Sanitize all inputs before saving
+      const sanitizedData = {
+        full_name: sanitizeInput(formData.name),
+        email: sanitizeInput(formData.email),
+        phone: sanitizeInput(formData.phone),
+        message: sanitizeInput(`Company: ${formData.company}\nLoan Amount: ${formData.loanAmount}\nProperty Type: ${formData.propertyType}\nMessage: ${formData.message}`)
+      };
 
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      company: "",
-      loanAmount: "",
-      propertyType: "",
-      message: ""
-    });
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert([sanitizedData]);
+
+      if (error) {
+        console.error('Error saving contact submission:', error);
+        toast({
+          title: "Submission Failed",
+          description: "There was an error submitting your message. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      toast({
+        title: "Message Sent Successfully",
+        description: "Thank you for contacting us. We'll respond within 24 hours.",
+      });
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        loanAmount: "",
+        propertyType: "",
+        message: ""
+      });
+
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an unexpected error. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (

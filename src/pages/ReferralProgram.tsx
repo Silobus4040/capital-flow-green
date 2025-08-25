@@ -7,6 +7,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { CheckCircle, DollarSign, Clock, Users, Award } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const US_STATES = [
   "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
@@ -37,11 +38,16 @@ export default function ReferralProgram() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  // Input sanitization function
+  const sanitizeInput = (input: string) => {
+    return input.trim().replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+  };
+
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Validation
     const requiredFields = ['isInstitutionalBroker', 'firstName', 'lastName', 'phone', 'email', 'addressLine1', 'city', 'state'];
     const missingFields = requiredFields.filter(field => !formData[field as keyof typeof formData]);
@@ -64,9 +70,40 @@ export default function ReferralProgram() {
       return;
     }
 
-    // Submit form
-    console.log("Referral Program Sign-up:", formData);
-    setIsSubmitted(true);
+    try {
+      // Sanitize all inputs before saving
+      const sanitizedData = {
+        full_name: sanitizeInput(`${formData.firstName} ${formData.lastName}`),
+        email: sanitizeInput(formData.email),
+        phone: sanitizeInput(formData.phone),
+        company: sanitizeInput(formData.isInstitutionalBroker === 'yes' ? 'Institutional Broker' : 'Individual Referrer'),
+        experience_level: sanitizeInput(`Address: ${formData.addressLine1}${formData.addressLine2 ? ', ' + formData.addressLine2 : ''}, ${formData.city}, ${formData.state}`)
+      };
+
+      const { error } = await supabase
+        .from('referral_signups')
+        .insert([sanitizedData]);
+
+      if (error) {
+        console.error('Error saving referral signup:', error);
+        toast({
+          title: "Submission Failed",
+          description: "There was an error submitting your application. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setIsSubmitted(true);
+
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an unexpected error. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   if (isSubmitted) {
