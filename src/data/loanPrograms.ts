@@ -12,7 +12,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "rv-park-financing",
     name: "RV Park Financing",
     interestRate: "Starting at 5.75%",
-    minimumLoanAmount: "$250,000",
+    minimumLoanAmount: "$500,000.00",
     description: "Specialized financing for RV parks and campground facilities with flexible terms designed for seasonal cash flow patterns.",
     terms: `
 <div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
@@ -492,7 +492,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "commercial-mortgage",
     name: "Commercial Mortgage",
     interestRate: "Starting at 5.31%",
-    minimumLoanAmount: "$500,000",
+    minimumLoanAmount: "$500,000.00",
     description: "100% financing available • No credit requirements • Fast approval for qualified commercial properties nationwide.",
     terms: `<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
@@ -924,7 +924,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "commercial-dscr-loan",
     name: "Commercial DSCR Loan",
     interestRate: "Starting at 6.57%",
-    minimumLoanAmount: "$500,000",
+    minimumLoanAmount: "$500,000.00",
     description: "Cash flow-based financing without personal income verification • Portfolio loans available • Fast closings for income-producing properties.",
     terms: `<div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
@@ -1280,7 +1280,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "rehab-loan",
     name: "Rehab Loan",
     interestRate: "Starting at 6.49%",
-    minimumLoanAmount: "$500,000",
+    minimumLoanAmount: "$500,000.00",
     description: "Financing for property renovation and rehabilitation projects • Fix-and-flip • Fix-and-hold • 100% rehab financing available.",
     terms: `<div style="background: linear-gradient(135deg, #7c2d12 0%, #ea580c 50%, #f97316 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
@@ -1641,7 +1641,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "acquisition-development-construction",
     name: "Acquisition Development & Construction",
     interestRate: "6.25% - 8.50%",
-    minimumLoanAmount: "$200,000",
+    minimumLoanAmount: "$500,000.00",
     description: "Comprehensive financing solutions for real estate developers nationwide spanning the entire project lifecycle.",
     terms: `<div class="space-y-8 bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl">
   <div class="text-center">
@@ -1939,7 +1939,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "self-storage-financing",
     name: "Self Storage Facility Financing",
     interestRate: "5.43% - 6.25%",
-    minimumLoanAmount: "$250,000",
+    minimumLoanAmount: "$500,000.00",
     description: "Specialized financial solutions exclusively focused on the self-storage industry with asset-based lending approach.",
     terms: `<div class="space-y-8 bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl">
   <div class="text-center">
@@ -2213,7 +2213,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "senior-living-financing",
     name: "Senior Living & Care Facility Financing",
     interestRate: "5.31% - 9.50%",
-    minimumLoanAmount: "$100,000",
+    minimumLoanAmount: "$500,000.00",
     description: "All-inclusive financing program for assisted living, memory care, residential care, and related senior housing facilities.",
     terms: `<div class="space-y-8 bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl">
   <div class="text-center">
@@ -2507,7 +2507,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "business-loan",
     name: "Business Loan",
     interestRate: "9% - 18%",
-    minimumLoanAmount: "$500,000",
+    minimumLoanAmount: "$500,000.00",
     description: "Flexible business financing for working capital, equipment, and expansion needs.",
     terms: `BUSINESS LOAN TERMS
 
@@ -2539,7 +2539,7 @@ Processing Time: 14-30 days`
     id: "residential-investment-loan",
     name: "Private Residential Mortgage",
     interestRate: "Starting at 5.00%",
-    minimumLoanAmount: "$50,000",
+    minimumLoanAmount: "$500,000.00",
     description: "Asset-based private lending providing flexible financing solutions for residential mortgage whether it's a primary residence or an investment property.",
     terms: `# Private Residential Mortgage
 
