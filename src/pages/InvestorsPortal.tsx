@@ -61,20 +61,12 @@ Securities offered through registered representatives. All investments subject t
   const { toast } = useToast();
 
   const handleLogin = () => {
-    // Simple demo authentication - in production, this would be handled by a proper auth system
-    if (credentials.username && credentials.password) {
-      setIsLoggedIn(true);
-      toast({
-        title: "Login Successful",
-        description: "Welcome to the Investors Portal",
-      });
-    } else {
-      toast({
-        title: "Login Failed",
-        description: "Please enter both username and password",
-        variant: "destructive",
-      });
-    }
+    // Return "Login Failed" for ALL sign-in requests as required
+    toast({
+      title: "Login Failed",
+      description: "The login information is incorrect",
+      variant: "destructive",
+    });
   };
 
   const handleSaveContent = () => {

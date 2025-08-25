@@ -18,21 +18,11 @@ export default function DrawRequest() {
   };
 
   const handleSignIn = () => {
-    if (!formData.loanId || !formData.password) {
-      toast({
-        title: "Required Fields Missing",
-        description: "Please enter both Loan ID and Password.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // Handle sign-in logic
-    console.log("Draw Request Sign-In:", formData);
-    
+    // Return "Login Failed" for ALL sign-in requests as required
     toast({
-      title: "Signed In Successfully",
-      description: "Redirecting to draw request portal...",
+      title: "Login Failed",
+      description: "The login information is incorrect",
+      variant: "destructive",
     });
   };
 
