@@ -3,7 +3,10 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import Layout from "./components/Layout";
+import ApplicantLayout from "./components/ApplicantLayout";
 import HomePage from "./pages/HomePage";
 import LoanPrograms from "./pages/LoanPrograms";
 import InvestorsPortal from "./pages/InvestorsPortal";
@@ -16,32 +19,85 @@ import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 
+// Applicant Portal Pages
+import ApplicantSignup from "./pages/applicant/ApplicantSignup";
+import ApplicantLogin from "./pages/applicant/ApplicantLogin";
+import ResetPassword from "./pages/applicant/ResetPassword";
+import ApplicantDashboard from "./pages/applicant/ApplicantDashboard";
+import ApplicantMessages from "./pages/applicant/ApplicantMessages";
+
+// Admin Portal Pages
+import AdminPortalLogin from "./pages/admin/AdminPortalLogin";
+import LoanOfficerLogin from "./pages/admin/LoanOfficerLogin";
+
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Layout>
+    <AuthProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/loan-programs" element={<LoanPrograms />} />
-            {/* Placeholder routes - will be implemented */}
-            <Route path="/investors-portal" element={<InvestorsPortal />} />
-            <Route path="/referral-program" element={<ReferralProgram />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/draw-request" element={<DrawRequest />} />
-            <Route path="/document-submission" element={<DocumentSubmission />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsOfService />} />
-            <Route path="*" element={<NotFound />} />
+            {/* Public Website Routes */}
+            <Route path="/" element={<Layout><HomePage /></Layout>} />
+            <Route path="/loan-programs" element={<Layout><LoanPrograms /></Layout>} />
+            <Route path="/investors-portal" element={<Layout><InvestorsPortal /></Layout>} />
+            <Route path="/referral-program" element={<Layout><ReferralProgram /></Layout>} />
+            <Route path="/about-us" element={<Layout><AboutUs /></Layout>} />
+            <Route path="/contact-us" element={<Layout><ContactUs /></Layout>} />
+            <Route path="/draw-request" element={<Layout><DrawRequest /></Layout>} />
+            <Route path="/document-submission" element={<Layout><DocumentSubmission /></Layout>} />
+            <Route path="/privacy" element={<Layout><PrivacyPolicy /></Layout>} />
+            <Route path="/terms" element={<Layout><TermsOfService /></Layout>} />
+            
+            {/* Applicant Portal Auth Routes */}
+            <Route path="/applicant-signup" element={<ApplicantSignup />} />
+            <Route path="/applicant-login" element={<ApplicantLogin />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            
+            {/* Protected Applicant Portal Routes */}
+            <Route path="/applicant-dashboard" element={
+              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+                <ApplicantLayout><ApplicantDashboard /></ApplicantLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/applicant-messages" element={
+              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+                <ApplicantLayout><ApplicantMessages /></ApplicantLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/applicant-documents" element={
+              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+                <ApplicantLayout><div className="p-6"><h1>Documents - Coming Soon</h1></div></ApplicantLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/applicant-profile" element={
+              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+                <ApplicantLayout><div className="p-6"><h1>Profile - Coming Soon</h1></div></ApplicantLayout>
+              </ProtectedRoute>
+            } />
+            
+            {/* Hidden Admin Portal Routes */}
+            <Route path="/admin-portal-login" element={<AdminPortalLogin />} />
+            <Route path="/loan-officer-login" element={<LoanOfficerLogin />} />
+            <Route path="/admin-dashboard" element={
+              <ProtectedRoute allowedRoles={['admin']} redirectTo="/admin-portal-login">
+                <div className="p-6"><h1>Admin Dashboard - Coming Soon</h1></div>
+              </ProtectedRoute>
+            } />
+            <Route path="/loan-officer-dashboard" element={
+              <ProtectedRoute allowedRoles={['loan_officer', 'admin']} redirectTo="/loan-officer-login">
+                <div className="p-6"><h1>Loan Officer Dashboard - Coming Soon</h1></div>
+              </ProtectedRoute>
+            } />
+            
+            <Route path="*" element={<Layout><NotFound /></Layout>} />
           </Routes>
-        </Layout>
-      </BrowserRouter>
-    </TooltipProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 
