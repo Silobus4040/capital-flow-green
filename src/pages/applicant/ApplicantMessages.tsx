@@ -240,12 +240,6 @@ export default function ApplicantMessages() {
     setIsRecording(false);
   };
 
-  const exportConversation = () => {
-    toast({
-      title: 'Export started',
-      description: 'Your conversation will be exported to PDF.'
-    });
-  };
 
   const filteredMessages = messages.filter(message =>
     message.content.toLowerCase().includes(searchQuery.toLowerCase())
@@ -268,6 +262,78 @@ export default function ApplicantMessages() {
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString();
+  };
+
+  const exportConversation = () => {
+    if (!selectedConversation) {
+      toast({
+        title: "No Conversation Selected",
+        description: "Please select a conversation to export.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const selectedConv = conversations.find(c => c.id === selectedConversation);
+    if (!selectedConv || !messages.length) {
+      toast({
+        title: "No Messages to Export", 
+        description: "This conversation has no messages to export.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Create export content
+    let exportContent = `Conversation Export: ${selectedConv.title}\n`;
+    exportContent += `Export Date: ${new Date().toLocaleString()}\n`;
+    exportContent += `Total Messages: ${messages.length}\n\n`;
+    exportContent += "=" + "=".repeat(50) + "\n\n";
+
+    messages.forEach((message, index) => {
+      const timestamp = formatTime(message.created_at);
+      const date = formatDate(message.created_at);
+      
+      exportContent += `Message #${index + 1}\n`;
+      exportContent += `Date: ${date} at ${timestamp}\n`;
+      exportContent += `From: ${message.sender_name} (${message.sender_role})\n`;
+      exportContent += `Type: ${message.message_type}\n\n`;
+      
+      if (message.content) {
+        exportContent += `Content:\n${message.content}\n\n`;
+      }
+      
+      if (message.file_name) {
+        exportContent += `Attachment: ${message.file_name}`;
+        if (message.file_size) {
+          exportContent += ` (${formatFileSize(message.file_size)})`;
+        }
+        exportContent += `\nFile Path: ${message.file_path}\n\n`;
+      }
+      
+      if (message.voice_duration) {
+        exportContent += `Voice Note Duration: ${message.voice_duration} seconds\n`;
+        exportContent += `Voice File: ${message.file_path}\n\n`;
+      }
+      
+      exportContent += "-".repeat(40) + "\n\n";
+    });
+
+    // Create and download file  
+    const blob = new Blob([exportContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `conversation-${selectedConv.title.replace(/[^a-z0-9]/gi, '-').toLowerCase()}-${new Date().toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    toast({
+      title: "Conversation Exported",
+      description: "Your conversation has been downloaded as a text file.",
+    });
   };
 
   if (loading) {

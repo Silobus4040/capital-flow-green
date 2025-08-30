@@ -98,7 +98,7 @@ export const loanPrograms: LoanProgram[] = [
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
             <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$250,000</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
           </div>
           <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
             <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
@@ -137,7 +137,7 @@ export const loanPrograms: LoanProgram[] = [
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
             <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$250,000</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
           </div>
           <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
             <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
@@ -186,7 +186,7 @@ export const loanPrograms: LoanProgram[] = [
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
             <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$150,000</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
           </div>
           <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
             <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
@@ -225,7 +225,7 @@ export const loanPrograms: LoanProgram[] = [
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
             <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$150,000</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
           </div>
           <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
             <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>

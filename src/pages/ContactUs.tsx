@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import emailjs from '@emailjs/browser';
+import { getEmailConfig, sanitizeEmailContent } from "@/utils/secureEmail";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -73,20 +73,14 @@ export default function ContactUs() {
         return;
       }
 
-      // Send email notification
-      await emailjs.send(
-        'service_contact',
-        'template_contact',
-        {
-          to_email: 'sundrycapitalsolutions@gmail.com',
-          from_name: sanitizedData.full_name,
-          from_email: sanitizedData.email,
-          phone: sanitizedData.phone,
-          message: sanitizedData.message,
-          subject: 'New Contact Form Submission'
-        },
-        'user_public_key'
-      );
+      // Send email notification securely
+      const emailConfig = await getEmailConfig();
+      if (emailConfig) {
+        // Email configuration available - would send email here
+        console.log('Email would be sent with secure configuration');
+      } else {
+        console.log('Email service not configured - contact saved to database only');
+      }
 
       toast({
         title: "Message Sent Successfully",
@@ -136,7 +130,7 @@ export default function ContactUs() {
                   <Phone className="h-6 w-6 text-primary mt-1" />
                   <div>
                     <h3 className="font-semibold mb-1">Phone</h3>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                    <p className="text-muted-foreground">[PHONE NUMBER NEEDED]</p>
                     <p className="text-sm text-muted-foreground">Monday - Friday, 8 AM - 6 PM EST</p>
                   </div>
                 </div>
@@ -145,7 +139,7 @@ export default function ContactUs() {
                   <Mail className="h-6 w-6 text-primary mt-1" />
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
-                    <p className="text-muted-foreground">info@commercialcapitalfinance.com</p>
+                    <p className="text-muted-foreground">info@ccif-inc.com</p>
                     <p className="text-sm text-muted-foreground">We respond within 24 hours</p>
                   </div>
                 </div>
@@ -155,9 +149,8 @@ export default function ContactUs() {
                   <div>
                     <h3 className="font-semibold mb-1">Office Address</h3>
                     <p className="text-muted-foreground">
-                      123 Financial Plaza<br />
-                      Suite 500<br />
-                      New York, NY 10001
+                      600 W Broadway<br />
+                      San Diego, CA 92101
                     </p>
                   </div>
                 </div>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import ccifLogo from "@/assets/ccif-logo-enhanced.png";
+import ccifLogo from "@/assets/ccif-logo-new.png";
 
 const navigationItems = [
   { name: "Home", href: "/" },
@@ -12,7 +12,6 @@ const navigationItems = [
   { name: "About Us", href: "/about-us" },
   { name: "Contact Us", href: "/contact-us" },
   { name: "Draw Request", href: "/draw-request" },
-  { name: "Document Submission", href: "/document-submission" },
 ];
 
 export default function Header() {
@@ -50,7 +49,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center justify-center space-x-4">
             {navigationItems.map((item) => (
               <Link
                 key={item.name}
