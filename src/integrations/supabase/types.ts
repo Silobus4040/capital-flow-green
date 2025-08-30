@@ -41,6 +41,44 @@ export type Database = {
         }
         Relationships: []
       }
+      conversations: {
+        Row: {
+          borrower_id: string | null
+          created_at: string
+          id: string
+          last_message_at: string | null
+          loan_application_id: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          borrower_id?: string | null
+          created_at?: string
+          id?: string
+          last_message_at?: string | null
+          loan_application_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          borrower_id?: string | null
+          created_at?: string
+          id?: string
+          last_message_at?: string | null
+          loan_application_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversations_loan_application_id_fkey"
+            columns: ["loan_application_id"]
+            isOneToOne: false
+            referencedRelation: "loan_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       document_submissions: {
         Row: {
           created_at: string
@@ -141,7 +179,9 @@ export type Database = {
           borrower_phone: string
           city: string
           created_at: string
+          detailed_status: string | null
           id: string
+          last_status_update: string | null
           loan_amount: number
           loan_program: string
           project_address: string
@@ -150,6 +190,7 @@ export type Database = {
           property_type: string
           state: string
           status: string | null
+          status_notes: string | null
           updated_at: string
           user_id: string | null
           zip_code: string
@@ -160,7 +201,9 @@ export type Database = {
           borrower_phone: string
           city: string
           created_at?: string
+          detailed_status?: string | null
           id?: string
+          last_status_update?: string | null
           loan_amount: number
           loan_program: string
           project_address: string
@@ -169,6 +212,7 @@ export type Database = {
           property_type: string
           state: string
           status?: string | null
+          status_notes?: string | null
           updated_at?: string
           user_id?: string | null
           zip_code: string
@@ -179,7 +223,9 @@ export type Database = {
           borrower_phone?: string
           city?: string
           created_at?: string
+          detailed_status?: string | null
           id?: string
+          last_status_update?: string | null
           loan_amount?: number
           loan_program?: string
           project_address?: string
@@ -188,9 +234,55 @@ export type Database = {
           property_type?: string
           state?: string
           status?: string | null
+          status_notes?: string | null
           updated_at?: string
           user_id?: string | null
           zip_code?: string
+        }
+        Relationships: []
+      }
+      messages: {
+        Row: {
+          content: string | null
+          conversation_id: string
+          created_at: string
+          file_name: string | null
+          file_path: string | null
+          file_size: number | null
+          id: string
+          message_type: string
+          sender_id: string | null
+          sender_type: string
+          updated_at: string
+          voice_duration: number | null
+        }
+        Insert: {
+          content?: string | null
+          conversation_id: string
+          created_at?: string
+          file_name?: string | null
+          file_path?: string | null
+          file_size?: number | null
+          id?: string
+          message_type: string
+          sender_id?: string | null
+          sender_type: string
+          updated_at?: string
+          voice_duration?: number | null
+        }
+        Update: {
+          content?: string | null
+          conversation_id?: string
+          created_at?: string
+          file_name?: string | null
+          file_path?: string | null
+          file_size?: number | null
+          id?: string
+          message_type?: string
+          sender_id?: string | null
+          sender_type?: string
+          updated_at?: string
+          voice_duration?: number | null
         }
         Relationships: []
       }
