@@ -20,11 +20,13 @@ export const ProtectedRoute = ({
   useEffect(() => {
     if (loading) {
       const timer = setTimeout(() => {
-        console.warn('🔐 ProtectedRoute: Loading timeout reached');
+        console.warn('🔐 ProtectedRoute: Loading timeout after 5 seconds');
         setLoadingTimeout(true);
-      }, 10000); // 10 second timeout
+      }, 5000); // 5 second timeout
 
       return () => clearTimeout(timer);
+    } else {
+      setLoadingTimeout(false);
     }
   }, [loading]);
 
@@ -51,8 +53,8 @@ export const ProtectedRoute = ({
     return <Navigate to={redirectTo} replace />;
   }
 
-  // Wait for profile to load before checking roles, but with timeout
-  if (!profile) {
+  // Wait for profile to load before checking roles, but handle timeout
+  if (!profile && !loadingTimeout) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -61,6 +63,12 @@ export const ProtectedRoute = ({
         </div>
       </div>
     );
+  }
+
+  // If profile failed to load after timeout, redirect
+  if (!profile && loadingTimeout) {
+    console.error('🔐 ProtectedRoute: Profile loading failed - redirecting');
+    return <Navigate to={redirectTo} replace />;
   }
 
   // Check if user has required role

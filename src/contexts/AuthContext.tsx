@@ -41,29 +41,34 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     console.log('🔐 AuthProvider: Setting up auth state listener');
     
-    // Set up auth state listener
+    // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
         console.log('🔐 Auth state changed:', event, 'User:', session?.user?.email);
         
         setSession(session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          console.log('🔐 Fetching profile for user:', session.user.id);
-          // Fetch user profile immediately without setTimeout
-          try {
-            const { data: profileData, error } = await supabase
-              .from('profiles')
-              .select('*')
-              .eq('user_id', session.user.id)
-              .single();
-            
-            if (error) {
-              console.error('🔐 Error fetching profile:', error);
-              // Create a basic profile if it doesn't exist
-              if (error.code === 'PGRST116') {
-                console.log('🔐 Profile not found, creating basic profile');
+          console.log('🔐 User authenticated, fetching profile for:', session.user.id);
+          // Defer async operations to prevent blocking
+          setTimeout(async () => {
+            try {
+              const { data: profileData, error } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('user_id', session.user.id)
+                .maybeSingle();
+              
+              if (error) {
+                console.error('🔐 Error fetching profile:', error);
+                setProfile(null);
+              } else if (profileData) {
+                console.log('🔐 Profile loaded successfully:', profileData);
+                setProfile(profileData as Profile);
+              } else {
+                console.log('🔐 No profile found, creating basic profile');
+                // Create basic profile for existing user
                 setProfile({
                   id: session.user.id,
                   user_id: session.user.id,
@@ -71,38 +76,35 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                   full_name: session.user.user_metadata?.full_name || session.user.email,
                   role: 'borrower'
                 } as Profile);
-              } else {
-                setProfile(null);
               }
-            } else {
-              console.log('🔐 Profile loaded:', profileData);
-              setProfile(profileData as Profile);
+            } catch (error) {
+              console.error('🔐 Profile fetch failed:', error);
+              setProfile(null);
+            } finally {
+              setLoading(false);
+              console.log('🔐 Auth initialization complete');
             }
-          } catch (error) {
-            console.error('🔐 Unexpected error fetching profile:', error);
-            setProfile(null);
-          }
+          }, 0);
         } else {
-          console.log('🔐 No user session, clearing profile');
+          console.log('🔐 No user session, clearing state');
           setProfile(null);
+          setLoading(false);
         }
-        
-        setLoading(false);
-        console.log('🔐 Auth loading complete');
       }
     );
 
-    // Get initial session
-    console.log('🔐 Getting initial session');
+    // Get initial session AFTER setting up listener
+    console.log('🔐 Checking for existing session...');
     supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log('🔐 Initial session:', session?.user?.email || 'none');
-      // Don't set loading to false here - let the auth state change handler do it
+      console.log('🔐 Initial session check:', session?.user?.email || 'no session');
       if (!session) {
+        // No session - clear everything and stop loading
         setSession(null);
         setUser(null);
         setProfile(null);
         setLoading(false);
       }
+      // If session exists, the auth state change handler will process it
     });
 
     return () => subscription.unsubscribe();
