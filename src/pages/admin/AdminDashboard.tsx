@@ -250,13 +250,7 @@ export default function AdminDashboard() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
+  // No loading screen - instant access
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">

@@ -76,26 +76,8 @@ export default function ApplicantMessages() {
 
   const fetchConversations = async () => {
     try {
-      // Mock conversations for now
-      const mockConversations: Conversation[] = [
-        {
-          id: '1',
-          title: 'General Loan Discussion',
-          last_message_at: new Date().toISOString(),
-          status: 'active'
-        },
-        {
-          id: '2', 
-          title: 'Document Requirements',
-          last_message_at: new Date(Date.now() - 86400000).toISOString(),
-          status: 'active'
-        }
-      ];
-      
-      setConversations(mockConversations);
-      if (mockConversations.length > 0 && !selectedConversation) {
-        setSelectedConversation(mockConversations[0].id);
-      }
+      // No auto-generated conversations - start with empty list
+      setConversations([]);
     } catch (error) {
       console.error('Error fetching conversations:', error);
     } finally {
@@ -105,41 +87,8 @@ export default function ApplicantMessages() {
 
   const fetchMessages = async (conversationId: string) => {
     try {
-      // Mock messages for now
-      const mockMessages: Message[] = [
-        {
-          id: '1',
-          content: 'Hello! I wanted to check on the status of my loan application. Are there any updates?',
-          message_type: 'text',
-          is_tts: false,
-          created_at: new Date(Date.now() - 3600000).toISOString(),
-          sender_id: profile?.user_id || '',
-          sender_name: profile?.full_name || 'You',
-          sender_role: 'borrower'
-        },
-        {
-          id: '2',
-          content: 'Thank you for reaching out! Your application is currently in underwriting. We expect to have an update by end of week.',
-          message_type: 'text',
-          is_tts: true,
-          created_at: new Date(Date.now() - 1800000).toISOString(),
-          sender_id: 'loan-officer-1',
-          sender_name: 'Sarah Johnson',
-          sender_role: 'loan_officer'
-        },
-        {
-          id: '3',
-          content: 'We may need a few additional documents. I\'ll send you the list shortly.',
-          message_type: 'text',
-          is_tts: true,
-          created_at: new Date(Date.now() - 1700000).toISOString(),
-          sender_id: 'loan-officer-1',
-          sender_name: 'Sarah Johnson',
-          sender_role: 'loan_officer'
-        }
-      ];
-      
-      setMessages(mockMessages);
+      // No auto-generated messages - start with empty conversation
+      setMessages([]);
     } catch (error) {
       console.error('Error fetching messages:', error);
     }
@@ -207,33 +156,79 @@ export default function ApplicantMessages() {
     });
   };
 
-  const startVoiceRecording = () => {
-    setIsRecording(true);
-    toast({
-      title: 'Recording started',
-      description: 'Voice recording functionality will be implemented.'
-    });
-    
-    // Mock recording - in real implementation, use Web Audio API
-    setTimeout(() => {
-      setIsRecording(false);
-      const voiceMsg: Message = {
-        id: Date.now().toString(),
-        content: 'Voice message',
-        message_type: 'voice',
-        voice_duration: 15,
-        is_tts: false,
-        created_at: new Date().toISOString(),
-        sender_id: profile?.user_id || '',
-        sender_name: profile?.full_name || 'You',
-        sender_role: 'borrower'
-      };
-      setMessages(prev => [...prev, voiceMsg]);
-      toast({
-        title: 'Voice message sent',
-        description: 'Your voice message has been recorded and sent.'
+  const startVoiceRecording = async () => {
+    try {
+      setIsRecording(true);
+      
+      // Request microphone access
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      
+      const mediaRecorder = new MediaRecorder(stream, {
+        mimeType: 'audio/webm;codecs=opus'
       });
-    }, 3000);
+      
+      const chunks: BlobPart[] = [];
+      
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          chunks.push(event.data);
+        }
+      };
+      
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(chunks, { type: 'audio/webm;codecs=opus' });
+        const audioUrl = URL.createObjectURL(audioBlob);
+        
+        // Create voice message
+        const voiceMsg: Message = {
+          id: Date.now().toString(),
+          content: 'Voice message',
+          message_type: 'voice',
+          voice_duration: Math.round(chunks.length * 0.1), // Approximate duration
+          is_tts: false,
+          created_at: new Date().toISOString(),
+          sender_id: profile?.user_id || '',
+          sender_name: profile?.full_name || 'You',
+          sender_role: 'borrower',
+          file_path: audioUrl
+        };
+        
+        setMessages(prev => [...prev, voiceMsg]);
+        
+        toast({
+          title: 'Voice message sent',
+          description: 'Your voice message has been recorded and sent.'
+        });
+        
+        // Stop all tracks
+        stream.getTracks().forEach(track => track.stop());
+      };
+      
+      // Start recording
+      mediaRecorder.start();
+      
+      // Auto-stop after 60 seconds
+      setTimeout(() => {
+        if (mediaRecorder.state === 'recording') {
+          mediaRecorder.stop();
+          setIsRecording(false);
+        }
+      }, 60000);
+      
+      toast({
+        title: 'Recording started',
+        description: 'Recording voice message... Click stop when finished.'
+      });
+      
+    } catch (error) {
+      console.error('Error starting voice recording:', error);
+      toast({
+        title: 'Recording failed',
+        description: 'Could not access microphone. Please check permissions.',
+        variant: 'destructive'
+      });
+      setIsRecording(false);
+    }
   };
 
   const stopVoiceRecording = () => {
@@ -336,13 +331,7 @@ export default function ApplicantMessages() {
     });
   };
 
-  if (loading) {
-    return (
-      <div className="p-6 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
+  // No loading screen - instant access
 
   return (
     <div className="p-6 space-y-6">

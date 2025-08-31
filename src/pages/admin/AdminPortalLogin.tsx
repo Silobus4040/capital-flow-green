@@ -22,7 +22,6 @@ export default function AdminPortalLogin() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
 
     try {
       const { error } = await signIn(email, password);
@@ -33,26 +32,14 @@ export default function AdminPortalLogin() {
           description: error.message,
           variant: 'destructive'
         });
-      } else {
-        // Check if user has admin role after login
-        setTimeout(() => {
-          if (profile?.role !== 'admin') {
-            toast({
-              title: 'Access Denied',
-              description: 'You do not have admin privileges.',
-              variant: 'destructive'
-            });
-          }
-        }, 1000);
       }
+      // No waiting - immediate access after successful login
     } catch (error) {
       toast({
         title: 'Error',
         description: 'An unexpected error occurred',
         variant: 'destructive'
       });
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -114,9 +101,8 @@ export default function AdminPortalLogin() {
             <Button 
               type="submit" 
               className="w-full bg-red-600 hover:bg-red-700"
-              disabled={loading}
             >
-              {loading ? 'Authenticating...' : 'Admin Login'}
+              Admin Login
             </Button>
           </form>
           
