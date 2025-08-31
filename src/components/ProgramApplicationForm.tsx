@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { LoanProgram } from "@/data/loanPrograms";
+import CommercialMortgageForm from "./CommercialMortgageForm";
 
 interface ProgramApplicationFormProps {
   program: LoanProgram;
@@ -14,6 +15,11 @@ interface ProgramApplicationFormProps {
 }
 
 export default function ProgramApplicationForm({ program, onSubmitSuccess }: ProgramApplicationFormProps) {
+  // If this is a commercial mortgage application, use the comprehensive form
+  if (program.id === 'commercial-mortgage' || program.name.toLowerCase().includes('commercial mortgage')) {
+    return <CommercialMortgageForm />;
+  }
+
   const { user } = useAuth();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);

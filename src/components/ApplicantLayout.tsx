@@ -21,8 +21,19 @@ export default function ApplicantLayout({ children }: ApplicantLayoutProps) {
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
-    await signOut();
-    navigate('/');
+    try {
+      await signOut();
+      // Force clear local storage and reload
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = '/';
+    } catch (error) {
+      console.error('Sign out error:', error);
+      // Force clear even on error
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = '/';
+    }
   };
 
   const navItems = [

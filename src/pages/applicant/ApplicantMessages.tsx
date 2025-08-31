@@ -17,7 +17,8 @@ import {
   Play,
   Pause,
   FileText,
-  Image
+  Image,
+  MessageSquare
 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -158,14 +159,39 @@ export default function ApplicantMessages() {
 
   const startVoiceRecording = async () => {
     try {
+      // Check for browser support
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error('Voice recording not supported in this browser');
+      }
+
+      if (!window.MediaRecorder) {
+        throw new Error('MediaRecorder not supported in this browser');
+      }
+
       setIsRecording(true);
       
-      // Request microphone access
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      
-      const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: 'audio/webm;codecs=opus'
+      // Request microphone access with better error handling
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+          sampleRate: 44100,
+        }
       });
+      
+      // Try different MIME types for better compatibility
+      let mimeType = 'audio/webm;codecs=opus';
+      if (!MediaRecorder.isTypeSupported(mimeType)) {
+        mimeType = 'audio/webm';
+        if (!MediaRecorder.isTypeSupported(mimeType)) {
+          mimeType = 'audio/mp4';
+          if (!MediaRecorder.isTypeSupported(mimeType)) {
+            mimeType = 'audio/wav';
+          }
+        }
+      }
+      
+      const mediaRecorder = new MediaRecorder(stream, { mimeType });
       
       const chunks: BlobPart[] = [];
       
@@ -343,11 +369,11 @@ export default function ApplicantMessages() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-[600px]">
-        {/* Conversations List */}
-        <div className="lg:col-span-1">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 h-[calc(100vh-200px)] min-h-[500px]">
+        {/* Conversations List - Mobile Responsive */}
+        <div className="lg:col-span-1 lg:block hidden">
           <Card className="h-full">
-            <CardHeader>
+            <CardHeader className="pb-3">
               <CardTitle className="text-lg">Conversations</CardTitle>
               <div className="relative">
                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -355,58 +381,79 @@ export default function ApplicantMessages() {
                   placeholder="Search messages..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-8"
+                  className="pl-8 text-sm"
                 />
               </div>
             </CardHeader>
             <CardContent className="p-0">
-              <ScrollArea className="h-80">
+              <ScrollArea className="h-[calc(100%-120px)]">
                 <div className="space-y-2 p-4">
-                  {conversations.map((conversation) => (
-                    <div
-                      key={conversation.id}
-                      onClick={() => setSelectedConversation(conversation.id)}
-                      className={`p-3 rounded-lg cursor-pointer transition-colors ${
-                        selectedConversation === conversation.id
-                          ? 'bg-primary text-primary-foreground'
-                          : 'hover:bg-accent'
-                      }`}
-                    >
-                      <div className="font-medium text-sm">{conversation.title}</div>
-                      <div className="text-xs opacity-75">
-                        {formatDate(conversation.last_message_at)}
-                      </div>
-                      <Badge variant="secondary" className="mt-1">
-                        {conversation.status}
-                      </Badge>
+                  {conversations.length === 0 ? (
+                    <div className="text-center py-8 text-muted-foreground">
+                      <p className="text-sm">No conversations yet</p>
+                      <p className="text-xs mt-1">Start a new conversation below</p>
                     </div>
-                  ))}
+                  ) : (
+                    conversations.map((conversation) => (
+                      <div
+                        key={conversation.id}
+                        onClick={() => setSelectedConversation(conversation.id)}
+                        className={`p-3 rounded-lg cursor-pointer transition-colors ${
+                          selectedConversation === conversation.id
+                            ? 'bg-primary text-primary-foreground'
+                            : 'hover:bg-accent'
+                        }`}
+                      >
+                        <div className="font-medium text-sm">{conversation.title}</div>
+                        <div className="text-xs opacity-75">
+                          {formatDate(conversation.last_message_at)}
+                        </div>
+                        <Badge variant="secondary" className="mt-1">
+                          {conversation.status}
+                        </Badge>
+                      </div>
+                    ))
+                  )}
                 </div>
               </ScrollArea>
             </CardContent>
           </Card>
         </div>
 
-        {/* Messages Area */}
-        <div className="lg:col-span-3">
+        {/* Messages Area - Mobile First */}
+        <div className="lg:col-span-3 col-span-1">
           <Card className="h-full flex flex-col">
-            <CardHeader className="flex-shrink-0">
+            <CardHeader className="flex-shrink-0 pb-3">
               <div className="flex justify-between items-center">
-                <CardTitle>
-                  {conversations.find(c => c.id === selectedConversation)?.title || 'Select a conversation'}
+                <CardTitle className="text-lg">
+                  {conversations.find(c => c.id === selectedConversation)?.title || 'New Loan Discussion'}
                 </CardTitle>
-                <Button onClick={exportConversation} variant="outline" size="sm">
-                  <Download className="h-4 w-4 mr-2" />
-                  Export
-                </Button>
+                <div className="flex gap-2">
+                  <Button onClick={exportConversation} variant="outline" size="sm" className="hidden sm:flex">
+                    <Download className="h-4 w-4 mr-2" />
+                    Export
+                  </Button>
+                  <Button onClick={exportConversation} variant="outline" size="sm" className="sm:hidden">
+                    <Download className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </CardHeader>
             
             <CardContent className="flex-1 flex flex-col p-0">
               {/* Messages */}
-              <ScrollArea className="flex-1 p-4">
-                <div className="space-y-4">
-                  {filteredMessages.map((message) => (
+              <ScrollArea className="flex-1 p-3 sm:p-4">
+                <div className="space-y-3 sm:space-y-4">
+                  {filteredMessages.length === 0 ? (
+                    <div className="flex items-center justify-center h-full">
+                      <div className="text-center text-muted-foreground">
+                        <MessageSquare className="h-12 w-12 mx-auto mb-3 opacity-50" />
+                        <p className="text-sm font-medium">Ready to discuss your loan?</p>
+                        <p className="text-xs mt-1">Send your first message below to get started</p>
+                      </div>    
+                    </div>
+                  ) : (
+                    filteredMessages.map((message) => (
                     <div
                       key={message.id}
                       className={`flex ${
@@ -414,7 +461,7 @@ export default function ApplicantMessages() {
                       }`}
                     >
                       <div
-                        className={`max-w-[70%] p-3 rounded-lg ${
+                        className={`max-w-[85%] sm:max-w-[70%] p-3 rounded-lg ${
                           message.sender_role === 'borrower'
                             ? 'bg-primary text-primary-foreground'
                             : 'bg-muted'
@@ -465,16 +512,17 @@ export default function ApplicantMessages() {
                             TTS
                           </Badge>
                         )}
-                      </div>
-                    </div>
-                  ))}
+                       </div>
+                     </div>
+                    ))
+                  )}
                   <div ref={messagesEndRef} />
                 </div>
               </ScrollArea>
               
-              {/* Message Input */}
-              <div className="border-t p-4 space-y-3">
-                <div className="flex space-x-2">
+              {/* Message Input - Mobile Optimized */}
+              <div className="border-t p-3 sm:p-4 space-y-3">
+                <div className="flex gap-2">
                   <Textarea
                     placeholder="Type your message..."
                     value={newMessage}
@@ -485,16 +533,21 @@ export default function ApplicantMessages() {
                         sendMessage();
                       }
                     }}
-                    className="flex-1 min-h-[40px] max-h-[120px]"
+                    className="flex-1 min-h-[44px] max-h-[120px] text-base"
                   />
-                  <div className="flex flex-col space-y-2">
-                    <Button onClick={sendMessage} disabled={!newMessage.trim()}>
-                      <Send className="h-4 w-4" />
+                  <div className="flex flex-col gap-2">
+                    <Button 
+                      onClick={sendMessage} 
+                      disabled={!newMessage.trim()}
+                      size="lg"
+                      className="h-[44px] px-4"
+                    >
+                      <Send className="h-5 w-5" />
                     </Button>
                   </div>
                 </div>
                 
-                <div className="flex space-x-2">
+                <div className="flex gap-2 flex-wrap">
                   <Button
                     variant="outline"
                     size="sm"
