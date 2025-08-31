@@ -8,7 +8,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { CheckCircle, DollarSign, Clock, Users, Award } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import emailjs from '@emailjs/browser';
 
 const US_STATES = [
   "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
@@ -86,7 +85,6 @@ export default function ReferralProgram() {
         .insert([sanitizedData]);
 
       if (error) {
-        console.error('Error saving referral signup:', error);
         toast({
           title: "Submission Failed",
           description: "There was an error submitting your application. Please try again.",
@@ -96,25 +94,19 @@ export default function ReferralProgram() {
       }
 
       // Send email notification
-      await emailjs.send(
-        'service_contact',
-        'template_referral',
-        {
-          to_email: 'sundrycapitalsolutions@gmail.com',
-          from_name: sanitizedData.full_name,
-          from_email: sanitizedData.email,
+      await supabase.functions.invoke('send-referral-signup', {
+        body: {
+          fullName: sanitizedData.full_name,
+          email: sanitizedData.email,
           phone: sanitizedData.phone,
-          broker_type: sanitizedData.company,
-          address: sanitizedData.experience_level,
-          subject: 'New Referral Program Signup'
-        },
-        'user_public_key'
-      );
+          brokerType: sanitizedData.company,
+          address: sanitizedData.experience_level
+        }
+      });
 
       setIsSubmitted(true);
 
     } catch (error) {
-      console.error('Unexpected error:', error);
       toast({
         title: "Submission Failed",
         description: "There was an unexpected error. Please try again.",

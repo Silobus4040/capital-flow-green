@@ -2,3 +2,6 @@ project_id = "pkgeixqboxsgxbmttuww"
 
 [functions.send-program-application]
 verify_jwt = true
+
+[functions.send-referral-signup]
+verify_jwt = false
