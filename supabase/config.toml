@@ -1,1 +1,4 @@
 project_id = "pkgeixqboxsgxbmttuww"
+
+[functions.send-program-application]
+verify_jwt = true

@@ -26,6 +26,7 @@ import ResetPassword from "./pages/applicant/ResetPassword";
 import ApplicantDashboard from "./pages/applicant/ApplicantDashboard";
 import ApplicantMessages from "./pages/applicant/ApplicantMessages";
 import ApplicantDocuments from "./pages/applicant/ApplicantDocuments";
+import ApplicantApplications from "./pages/applicant/ApplicantApplications";
 
 // Admin Portal Pages
 import AdminPortalLogin from "./pages/admin/AdminPortalLogin";
@@ -72,6 +73,11 @@ const App = () => (
             <Route path="/applicant-documents" element={
               <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
                 <ApplicantLayout><ApplicantDocuments /></ApplicantLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/applicant-applications" element={
+              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+                <ApplicantLayout><ApplicantApplications /></ApplicantLayout>
               </ProtectedRoute>
             } />
             <Route path="/applicant-profile" element={

@@ -2,12 +2,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { loanPrograms, LoanProgram } from "@/data/loanPrograms";
-import { useToast } from "@/hooks/use-toast";
-import emailjs from '@emailjs/browser';
+import ProgramApplicationForm from "@/components/ProgramApplicationForm";
+import DOMPurify from "dompurify";
 import commercialMortgageImage from "@/assets/commercial-mortgage.jpg";
 import commercialDscrImage from "@/assets/commercial-dscr-rental.jpg";
 import rehabPropertyImage from "@/assets/rehab-property.jpg";
@@ -20,53 +18,10 @@ import residentialInvestmentImage from "@/assets/residential-investment.jpg";
 
 export default function LoanPrograms() {
   const [selectedProgram, setSelectedProgram] = useState<LoanProgram | null>(null);
-  const [applicationForm, setApplicationForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    program: ""
-  });
-  const { toast } = useToast();
+  const [showApplicationForm, setShowApplicationForm] = useState<LoanProgram | null>(null);
 
-  const handleApplicationSubmit = async (program: LoanProgram) => {
-    if (!applicationForm.name || !applicationForm.phone || !applicationForm.email) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    try {
-      // Send email notification
-      await emailjs.send(
-        'service_contact',
-        'template_application',
-        {
-          to_email: 'sundrycapitalsolutions@gmail.com',
-          from_name: applicationForm.name,
-          from_email: applicationForm.email,
-          phone: applicationForm.phone,
-          program_name: program.name,
-          subject: `Loan Application Request - ${program.name}`
-        },
-        'user_public_key'
-      );
-
-      toast({
-        title: "Application Request Sent",
-        description: `Your request for ${program.name} application has been submitted successfully.`,
-      });
-
-      setApplicationForm({ name: "", phone: "", email: "", program: "" });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send application request. Please try again.",
-        variant: "destructive",
-      });
-    }
+  const handleApplicationFormSuccess = () => {
+    setShowApplicationForm(null);
   };
 
   return (
@@ -211,7 +166,11 @@ export default function LoanPrograms() {
                           <div 
                             className="commercial-mortgage-terms"
                             dangerouslySetInnerHTML={{
-                              __html: selectedProgram?.terms
+                              __html: DOMPurify.sanitize(selectedProgram?.terms || "", {
+                                ALLOWED_TAGS: ['div', 'h1', 'h2', 'h3', 'h4', 'p', 'span', 'strong', 'em', 'ul', 'li', 'br'],
+                                ALLOWED_ATTR: ['class', 'style'],
+                                ALLOW_DATA_ATTR: false
+                              })
                                 .replace(/^# (.*$)/gm, '<div class="hero-title text-3xl font-bold bg-gradient-to-r from-primary via-blue-600 to-green-600 bg-clip-text text-transparent mb-6 text-center">$1</div>')
                                 .replace(/^## (.*$)/gm, '<h2 class="text-2xl font-bold text-primary mb-4 mt-8 border-l-4 border-primary pl-4 bg-primary/5 py-2 rounded-r">$1</h2>')
                                 .replace(/^### (.*$)/gm, '<h3 class="text-xl font-semibold mb-3 mt-6 text-primary border-b border-primary/30 pb-2">$1</h3>')
@@ -250,54 +209,25 @@ export default function LoanPrograms() {
                     </DialogContent>
                   </Dialog>
 
-                  <Dialog>
+                  <Dialog open={showApplicationForm?.id === program.id} onOpenChange={(open) => !open && setShowApplicationForm(null)}>
                     <DialogTrigger asChild>
-                      <Button className="w-full">Request Application Form</Button>
+                      <Button 
+                        className="w-full"
+                        onClick={() => setShowApplicationForm(program)}
+                      >
+                        Submit Application
+                      </Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
                       <DialogHeader>
-                        <DialogTitle>Request Application for {program.name}</DialogTitle>
+                        <DialogTitle>Submit Application for {program.name}</DialogTitle>
                       </DialogHeader>
-                      <div className="space-y-4">
-                        <div>
-                          <Label htmlFor="name">Full Name *</Label>
-                          <Input
-                            id="name"
-                            value={applicationForm.name}
-                            onChange={(e) => setApplicationForm(prev => ({ ...prev, name: e.target.value }))}
-                            placeholder="Enter your full name"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="phone">Phone Number *</Label>
-                          <Input
-                            id="phone"
-                            type="tel"
-                            value={applicationForm.phone}
-                            onChange={(e) => setApplicationForm(prev => ({ ...prev, phone: e.target.value }))}
-                            placeholder="Enter your phone number"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="email">Email Address *</Label>
-                          <Input
-                            id="email"
-                            type="email"
-                            value={applicationForm.email}
-                            onChange={(e) => setApplicationForm(prev => ({ ...prev, email: e.target.value }))}
-                            placeholder="Enter your email address"
-                            required
-                          />
-                        </div>
-                        <Button 
-                          onClick={() => handleApplicationSubmit(program)}
-                          className="w-full"
-                        >
-                          Submit Request
-                        </Button>
-                      </div>
+                      {showApplicationForm && (
+                        <ProgramApplicationForm 
+                          program={showApplicationForm} 
+                          onSubmitSuccess={handleApplicationFormSuccess}
+                        />
+                      )}
                     </DialogContent>
                   </Dialog>
                 </div>

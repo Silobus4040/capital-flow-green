@@ -14,6 +14,65 @@ export type Database = {
   }
   public: {
     Tables: {
+      application_documents: {
+        Row: {
+          admin_notes: string | null
+          admin_reviewed: boolean | null
+          application_id: string
+          created_at: string
+          document_name: string
+          document_type: string | null
+          file_name: string
+          file_path: string
+          file_size: number | null
+          id: string
+          mime_type: string | null
+          updated_at: string
+          upload_status: string
+          user_id: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          admin_reviewed?: boolean | null
+          application_id: string
+          created_at?: string
+          document_name: string
+          document_type?: string | null
+          file_name: string
+          file_path: string
+          file_size?: number | null
+          id?: string
+          mime_type?: string | null
+          updated_at?: string
+          upload_status?: string
+          user_id: string
+        }
+        Update: {
+          admin_notes?: string | null
+          admin_reviewed?: boolean | null
+          application_id?: string
+          created_at?: string
+          document_name?: string
+          document_type?: string | null
+          file_name?: string
+          file_path?: string
+          file_size?: number | null
+          id?: string
+          mime_type?: string | null
+          updated_at?: string
+          upload_status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_application_documents_application_id"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "loan_program_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_submissions: {
         Row: {
           created_at: string
@@ -238,6 +297,72 @@ export type Database = {
           updated_at?: string
           user_id?: string | null
           zip_code?: string
+        }
+        Relationships: []
+      }
+      loan_program_applications: {
+        Row: {
+          admin_notes: string | null
+          borrower_email: string
+          borrower_name: string
+          borrower_phone: string
+          created_at: string
+          id: string
+          last_status_update: string | null
+          loan_purpose: string | null
+          program_id: string
+          program_name: string
+          program_specific_data: Json | null
+          property_address: string | null
+          property_city: string | null
+          property_state: string | null
+          property_zip: string | null
+          requested_amount: number | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          borrower_email: string
+          borrower_name: string
+          borrower_phone: string
+          created_at?: string
+          id?: string
+          last_status_update?: string | null
+          loan_purpose?: string | null
+          program_id: string
+          program_name: string
+          program_specific_data?: Json | null
+          property_address?: string | null
+          property_city?: string | null
+          property_state?: string | null
+          property_zip?: string | null
+          requested_amount?: number | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          admin_notes?: string | null
+          borrower_email?: string
+          borrower_name?: string
+          borrower_phone?: string
+          created_at?: string
+          id?: string
+          last_status_update?: string | null
+          loan_purpose?: string | null
+          program_id?: string
+          program_name?: string
+          program_specific_data?: Json | null
+          property_address?: string | null
+          property_city?: string | null
+          property_state?: string | null
+          property_zip?: string | null
+          requested_amount?: number | null
+          status?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
