@@ -14,9 +14,20 @@ serve(async (req) => {
   try {
     const { text, voice = 'Aria' } = await req.json()
 
-    if (!text) {
-      throw new Error('Text is required')
+    // Input validation
+    if (!text || typeof text !== 'string') {
+      throw new Error('Valid text is required')
     }
+
+    // Length validation (ElevenLabs has character limits)
+    if (text.length > 5000) {
+      throw new Error('Text too long (max 5000 characters)')
+    }
+
+    // Sanitize text input
+    const sanitizedText = text.trim().replace(/[<>]/g, '')
+
+    console.log("Processing TTS request, length:", sanitizedText.length)
 
     const ELEVENLABS_API_KEY = Deno.env.get('ELEVENLABS_API_KEY')
     if (!ELEVENLABS_API_KEY) {
@@ -58,7 +69,7 @@ serve(async (req) => {
         'xi-api-key': ELEVENLABS_API_KEY,
       },
       body: JSON.stringify({
-        text: text,
+        text: sanitizedText,
         model_id: 'eleven_multilingual_v2',
         voice_settings: {
           stability: 0.5,
@@ -84,14 +95,18 @@ serve(async (req) => {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       },
     )
-  } catch (error) {
-    console.error('Text-to-speech error:', error)
+  } catch (error: any) {
+    console.error('Error in text-to-speech function:', error)
+    
+    // Don't expose internal error details to client
+    const userMessage = error.message?.includes('Text too long') ? error.message : 'Text-to-speech service temporarily unavailable'
+    
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: userMessage }),
       {
-        status: 400,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      },
+        status: 500,
+        headers: { 'Content-Type': 'application/json', ...corsHeaders },
+      }
     )
   }
 })
