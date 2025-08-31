@@ -135,6 +135,15 @@ export default function AdminDashboard() {
     }
   };
 
+  const generatePassword = () => {
+    const chars = 'ABCDEFGHJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%';
+    let password = '';
+    for (let i = 0; i < 12; i++) {
+      password += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return password;
+  };
+
   const createLoanOfficer = async () => {
     if (!newUserEmail || !newUserName) {
       toast({
@@ -145,14 +154,24 @@ export default function AdminDashboard() {
       return;
     }
 
+    const generatedPassword = generatePassword();
+
     try {
-      // Note: In a real app, you'd use Supabase admin SDK to create users
-      // For now, we'll just add to profiles and let them sign up
       toast({
-        title: 'Instructions',
-        description: `Ask the new ${newUserRole} to sign up at /applicant-signup with email: ${newUserEmail}. Then update their role here.`,
-        duration: 10000
+        title: 'User Creation Instructions',
+        description: (
+          <div className="space-y-2">
+            <p>Send these credentials to the new {newUserRole}:</p>
+            <p><strong>Email:</strong> {newUserEmail}</p>
+            <p><strong>Temporary Password:</strong> {generatedPassword}</p>
+            <p>Direct them to /applicant-signup to create their account.</p>
+          </div>
+        ),
+        duration: 15000
       });
+      
+      // Copy to clipboard
+      navigator.clipboard.writeText(`Email: ${newUserEmail}\nPassword: ${generatedPassword}\nSignup: ${window.location.origin}/applicant-signup`);
       
       setNewUserEmail('');
       setNewUserName('');
@@ -258,6 +277,11 @@ export default function AdminDashboard() {
                 <Button variant="outline" size="sm">
                   <Volume2 className="h-4 w-4 mr-2" />
                   Test TTS
+                </Button>
+              </Link>
+              <Link to="/loan-officer-dashboard">
+                <Button variant="outline" size="sm">
+                  Officer Portal
                 </Button>
               </Link>
               <Button variant="outline" onClick={signOut}>
@@ -366,9 +390,22 @@ export default function AdminDashboard() {
                       </SelectContent>
                     </Select>
                   </div>
-                  <Button onClick={createLoanOfficer} className="w-full">
-                    Send Invitation
-                  </Button>
+                  <div className="flex space-x-2">
+                    <Button onClick={() => {
+                      const password = generatePassword();
+                      navigator.clipboard.writeText(password);
+                      toast({
+                        title: 'Password Generated',
+                        description: `Generated password: ${password} (copied to clipboard)`,
+                        duration: 5000
+                      });
+                    }} variant="outline" className="flex-1">
+                      Generate Password
+                    </Button>
+                    <Button onClick={createLoanOfficer} className="flex-1">
+                      Create User
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
 
