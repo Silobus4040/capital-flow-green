@@ -71,7 +71,7 @@ const App = () => (
             } />
             <Route path="/applicant-documents" element={
               <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
-                <ApplicantDocuments />
+                <ApplicantLayout><ApplicantDocuments /></ApplicantLayout>
               </ProtectedRoute>
             } />
             <Route path="/applicant-profile" element={
