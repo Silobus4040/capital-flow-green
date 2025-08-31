@@ -39,40 +39,70 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log('🔐 AuthProvider: Setting up auth state listener');
+    
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('🔐 Auth state changed:', event, 'User:', session?.user?.email);
+        
         setSession(session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          // Fetch user profile
-          setTimeout(async () => {
-            try {
-              const { data: profileData } = await supabase
-                .from('profiles')
-                .select('*')
-                .eq('user_id', session.user.id)
-                .single();
-              
+          console.log('🔐 Fetching profile for user:', session.user.id);
+          // Fetch user profile immediately without setTimeout
+          try {
+            const { data: profileData, error } = await supabase
+              .from('profiles')
+              .select('*')
+              .eq('user_id', session.user.id)
+              .single();
+            
+            if (error) {
+              console.error('🔐 Error fetching profile:', error);
+              // Create a basic profile if it doesn't exist
+              if (error.code === 'PGRST116') {
+                console.log('🔐 Profile not found, creating basic profile');
+                setProfile({
+                  id: session.user.id,
+                  user_id: session.user.id,
+                  email: session.user.email || '',
+                  full_name: session.user.user_metadata?.full_name || session.user.email,
+                  role: 'borrower'
+                } as Profile);
+              } else {
+                setProfile(null);
+              }
+            } else {
+              console.log('🔐 Profile loaded:', profileData);
               setProfile(profileData as Profile);
-            } catch (error) {
-              console.error('Error fetching profile:', error);
             }
-          }, 0);
+          } catch (error) {
+            console.error('🔐 Unexpected error fetching profile:', error);
+            setProfile(null);
+          }
         } else {
+          console.log('🔐 No user session, clearing profile');
           setProfile(null);
         }
         
         setLoading(false);
+        console.log('🔐 Auth loading complete');
       }
     );
 
     // Get initial session
+    console.log('🔐 Getting initial session');
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
+      console.log('🔐 Initial session:', session?.user?.email || 'none');
+      // Don't set loading to false here - let the auth state change handler do it
+      if (!session) {
+        setSession(null);
+        setUser(null);
+        setProfile(null);
+        setLoading(false);
+      }
     });
 
     return () => subscription.unsubscribe();
