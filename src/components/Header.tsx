@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import ccifLogo from "@/assets/ccif-logo-new.png";
+const ccifLogo = "/lovable-uploads/7a51105a-a80d-4bc0-8f7b-c8e5b6b783c3.png";
 
 const navigationItems = [
   { name: "Home", href: "/" },
