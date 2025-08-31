@@ -71,9 +71,15 @@ export default function AdminDashboard() {
         .select('*')
         .order('created_at', { ascending: false });
 
-      // Load clients (loan applications)
+      // Load clients (loan applications and program applications)
       const { data: clientsData } = await supabase
         .from('loan_applications')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      // Load loan program applications
+      const { data: programApplicationsData } = await supabase
+        .from('loan_program_applications')
         .select('*')
         .order('created_at', { ascending: false });
 
@@ -84,7 +90,18 @@ export default function AdminDashboard() {
         .order('assigned_at', { ascending: false });
 
       setUsers(usersData || []);
-      setClients(clientsData || []);
+      
+      // Combine both types of applications
+      const allApplications = [
+        ...(clientsData || []).map(app => ({ ...app, type: 'loan_application' })),
+        ...(programApplicationsData || []).map(app => ({ 
+          ...app, 
+          type: 'program_application',
+          loan_amount: app.requested_amount,
+          project_name: app.program_name
+        }))
+      ];
+      setClients(allApplications);
       
       // Format assignments data with manual lookups
       const formattedAssignments = assignmentsData?.map(assignment => {

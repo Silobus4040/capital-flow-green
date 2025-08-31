@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
 import { UserCheck, FileText, MessageSquare, Calendar, Volume2, Phone, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import LoanOfficerMessaging from '@/components/LoanOfficerMessaging';
 
 interface AssignedClient {
   id: string;
@@ -353,30 +354,43 @@ export default function LoanOfficerDashboard() {
           </TabsContent>
 
           <TabsContent value="communication" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <MessageSquare className="h-5 w-5 mr-2" />
-                  Communication Center
-                </CardTitle>
-                <CardDescription>Connect with your assigned clients</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-8">
-                  <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                  <h3 className="text-lg font-medium mb-2">Communication Center</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Advanced messaging and communication tools will be available here.
-                  </p>
-                  <Link to="/tts-test">
-                    <Button>
-                      <Volume2 className="h-4 w-4 mr-2" />
-                      Test Text-to-Speech
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
+            {assignedClients.length === 0 ? (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <MessageSquare className="h-5 w-5 mr-2" />
+                    Communication Center
+                  </CardTitle>
+                  <CardDescription>Connect with your assigned clients</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center py-8">
+                    <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                    <h3 className="text-lg font-medium mb-2">No Clients Assigned</h3>
+                    <p className="text-muted-foreground mb-4">
+                      You don't have any clients assigned to communicate with yet.
+                    </p>
+                    <Link to="/tts-test">
+                      <Button>
+                        <Volume2 className="h-4 w-4 mr-2" />
+                        Test Text-to-Speech
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ) : (
+              <div className="space-y-6">
+                {assignedClients.map((client) => (
+                  <LoanOfficerMessaging
+                    key={client.client_id}
+                    clientId={client.client_id}
+                    clientName={client.borrower_name}
+                    clientEmail={client.borrower_email}
+                  />
+                ))}
+              </div>
+            )}
           </TabsContent>
         </Tabs>
       </div>
