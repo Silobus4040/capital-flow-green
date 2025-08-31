@@ -9,6 +9,8 @@ import { useToast } from '@/components/ui/use-toast';
 import { Eye, EyeOff } from 'lucide-react';
 
 export default function ApplicantSignup() {
+  console.log('🚀 ApplicantSignup component loaded successfully');
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
