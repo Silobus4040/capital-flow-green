@@ -73,6 +73,42 @@ export type Database = {
           },
         ]
       }
+      client_assignments: {
+        Row: {
+          assigned_at: string
+          assigned_by: string
+          client_id: string
+          created_at: string
+          id: string
+          loan_officer_id: string
+          notes: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_at?: string
+          assigned_by: string
+          client_id: string
+          created_at?: string
+          id?: string
+          loan_officer_id: string
+          notes?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_at?: string
+          assigned_by?: string
+          client_id?: string
+          created_at?: string
+          id?: string
+          loan_officer_id?: string
+          notes?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string

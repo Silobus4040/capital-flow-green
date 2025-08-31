@@ -31,6 +31,9 @@ import ApplicantApplications from "./pages/applicant/ApplicantApplications";
 // Admin Portal Pages
 import AdminPortalLogin from "./pages/admin/AdminPortalLogin";
 import LoanOfficerLogin from "./pages/admin/LoanOfficerLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import LoanOfficerDashboard from "./pages/admin/LoanOfficerDashboard";
+import TTSTest from "./pages/TTSTest";
 
 const queryClient = new QueryClient();
 
@@ -91,12 +94,17 @@ const App = () => (
             <Route path="/loan-officer-login" element={<LoanOfficerLogin />} />
             <Route path="/admin-dashboard" element={
               <ProtectedRoute allowedRoles={['admin']} redirectTo="/admin-portal-login">
-                <div className="p-6"><h1>Admin Dashboard - Coming Soon</h1></div>
+                <AdminDashboard />
               </ProtectedRoute>
             } />
             <Route path="/loan-officer-dashboard" element={
               <ProtectedRoute allowedRoles={['loan_officer', 'admin']} redirectTo="/loan-officer-login">
-                <div className="p-6"><h1>Loan Officer Dashboard - Coming Soon</h1></div>
+                <LoanOfficerDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/tts-test" element={
+              <ProtectedRoute allowedRoles={['admin', 'loan_officer']} redirectTo="/admin-portal-login">
+                <TTSTest />
               </ProtectedRoute>
             } />
             
