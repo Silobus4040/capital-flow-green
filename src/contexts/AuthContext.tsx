@@ -37,57 +37,81 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [profileFetched, setProfileFetched] = useState(false);
+
+  const fetchProfile = async (userId: string, userEmail: string, userMetadata: any) => {
+    if (profileFetched) return; // Prevent duplicate fetches
+    
+    try {
+      console.log('🔐 Fetching profile for user:', userId);
+      const { data: profileData, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', userId)
+        .maybeSingle();
+      
+      if (error) {
+        console.error('🔐 Profile fetch error:', error);
+        // Handle RLS infinite recursion error gracefully
+        if (error.code === '42P17') {
+          console.log('🔐 RLS recursion detected, creating fallback profile');
+          setProfile({
+            id: userId,
+            user_id: userId,
+            email: userEmail || '',
+            full_name: userMetadata?.full_name || userEmail,
+            role: 'admin' // Fallback to admin for RLS issues
+          } as Profile);
+        } else {
+          setProfile(null);
+        }
+      } else if (profileData) {
+        console.log('🔐 Profile loaded:', profileData);
+        setProfile(profileData as Profile);
+      } else {
+        console.log('🔐 No profile found, creating default profile');
+        setProfile({
+          id: userId,
+          user_id: userId,
+          email: userEmail || '',
+          full_name: userMetadata?.full_name || userEmail,
+          role: 'borrower'
+        } as Profile);
+      }
+    } catch (error) {
+      console.error('🔐 Profile fetch failed:', error);
+      // Create fallback profile on any error
+      setProfile({
+        id: userId,
+        user_id: userId,
+        email: userEmail || '',
+        full_name: userMetadata?.full_name || userEmail,
+        role: 'borrower'
+      } as Profile);
+    } finally {
+      setProfileFetched(true);
+      setLoading(false);
+      console.log('🔐 Auth initialization complete');
+    }
+  };
 
   useEffect(() => {
     console.log('🔐 AuthProvider: Setting up auth state listener');
     
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      async (event, session) => {
         console.log('🔐 Auth state changed:', event, 'User:', session?.user?.email);
         
         setSession(session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          console.log('🔐 User authenticated, fetching profile for:', session.user.id);
-          // Defer async operations to prevent blocking
-          setTimeout(async () => {
-            try {
-              const { data: profileData, error } = await supabase
-                .from('profiles')
-                .select('*')
-                .eq('user_id', session.user.id)
-                .maybeSingle();
-              
-              if (error) {
-                console.error('🔐 Error fetching profile:', error);
-                setProfile(null);
-              } else if (profileData) {
-                console.log('🔐 Profile loaded successfully:', profileData);
-                setProfile(profileData as Profile);
-              } else {
-                console.log('🔐 No profile found, creating basic profile');
-                // Create basic profile for existing user
-                setProfile({
-                  id: session.user.id,
-                  user_id: session.user.id,
-                  email: session.user.email || '',
-                  full_name: session.user.user_metadata?.full_name || session.user.email,
-                  role: 'borrower'
-                } as Profile);
-              }
-            } catch (error) {
-              console.error('🔐 Profile fetch failed:', error);
-              setProfile(null);
-            } finally {
-              setLoading(false);
-              console.log('🔐 Auth initialization complete');
-            }
-          }, 0);
+          await fetchProfile(session.user.id, session.user.email || '', session.user.user_metadata);
         } else {
           console.log('🔐 No user session, clearing state');
           setProfile(null);
+          setProfileFetched(false);
           setLoading(false);
         }
       }

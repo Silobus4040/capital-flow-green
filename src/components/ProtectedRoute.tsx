@@ -20,9 +20,9 @@ export const ProtectedRoute = ({
   useEffect(() => {
     if (loading) {
       const timer = setTimeout(() => {
-        console.warn('🔐 ProtectedRoute: Loading timeout after 5 seconds');
+        console.warn('🔐 ProtectedRoute: Loading timeout after 3 seconds');
         setLoadingTimeout(true);
-      }, 5000); // 5 second timeout
+      }, 3000); // Reduced to 3 seconds since we fixed auth race conditions
 
       return () => clearTimeout(timer);
     } else {
