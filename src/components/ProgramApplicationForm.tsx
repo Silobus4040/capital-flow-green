@@ -10,6 +10,11 @@ import { useAuth } from "@/contexts/AuthContext";
 import { LoanProgram } from "@/data/loanPrograms";
 import CommercialMortgageForm from "./CommercialMortgageForm";
 import EnhancedBusinessLoanForm from "./forms/EnhancedBusinessLoanForm";
+import DSCRLoanForm from "./forms/DSCRLoanForm";
+import SelfStorageForm from "./forms/SelfStorageForm";
+import RehabInvestorForm from "./forms/RehabInvestorForm";
+import RVParkForm from "./forms/RVParkForm";
+import SeniorLivingForm from "./forms/SeniorLivingForm";
 import ConditionalFormFields from "./forms/ConditionalFormFields";
 
 interface ProgramApplicationFormProps {
@@ -18,9 +23,33 @@ interface ProgramApplicationFormProps {
 }
 
 export default function ProgramApplicationForm({ program, onSubmitSuccess }: ProgramApplicationFormProps) {
-  // Enhanced Commercial Mortgage Form for Business Loan program
+  // Enhanced forms for specific programs
   if (program.id === 'business-loan' || program.name.toLowerCase().includes('business loan')) {
     return <EnhancedBusinessLoanForm />;
+  }
+
+  if (program.id === 'commercial-mortgage' || program.name.toLowerCase().includes('commercial mortgage')) {
+    return <CommercialMortgageForm />;
+  }
+
+  if (program.id === 'commercial-dscr' || program.name.toLowerCase().includes('dscr')) {
+    return <DSCRLoanForm />;
+  }
+
+  if (program.id === 'self-storage' || program.name.toLowerCase().includes('self storage')) {
+    return <SelfStorageForm />;
+  }
+
+  if (program.id === 'rehab-investor' || program.name.toLowerCase().includes('rehab') || program.name.toLowerCase().includes('investor')) {
+    return <RehabInvestorForm />;
+  }
+
+  if (program.id === 'rv-park-financing' || program.name.toLowerCase().includes('rv park')) {
+    return <RVParkForm />;
+  }
+
+  if (program.id === 'senior-living' || program.name.toLowerCase().includes('senior living')) {
+    return <SeniorLivingForm />;
   }
 
   const { user } = useAuth();

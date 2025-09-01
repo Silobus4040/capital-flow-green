@@ -902,7 +902,7 @@ export const loanPrograms: LoanProgram[] = [
     </div>
     <div style="background: rgba(31, 41, 55, 0.1); padding: 1rem; border-radius: 8px;">
       <div style="font-weight: 700; font-size: 1.1rem;">📧 EMAIL</div>
-      <div style="font-size: 1.2rem; font-weight: 800;">deals@ccif.com</div>
+      <div style="font-size: 1.2rem; font-weight: 800;">admin@ccif-inc.com</div>
     </div>
   </div>
   
@@ -1258,7 +1258,7 @@ export const loanPrograms: LoanProgram[] = [
     </div>
     <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
       <div style="font-weight: 700; font-size: 1.1rem;">📧 EMAIL</div>
-      <div style="font-size: 1.2rem; font-weight: 800;">dscr@ccif.com</div>
+      <div style="font-size: 1.2rem; font-weight: 800;">admin@ccif-inc.com</div>
     </div>
   </div>
   
@@ -1619,7 +1619,7 @@ export const loanPrograms: LoanProgram[] = [
     </div>
     <div style="background: rgba(31, 41, 55, 0.1); padding: 1rem; border-radius: 8px;">
       <div style="font-weight: 700; font-size: 1.1rem;">📧 EMAIL</div>
-      <div style="font-size: 1.2rem; font-weight: 800;">rehab@ccif.com</div>
+      <div style="font-size: 1.2rem; font-weight: 800;">admin@ccif-inc.com</div>
     </div>
   </div>
   
