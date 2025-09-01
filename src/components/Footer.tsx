@@ -61,14 +61,14 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
-                <span>info@ccif.com</span>
+                <span>admin@ccif-inc.com</span>
               </div>
             </div>
             
             {/* Social Media Icons */}
             <div className="flex space-x-4 pt-2">
               <a 
-                href="https://facebook.com/commercialcapitalfinance" 
+                href="https://www.facebook.com/share/17FknQvsu7/?mibextid=LQQJ4d" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-2 bg-primary-foreground/10 rounded-full hover:bg-primary-foreground/20 transition-colors"
@@ -104,7 +104,7 @@ export default function Footer() {
                 <Send className="h-4 w-4" />
               </a>
               <a 
-                href="https://x.com/commercialcap" 
+                href="https://x.com/CCIF_INC?t=ZmHYoDv78lkKUfjkih8zTQ&s=09" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-2 bg-primary-foreground/10 rounded-full hover:bg-primary-foreground/20 transition-colors"

@@ -3,11 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { LoanProgram } from "@/data/loanPrograms";
 import CommercialMortgageForm from "./CommercialMortgageForm";
+import EnhancedBusinessLoanForm from "./forms/EnhancedBusinessLoanForm";
+import ConditionalFormFields from "./forms/ConditionalFormFields";
 
 interface ProgramApplicationFormProps {
   program: LoanProgram;
@@ -15,9 +18,9 @@ interface ProgramApplicationFormProps {
 }
 
 export default function ProgramApplicationForm({ program, onSubmitSuccess }: ProgramApplicationFormProps) {
-  // If this is a commercial mortgage application, use the comprehensive form
-  if (program.id === 'commercial-mortgage' || program.name.toLowerCase().includes('commercial mortgage')) {
-    return <CommercialMortgageForm />;
+  // Enhanced Commercial Mortgage Form for Business Loan program
+  if (program.id === 'business-loan' || program.name.toLowerCase().includes('business loan')) {
+    return <EnhancedBusinessLoanForm />;
   }
 
   const { user } = useAuth();
@@ -29,7 +32,8 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
     borrowerPhone: "",
     propertyAddress: "",
     requestedAmount: "",
-    loanPurpose: ""
+    loanPurpose: "",
+    loanType: ""
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -104,8 +108,104 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
     }
   };
 
+  const updateFormData = (field: string, value: any) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const getLoanTypeOptions = () => {
+    // Define loan type options based on program
+    const programSpecificOptions: { [key: string]: Array<{value: string, label: string}> } = {
+      'commercial-mortgage': [
+        { value: 'first-mortgage', label: 'First Mortgage' },
+        { value: 'second-mortgage', label: 'Second Mortgage' },
+        { value: 'rate-and-term-refinance', label: 'Rate and Term Refinance' },
+        { value: 'cash-out-refinance', label: 'Cash-out Refinance' },
+        { value: 'bridge-loan', label: 'Bridge Loan' },
+        { value: '100-financing', label: '100% Financing Program' }
+      ],
+      'business-loan': [
+        { value: 'real-estate-security', label: 'Real Estate Security' },
+        { value: 'credit-protection-insurance', label: 'Credit Protection Insurance' },
+        { value: 'personal-guarantee', label: 'Personal Guarantee' },
+        { value: 'bank-guarantee', label: 'Bank Guarantee' },
+        { value: 'business-assets', label: 'Business Assets' },
+        { value: 'inventory', label: 'Inventory' }
+      ],
+      'commercial-dscr': [
+        { value: 'standard-dscr', label: 'Standard Commercial DSCR Loan' },
+        { value: '100-financing', label: '100% Financing Option' }
+      ],
+      'construction': [
+        { value: 'acquisition-development', label: 'Acquisition & Development' },
+        { value: 'development-only', label: 'Development-Only' },
+        { value: 'construction-only', label: 'Construction-Only' },
+        { value: 'construction-to-permanent', label: 'Construction-to-Permanent' }
+      ],
+      'self-storage': [
+        { value: 'purchase', label: 'Standard Purchase Loan' },
+        { value: 'rate-and-term-refinance', label: 'Rate and Term Refinance' },
+        { value: 'purchase-dscr', label: 'Purchase with DSCR Loan' },
+        { value: 'cash-out-refinance', label: 'Cash-out Refinance' },
+        { value: 'bridge-loan', label: 'Bridge Loan' },
+        { value: '100-financing', label: '100% Financing Program' }
+      ],
+      'rv-park': [
+        { value: 'purchase', label: 'Standard Purchase Loans' },
+        { value: 'purchase-dscr', label: 'Purchase with DSCR Loan' },
+        { value: 'cash-out-refinance', label: 'Cash-Out Refinance' },
+        { value: 'rate-and-term-refinance', label: 'Rate and Term Refinance' },
+        { value: 'bridge-financing', label: 'Bridge Financing' },
+        { value: '100-financing', label: '100% Financing Program' }
+      ],
+      'senior-living': [
+        { value: 'purchase-loan', label: 'Purchase Loan Program' },
+        { value: '100-financing', label: '100% Financing' },
+        { value: 'refinance', label: 'Refinance Program' },
+        { value: 'bridge-loan', label: 'Bridge Loan Program' },
+        { value: 'business-operation', label: 'Business Operation Loans' }
+      ],
+      'residential-mortgage': [
+        { value: 'first-mortgage', label: 'First Mortgage/Purchase' },
+        { value: 'rate-and-term-refinance', label: 'Rate and Term Refinance' },
+        { value: 'cash-out-refinance', label: 'Cash-out Refinance' },
+        { value: 'bridge-loan', label: 'Bridge Loan' },
+        { value: '100-financing', label: '100% Financing Program' }
+      ],
+      'rehab-investor': [
+        { value: 'fix-and-flip', label: 'Fix-and-Flip Loan Program' },
+        { value: 'rehab-only', label: 'Rehab Only' },
+        { value: 'fix-and-hold', label: 'Fix-and-Hold Loan Program' },
+        { value: 'zero-down-payment', label: 'Zero Down Payment Program' }
+      ]
+    };
+
+    return programSpecificOptions[program.id] || [
+      { value: 'purchase', label: 'Purchase' },
+      { value: 'refinance', label: 'Refinance' },
+      { value: 'construction', label: 'Construction' },
+      { value: 'bridge-loan', label: 'Bridge Loan' }
+    ];
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Loan Type Selection */}
+      <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
+        <Label htmlFor="loanType" className="text-lg font-semibold">Loan Type Selection *</Label>
+        <Select onValueChange={(value) => updateFormData('loanType', value)}>
+          <SelectTrigger className="mt-2">
+            <SelectValue placeholder="Select your loan type to view specific fields" />
+          </SelectTrigger>
+          <SelectContent>
+            {getLoanTypeOptions().map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <Label htmlFor="borrowerName">Full Name *</Label>
@@ -162,7 +262,17 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
           onChange={(e) => setFormData(prev => ({ ...prev, loanPurpose: e.target.value }))}
         />
       </div>
-      <Button type="submit" disabled={isLoading} className="w-full">
+
+      {/* Conditional Fields Based on Loan Type */}
+      {formData.loanType && (
+        <ConditionalFormFields 
+          loanType={formData.loanType}
+          formData={formData}
+          updateFormData={updateFormData}
+        />
+      )}
+
+      <Button type="submit" disabled={isLoading || !formData.loanType} className="w-full">
         {isLoading ? "Submitting..." : "Submit Application"}
       </Button>
     </form>
