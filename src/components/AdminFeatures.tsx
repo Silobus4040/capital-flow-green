@@ -85,15 +85,10 @@ export default function AdminFeatures() {
     }
 
     try {
-      const { user } = useAuth();
       const { error } = await supabase
         .from('loan_program_applications')
         .update({ 
-          admin_notes: `Assigned to loan officer: ${selectedOfficer}`,
-          program_specific_data: { 
-            ...applicants.find(a => a.id === selectedApplicant)?.program_specific_data,
-            assigned_loan_officer: selectedOfficer 
-          }
+          admin_notes: `Assigned to loan officer: ${selectedOfficer}`
         })
         .eq('id', selectedApplicant);
 
