@@ -17,6 +17,7 @@ interface Applicant {
   status: string;
   created_at: string;
   assigned_loan_officer?: string;
+  program_specific_data?: any;
 }
 
 interface LoanOfficer {
@@ -89,8 +90,8 @@ export default function AdminFeatures() {
         .from('loan_program_applications')
         .update({ 
           admin_notes: `Assigned to loan officer: ${selectedOfficer}`,
-          application_data: { 
-            ...applicants.find(a => a.id === selectedApplicant)?.application_data,
+          program_specific_data: { 
+            ...applicants.find(a => a.id === selectedApplicant)?.program_specific_data,
             assigned_loan_officer: selectedOfficer 
           }
         })
