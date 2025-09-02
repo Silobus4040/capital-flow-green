@@ -52,19 +52,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       
       if (error) {
         console.error('🔐 Profile fetch error:', error);
-        // Handle RLS infinite recursion error gracefully
-        if (error.code === '42P17') {
-          console.log('🔐 RLS recursion detected, creating fallback profile');
-          setProfile({
-            id: userId,
-            user_id: userId,
-            email: userEmail || '',
-            full_name: userMetadata?.full_name || userEmail,
-            role: 'admin' // Fallback to admin for RLS issues
-          } as Profile);
-        } else {
-          setProfile(null);
-        }
+        console.warn('🚨 SECURITY: Profile fetch failed - user should re-authenticate');
+        // SECURITY FIX: Never fallback to admin role, always use borrower as default
+        setProfile({
+          id: userId,
+          user_id: userId,
+          email: userEmail || '',
+          full_name: userMetadata?.full_name || userEmail,
+          role: 'borrower' // Always fallback to borrower role for security
+        } as Profile);
+      }
       } else if (profileData) {
         console.log('🔐 Profile loaded:', profileData);
         setProfile(profileData as Profile);
