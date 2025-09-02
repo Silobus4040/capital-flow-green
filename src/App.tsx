@@ -31,6 +31,7 @@ import ApplicantApplications from "./pages/applicant/ApplicantApplications";
 
 // Admin Portal Pages
 import AdminPortalLogin from "./pages/admin/AdminPortalLogin";
+import AdminTestLogin from "./pages/admin/AdminTestLogin";
 import LoanOfficerLogin from "./pages/admin/LoanOfficerLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import LoanOfficerDashboard from "./pages/admin/LoanOfficerDashboard";
@@ -95,6 +96,7 @@ const App = () => {
             
             {/* Hidden Admin Portal Routes */}
             <Route path="/admin-portal-login" element={<AdminPortalLogin />} />
+            <Route path="/admin-test-login" element={<AdminTestLogin />} />
             <Route path="/loan-officer-login" element={<LoanOfficerLogin />} />
             <Route path="/admin-dashboard" element={
               <ProtectedRoute allowedRoles={['admin']} redirectTo="/admin-portal-login">
