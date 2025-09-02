@@ -85,15 +85,23 @@ export default function AdminDashboard() {
         .select('*')
         .order('created_at', { ascending: false });
 
-      // Load assignments with proper joins
+      // Load assignments - simplified approach
       const { data: assignmentsData } = await supabase
         .from('client_assignments')
-        .select(`
-          *,
-          loan_officer:profiles!client_assignments_loan_officer_id_fkey(full_name),
-          client:loan_applications!client_assignments_client_id_fkey(borrower_name)
-        `)
+        .select('*')
         .order('assigned_at', { ascending: false });
+
+      // Load referral signups for admin dashboard
+      const { data: referralData } = await supabase
+        .from('referral_signups')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      // Load contact submissions for admin dashboard 
+      const { data: contactData } = await supabase
+        .from('contact_submissions')
+        .select('*')
+        .order('created_at', { ascending: false });
 
       setUsers(usersData || []);
       

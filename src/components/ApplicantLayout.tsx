@@ -39,7 +39,6 @@ export default function ApplicantLayout({ children }: ApplicantLayoutProps) {
   const navItems = [
     { icon: LayoutDashboard, label: 'Dashboard', path: '/applicant-dashboard' },
     { icon: MessageSquare, label: 'Messages', path: '/applicant-messages' },
-    { icon: FileText, label: 'Applications', path: '/applicant-applications' },
     { icon: FileText, label: 'Documents', path: '/applicant-documents' },
     { icon: User, label: 'Profile', path: '/applicant-profile' },
   ];
