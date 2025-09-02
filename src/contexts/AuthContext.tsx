@@ -156,9 +156,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
       
       if (!error && data.user) {
-        // Force profile fetch immediately after successful login
-        setProfileFetched(false);
-        await fetchProfile(data.user.id, data.user.email || '', data.user.user_metadata);
+        // INSTANT ACCESS FIX: Don't wait for profile loading
+        // Set user immediately for instant access
+        setUser(data.user);
+        setSession(data.session);
+        
+        // Fetch profile in background without blocking
+        setTimeout(async () => {
+          setProfileFetched(false);
+          await fetchProfile(data.user.id, data.user.email || '', data.user.user_metadata);
+        }, 0);
       }
       
       return { error };
