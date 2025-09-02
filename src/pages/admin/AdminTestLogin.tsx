@@ -26,10 +26,15 @@ export default function AdminTestLogin() {
   const [currentTest, setCurrentTest] = useState<TestResult | undefined>();
   const [isRunningMultiTest, setIsRunningMultiTest] = useState(false);
   const [multiTestProgress, setMultiTestProgress] = useState({ completed: 0, total: 0 });
-  const { signIn, user, profile } = useAuth();
+  const { signIn, adminSignIn, user, profile } = useAuth();
   const { toast } = useToast();
 
-  if (user && profile?.role === 'admin' && !loading && !isRunningMultiTest) {
+  // INSTANT ADMIN CHECK - Don't wait for profile loading
+  const ADMIN_EMAILS = ['sundrycapitalsolutions@gmail.com'];
+  const isAdminUser = user && ADMIN_EMAILS.includes(user.email || '');
+  
+  // Redirect if already admin and not testing
+  if (isAdminUser && !loading && !isRunningMultiTest) {
     return <Navigate to="/admin-dashboard" replace />;
   }
 
@@ -48,7 +53,7 @@ export default function AdminTestLogin() {
     const startTime = Date.now();
 
     try {
-      const { error } = await signIn(email, password);
+      const { error } = await adminSignIn(email, password);
       const endTime = Date.now();
       const duration = endTime - startTime;
       const passed = duration < 1000 && !error;
@@ -136,7 +141,7 @@ export default function AdminTestLogin() {
         // Clear any existing session first
         setCurrentTest(undefined);
         
-        const { error } = await signIn(email, password);
+        const { error } = await adminSignIn(email, password);
         const endTime = Date.now();
         const duration = endTime - startTime;
         const passed = duration < 1000 && !error;

@@ -18,6 +18,7 @@ interface AuthContextType {
   loading: boolean;
   signUp: (email: string, password: string, fullName: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
+  adminSignIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: any }>;
 }
@@ -94,16 +95,38 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     console.log('🔐 AuthProvider: Setting up auth state listener');
     
-    // Set up auth state listener FIRST
+    // ADMIN EMAIL LIST for instant access
+    const ADMIN_EMAILS = ['sundrycapitalsolutions@gmail.com'];
+    
+    // Set up auth state listener FIRST - MUST BE SYNCHRONOUS
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
         console.log('🔐 Auth state changed:', event, 'User:', session?.user?.email);
         
         setSession(session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          await fetchProfile(session.user.id, session.user.email || '', session.user.user_metadata);
+          // INSTANT ADMIN PROFILE for known admin emails
+          if (ADMIN_EMAILS.includes(session.user.email || '')) {
+            console.log('🔐 INSTANT ADMIN ACCESS for:', session.user.email);
+            setProfile({
+              id: session.user.id,
+              user_id: session.user.id,
+              email: session.user.email || '',
+              full_name: session.user.user_metadata?.full_name || session.user.email,
+              role: 'admin'
+            } as Profile);
+            setProfileFetched(true);
+            setLoading(false);
+          } else {
+            // Non-admin users: defer profile loading to prevent blocking
+            setTimeout(() => {
+              if (!profileFetched) {
+                fetchProfile(session.user.id, session.user.email || '', session.user.user_metadata);
+              }
+            }, 0);
+          }
         } else {
           console.log('🔐 No user session, clearing state');
           setProfile(null);
@@ -174,6 +197,43 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const adminSignIn = async (email: string, password: string) => {
+    console.log('🔐 ADMIN SIGN IN STARTED:', email);
+    const startTime = Date.now();
+    
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+      
+      if (!error && data.user) {
+        console.log('🔐 ADMIN AUTH SUCCESS in', Date.now() - startTime + 'ms');
+        
+        // INSTANT ADMIN ACCESS - No profile loading delays
+        setUser(data.user);
+        setSession(data.session);
+        setProfile({
+          id: data.user.id,
+          user_id: data.user.id,
+          email: data.user.email || '',
+          full_name: data.user.user_metadata?.full_name || data.user.email,
+          role: 'admin'
+        } as Profile);
+        setProfileFetched(true);
+        setLoading(false);
+        
+        console.log('🔐 ADMIN SIGN IN COMPLETE in', Date.now() - startTime + 'ms');
+      }
+      
+      return { error };
+    } catch (err) {
+      console.error('🔐 ADMIN SIGN IN ERROR:', err);
+      setLoading(false);
+      return { error: err };
+    }
+  };
+
   const signOut = async () => {
     await supabase.auth.signOut();
   };
@@ -195,6 +255,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loading,
     signUp,
     signIn,
+    adminSignIn,
     signOut,
     resetPassword
   };
