@@ -61,7 +61,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           full_name: userMetadata?.full_name || userEmail,
           role: 'borrower' // Always fallback to borrower role for security
         } as Profile);
-      }
       } else if (profileData) {
         console.log('🔐 Profile loaded:', profileData);
         setProfile(profileData as Profile);

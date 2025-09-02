@@ -67,7 +67,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     await resend.emails.send({
       from: "CCIF Applications <applications@sundrycapitalsolutions.com>",
-      to: ["sundrycapitalsolutions@gmail.com"],
+      to: [Deno.env.get("ADMIN_EMAIL") || "sundrycapitalsolutions@gmail.com"],
       subject: `New Loan Application: ${sanitizedProgram}`,
       html: `
         <h2>New Loan Application</h2>
