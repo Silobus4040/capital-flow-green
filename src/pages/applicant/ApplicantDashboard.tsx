@@ -228,20 +228,24 @@ export default function ApplicantDashboard() {
             </CardContent>
           </Card>
 
-          {/* Contact Only */}
+          {/* Messaging Support */}
           <Card>
             <CardHeader>
-              <CardTitle>Support</CardTitle>
-              <CardDescription>Need assistance with your loan?</CardDescription>
+              <CardTitle>Support & Communication</CardTitle>
+              <CardDescription>Stay in touch with your loan team</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Button variant="outline" className="w-full justify-start">
-                <MessageSquare className="mr-2 h-4 w-4" />
-                Contact Loan Officer
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <a href="/applicant-messages">
+                  <MessageSquare className="mr-2 h-4 w-4" />
+                  Message Center
+                </a>
               </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <FileText className="mr-2 h-4 w-4" />
-                Upload Documents
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <a href="/document-submission">
+                  <FileText className="mr-2 h-4 w-4" />
+                  Upload Documents
+                </a>
               </Button>
             </CardContent>
           </Card>

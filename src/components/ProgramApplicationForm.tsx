@@ -67,15 +67,6 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!user) {
-      toast({
-        title: "Authentication Required",
-        description: "Please log in to submit an application.",
-        variant: "destructive",
-      });
-      return;
-    }
 
     if (!formData.borrowerName || !formData.borrowerEmail || !formData.borrowerPhone) {
       toast({
@@ -89,11 +80,11 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
     setIsLoading(true);
 
     try {
-      // Save to database
+      // Save to database (public access, no user required)
       const { error: dbError } = await supabase
         .from('loan_program_applications')
         .insert({
-          user_id: user.id,
+          user_id: user?.id || null,
           program_id: program.id,
           program_name: program.name,
           borrower_name: formData.borrowerName,

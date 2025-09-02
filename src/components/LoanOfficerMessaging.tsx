@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/components/ui/use-toast';
 import { Send, Volume2, Mic, MicOff, Play, Pause } from 'lucide-react';
+import VoiceRecording from './VoiceRecording';
 
 interface Message {
   id: string;
@@ -38,7 +39,6 @@ export default function LoanOfficerMessaging({ clientId, clientName, clientEmail
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [isRecording, setIsRecording] = useState(false);
-  const [isPlaying, setIsPlaying] = useState<string | null>(null);
   const [isGeneratingTTS, setIsGeneratingTTS] = useState(false);
   const [loading, setLoading] = useState(true);
   const { user, profile } = useAuth();
@@ -257,44 +257,47 @@ export default function LoanOfficerMessaging({ clientId, clientName, clientEmail
     }
   };
 
-  const startRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
-      mediaRecorderRef.current = mediaRecorder;
-      audioChunksRef.current = [];
-
-      mediaRecorder.ondataavailable = (event) => {
-        audioChunksRef.current.push(event.data);
-      };
-
-      mediaRecorder.onstop = async () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-        // Here you could upload the audio and send as voice message
-        // For now, we'll just show a placeholder
-        toast({
-          title: 'Voice Recording',
-          description: 'Voice messaging feature coming soon',
-        });
-      };
-
-      mediaRecorder.start();
-      setIsRecording(true);
-    } catch (error) {
-      console.error('Error starting recording:', error);
-      toast({
-        title: 'Error',
-        description: 'Failed to start recording',
-        variant: 'destructive'
-      });
-    }
+  const handleRecordingComplete = (audioBlob: Blob, duration: number) => {
+    console.log('Recording completed:', { size: audioBlob.size, duration });
   };
 
-  const stopRecording = () => {
-    if (mediaRecorderRef.current && isRecording) {
-      mediaRecorderRef.current.stop();
-      mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
-      setIsRecording(false);
+  const handleSendRecording = async (audioBlob: Blob, duration: number) => {
+    if (!conversation || !user) {
+      throw new Error('No conversation or user available');
+    }
+
+    try {
+      // Upload audio to Supabase storage
+      const fileName = `voice-${Date.now()}.webm`;
+      const filePath = `conversation-files/${conversation.id}/${fileName}`;
+      
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('conversation-files')
+        .upload(filePath, audioBlob, {
+          contentType: 'audio/webm',
+          upsert: false
+        });
+
+      if (uploadError) throw uploadError;
+
+      // Save voice message to database
+      const { error: messageError } = await supabase
+        .from('messages')
+        .insert({
+          conversation_id: conversation.id,
+          sender_type: profile?.role === 'admin' ? 'admin' : 'loan_officer',
+          sender_id: user.id,
+          content: `Voice message (${duration} seconds)`,
+          message_type: 'voice',
+          voice_duration: duration,
+          file_path: filePath
+        });
+
+      if (messageError) throw messageError;
+
+    } catch (error) {
+      console.error('Error sending voice recording:', error);
+      throw error;
     }
   };
 
@@ -382,25 +385,12 @@ export default function LoanOfficerMessaging({ clientId, clientName, clientEmail
           />
           
           <div className="flex items-center justify-between">
-            <div className="flex space-x-2">
-              <Button
-                onClick={isRecording ? stopRecording : startRecording}
-                variant="outline"
-                size="sm"
+            <div className="flex items-center space-x-2">
+              <VoiceRecording
+                onRecordingComplete={handleRecordingComplete}
+                onSendRecording={handleSendRecording}
                 disabled={!conversation}
-              >
-                {isRecording ? (
-                  <>
-                    <MicOff className="h-4 w-4 mr-2" />
-                    Stop Recording
-                  </>
-                ) : (
-                  <>
-                    <Mic className="h-4 w-4 mr-2" />
-                    Voice Message
-                  </>
-                )}
-              </Button>
+              />
               
               <Button
                 onClick={generateTTSMessage}

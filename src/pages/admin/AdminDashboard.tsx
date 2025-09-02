@@ -27,6 +27,8 @@ interface Client {
   loan_amount: number;
   status: string;
   created_at: string;
+  type?: string;
+  project_name?: string;
 }
 
 interface Assignment {
@@ -83,10 +85,14 @@ export default function AdminDashboard() {
         .select('*')
         .order('created_at', { ascending: false });
 
-      // Load assignments - simplified approach
+      // Load assignments with proper joins
       const { data: assignmentsData } = await supabase
         .from('client_assignments')
-        .select('*')
+        .select(`
+          *,
+          loan_officer:profiles!client_assignments_loan_officer_id_fkey(full_name),
+          client:loan_applications!client_assignments_client_id_fkey(borrower_name)
+        `)
         .order('assigned_at', { ascending: false });
 
       setUsers(usersData || []);
@@ -449,27 +455,30 @@ export default function AdminDashboard() {
                 <CardTitle>Client Applications</CardTitle>
                 <CardDescription>View and manage all loan applications</CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {clients.map((client) => (
-                    <div key={client.id} className="flex items-center justify-between p-4 border rounded-lg">
-                      <div>
-                        <p className="font-medium">{client.borrower_name}</p>
-                        <p className="text-sm text-muted-foreground">{client.borrower_email}</p>
-                        <p className="text-sm">Loan Amount: ${client.loan_amount?.toLocaleString()}</p>
+                <CardContent>
+                  <div className="space-y-3">
+                    {clients.map((client) => (
+                      <div key={client.id} className="flex items-center justify-between p-4 border rounded-lg">
+                        <div>
+                          <p className="font-medium">{client.borrower_name}</p>
+                          <p className="text-sm text-muted-foreground">{client.borrower_email}</p>
+                          <p className="text-sm">Loan Amount: ${client.loan_amount?.toLocaleString()}</p>
+                          <p className="text-xs text-blue-600 font-medium">
+                            {client.type === 'loan_application' ? 'Loan Application' : `Loan Application - ${client.project_name}`}
+                          </p>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <Badge variant={client.status === 'approved' ? 'default' : client.status === 'pending' ? 'secondary' : 'destructive'}>
+                            {client.status}
+                          </Badge>
+                          <p className="text-xs text-muted-foreground">
+                            {new Date(client.created_at).toLocaleDateString()}
+                          </p>
+                        </div>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <Badge variant={client.status === 'approved' ? 'default' : client.status === 'pending' ? 'secondary' : 'destructive'}>
-                          {client.status}
-                        </Badge>
-                        <p className="text-xs text-muted-foreground">
-                          {new Date(client.created_at).toLocaleDateString()}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
+                    ))}
+                  </div>
+                </CardContent>
             </Card>
           </TabsContent>
 
