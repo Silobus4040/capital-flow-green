@@ -22,6 +22,7 @@ export default function AdminPortalLogin() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const { error } = await signIn(email, password);
@@ -32,14 +33,20 @@ export default function AdminPortalLogin() {
           description: error.message,
           variant: 'destructive'
         });
+      } else {
+        toast({
+          title: 'Login Successful',
+          description: 'Welcome to the Admin Portal',
+        });
       }
-      // No waiting - immediate access after successful login
     } catch (error) {
       toast({
         title: 'Error',
         description: 'An unexpected error occurred',
         variant: 'destructive'
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -101,8 +108,9 @@ export default function AdminPortalLogin() {
             <Button 
               type="submit" 
               className="w-full bg-red-600 hover:bg-red-700"
+              disabled={loading}
             >
-              Admin Login
+              {loading ? 'Logging in...' : 'Admin Login'}
             </Button>
           </form>
           

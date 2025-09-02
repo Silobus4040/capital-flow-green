@@ -228,11 +228,11 @@ export default function ApplicantDashboard() {
             </CardContent>
           </Card>
 
-          {/* Quick Actions */}
+          {/* Contact Only */}
           <Card>
             <CardHeader>
-              <CardTitle>Quick Actions</CardTitle>
-              <CardDescription>Common tasks and resources</CardDescription>
+              <CardTitle>Support</CardTitle>
+              <CardDescription>Need assistance with your loan?</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               <Button variant="outline" className="w-full justify-start">
@@ -242,10 +242,6 @@ export default function ApplicantDashboard() {
               <Button variant="outline" className="w-full justify-start">
                 <FileText className="mr-2 h-4 w-4" />
                 Upload Documents
-              </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <Calendar className="mr-2 h-4 w-4" />
-                Schedule Call
               </Button>
             </CardContent>
           </Card>

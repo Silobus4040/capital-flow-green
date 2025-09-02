@@ -73,6 +73,10 @@ export default function EnhancedBusinessLoanForm() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const handleInputChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    updateFormData(field, e.target.value);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -189,7 +193,7 @@ export default function EnhancedBusinessLoanForm() {
                 <Input
                   id="businessName"
                   value={formData.businessName}
-                  onChange={(e) => updateFormData('businessName', e.target.value)}
+                  onChange={handleInputChange('businessName')}
                   required
                 />
               </div>

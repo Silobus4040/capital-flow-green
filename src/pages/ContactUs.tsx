@@ -19,6 +19,7 @@ export default function ContactUs() {
     propertyType: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   // Input sanitization function
@@ -31,6 +32,8 @@ export default function ContactUs() {
   };
 
   const handleSubmit = async () => {
+    if (isSubmitting) return;
+    
     // Validation
     if (!formData.name || !formData.email || !formData.phone) {
       toast({
@@ -49,6 +52,8 @@ export default function ContactUs() {
       });
       return;
     }
+
+    setIsSubmitting(true);
 
     try {
       // Sanitize all inputs before saving
@@ -71,15 +76,6 @@ export default function ContactUs() {
           variant: "destructive",
         });
         return;
-      }
-
-      // Send email notification securely
-      const emailConfig = await getEmailConfig();
-      if (emailConfig) {
-        // Email configuration available - would send email here
-        console.log('Email would be sent with secure configuration');
-      } else {
-        console.log('Email service not configured - contact saved to database only');
       }
 
       toast({
@@ -105,6 +101,8 @@ export default function ContactUs() {
         description: "There was an unexpected error. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -288,8 +286,8 @@ export default function ContactUs() {
                 />
               </div>
 
-              <Button onClick={handleSubmit} className="w-full" size="lg">
-                Send Message
+              <Button onClick={handleSubmit} className="w-full" size="lg" disabled={isSubmitting}>
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
               
               <p className="text-xs text-muted-foreground text-center">

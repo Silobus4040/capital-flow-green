@@ -194,6 +194,7 @@ export default function ApplicantMessages() {
       const mediaRecorder = new MediaRecorder(stream, { mimeType });
       
       const chunks: BlobPart[] = [];
+      const startTime = Date.now();
       
       mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
@@ -202,7 +203,19 @@ export default function ApplicantMessages() {
       };
       
       mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(chunks, { type: 'audio/webm;codecs=opus' });
+        const endTime = Date.now();
+        const duration = Math.round((endTime - startTime) / 1000);
+        
+        if (duration < 1) {
+          toast({
+            title: 'Recording too short',
+            description: 'Please record for at least 1 second.',
+            variant: 'destructive'
+          });
+          return;
+        }
+        
+        const audioBlob = new Blob(chunks, { type: mimeType });
         const audioUrl = URL.createObjectURL(audioBlob);
         
         // Create voice message
@@ -210,7 +223,7 @@ export default function ApplicantMessages() {
           id: Date.now().toString(),
           content: 'Voice message',
           message_type: 'voice',
-          voice_duration: Math.round(chunks.length * 0.1), // Approximate duration
+          voice_duration: duration,
           is_tts: false,
           created_at: new Date().toISOString(),
           sender_id: profile?.user_id || '',
@@ -222,8 +235,8 @@ export default function ApplicantMessages() {
         setMessages(prev => [...prev, voiceMsg]);
         
         toast({
-          title: 'Voice message sent',
-          description: 'Your voice message has been recorded and sent.'
+          title: 'Voice message recorded',
+          description: `${duration} second voice message ready to send.`
         });
         
         // Stop all tracks
@@ -248,9 +261,21 @@ export default function ApplicantMessages() {
       
     } catch (error) {
       console.error('Error starting voice recording:', error);
+      let errorMessage = 'Could not access microphone. Please check permissions.';
+      
+      if (error instanceof Error) {
+        if (error.message.includes('not supported')) {
+          errorMessage = error.message;
+        } else if (error.name === 'NotAllowedError') {
+          errorMessage = 'Microphone access denied. Please allow microphone access and try again.';
+        } else if (error.name === 'NotFoundError') {
+          errorMessage = 'No microphone found. Please connect a microphone and try again.';
+        }
+      }
+      
       toast({
         title: 'Recording failed',
-        description: 'Could not access microphone. Please check permissions.',
+        description: errorMessage,
         variant: 'destructive'
       });
       setIsRecording(false);
@@ -310,6 +335,12 @@ export default function ApplicantMessages() {
     exportContent += `Export Date: ${new Date().toLocaleString()}\n`;
     exportContent += `Total Messages: ${messages.length}\n\n`;
     exportContent += "=" + "=".repeat(50) + "\n\n";
+
+    // Data retention notice
+    exportContent += "\n=== DATA RETENTION NOTICE ===\n";
+    exportContent += "IMPORTANT: All conversation data including voice notes will be automatically deleted 90 days after loan repayment completion.\n";
+    exportContent += "This export serves as your record of communications. Please save it in a secure location if you need future reference.\n";
+    exportContent += "For questions about data retention, contact admin@ccif-inc.com\n\n";
 
     messages.forEach((message, index) => {
       const timestamp = formatTime(message.created_at);
@@ -387,13 +418,13 @@ export default function ApplicantMessages() {
             </CardHeader>
             <CardContent className="p-0">
               <ScrollArea className="h-[calc(100%-120px)]">
-                <div className="space-y-2 p-4">
-                  {conversations.length === 0 ? (
-                    <div className="text-center py-8 text-muted-foreground">
-                      <p className="text-sm">No conversations yet</p>
-                      <p className="text-xs mt-1">Start a new conversation below</p>
-                    </div>
-                  ) : (
+          <div className="space-y-2 p-4">
+            {conversations.length === 0 ? (
+              <div className="text-center py-8 text-muted-foreground">
+                <p className="text-sm">Ready to start a conversation?</p>
+                <p className="text-xs mt-1">Your loan officer will reach out soon</p>
+              </div>
+            ) : (
                     conversations.map((conversation) => (
                       <div
                         key={conversation.id}
@@ -446,11 +477,11 @@ export default function ApplicantMessages() {
                 <div className="space-y-3 sm:space-y-4">
                   {filteredMessages.length === 0 ? (
                     <div className="flex items-center justify-center h-full">
-                      <div className="text-center text-muted-foreground">
-                        <MessageSquare className="h-12 w-12 mx-auto mb-3 opacity-50" />
-                        <p className="text-sm font-medium">Ready to discuss your loan?</p>
-                        <p className="text-xs mt-1">Send your first message below to get started</p>
-                      </div>    
+              <div className="text-center py-8 text-muted-foreground">
+                <MessageSquare className="h-12 w-12 mx-auto mb-3 opacity-50" />
+                <p className="text-sm font-medium">Voice messages only</p>
+                <p className="text-xs mt-1">Use the voice recording button below to send messages</p>
+              </div>
                     </div>
                   ) : (
                     filteredMessages.map((message) => (
@@ -520,63 +551,31 @@ export default function ApplicantMessages() {
                 </div>
               </ScrollArea>
               
-              {/* Message Input - Mobile Optimized */}
-              <div className="border-t p-3 sm:p-4 space-y-3">
-                <div className="flex gap-2">
-                  <Textarea
-                    placeholder="Type your message..."
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    onKeyPress={(e) => {
-                      if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        sendMessage();
-                      }
-                    }}
-                    className="flex-1 min-h-[44px] max-h-[120px] text-base"
-                  />
-                  <div className="flex flex-col gap-2">
-                    <Button 
-                      onClick={sendMessage} 
-                      disabled={!newMessage.trim()}
-                      size="lg"
-                      className="h-[44px] px-4"
-                    >
-                      <Send className="h-5 w-5" />
-                    </Button>
-                  </div>
-                </div>
-                
-                <div className="flex gap-2 flex-wrap">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={isRecording ? stopVoiceRecording : startVoiceRecording}
-                    className={isRecording ? 'bg-red-500 text-white' : ''}
-                  >
-                    {isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
-                    {isRecording ? 'Stop Recording' : 'Voice Note'}
-                  </Button>
-                  
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => fileInputRef.current?.click()}
-                  >
-                    <Paperclip className="h-4 w-4 mr-2" />
-                    Attach Files
-                  </Button>
-                  
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    multiple
-                    onChange={handleFileUpload}
-                    className="hidden"
-                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.txt"
-                  />
-                </div>
+              {/* Voice Recording Only - No Text Input */}
+              <div className="flex justify-center">
+                <Button
+                  onClick={isRecording ? stopVoiceRecording : startVoiceRecording}
+                  variant={isRecording ? "destructive" : "default"}
+                  size="lg"
+                  className="flex items-center space-x-2"
+                >
+                  {isRecording ? (
+                    <>
+                      <MicOff className="h-5 w-5" />
+                      <span>Stop Recording</span>
+                    </>
+                  ) : (
+                    <>
+                      <Mic className="h-5 w-5" />
+                      <span>Record Voice Message</span>
+                    </>
+                  )}
+                </Button>
               </div>
+              
+              <p className="text-xs text-muted-foreground text-center">
+                Voice messages only. Your loan officer can send both text and voice replies.
+              </p>
             </CardContent>
           </Card>
         </div>

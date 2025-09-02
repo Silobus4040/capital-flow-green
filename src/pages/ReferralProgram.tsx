@@ -47,7 +47,11 @@ export default function ReferralProgram() {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleSubmit = async () => {
+    if (isSubmitting) return;
+    
     // Validation
     const requiredFields = ['isInstitutionalBroker', 'firstName', 'lastName', 'phone', 'email', 'addressLine1', 'city', 'state'];
     const missingFields = requiredFields.filter(field => !formData[field as keyof typeof formData]);
@@ -70,6 +74,8 @@ export default function ReferralProgram() {
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
       // Sanitize all inputs before saving
       const sanitizedData = {
@@ -85,6 +91,7 @@ export default function ReferralProgram() {
         .insert([sanitizedData]);
 
       if (error) {
+        console.error('Database error:', error);
         toast({
           title: "Submission Failed",
           description: "There was an error submitting your application. Please try again.",
@@ -94,24 +101,37 @@ export default function ReferralProgram() {
       }
 
       // Send email notification
-      await supabase.functions.invoke('send-referral-signup', {
-        body: {
-          fullName: sanitizedData.full_name,
-          email: sanitizedData.email,
-          phone: sanitizedData.phone,
-          brokerType: sanitizedData.company,
-          address: sanitizedData.experience_level
-        }
-      });
+      try {
+        await supabase.functions.invoke('send-referral-signup', {
+          body: {
+            fullName: sanitizedData.full_name,
+            email: sanitizedData.email,
+            phone: sanitizedData.phone,
+            brokerType: sanitizedData.company,
+            address: sanitizedData.experience_level
+          }
+        });
+      } catch (emailError) {
+        console.error('Email error:', emailError);
+        // Continue with success - email failure shouldn't block form submission
+      }
 
       setIsSubmitted(true);
+      
+      toast({
+        title: "Application Submitted",
+        description: "Thank you for joining our referral program. We'll contact you soon!",
+      });
 
     } catch (error) {
+      console.error('Unexpected error:', error);
       toast({
         title: "Submission Failed",
         description: "There was an unexpected error. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -304,8 +324,8 @@ export default function ReferralProgram() {
             </div>
 
             <div className="pt-4">
-              <Button onClick={handleSubmit} size="lg" className="w-full">
-                Join the Referral Network
+              <Button onClick={handleSubmit} size="lg" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? 'Submitting...' : 'Join the Referral Network'}
               </Button>
             </div>
           </CardContent>

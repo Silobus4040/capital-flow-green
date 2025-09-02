@@ -184,18 +184,34 @@ export default function LoanOfficerMessaging({ clientId, clientName, clientEmail
       return;
     }
 
+    if (!conversation || !user) {
+      toast({
+        title: 'Error',
+        description: 'No conversation selected',
+        variant: 'destructive'
+      });
+      return;
+    }
+
     setIsGeneratingTTS(true);
     try {
       const { data, error } = await supabase.functions.invoke('text-to-speech', {
         body: { 
           text: newMessage,
-          voice: 'alloy'
+          voice: 'Aria'
         }
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('TTS function error:', error);
+        throw new Error(error.message || 'Failed to generate speech');
+      }
 
-      // Convert base64 audio to blob and play
+      if (!data || !data.audioContent) {
+        throw new Error('No audio data received from TTS service');
+      }
+
+      // Convert base64 audio to blob
       const audioData = atob(data.audioContent);
       const audioBytes = new Uint8Array(audioData.length);
       for (let i = 0; i < audioData.length; i++) {
@@ -204,23 +220,36 @@ export default function LoanOfficerMessaging({ clientId, clientName, clientEmail
       
       const audioBlob = new Blob([audioBytes], { type: 'audio/mpeg' });
       const audioUrl = URL.createObjectURL(audioBlob);
-      const audio = new Audio(audioUrl);
       
-      audio.play();
-      audio.onended = () => URL.revokeObjectURL(audioUrl);
+      // Send as voice message (not text)
+      const { error: messageError } = await supabase
+        .from('messages')
+        .insert({
+          conversation_id: conversation.id,
+          sender_type: profile?.role === 'admin' ? 'admin' : 'loan_officer',
+          sender_id: user.id,
+          content: newMessage,
+          message_type: 'voice',
+          voice_duration: Math.ceil(audioData.length / 16000), // Estimate duration
+          file_path: audioUrl
+        });
 
-      // Send the text message along with TTS
-      await sendMessage();
+      if (messageError) {
+        console.error('Error saving voice message:', messageError);
+        throw messageError;
+      }
+
+      setNewMessage('');
 
       toast({
-        title: 'Success',
-        description: 'Message sent with text-to-speech',
+        title: 'Voice Message Sent',
+        description: 'Text converted to speech and sent as voice message',
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error generating TTS:', error);
       toast({
-        title: 'Error',
-        description: 'Failed to generate text-to-speech',
+        title: 'TTS Failed',
+        description: error.message || 'Failed to generate text-to-speech',
         variant: 'destructive'
       });
     } finally {

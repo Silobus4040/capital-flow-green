@@ -119,18 +119,6 @@ export default function HomePage() {
             </Button>
           </div>
           
-          {/* Temporary Debug Link - Remove after testing */}
-          <div className="mt-8 p-4 bg-yellow-100 rounded-lg">
-            <p className="text-sm text-yellow-800 mb-2">🔧 Debug Links (Remove after testing):</p>
-            <div className="space-x-2">
-              <Button variant="outline" size="sm" asChild>
-                <Link to="/applicant-signup">Test Signup Route</Link>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <Link to="/applicant-login">Test Login Route</Link>
-              </Button>
-            </div>
-          </div>
         </div>
       </section>
     </div>

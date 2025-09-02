@@ -914,7 +914,7 @@ export const loanPrograms: LoanProgram[] = [
 
 <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
   <p style="color: #d1d5db; font-size: 0.9rem; line-height: 1.6;">
-    <strong>Licensed in all 50 states • A+ BBB Rating • $2.5B+ in funded loans • Asset-based lending specialists</strong>
+    <strong>Licensed in all 50 states • $2.5B+ in funded loans • Asset-based lending specialists</strong>
   </p>
 </div>
 
