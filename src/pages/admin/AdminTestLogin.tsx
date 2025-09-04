@@ -33,10 +33,7 @@ export default function AdminTestLogin() {
   const ADMIN_EMAILS = ['sundrycapitalsolutions@gmail.com'];
   const isAdminUser = user && ADMIN_EMAILS.includes(user.email || '');
   
-  // Redirect if already admin and not testing
-  if (isAdminUser && !loading && !isRunningMultiTest) {
-    return <Navigate to="/admin-dashboard" replace />;
-  }
+  // Allow direct access to test page without redirect
 
   const runSingleTest = async () => {
     if (!email || !password) {
