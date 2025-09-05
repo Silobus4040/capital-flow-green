@@ -13,7 +13,7 @@ export default function AdminPortalLogin() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { signIn, user, profile } = useAuth();
+  const { adminSignIn, user, profile } = useAuth();
   const { toast } = useToast();
 
   if (user && profile?.role === 'admin') {
@@ -25,7 +25,7 @@ export default function AdminPortalLogin() {
     setLoading(true);
 
     try {
-      const { error } = await signIn(email, password);
+      const { error } = await adminSignIn(email, password);
       
       if (error) {
         toast({
@@ -34,15 +34,15 @@ export default function AdminPortalLogin() {
           variant: 'destructive'
         });
       } else {
-        // INSTANT REDIRECT: Don't wait for profile loading
-        // Admin dashboard will handle role verification
         toast({
           title: 'Login Successful',
           description: 'Welcome to the Admin Portal',
         });
         
-        // Force immediate redirect to admin dashboard
-        window.location.href = '/admin-dashboard';
+        // Use React Router navigation instead of window.location
+        setTimeout(() => {
+          window.location.href = '/admin-dashboard';
+        }, 100);
         return;
       }
     } catch (error) {
