@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,10 +13,19 @@ export default function AdminPortalLogin() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [redirectAfterLogin, setRedirectAfterLogin] = useState(false);
   const { adminSignIn, user, profile } = useAuth();
   const { toast } = useToast();
-  const navigate = useNavigate();
 
+  // Monitor auth state changes for redirection
+  useEffect(() => {
+    if (redirectAfterLogin && user && profile?.role === 'admin') {
+      // Auth state has updated, redirect will happen automatically
+      setRedirectAfterLogin(false);
+    }
+  }, [user, profile, redirectAfterLogin]);
+
+  // Redirect if user is already logged in as admin
   if (user && profile?.role === 'admin') {
     return <Navigate to="/admin-dashboard" replace />;
   }
@@ -40,8 +49,8 @@ export default function AdminPortalLogin() {
           description: 'Welcome to the Admin Portal',
         });
         
-        // Navigate to admin dashboard directly using React Router
-        navigate('/admin-dashboard', { replace: true });
+        // Trigger state-based redirection
+        setRedirectAfterLogin(true);
       }
     } catch (error) {
       toast({
