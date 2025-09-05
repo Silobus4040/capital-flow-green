@@ -26,7 +26,7 @@ export const usePublicApplications = () => {
     
     try {
       // Insert application into database without user_id requirement
-      const { data: application, error: dbError } = await supabase
+      const { error: dbError } = await supabase
         .from('loan_program_applications')
         .insert({
           user_id: null, // Allow null for public submissions
@@ -42,9 +42,7 @@ export const usePublicApplications = () => {
           requested_amount: applicationData.requestedAmount,
           loan_purpose: applicationData.loanPurpose,
           program_specific_data: applicationData.programSpecificData || {},
-        })
-        .select()
-        .single();
+        });
 
       if (dbError) {
         throw new Error(`Database error: ${dbError.message}`);
@@ -52,7 +50,7 @@ export const usePublicApplications = () => {
 
       // Send email notification via edge function
       const { data: emailResult, error: emailError } = await supabase.functions.invoke(
-        'send-application-notification',
+        'send-program-application',
         {
           body: {
             borrowerName: applicationData.borrowerName,
@@ -85,7 +83,7 @@ export const usePublicApplications = () => {
         });
       }
 
-      return { application, emailResult };
+      return { success: true, emailResult };
       
     } catch (error: any) {
       console.error('Application submission error:', error);
