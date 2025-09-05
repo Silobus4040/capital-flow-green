@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
@@ -27,7 +27,24 @@ export default function TTSTest() {
   const [loading, setLoading] = useState(false);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [audioLoading, setAudioLoading] = useState(false);
   const { toast } = useToast();
+  
+  // Single audio element reference for proper control
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  
+  // Cleanup old audio URLs to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (audioUrl) {
+        URL.revokeObjectURL(audioUrl);
+      }
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, [audioUrl]);
 
   const generateSpeech = async () => {
     if (!text.trim()) {
@@ -52,18 +69,43 @@ export default function TTSTest() {
       if (error) throw error;
 
       if (data?.audioContent) {
-        // Convert base64 to blob and create URL
-        const audioBlob = new Blob(
-          [Uint8Array.from(atob(data.audioContent), c => c.charCodeAt(0))],
-          { type: 'audio/mpeg' }
-        );
-        const url = URL.createObjectURL(audioBlob);
-        setAudioUrl(url);
+        console.log('Received audio content, length:', data.audioContent.length);
         
-        toast({
-          title: 'Success',
-          description: 'Audio generated successfully!'
-        });
+        // Enhanced base64 to blob conversion with validation
+        try {
+          const binaryString = atob(data.audioContent);
+          console.log('Decoded binary string length:', binaryString.length);
+          
+          const bytes = new Uint8Array(binaryString.length);
+          for (let i = 0; i < binaryString.length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+          }
+          
+          const audioBlob = new Blob([bytes], { type: 'audio/mpeg' });
+          console.log('Created audio blob, size:', audioBlob.size, 'type:', audioBlob.type);
+          
+          // Validate blob
+          if (audioBlob.size === 0) {
+            throw new Error('Generated audio blob is empty');
+          }
+          
+          // Clean up previous URL
+          if (audioUrl) {
+            URL.revokeObjectURL(audioUrl);
+          }
+          
+          const url = URL.createObjectURL(audioBlob);
+          console.log('Created audio URL:', url);
+          setAudioUrl(url);
+          
+          toast({
+            title: 'Success',
+            description: `Audio generated successfully! (${Math.round(audioBlob.size / 1024)}KB)`
+          });
+        } catch (conversionError) {
+          console.error('Audio conversion error:', conversionError);
+          throw new Error('Failed to process generated audio');
+        }
       } else {
         throw new Error('No audio content received');
       }
@@ -79,39 +121,95 @@ export default function TTSTest() {
     }
   };
 
-  const playAudio = () => {
-    if (audioUrl) {
+  const playAudio = async () => {
+    if (!audioUrl) {
+      console.error('No audio URL available');
+      return;
+    }
+
+    try {
+      setAudioLoading(true);
+      console.log('Starting audio playback for URL:', audioUrl);
+
+      // Stop any currently playing audio
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+
+      // Create new audio element
       const audio = new Audio(audioUrl);
-      
+      audioRef.current = audio;
+
+      // Enhanced audio event handling
+      audio.addEventListener('loadstart', () => {
+        console.log('Audio loading started');
+      });
+
       audio.addEventListener('loadedmetadata', () => {
-        console.log('Audio duration:', audio.duration);
+        console.log('Audio metadata loaded, duration:', audio.duration);
+        setAudioLoading(false);
       });
-      
-      audio.addEventListener('timeupdate', () => {
-        // Audio is playing, timing is handled by the HTML5 audio element
+
+      audio.addEventListener('loadeddata', () => {
+        console.log('Audio data loaded');
       });
-      
-      audio.play();
-      setIsPlaying(true);
-      
-      audio.onended = () => {
+
+      audio.addEventListener('canplay', () => {
+        console.log('Audio can start playing');
+      });
+
+      audio.addEventListener('play', () => {
+        console.log('Audio play event fired');
+        setIsPlaying(true);
+        setAudioLoading(false);
+      });
+
+      audio.addEventListener('pause', () => {
+        console.log('Audio paused');
         setIsPlaying(false);
-      };
-      
-      audio.onerror = () => {
+      });
+
+      audio.addEventListener('ended', () => {
+        console.log('Audio playback ended');
         setIsPlaying(false);
+      });
+
+      audio.addEventListener('error', (e) => {
+        console.error('Audio error:', e);
+        setIsPlaying(false);
+        setAudioLoading(false);
         toast({
-          title: 'Error',
-          description: 'Failed to play audio',
+          title: 'Playback Error',
+          description: 'Failed to play audio. The audio file may be corrupted.',
           variant: 'destructive'
         });
-      };
+      });
+
+      // Start playback
+      await audio.play();
+      console.log('Audio play() called successfully');
+
+    } catch (error) {
+      console.error('Error in playAudio:', error);
+      setIsPlaying(false);
+      setAudioLoading(false);
+      toast({
+        title: 'Playback Error',
+        description: error instanceof Error ? error.message : 'Failed to play audio',
+        variant: 'destructive'
+      });
     }
   };
 
   const stopAudio = () => {
+    console.log('Stopping audio playback');
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      console.log('Audio stopped and reset to beginning');
+    }
     setIsPlaying(false);
-    // Note: In a full implementation, you'd keep a reference to the audio element to actually stop it
   };
 
   return (
@@ -216,35 +314,60 @@ export default function TTSTest() {
                     <div className="flex space-x-2">
                       <Button 
                         onClick={playAudio} 
-                        disabled={isPlaying}
+                        disabled={isPlaying || audioLoading}
                         variant="outline"
                         size="sm"
                       >
-                        <Volume2 className="h-4 w-4 mr-2" />
-                        Play
+                        {audioLoading ? (
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        ) : (
+                          <Volume2 className="h-4 w-4 mr-2" />
+                        )}
+                        {audioLoading ? 'Loading...' : 'Play'}
                       </Button>
-                      {isPlaying && (
-                        <Button 
-                          onClick={stopAudio}
-                          variant="outline"
-                          size="sm"
-                        >
-                          <VolumeX className="h-4 w-4 mr-2" />
-                          Stop
-                        </Button>
-                      )}
+                      <Button 
+                        onClick={stopAudio}
+                        disabled={!isPlaying && !audioLoading}
+                        variant="outline"
+                        size="sm"
+                      >
+                        <VolumeX className="h-4 w-4 mr-2" />
+                        Stop
+                      </Button>
                     </div>
                   </div>
                   
-                  {/* Native HTML5 Audio Player */}
+                  {/* Native HTML5 Audio Player (Fallback) */}
                   <div className="mt-3">
+                    <div className="text-xs text-muted-foreground mb-2">
+                      Fallback HTML5 Player (use buttons above for better experience):
+                    </div>
                     <audio 
                       controls 
                       src={audioUrl} 
                       className="w-full"
-                      onPlay={() => setIsPlaying(true)}
-                      onPause={() => setIsPlaying(false)}
-                      onEnded={() => setIsPlaying(false)}
+                      onLoadStart={() => console.log('HTML5 audio: loadstart')}
+                      onLoadedMetadata={(e) => console.log('HTML5 audio: metadata loaded, duration:', e.currentTarget.duration)}
+                      onPlay={() => {
+                        console.log('HTML5 audio: play event');
+                        setIsPlaying(true);
+                      }}
+                      onPause={() => {
+                        console.log('HTML5 audio: pause event');
+                        setIsPlaying(false);
+                      }}
+                      onEnded={() => {
+                        console.log('HTML5 audio: ended event');
+                        setIsPlaying(false);
+                      }}
+                      onError={(e) => {
+                        console.error('HTML5 audio error:', e.currentTarget.error);
+                        toast({
+                          title: 'Audio Error',
+                          description: 'HTML5 audio player encountered an error',
+                          variant: 'destructive'
+                        });
+                      }}
                     >
                       Your browser does not support the audio element.
                     </audio>
