@@ -9,21 +9,17 @@ import { Volume2, VolumeX, Loader2, ArrowLeft, AlertTriangle } from 'lucide-reac
 import { Link } from 'react-router-dom';
 
 const voices = [
-  { id: 'Aria', name: 'Aria - Natural and warm' },
-  { id: 'Roger', name: 'Roger - Professional male' },
-  { id: 'Sarah', name: 'Sarah - Clear and friendly' },
-  { id: 'Laura', name: 'Laura - Smooth and elegant' },
-  { id: 'Charlie', name: 'Charlie - Energetic male' },
-  { id: 'George', name: 'George - Deep and authoritative' },
-  { id: 'Callum', name: 'Callum - British accent' },
-  { id: 'River', name: 'River - Calm and soothing' },
-  { id: 'Liam', name: 'Liam - Young and dynamic' },
-  { id: 'Charlotte', name: 'Charlotte - Professional female' }
+  { id: 'alloy', name: 'Alloy - Balanced and neutral' },
+  { id: 'echo', name: 'Echo - Clear and articulate' },
+  { id: 'fable', name: 'Fable - Warm and expressive' },
+  { id: 'onyx', name: 'Onyx - Deep and authoritative' },
+  { id: 'nova', name: 'Nova - Bright and energetic' },
+  { id: 'shimmer', name: 'Shimmer - Smooth and elegant' }
 ];
 
 export default function TTSTest() {
   const [text, setText] = useState('Welcome to CCIF Capital. We specialize in providing flexible financing solutions for your commercial real estate investments.');
-  const [selectedVoice, setSelectedVoice] = useState('Aria');
+  const [selectedVoice, setSelectedVoice] = useState('alloy');
   const [loading, setLoading] = useState(false);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -281,7 +277,7 @@ export default function TTSTest() {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-slate-900">Text-to-Speech Test</h1>
-                <p className="text-slate-600">Test ElevenLabs voice synthesis</p>
+                <p className="text-slate-600">Test OpenAI voice synthesis</p>
               </div>
             </div>
           </div>
@@ -296,7 +292,7 @@ export default function TTSTest() {
               Text-to-Speech Generator
             </CardTitle>
             <CardDescription>
-              Enter text below and select a voice to generate natural-sounding speech using ElevenLabs AI.
+              Enter text below and select a voice to generate natural-sounding speech using OpenAI's TTS API.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -309,10 +305,10 @@ export default function TTSTest() {
                 placeholder="Enter the text you want to convert to speech..."
                 rows={4}
                 className="resize-none"
-                maxLength={1000}
+                maxLength={4096}
               />
               <p className="text-xs text-muted-foreground">
-                {text.length}/1000 characters
+                {text.length}/4096 characters
               </p>
             </div>
 

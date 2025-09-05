@@ -12,85 +12,56 @@ serve(async (req) => {
   }
 
   try {
-    const { text, voice = 'Aria', format = 'wav' } = await req.json()
+    const { text, voice = 'alloy', format = 'mp3' } = await req.json()
 
     // Input validation
     if (!text || typeof text !== 'string') {
       throw new Error('Valid text is required')
     }
 
-    // Length validation (ElevenLabs has character limits)
-    if (text.length > 5000) {
-      throw new Error('Text too long (max 5000 characters)')
+    // Length validation (OpenAI has character limits)
+    if (text.length > 4096) {
+      throw new Error('Text too long (max 4096 characters)')
     }
 
     // Sanitize text input
     const sanitizedText = text.trim().replace(/[<>]/g, '')
 
-    console.log("Processing TTS request, length:", sanitizedText.length, "format:", format)
+    console.log("Processing TTS request, length:", sanitizedText.length, "format:", format, "voice:", voice)
 
-    const ELEVENLABS_API_KEY = Deno.env.get('ELEVENLABS_API_KEY')
-    if (!ELEVENLABS_API_KEY) {
-      throw new Error('ELEVENLABS_API_KEY not configured')
+    const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY')
+    if (!OPENAI_API_KEY) {
+      throw new Error('OPENAI_API_KEY not configured')
     }
 
-    // Map voice names to ElevenLabs voice IDs
-    const voiceMap: { [key: string]: string } = {
-      'Aria': '9BWtsMINqrJLrRacOk9x',
-      'Roger': 'CwhRBWXzGAHq8TQ4Fs17',
-      'Sarah': 'EXAVITQu4vr4xnSDxMaL',
-      'Laura': 'FGY2WhTYpPnrIDTdsKH5',
-      'Charlie': 'IKne3meq5aSn9XLyUdCD',
-      'George': 'JBFqnCBsd6RMkjVDRZzb',
-      'Callum': 'N2lVS1w4EtoT3dr4eOWO',
-      'River': 'SAz9YHcvj6GT2YYXdXww',
-      'Liam': 'TX3LPaxmHKxFdv7VOQHJ',
-      'Charlotte': 'XB0fDUnXU5powFXDhCwa',
-      'Alice': 'Xb7hH8MSUJpSbSDYk0k2',
-      'Matilda': 'XrExE9yKIg1WjnnlVkGX',
-      'Will': 'bIHbv24MWmeRgasZH58o',
-      'Jessica': 'cgSgspJ2msm6clMCkdW9',
-      'Eric': 'cjVigY5qzO86Huf0OWal',
-      'Chris': 'iP95p4xoKVk53GoZ742B',
-      'Brian': 'nPczCjzI2devNBz1zQrb',
-      'Daniel': 'onwK4e9ZLuTAKqWW03F9',
-      'Lily': 'pFZP5JQG7iQjIQuC4Bku',
-      'Bill': 'pqHfZKP75CvOlQylNhV4'
-    }
+    // OpenAI TTS voices
+    const validVoices = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer']
+    const selectedVoice = validVoices.includes(voice) ? voice : 'alloy'
 
-    const voiceId = voiceMap[voice] || voiceMap['Aria']
-
-    // Determine output format and content type
-    const outputFormat = format === 'wav' ? 'wav' : 'mp3_44100_128'
-    const contentType = format === 'wav' ? 'audio/wav' : 'audio/mpeg'
+    // Determine response format
+    const responseFormat = format === 'wav' ? 'wav' : 'mp3'
     
-    console.log("Using voice ID:", voiceId, "output format:", outputFormat)
+    console.log("Using OpenAI voice:", selectedVoice, "format:", responseFormat)
 
-    // Generate speech from text using ElevenLabs
-    const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
+    // Generate speech from text using OpenAI
+    const response = await fetch('https://api.openai.com/v1/audio/speech', {
       method: 'POST',
       headers: {
-        'Accept': contentType,
+        'Authorization': `Bearer ${OPENAI_API_KEY}`,
         'Content-Type': 'application/json',
-        'xi-api-key': ELEVENLABS_API_KEY,
       },
       body: JSON.stringify({
-        text: sanitizedText,
-        model_id: 'eleven_multilingual_v2',
-        output_format: outputFormat,
-        voice_settings: {
-          stability: 0.5,
-          similarity_boost: 0.5,
-          style: 0.0,
-          use_speaker_boost: true
-        }
+        model: 'tts-1',
+        input: sanitizedText,
+        voice: selectedVoice,
+        response_format: responseFormat,
       }),
     })
 
     if (!response.ok) {
       const errorText = await response.text()
-      console.error('ElevenLabs API error:', response.status, errorText)
-      throw new Error(`ElevenLabs API error (${response.status}): ${errorText}`)
+      console.error('OpenAI API error:', response.status, errorText)
+      throw new Error(`OpenAI API error (${response.status}): ${errorText}`)
     }
 
     // Convert audio buffer to base64 in chunks to prevent stack overflow
