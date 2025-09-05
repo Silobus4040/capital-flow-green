@@ -6,8 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/contexts/AuthContext";
+import { usePublicApplications } from "@/hooks/usePublicApplications";
 import BusinessLoanSecurityFields from "./BusinessLoanSecurityFields";
 
 interface BusinessLoanFormData {
@@ -43,9 +42,8 @@ interface BusinessLoanFormData {
 }
 
 export default function EnhancedBusinessLoanForm() {
-  const { user } = useAuth();
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
+  const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const [formData, setFormData] = useState<BusinessLoanFormData>({
     businessName: "",
     businessType: "",
@@ -89,47 +87,20 @@ export default function EnhancedBusinessLoanForm() {
       return;
     }
 
-    setIsLoading(true);
-
     try {
-      // Save to database
-      const { error: dbError } = await supabase
-        .from('loan_program_applications')
-        .insert({
-          user_id: null, // Allow public submissions
-          program_id: 'business-loan',
-          program_name: 'Business Loan',
-          borrower_name: formData.contactName,
-          borrower_email: formData.contactEmail,
-          borrower_phone: formData.contactPhone,
-          property_address: formData.businessAddress,
-          requested_amount: formData.loanAmount ? parseFloat(formData.loanAmount) : null,
-          loan_purpose: formData.loanPurpose,
-          status: 'submitted',
-          program_specific_data: formData as any
-        });
+      const applicationData = {
+        programId: 'enhanced-business-loan',
+        programName: 'Enhanced Business Loan',
+        borrowerName: formData.contactName,
+        borrowerEmail: formData.contactEmail,
+        borrowerPhone: formData.contactPhone,
+        propertyAddress: formData.businessAddress,
+        requestedAmount: parseFloat(formData.loanAmount) || 0,
+        loanPurpose: formData.loanPurpose,
+        programSpecificData: formData,
+      };
 
-      if (dbError) throw dbError;
-
-      // Send email notifications
-      await supabase.functions.invoke('send-program-application', {
-        body: {
-          applicantName: formData.contactName,
-          applicantEmail: formData.contactEmail,
-          applicantPhone: formData.contactPhone,
-          programName: 'Business Loan',
-          programId: 'business-loan',
-          businessName: formData.businessName,
-          requestedAmount: formData.loanAmount,
-          securityType: formData.securityType,
-          additionalData: formData
-        }
-      });
-
-      toast({
-        title: "Application Submitted Successfully",
-        description: "Your Business Loan application has been submitted. We'll contact you within 24-48 hours.",
-      });
+      await submitPublicApplication(applicationData);
 
       // Reset form
       setFormData({
@@ -154,14 +125,9 @@ export default function EnhancedBusinessLoanForm() {
         businessDescription: "",
         additionalComments: ""
       });
+      
     } catch (error: any) {
-      toast({
-        title: "Submission Failed",
-        description: "Failed to submit application. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+      // Error handling is done in the hook
     }
   };
 
@@ -421,8 +387,8 @@ export default function EnhancedBusinessLoanForm() {
             </div>
           </div>
 
-          <Button type="submit" disabled={isLoading || !formData.securityType} className="w-full">
-            {isLoading ? "Submitting Application..." : "Submit Business Loan Application"}
+          <Button type="submit" disabled={isSubmitting || !formData.securityType} className="w-full">
+            {isSubmitting ? "Submitting Application..." : "Submit Business Loan Application"}
           </Button>
         </form>
       </CardContent>

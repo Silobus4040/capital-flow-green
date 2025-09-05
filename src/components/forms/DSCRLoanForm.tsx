@@ -7,8 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/contexts/AuthContext";
+import { usePublicApplications } from "@/hooks/usePublicApplications";
 import ConditionalFormFields from "./ConditionalFormFields";
 
 interface DSCRLoanFormData {
@@ -50,9 +49,8 @@ interface DSCRLoanFormData {
 }
 
 export default function DSCRLoanForm() {
-  const { user } = useAuth();
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
+  const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const [formData, setFormData] = useState<DSCRLoanFormData>({
     borrowerName: "",
     borrowerEmail: "",
@@ -106,54 +104,23 @@ export default function DSCRLoanForm() {
       return;
     }
 
-    setIsLoading(true);
-
-    console.log("🎯 Form submission starting...", {
-      borrowerName: formData.borrowerName,
-      borrowerEmail: formData.borrowerEmail,
-      loanType: formData.loanType,
-      programId: 'commercial-dscr'
-    });
-
     try {
-      const { error: dbError } = await supabase
-        .from('loan_program_applications')
-        .insert({
-          user_id: null, // Allow public submissions
-          program_id: 'commercial-dscr',
-          program_name: 'Commercial DSCR Loan',
-          borrower_name: formData.borrowerName,
-          borrower_email: formData.borrowerEmail,
-          borrower_phone: formData.borrowerPhone,
-          property_address: formData.propertyAddress,
-          property_city: formData.propertyCity,
-          property_state: formData.propertyState,
-          property_zip: formData.propertyZip,
-          requested_amount: formData.requestedAmount ? parseFloat(formData.requestedAmount) : null,
-          loan_purpose: formData.loanType,
-          status: 'submitted',
-          program_specific_data: formData as any
-        });
+      const applicationData = {
+        programId: 'commercial-dscr-loan',
+        programName: 'Commercial DSCR Loan',
+        borrowerName: formData.borrowerName,
+        borrowerEmail: formData.borrowerEmail,
+        borrowerPhone: formData.borrowerPhone,
+        propertyAddress: formData.propertyAddress,
+        propertyCity: formData.propertyCity,
+        propertyState: formData.propertyState,
+        propertyZip: formData.propertyZip,
+        requestedAmount: parseFloat(formData.requestedAmount) || 0,
+        loanPurpose: formData.loanType,
+        programSpecificData: formData,
+      };
 
-      if (dbError) throw dbError;
-
-      await supabase.functions.invoke('send-program-application', {
-        body: {
-          applicantName: formData.borrowerName,
-          applicantEmail: formData.borrowerEmail,
-          applicantPhone: formData.borrowerPhone,
-          programName: 'Commercial DSCR Loan',
-          programId: 'commercial-dscr',
-          propertyAddress: `${formData.propertyAddress}, ${formData.propertyCity}, ${formData.propertyState} ${formData.propertyZip}`,
-          requestedAmount: formData.requestedAmount,
-          additionalData: formData
-        }
-      });
-
-      toast({
-        title: "Application Submitted Successfully",
-        description: "Your Commercial DSCR Loan application has been submitted. We'll contact you within 24-48 hours.",
-      });
+      await submitPublicApplication(applicationData);
 
       // Reset form
       setFormData({
@@ -182,14 +149,9 @@ export default function DSCRLoanForm() {
         additionalProperties: "",
         additionalComments: ""
       });
+      
     } catch (error: any) {
-      toast({
-        title: "Submission Failed",
-        description: "Failed to submit application. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+      // Error handling is done in the hook
     }
   };
 
@@ -464,8 +426,8 @@ export default function DSCRLoanForm() {
             </div>
           </div>
 
-          <Button type="submit" disabled={isLoading || !formData.loanType} className="w-full">
-            {isLoading ? "Submitting Application..." : "Submit DSCR Loan Application"}
+          <Button type="submit" disabled={isSubmitting || !formData.loanType} className="w-full">
+            {isSubmitting ? "Submitting Application..." : "Submit DSCR Loan Application"}
           </Button>
         </form>
       </CardContent>

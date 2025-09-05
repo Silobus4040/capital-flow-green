@@ -6,8 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/contexts/AuthContext";
+import { usePublicApplications } from "@/hooks/usePublicApplications";
 import ConditionalFormFields from "./ConditionalFormFields";
 
 interface SelfStorageFormData {
@@ -55,9 +54,8 @@ interface SelfStorageFormData {
 }
 
 export default function SelfStorageForm() {
-  const { user } = useAuth();
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
+  const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const [formData, setFormData] = useState<SelfStorageFormData>({
     borrowerName: "",
     borrowerEmail: "",
@@ -103,58 +101,27 @@ export default function SelfStorageForm() {
       return;
     }
 
-    setIsLoading(true);
-
     try {
-      const { error: dbError } = await supabase
-        .from('loan_program_applications')
-        .insert({
-          user_id: null, // Allow public submissions
-          program_id: 'self-storage',
-          program_name: 'Self Storage Financing',
-          borrower_name: formData.borrowerName,
-          borrower_email: formData.borrowerEmail,
-          borrower_phone: formData.borrowerPhone,
-          property_address: formData.facilityAddress,
-          property_city: formData.facilityCity,
-          property_state: formData.facilityState,
-          property_zip: formData.facilityZip,
-          requested_amount: formData.requestedAmount ? parseFloat(formData.requestedAmount) : null,
-          loan_purpose: formData.loanType,
-          status: 'submitted',
-          program_specific_data: formData as any
-        });
+      const applicationData = {
+        programId: 'self-storage-financing',
+        programName: 'Self Storage Financing',
+        borrowerName: formData.borrowerName,
+        borrowerEmail: formData.borrowerEmail,
+        borrowerPhone: formData.borrowerPhone,
+        propertyAddress: formData.facilityAddress,
+        propertyCity: formData.facilityCity,
+        propertyState: formData.facilityState,
+        propertyZip: formData.facilityZip,
+        requestedAmount: parseFloat(formData.requestedAmount) || 0,
+        loanPurpose: formData.loanType,
+        programSpecificData: formData,
+      };
 
-      if (dbError) throw dbError;
-
-      await supabase.functions.invoke('send-program-application', {
-        body: {
-          applicantName: formData.borrowerName,
-          applicantEmail: formData.borrowerEmail,
-          applicantPhone: formData.borrowerPhone,
-          programName: 'Self Storage Financing',
-          programId: 'self-storage',
-          facilityName: formData.facilityName,
-          propertyAddress: `${formData.facilityAddress}, ${formData.facilityCity}, ${formData.facilityState} ${formData.facilityZip}`,
-          requestedAmount: formData.requestedAmount,
-          additionalData: formData
-        }
-      });
-
-      toast({
-        title: "Application Submitted Successfully",
-        description: "Your Self Storage application has been submitted. We'll contact you within 24-48 hours.",
-      });
+      await submitPublicApplication(applicationData);
 
       // Reset form would go here
     } catch (error: any) {
-      toast({
-        title: "Submission Failed",
-        description: "Failed to submit application. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+      // Error handling is done in the hook
     }
   };
 
@@ -468,8 +435,8 @@ export default function SelfStorageForm() {
             </div>
           </div>
 
-          <Button type="submit" disabled={isLoading || !formData.loanType} className="w-full">
-            {isLoading ? "Submitting Application..." : "Submit Self Storage Application"}
+          <Button type="submit" disabled={isSubmitting || !formData.loanType} className="w-full">
+            {isSubmitting ? "Submitting Application..." : "Submit Self Storage Application"}
           </Button>
         </form>
       </CardContent>

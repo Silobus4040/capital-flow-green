@@ -14,14 +14,30 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    // Input validation and sanitization
     const rawData = await req.json();
-    const { applicantName, applicantEmail, applicantPhone, programName } = rawData;
+    const { 
+      borrowerName, 
+      borrowerEmail, 
+      borrowerPhone, 
+      programName, 
+      propertyAddress,
+      propertyCity,
+      propertyState,
+      propertyZip,
+      requestedAmount,
+      loanPurpose,
+      programSpecificData
+    } = rawData;
 
     // Validate required fields
-    if (!applicantName || !applicantEmail || !applicantPhone || !programName) {
-      console.error("Missing required fields:", { applicantName: !!applicantName, applicantEmail: !!applicantEmail, applicantPhone: !!applicantPhone, programName: !!programName });
-      return new Response(JSON.stringify({ error: "All fields are required" }), {
+    if (!borrowerName || !borrowerEmail || !borrowerPhone || !programName) {
+      console.error("Missing required fields:", { 
+        borrowerName: !!borrowerName, 
+        borrowerEmail: !!borrowerEmail, 
+        borrowerPhone: !!borrowerPhone, 
+        programName: !!programName 
+      });
+      return new Response(JSON.stringify({ error: "All basic fields are required" }), {
         status: 400,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
@@ -29,15 +45,15 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(applicantEmail)) {
-      console.error("Invalid email format:", applicantEmail);
+    if (!emailRegex.test(borrowerEmail)) {
+      console.error("Invalid email format:", borrowerEmail);
       return new Response(JSON.stringify({ error: "Invalid email format" }), {
         status: 400,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
-    // Sanitize inputs to prevent XSS
+    // Sanitize inputs
     const sanitize = (str: string) => str.replace(/[<>\"'&]/g, (match) => {
       const map: { [key: string]: string } = {
         '<': '&lt;',
@@ -49,35 +65,55 @@ const handler = async (req: Request): Promise<Response> => {
       return map[match];
     });
 
-    const sanitizedName = sanitize(applicantName.trim());
-    const sanitizedEmail = applicantEmail.trim().toLowerCase();
-    const sanitizedPhone = sanitize(applicantPhone.trim());
+    const sanitizedName = sanitize(borrowerName.trim());
+    const sanitizedEmail = borrowerEmail.trim().toLowerCase();
+    const sanitizedPhone = sanitize(borrowerPhone.trim());
     const sanitizedProgram = sanitize(programName.trim());
 
-    // Length validation
-    if (sanitizedName.length > 100 || sanitizedEmail.length > 254 || sanitizedPhone.length > 20 || sanitizedProgram.length > 100) {
-      console.error("Input length validation failed");
-      return new Response(JSON.stringify({ error: "Input too long" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
+    console.log("Processing program application:", { 
+      programName: sanitizedProgram, 
+      email: sanitizedEmail 
+    });
+
+    // Build property address string
+    const fullAddress = [propertyAddress, propertyCity, propertyState, propertyZip]
+      .filter(Boolean)
+      .join(', ');
+
+    // Format program specific data for email
+    let programDataHtml = '';
+    if (programSpecificData && Object.keys(programSpecificData).length > 0) {
+      programDataHtml = '<h3>Additional Details:</h3><ul>';
+      Object.entries(programSpecificData).forEach(([key, value]) => {
+        if (value) {
+          const formattedKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+          programDataHtml += `<li><strong>${sanitize(formattedKey)}:</strong> ${sanitize(String(value))}</li>`;
+        }
       });
+      programDataHtml += '</ul>';
     }
 
-    console.log("Processing loan application:", { programName: sanitizedProgram, email: sanitizedEmail });
-
+    // Send notification email to admin
     await resend.emails.send({
       from: "CCIF Applications <applications@sundrycapitalsolutions.com>",
       to: [Deno.env.get("ADMIN_EMAIL") || "sundrycapitalsolutions@gmail.com"],
-      subject: `New Loan Application: ${sanitizedProgram}`,
+      subject: `New Program Application: ${sanitizedProgram}`,
       html: `
-        <h2>New Loan Application</h2>
+        <h2>New Program Application Received</h2>
         <p><strong>Program:</strong> ${sanitizedProgram}</p>
+        <h3>Borrower Information:</h3>
         <p><strong>Name:</strong> ${sanitizedName}</p>
         <p><strong>Email:</strong> ${sanitizedEmail}</p>
         <p><strong>Phone:</strong> ${sanitizedPhone}</p>
+        ${fullAddress ? `<p><strong>Property Address:</strong> ${sanitize(fullAddress)}</p>` : ''}
+        ${requestedAmount ? `<p><strong>Requested Amount:</strong> $${requestedAmount.toLocaleString()}</p>` : ''}
+        ${loanPurpose ? `<p><strong>Loan Purpose:</strong> ${sanitize(loanPurpose)}</p>` : ''}
+        ${programDataHtml}
+        <p><em>Application submitted at ${new Date().toLocaleString()}</em></p>
       `,
     });
 
+    // Send confirmation email to borrower
     await resend.emails.send({
       from: "CCIF Applications <applications@sundrycapitalsolutions.com>",
       to: [sanitizedEmail],
@@ -85,12 +121,13 @@ const handler = async (req: Request): Promise<Response> => {
       html: `
         <h2>Application Received</h2>
         <p>Dear ${sanitizedName},</p>
-        <p>Thank you for submitting your application for ${sanitizedProgram}. We'll review it and contact you within 24-48 hours.</p>
-        <p>Best regards,<br>CCIF Team</p>
+        <p>Thank you for submitting your application for <strong>${sanitizedProgram}</strong>. We have received your request and will review it within 24-48 hours.</p>
+        <p>Our team will contact you at ${sanitizedPhone} or reply to this email with next steps.</p>
+        <p>Best regards,<br>CCIF Team<br>Sundry Capital Solutions</p>
       `,
     });
 
-    console.log("Emails sent successfully for application:", sanitizedProgram);
+    console.log("Emails sent successfully for program application:", sanitizedProgram);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
@@ -99,8 +136,9 @@ const handler = async (req: Request): Promise<Response> => {
   } catch (error: any) {
     console.error("Error in send-program-application:", error);
     
-    // Don't expose internal error details to client
-    const userMessage = error.message?.includes("rate limit") ? "Too many requests. Please try again later." : "An error occurred processing your application.";
+    const userMessage = error.message?.includes("rate limit") 
+      ? "Too many requests. Please try again later." 
+      : "An error occurred processing your application.";
     
     return new Response(JSON.stringify({ error: userMessage }), {
       status: 500,

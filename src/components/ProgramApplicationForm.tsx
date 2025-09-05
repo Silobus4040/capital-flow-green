@@ -5,8 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/contexts/AuthContext";
+import { usePublicApplications, ProgramApplicationData } from "@/hooks/usePublicApplications";
 import { LoanProgram } from "@/data/loanPrograms";
 import CommercialMortgageForm from "./CommercialMortgageForm";
 import EnhancedBusinessLoanForm from "./forms/EnhancedBusinessLoanForm";
@@ -53,7 +52,7 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
   }
 
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
+  const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const [formData, setFormData] = useState({
     borrowerName: "",
     borrowerEmail: "",
@@ -76,54 +75,23 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
       return;
     }
 
-    setIsLoading(true);
-
     try {
-      // Save to database (public access, no user required)
-      const { error: dbError } = await supabase
-        .from('loan_program_applications')
-        .insert({
-          user_id: null, // Allow public submissions without user account
-          program_id: program.id,
-          program_name: program.name,
-          borrower_name: formData.borrowerName,
-          borrower_email: formData.borrowerEmail,
-          borrower_phone: formData.borrowerPhone,
-          property_address: formData.propertyAddress,
-          requested_amount: formData.requestedAmount ? parseFloat(formData.requestedAmount) : null,
-          loan_purpose: formData.loanPurpose,
-          status: 'submitted'
-        });
+      const applicationData: ProgramApplicationData = {
+        programId: program.id,
+        programName: program.name,
+        borrowerName: formData.borrowerName,
+        borrowerEmail: formData.borrowerEmail,
+        borrowerPhone: formData.borrowerPhone,
+        propertyAddress: formData.propertyAddress,
+        requestedAmount: formData.requestedAmount ? parseFloat(formData.requestedAmount) : undefined,
+        loanPurpose: formData.loanPurpose,
+        programSpecificData: { ...formData, loanType: formData.loanType },
+      };
 
-      if (dbError) throw dbError;
-
-      // Send email notifications
-      await supabase.functions.invoke('send-program-application', {
-        body: {
-          applicantName: formData.borrowerName,
-          applicantEmail: formData.borrowerEmail,
-          applicantPhone: formData.borrowerPhone,
-          programName: program.name,
-          programId: program.id,
-          propertyAddress: formData.propertyAddress,
-          requestedAmount: formData.requestedAmount
-        }
-      });
-
-      toast({
-        title: "Application Submitted Successfully",
-        description: `Your ${program.name} application has been submitted. We'll contact you within 24-48 hours.`,
-      });
-
+      await submitPublicApplication(applicationData);
       onSubmitSuccess();
     } catch (error: any) {
-      toast({
-        title: "Submission Failed",
-        description: "Failed to submit application. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+      // Error handling is done in the hook
     }
   };
 
@@ -291,8 +259,8 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
         />
       )}
 
-      <Button type="submit" disabled={isLoading || !formData.loanType} className="w-full">
-        {isLoading ? "Submitting..." : "Submit Application"}
+      <Button type="submit" disabled={isSubmitting || !formData.loanType} className="w-full">
+        {isSubmitting ? "Submitting..." : "Submit Application"}
       </Button>
     </form>
   );
