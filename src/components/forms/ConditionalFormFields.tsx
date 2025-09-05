@@ -32,8 +32,6 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
             value={formData.currentLoanBalance || ""}
             onChange={(e) => updateFormData('currentLoanBalance', e.target.value)}
             placeholder="Current loan balance"
-            onFocus={(e) => e.stopPropagation()}
-            onBlur={(e) => e.stopPropagation()}
           />
         </div>
         <div>

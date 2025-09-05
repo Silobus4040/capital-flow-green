@@ -132,9 +132,9 @@ export default function AdminDashboard() {
       // Calculate stats
       setStats({
         totalUsers: usersData?.length || 0,
-        totalClients: clientsData?.length || 0,
-        totalApplications: clientsData?.length || 0,
-        pendingApplications: clientsData?.filter(c => c.status === 'pending').length || 0
+        totalClients: allApplications?.length || 0,
+        totalApplications: allApplications?.length || 0,
+        pendingApplications: allApplications?.filter(c => c.status === 'pending').length || 0
       });
 
     } catch (error) {
@@ -171,14 +171,41 @@ export default function AdminDashboard() {
     const generatedPassword = generatePassword();
 
     try {
+      // Create the actual user account in Supabase
+      const { data: newUser, error: createError } = await supabase.auth.admin.createUser({
+        email: newUserEmail,
+        password: generatedPassword,
+        email_confirm: true,
+        user_metadata: {
+          full_name: newUserName
+        }
+      });
+
+      if (createError) {
+        throw new Error(`Failed to create user: ${createError.message}`);
+      }
+
+      // Update the user's profile with the correct role
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .update({ 
+          role: newUserRole,
+          full_name: newUserName
+        })
+        .eq('user_id', newUser.user.id);
+
+      if (profileError) {
+        console.error('Error updating profile:', profileError);
+      }
+
       toast({
-        title: 'User Creation Instructions',
+        title: 'User Created Successfully',
         description: (
           <div className="space-y-2">
-            <p>Send these credentials to the new {newUserRole}:</p>
+            <p>New {newUserRole} account created:</p>
             <p><strong>Email:</strong> {newUserEmail}</p>
             <p><strong>Temporary Password:</strong> {generatedPassword}</p>
-            <p>Direct them to /loan-officer-login to create their account.</p>
+            <p>Credentials copied to clipboard. Direct them to /loan-officer-login</p>
           </div>
         ),
         duration: 15000
@@ -190,11 +217,15 @@ export default function AdminDashboard() {
       setNewUserEmail('');
       setNewUserName('');
       setNewUserRole('loan_officer');
-    } catch (error) {
+      
+      // Reload dashboard data to show the new user
+      loadDashboardData();
+      
+    } catch (error: any) {
       console.error('Error creating user:', error);
       toast({
         title: 'Error',
-        description: 'Failed to create user',
+        description: error.message || 'Failed to create user',
         variant: 'destructive'
       });
     }
