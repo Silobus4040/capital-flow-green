@@ -53,7 +53,11 @@ interface SelfStorageFormData {
   additionalComments: string;
 }
 
-export default function SelfStorageForm() {
+interface SelfStorageFormProps {
+  onSubmitSuccess?: () => void;
+}
+
+export default function SelfStorageForm({ onSubmitSuccess }: SelfStorageFormProps = {}) {
   const { toast } = useToast();
   const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const [formData, setFormData] = useState<SelfStorageFormData>({
@@ -119,7 +123,40 @@ export default function SelfStorageForm() {
 
       await submitPublicApplication(applicationData);
 
-      // Reset form would go here
+      // Reset form on success
+      setFormData({
+        borrowerName: "",
+        borrowerEmail: "",
+        borrowerPhone: "",
+        facilityName: "",
+        facilityAddress: "",
+        facilityCity: "",
+        facilityState: "",
+        facilityZip: "",
+        loanType: "",
+        requestedAmount: "",
+        totalUnits: "",
+        totalSquareFootage: "",
+        averageUnitSize: "",
+        facilityAge: "",
+        monthlyRevenue: "",
+        occupancyRate: "",
+        averageRentPerUnit: "",
+        operatingExpenses: "",
+        netOperatingIncome: "",
+        competitorAnalysis: "",
+        marketDemand: "",
+        expansionOpportunities: "",
+        managementType: "",
+        onSiteManager: "",
+        securityFeatures: "",
+        additionalComments: ""
+      });
+
+      // Call success callback if provided
+      if (onSubmitSuccess) {
+        onSubmitSuccess();
+      }
     } catch (error: any) {
       // Error handling is done in the hook
     }

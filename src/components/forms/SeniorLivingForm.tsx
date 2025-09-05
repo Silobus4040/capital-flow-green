@@ -67,7 +67,11 @@ interface SeniorLivingFormData {
   additionalComments: string;
 }
 
-export default function SeniorLivingForm() {
+interface SeniorLivingFormProps {
+  onSubmitSuccess?: () => void;
+}
+
+export default function SeniorLivingForm({ onSubmitSuccess }: SeniorLivingFormProps = {}) {
   const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const { toast } = useToast();
   const [formData, setFormData] = useState<SeniorLivingFormData>({
@@ -140,6 +144,51 @@ export default function SeniorLivingForm() {
         loanPurpose: formData.loanType,
         programSpecificData: formData as any
       });
+
+      // Reset form on success
+      setFormData({
+        borrowerName: "",
+        borrowerEmail: "",
+        borrowerPhone: "",
+        facilityName: "",
+        facilityAddress: "",
+        facilityCity: "",
+        facilityState: "",
+        facilityZip: "",
+        loanType: "",
+        requestedAmount: "",
+        facilityType: "",
+        totalUnits: "",
+        totalBeds: "",
+        facilityAge: "",
+        squareFootage: "",
+        independentLiving: "",
+        assistedLiving: "",
+        memorycare: "",
+        skilledNursing: "",
+        monthlyRevenue: "",
+        occupancyRate: "",
+        averageMonthlyRate: "",
+        operatingExpenses: "",
+        netOperatingIncome: "",
+        totalStaff: "",
+        licensedStaff: "",
+        staffingModel: "",
+        licensingStatus: "",
+        marketAnalysis: "",
+        waitingList: "",
+        competitorAnalysis: "",
+        stateLicense: "",
+        medicaidCertified: "",
+        medicareCertified: "",
+        accreditation: "",
+        additionalComments: ""
+      });
+
+      // Call success callback if provided
+      if (onSubmitSuccess) {
+        onSubmitSuccess();
+      }
     } catch (error: any) {
       console.error('Senior Living form submission error:', error);
     }

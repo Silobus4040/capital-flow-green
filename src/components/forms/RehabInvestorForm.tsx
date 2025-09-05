@@ -63,7 +63,11 @@ interface RehabInvestorFormData {
   additionalComments: string;
 }
 
-export default function RehabInvestorForm() {
+interface RehabInvestorFormProps {
+  onSubmitSuccess?: () => void;
+}
+
+export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorFormProps = {}) {
   const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const { toast } = useToast();
   const [formData, setFormData] = useState<RehabInvestorFormData>({
@@ -141,6 +145,40 @@ export default function RehabInvestorForm() {
         loanPurpose: formData.loanType,
         programSpecificData: formData as any
       });
+
+      // Reset form on success
+      setFormData({
+        borrowerName: "",
+        borrowerEmail: "",
+        borrowerPhone: "",
+        propertyAddress: "",
+        propertyCity: "",
+        propertyState: "",
+        propertyZip: "",
+        loanType: "",
+        requestedAmount: "",
+        propertyType: "",
+        purchasePrice: "",
+        rehabBudget: "",
+        totalProjectCost: "",
+        afterRepairValue: "",
+        downPayment: "",
+        experienceLevel: "",
+        numberOfProjects: "",
+        rehabTimeline: "",
+        rehabScope: "",
+        contractorLicensed: "",
+        contractorName: "",
+        contractorPhone: "",
+        contractorEmail: "",
+        exitStrategy: "",
+        additionalComments: ""
+      });
+
+      // Call success callback if provided
+      if (onSubmitSuccess) {
+        onSubmitSuccess();
+      }
     } catch (error: any) {
       console.error('Rehab form submission error:', error);
     }

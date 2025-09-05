@@ -48,7 +48,11 @@ interface DSCRLoanFormData {
   additionalComments: string;
 }
 
-export default function DSCRLoanForm() {
+interface DSCRLoanFormProps {
+  onSubmitSuccess?: () => void;
+}
+
+export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}) {
   const { toast } = useToast();
   const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const [formData, setFormData] = useState<DSCRLoanFormData>({
@@ -122,7 +126,33 @@ export default function DSCRLoanForm() {
 
       await submitPublicApplication(applicationData);
 
-      // Reset form
+      // Reset form on success  
+      setFormData({
+        borrowerName: "",
+        borrowerEmail: "",
+        borrowerPhone: "",
+        propertyAddress: "",
+        propertyCity: "",
+        propertyState: "",
+        propertyZip: "",
+        loanType: "",
+        requestedAmount: "",
+        propertyType: "",
+        numberOfUnits: "",
+        grossRentalIncome: "",
+        operatingExpenses: "",
+        netOperatingIncome: "",
+        existingMortgage: "",
+        propertyValue: "",
+        loanToValueRatio: "",
+        debtServiceCoverageRatio: "",
+        additionalComments: ""
+      });
+
+      // Call success callback if provided
+      if (onSubmitSuccess) {
+        onSubmitSuccess();
+      }
       setFormData({
         borrowerName: "",
         borrowerEmail: "",

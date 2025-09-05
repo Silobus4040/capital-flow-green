@@ -41,7 +41,11 @@ interface BusinessLoanFormData {
   additionalComments: string;
 }
 
-export default function EnhancedBusinessLoanForm() {
+interface EnhancedBusinessLoanFormProps {
+  onSubmitSuccess?: () => void;
+}
+
+export default function EnhancedBusinessLoanForm({ onSubmitSuccess }: EnhancedBusinessLoanFormProps = {}) {
   const { toast } = useToast();
   const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const [formData, setFormData] = useState<BusinessLoanFormData>({
@@ -102,7 +106,34 @@ export default function EnhancedBusinessLoanForm() {
 
       await submitPublicApplication(applicationData);
 
-      // Reset form
+      // Reset form on success
+      setFormData({
+        businessName: "",
+        businessType: "",
+        yearEstablished: "",
+        federalTaxId: "",
+        contactName: "",
+        contactTitle: "",
+        contactEmail: "",
+        contactPhone: "",
+        businessAddress: "",
+        loanAmount: "",
+        loanPurpose: "",
+        securityType: "",
+        annualRevenue: "",
+        monthlyExpenses: "",
+        existingDebts: "",
+        businessBankAccount: "",
+        yearsInBusiness: "",
+        numberOfEmployees: "",
+        businessDescription: "",
+        additionalComments: ""
+      });
+
+      // Call success callback if provided
+      if (onSubmitSuccess) {
+        onSubmitSuccess();
+      }
       setFormData({
         businessName: "",
         businessType: "",

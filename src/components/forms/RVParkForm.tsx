@@ -63,7 +63,11 @@ interface RVParkFormData {
   additionalComments: string;
 }
 
-export default function RVParkForm() {
+interface RVParkFormProps {
+  onSubmitSuccess?: () => void;
+}
+
+export default function RVParkForm({ onSubmitSuccess }: RVParkFormProps = {}) {
   const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const { toast } = useToast();
   const [formData, setFormData] = useState<RVParkFormData>({
@@ -132,6 +136,44 @@ export default function RVParkForm() {
         loanPurpose: formData.loanType,
         programSpecificData: formData as any
       });
+
+      // Reset form on success
+      setFormData({
+        borrowerName: "",
+        borrowerEmail: "",
+        borrowerPhone: "",
+        parkName: "",
+        parkAddress: "",
+        parkCity: "",
+        parkState: "",
+        parkZip: "",
+        loanType: "",
+        requestedAmount: "",
+        totalSites: "",
+        rvSites: "",
+        tentSites: "",
+        cabins: "",
+        parkAcreage: "",
+        seasonalRates: "",
+        occupancyRate: "",
+        monthlyRevenue: "",
+        operatingExpenses: "",
+        netOperatingIncome: "",
+        facilitiesAmenities: "",
+        utilities: "",
+        roadAccess: "",
+        zoningCompliance: "",
+        environmentalConcerns: "",
+        seasonalFactors: "",
+        competitionAnalysis: "",
+        futureExpansion: "",
+        additionalComments: ""
+      });
+
+      // Call success callback if provided
+      if (onSubmitSuccess) {
+        onSubmitSuccess();
+      }
     } catch (error: any) {
       console.error('RV Park form submission error:', error);
     }

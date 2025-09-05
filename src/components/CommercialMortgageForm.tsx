@@ -6,8 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/contexts/AuthContext";
+import { usePublicApplications } from "@/hooks/usePublicApplications";
 
 interface CommercialMortgageFormData {
   // Borrower Information
@@ -46,10 +45,13 @@ interface CommercialMortgageFormData {
   additionalComments: string;
 }
 
-export default function CommercialMortgageForm() {
-  const { user } = useAuth();
+interface CommercialMortgageFormProps {
+  onSubmitSuccess?: () => void;
+}
+
+export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMortgageFormProps = {}) {
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
+  const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const [formData, setFormData] = useState<CommercialMortgageFormData>({
     firstName: "",
     lastName: "",
@@ -85,15 +87,6 @@ export default function CommercialMortgageForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!user) {
-      toast({
-        title: "Authentication Required",
-        description: "Please log in to submit an application.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone) {
       toast({
         title: "Missing Information",
@@ -103,48 +96,25 @@ export default function CommercialMortgageForm() {
       return;
     }
 
-    setIsLoading(true);
-
     try {
-      // Save to database
-      const { error: dbError } = await supabase
-        .from('loan_program_applications')
-        .insert({
-          user_id: user.id,
-          program_id: 'commercial-mortgage',
-          program_name: 'Commercial Mortgage',
-          borrower_name: `${formData.firstName} ${formData.lastName}`,
-          borrower_email: formData.email,
-          borrower_phone: formData.phone,
-          property_address: `${formData.propertyAddress}, ${formData.propertyCity}, ${formData.propertyState} ${formData.propertyZip}`,
-          requested_amount: formData.loanAmount ? parseFloat(formData.loanAmount) : null,
-          loan_purpose: formData.loanPurpose,
-          status: 'submitted',
-          application_data: formData
-        });
+      const applicationData = {
+        programId: 'commercial-mortgage',
+        programName: 'Commercial Mortgage',
+        borrowerName: `${formData.firstName} ${formData.lastName}`,
+        borrowerEmail: formData.email,
+        borrowerPhone: formData.phone,
+        propertyAddress: formData.propertyAddress,
+        propertyCity: formData.propertyCity,
+        propertyState: formData.propertyState,
+        propertyZip: formData.propertyZip,
+        requestedAmount: formData.loanAmount ? parseFloat(formData.loanAmount) : undefined,
+        loanPurpose: formData.loanPurpose,
+        programSpecificData: formData
+      };
 
-      if (dbError) throw dbError;
-
-      // Send email notifications
-      await supabase.functions.invoke('send-program-application', {
-        body: {
-          applicantName: `${formData.firstName} ${formData.lastName}`,
-          applicantEmail: formData.email,
-          applicantPhone: formData.phone,
-          programName: 'Commercial Mortgage',
-          programId: 'commercial-mortgage',
-          propertyAddress: `${formData.propertyAddress}, ${formData.propertyCity}, ${formData.propertyState} ${formData.propertyZip}`,
-          requestedAmount: formData.loanAmount,
-          additionalData: formData
-        }
-      });
-
-      toast({
-        title: "Application Submitted Successfully",
-        description: "Your Commercial Mortgage application has been submitted. We'll contact you within 24-48 hours.",
-      });
-
-      // Reset form
+      await submitPublicApplication(applicationData);
+      
+      // Reset form on success
       setFormData({
         firstName: "",
         lastName: "",
@@ -172,14 +142,13 @@ export default function CommercialMortgageForm() {
         timeframe: "",
         additionalComments: ""
       });
+
+      // Call success callback if provided
+      if (onSubmitSuccess) {
+        onSubmitSuccess();
+      }
     } catch (error: any) {
-      toast({
-        title: "Submission Failed",
-        description: "Failed to submit application. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+      // Error handling is done in the hook
     }
   };
 
@@ -496,8 +465,8 @@ export default function CommercialMortgageForm() {
             </div>
           </div>
 
-          <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? "Submitting Application..." : "Submit Commercial Mortgage Application"}
+          <Button type="submit" disabled={isSubmitting} className="w-full">
+            {isSubmitting ? "Submitting Application..." : "Submit Commercial Mortgage Application"}
           </Button>
         </form>
       </CardContent>

@@ -24,31 +24,31 @@ interface ProgramApplicationFormProps {
 export default function ProgramApplicationForm({ program, onSubmitSuccess }: ProgramApplicationFormProps) {
   // Enhanced forms for specific programs
   if (program.id === 'business-loan' || program.name.toLowerCase().includes('business loan')) {
-    return <EnhancedBusinessLoanForm />;
+    return <EnhancedBusinessLoanForm onSubmitSuccess={onSubmitSuccess} />;
   }
 
   if (program.id === 'commercial-mortgage' || program.name.toLowerCase().includes('commercial mortgage')) {
-    return <CommercialMortgageForm />;
+    return <CommercialMortgageForm onSubmitSuccess={onSubmitSuccess} />;
   }
 
   if (program.id === 'commercial-dscr' || program.name.toLowerCase().includes('dscr')) {
-    return <DSCRLoanForm />;
+    return <DSCRLoanForm onSubmitSuccess={onSubmitSuccess} />;
   }
 
   if (program.id === 'self-storage' || program.name.toLowerCase().includes('self storage')) {
-    return <SelfStorageForm />;
+    return <SelfStorageForm onSubmitSuccess={onSubmitSuccess} />;
   }
 
   if (program.id === 'rehab-investor' || program.name.toLowerCase().includes('rehab') || program.name.toLowerCase().includes('investor')) {
-    return <RehabInvestorForm />;
+    return <RehabInvestorForm onSubmitSuccess={onSubmitSuccess} />;
   }
 
   if (program.id === 'rv-park-financing' || program.name.toLowerCase().includes('rv park')) {
-    return <RVParkForm />;
+    return <RVParkForm onSubmitSuccess={onSubmitSuccess} />;
   }
 
   if (program.id === 'senior-living' || program.name.toLowerCase().includes('senior living')) {
-    return <SeniorLivingForm />;
+    return <SeniorLivingForm onSubmitSuccess={onSubmitSuccess} />;
   }
 
   const { toast } = useToast();
