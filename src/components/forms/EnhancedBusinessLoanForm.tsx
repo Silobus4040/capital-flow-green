@@ -80,15 +80,6 @@ export default function EnhancedBusinessLoanForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!user) {
-      toast({
-        title: "Authentication Required",
-        description: "Please log in to submit an application.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     if (!formData.businessName || !formData.contactName || !formData.contactEmail || !formData.loanAmount || !formData.securityType) {
       toast({
         title: "Missing Information",
@@ -105,7 +96,7 @@ export default function EnhancedBusinessLoanForm() {
       const { error: dbError } = await supabase
         .from('loan_program_applications')
         .insert({
-          user_id: user.id,
+          user_id: null, // Allow public submissions
           program_id: 'business-loan',
           program_name: 'Business Loan',
           borrower_name: formData.contactName,

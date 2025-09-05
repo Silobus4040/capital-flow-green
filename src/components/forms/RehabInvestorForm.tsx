@@ -119,15 +119,6 @@ export default function RehabInvestorForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!user) {
-      toast({
-        title: "Authentication Required",
-        description: "Please log in to submit an application.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     if (!formData.borrowerName || !formData.borrowerEmail || !formData.loanType || !formData.requestedAmount) {
       toast({
         title: "Missing Information",
@@ -143,7 +134,7 @@ export default function RehabInvestorForm() {
       const { error: dbError } = await supabase
         .from('loan_program_applications')
         .insert({
-          user_id: user.id,
+          user_id: null, // Allow public submissions
           program_id: 'rehab-investor',
           program_name: 'Rehab/Investor Financing',
           borrower_name: formData.borrowerName,
