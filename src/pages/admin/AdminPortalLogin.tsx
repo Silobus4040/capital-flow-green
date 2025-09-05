@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,6 +15,7 @@ export default function AdminPortalLogin() {
   const [loading, setLoading] = useState(false);
   const { adminSignIn, user, profile } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   if (user && profile?.role === 'admin') {
     return <Navigate to="/admin-dashboard" replace />;
@@ -39,11 +40,8 @@ export default function AdminPortalLogin() {
           description: 'Welcome to the Admin Portal',
         });
         
-        // Use React Router navigation instead of window.location
-        setTimeout(() => {
-          window.location.href = '/admin-dashboard';
-        }, 100);
-        return;
+        // Navigate to admin dashboard directly using React Router
+        navigate('/admin-dashboard', { replace: true });
       }
     } catch (error) {
       toast({
