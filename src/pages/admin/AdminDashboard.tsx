@@ -178,14 +178,14 @@ export default function AdminDashboard() {
             <p>Send these credentials to the new {newUserRole}:</p>
             <p><strong>Email:</strong> {newUserEmail}</p>
             <p><strong>Temporary Password:</strong> {generatedPassword}</p>
-            <p>Direct them to /applicant-signup to create their account.</p>
+            <p>Direct them to /loan-officer-login to create their account.</p>
           </div>
         ),
         duration: 15000
       });
       
       // Copy to clipboard
-      navigator.clipboard.writeText(`Email: ${newUserEmail}\nPassword: ${generatedPassword}\nSignup: ${window.location.origin}/applicant-signup`);
+      navigator.clipboard.writeText(`Email: ${newUserEmail}\nPassword: ${generatedPassword}\nLogin: ${window.location.origin}/loan-officer-login`);
       
       setNewUserEmail('');
       setNewUserName('');

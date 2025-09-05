@@ -7,11 +7,12 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/components/ui/use-toast';
-import { Send, MessageSquare, Clock } from 'lucide-react';
+import { Send, MessageSquare, Clock, Volume2 } from 'lucide-react';
+import VoiceRecorder from '@/components/VoiceRecorder';
 
 interface Message {
   id: string;
-  content: string;
+  content?: string;
   sender_type: 'borrower' | 'loan_officer' | 'admin';
   sender_id: string;
   created_at: string;
@@ -32,6 +33,7 @@ export default function ApplicantMessages() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
+  const [sending, setSending] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -135,6 +137,7 @@ export default function ApplicantMessages() {
   const sendMessage = async () => {
     if (!newMessage.trim() || !conversation || !user) return;
 
+    setSending(true);
     try {
       const { error } = await supabase
         .from('messages')
@@ -148,6 +151,10 @@ export default function ApplicantMessages() {
 
       if (error) throw error;
       setNewMessage('');
+      toast({
+        title: 'Message Sent',
+        description: 'Your message has been sent successfully'
+      });
     } catch (error) {
       console.error('Error sending message:', error);
       toast({
@@ -155,6 +162,49 @@ export default function ApplicantMessages() {
         description: 'Failed to send message',
         variant: 'destructive'
       });
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const handleVoiceMessage = async (audioBlob: Blob, duration: number) => {
+    if (!conversation || !user) return;
+
+    try {
+      // Upload audio to Supabase storage
+      const fileName = `voice_${Date.now()}.webm`;
+      const filePath = `conversation-files/${conversation.id}/${fileName}`;
+      
+      const { error: uploadError } = await supabase.storage
+        .from('conversation-files')
+        .upload(filePath, audioBlob, {
+          contentType: 'audio/webm'
+        });
+
+      if (uploadError) throw uploadError;
+
+      // Save message to database
+      const { error: messageError } = await supabase
+        .from('messages')
+        .insert({
+          conversation_id: conversation.id,
+          sender_type: 'borrower',
+          sender_id: user.id,
+          message_type: 'voice',
+          voice_duration: duration,
+          file_path: filePath,
+          content: `Voice message (${Math.floor(duration / 60)}:${(duration % 60).toString().padStart(2, '0')})`
+        });
+
+      if (messageError) throw messageError;
+
+      toast({
+        title: 'Voice Message Sent',
+        description: 'Your voice message has been sent successfully'
+      });
+    } catch (error) {
+      console.error('Error sending voice message:', error);
+      throw error;
     }
   };
 
@@ -221,7 +271,31 @@ export default function ApplicantMessages() {
                           : 'bg-white border'
                       }`}
                     >
-                      <p className="text-sm">{message.content}</p>
+                      {message.message_type === 'voice' ? (
+                        <div className="space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <Volume2 className="h-4 w-4" />
+                            <span className="text-sm">
+                              Voice message ({message.voice_duration}s)
+                            </span>
+                          </div>
+                          {message.file_path && (
+                            <audio 
+                              controls 
+                              className="w-full max-w-xs"
+                              preload="metadata"
+                            >
+                              <source 
+                                src={supabase.storage.from('conversation-files').getPublicUrl(message.file_path).data.publicUrl} 
+                                type="audio/webm" 
+                              />
+                              Your browser does not support audio playback.
+                            </audio>
+                          )}
+                        </div>
+                      ) : (
+                        <p className="text-sm">{message.content}</p>
+                      )}
                       <div className="flex items-center justify-between mt-1">
                         <p className={`text-xs ${
                           message.sender_type === 'borrower' ? 'opacity-70' : 'text-muted-foreground'
@@ -260,15 +334,19 @@ export default function ApplicantMessages() {
                 className="min-h-[80px]"
               />
               
-              <div className="flex justify-end">
+              <div className="flex justify-between items-center">
+                <VoiceRecorder 
+                  onSend={handleVoiceMessage}
+                  disabled={sending}
+                />
                 <Button 
                   onClick={sendMessage}
-                  disabled={!newMessage.trim() || !conversation}
+                  disabled={!newMessage.trim() || !conversation || sending}
                   size="sm"
                   className="px-6"
                 >
                   <Send className="h-4 w-4 mr-2" />
-                  Send Message
+                  {sending ? 'Sending...' : 'Send Message'}
                 </Button>
               </div>
             </div>

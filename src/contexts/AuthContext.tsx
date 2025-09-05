@@ -179,12 +179,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
       
       if (!error && data.user) {
-        // INSTANT ACCESS FIX: Don't wait for profile loading
-        // Set user immediately for instant access
         setUser(data.user);
         setSession(data.session);
         
-        // Fetch profile in background without blocking
+        // Fetch profile to determine role-based redirection
         setTimeout(async () => {
           setProfileFetched(false);
           await fetchProfile(data.user.id, data.user.email || '', data.user.user_metadata);

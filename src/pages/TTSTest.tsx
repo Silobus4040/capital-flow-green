@@ -82,6 +82,15 @@ export default function TTSTest() {
   const playAudio = () => {
     if (audioUrl) {
       const audio = new Audio(audioUrl);
+      
+      audio.addEventListener('loadedmetadata', () => {
+        console.log('Audio duration:', audio.duration);
+      });
+      
+      audio.addEventListener('timeupdate', () => {
+        // Audio is playing, timing is handled by the HTML5 audio element
+      });
+      
       audio.play();
       setIsPlaying(true);
       

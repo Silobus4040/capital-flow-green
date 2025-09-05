@@ -52,7 +52,6 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
     return <SeniorLivingForm />;
   }
 
-  const { user } = useAuth();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -84,7 +83,7 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
       const { error: dbError } = await supabase
         .from('loan_program_applications')
         .insert({
-          user_id: user?.id || null,
+          user_id: null, // Allow public submissions without user account
           program_id: program.id,
           program_name: program.name,
           borrower_name: formData.borrowerName,

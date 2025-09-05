@@ -40,7 +40,6 @@ export default function ApplicantLayout({ children }: ApplicantLayoutProps) {
     { icon: LayoutDashboard, label: 'Dashboard', path: '/applicant-dashboard' },
     { icon: MessageSquare, label: 'Messages', path: '/applicant-messages' },
     { icon: FileText, label: 'Documents', path: '/applicant-documents' },
-    { icon: User, label: 'Profile', path: '/applicant-profile' },
   ];
 
   return (
