@@ -144,8 +144,13 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
         netOperatingIncome: "",
         existingMortgage: "",
         propertyValue: "",
-        loanToValueRatio: "",
-        debtServiceCoverageRatio: "",
+        yearBuilt: "",
+        squareFootage: "",
+        occupancyRate: "",
+        proposedPayment: "",
+        calculatedDSCR: "",
+        experienceLevel: "",
+        additionalProperties: "",
         additionalComments: ""
       });
 
