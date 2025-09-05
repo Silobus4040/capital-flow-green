@@ -106,7 +106,7 @@ export default function EnhancedBusinessLoanForm() {
           requested_amount: formData.loanAmount ? parseFloat(formData.loanAmount) : null,
           loan_purpose: formData.loanPurpose,
           status: 'submitted',
-          application_data: formData
+          program_specific_data: formData as any
         });
 
       if (dbError) throw dbError;

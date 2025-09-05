@@ -140,11 +140,14 @@ export default function RehabInvestorForm() {
           borrower_name: formData.borrowerName,
           borrower_email: formData.borrowerEmail,
           borrower_phone: formData.borrowerPhone,
-          property_address: `${formData.propertyAddress}, ${formData.propertyCity}, ${formData.propertyState} ${formData.propertyZip}`,
+          property_address: formData.propertyAddress,
+          property_city: formData.propertyCity,
+          property_state: formData.propertyState,
+          property_zip: formData.propertyZip,
           requested_amount: formData.requestedAmount ? parseFloat(formData.requestedAmount) : null,
           loan_purpose: formData.loanType,
           status: 'submitted',
-          application_data: formData
+          program_specific_data: formData as any
         });
 
       if (dbError) throw dbError;

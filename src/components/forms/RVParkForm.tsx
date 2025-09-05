@@ -131,11 +131,14 @@ export default function RVParkForm() {
           borrower_name: formData.borrowerName,
           borrower_email: formData.borrowerEmail,
           borrower_phone: formData.borrowerPhone,
-          property_address: `${formData.parkAddress}, ${formData.parkCity}, ${formData.parkState} ${formData.parkZip}`,
+          property_address: formData.parkAddress,
+          property_city: formData.parkCity,
+          property_state: formData.parkState,
+          property_zip: formData.parkZip,
           requested_amount: formData.requestedAmount ? parseFloat(formData.requestedAmount) : null,
           loan_purpose: formData.loanType,
           status: 'submitted',
-          application_data: formData
+          program_specific_data: formData as any
         });
 
       if (dbError) throw dbError;

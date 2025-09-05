@@ -139,11 +139,14 @@ export default function SeniorLivingForm() {
           borrower_name: formData.borrowerName,
           borrower_email: formData.borrowerEmail,
           borrower_phone: formData.borrowerPhone,
-          property_address: `${formData.facilityAddress}, ${formData.facilityCity}, ${formData.facilityState} ${formData.facilityZip}`,
+          property_address: formData.facilityAddress,
+          property_city: formData.facilityCity,
+          property_state: formData.facilityState,
+          property_zip: formData.facilityZip,
           requested_amount: formData.requestedAmount ? parseFloat(formData.requestedAmount) : null,
           loan_purpose: formData.loanType,
           status: 'submitted',
-          application_data: formData
+          program_specific_data: formData as any
         });
 
       if (dbError) throw dbError;
