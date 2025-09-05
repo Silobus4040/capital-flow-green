@@ -6,8 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/contexts/AuthContext";
+import { usePublicApplications } from "@/hooks/usePublicApplications";
 import ConditionalFormFields from "./ConditionalFormFields";
 
 interface SeniorLivingFormData {
@@ -69,9 +68,8 @@ interface SeniorLivingFormData {
 }
 
 export default function SeniorLivingForm() {
-  const { user } = useAuth();
+  const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<SeniorLivingFormData>({
     borrowerName: "",
     borrowerEmail: "",
@@ -127,58 +125,23 @@ export default function SeniorLivingForm() {
       return;
     }
 
-    setIsLoading(true);
-
     try {
-      const { error: dbError } = await supabase
-        .from('loan_program_applications')
-        .insert({
-          user_id: null, // Allow public submissions
-          program_id: 'senior-living',
-          program_name: 'Senior Living Financing',
-          borrower_name: formData.borrowerName,
-          borrower_email: formData.borrowerEmail,
-          borrower_phone: formData.borrowerPhone,
-          property_address: formData.facilityAddress,
-          property_city: formData.facilityCity,
-          property_state: formData.facilityState,
-          property_zip: formData.facilityZip,
-          requested_amount: formData.requestedAmount ? parseFloat(formData.requestedAmount) : null,
-          loan_purpose: formData.loanType,
-          status: 'submitted',
-          program_specific_data: formData as any
-        });
-
-      if (dbError) throw dbError;
-
-      await supabase.functions.invoke('send-program-application', {
-        body: {
-          applicantName: formData.borrowerName,
-          applicantEmail: formData.borrowerEmail,
-          applicantPhone: formData.borrowerPhone,
-          programName: 'Senior Living Financing',
-          programId: 'senior-living',
-          facilityName: formData.facilityName,
-          propertyAddress: `${formData.facilityAddress}, ${formData.facilityCity}, ${formData.facilityState} ${formData.facilityZip}`,
-          requestedAmount: formData.requestedAmount,
-          additionalData: formData
-        }
+      await submitPublicApplication({
+        programId: 'senior-living',
+        programName: 'Senior Living Financing',
+        borrowerName: formData.borrowerName,
+        borrowerEmail: formData.borrowerEmail,
+        borrowerPhone: formData.borrowerPhone,
+        propertyAddress: formData.facilityAddress,
+        propertyCity: formData.facilityCity,
+        propertyState: formData.facilityState,
+        propertyZip: formData.facilityZip,
+        requestedAmount: formData.requestedAmount ? parseFloat(formData.requestedAmount) : null,
+        loanPurpose: formData.loanType,
+        programSpecificData: formData as any
       });
-
-      toast({
-        title: "Application Submitted Successfully",
-        description: "Your Senior Living application has been submitted. We'll contact you within 24-48 hours.",
-      });
-
-      // Reset form would go here
     } catch (error: any) {
-      toast({
-        title: "Submission Failed",
-        description: "Failed to submit application. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+      console.error('Senior Living form submission error:', error);
     }
   };
 
@@ -635,8 +598,8 @@ export default function SeniorLivingForm() {
             </div>
           </div>
 
-          <Button type="submit" disabled={isLoading || !formData.loanType} className="w-full">
-            {isLoading ? "Submitting Application..." : "Submit Senior Living Application"}
+          <Button type="submit" disabled={isSubmitting || !formData.loanType} className="w-full">
+            {isSubmitting ? "Submitting Application..." : "Submit Senior Living Application"}
           </Button>
         </form>
       </CardContent>

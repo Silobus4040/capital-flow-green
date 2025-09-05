@@ -6,8 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/contexts/AuthContext";
+import { usePublicApplications } from "@/hooks/usePublicApplications";
 import ConditionalFormFields from "./ConditionalFormFields";
 
 interface RVParkFormData {
@@ -65,9 +64,8 @@ interface RVParkFormData {
 }
 
 export default function RVParkForm() {
-  const { user } = useAuth();
+  const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<RVParkFormData>({
     borrowerName: "",
     borrowerEmail: "",
@@ -119,58 +117,23 @@ export default function RVParkForm() {
       return;
     }
 
-    setIsLoading(true);
-
     try {
-      const { error: dbError } = await supabase
-        .from('loan_program_applications')
-        .insert({
-          user_id: null, // Allow public submissions
-          program_id: 'rv-park-financing',
-          program_name: 'RV Park Financing',
-          borrower_name: formData.borrowerName,
-          borrower_email: formData.borrowerEmail,
-          borrower_phone: formData.borrowerPhone,
-          property_address: formData.parkAddress,
-          property_city: formData.parkCity,
-          property_state: formData.parkState,
-          property_zip: formData.parkZip,
-          requested_amount: formData.requestedAmount ? parseFloat(formData.requestedAmount) : null,
-          loan_purpose: formData.loanType,
-          status: 'submitted',
-          program_specific_data: formData as any
-        });
-
-      if (dbError) throw dbError;
-
-      await supabase.functions.invoke('send-program-application', {
-        body: {
-          applicantName: formData.borrowerName,
-          applicantEmail: formData.borrowerEmail,
-          applicantPhone: formData.borrowerPhone,
-          programName: 'RV Park Financing',
-          programId: 'rv-park-financing',
-          parkName: formData.parkName,
-          propertyAddress: `${formData.parkAddress}, ${formData.parkCity}, ${formData.parkState} ${formData.parkZip}`,
-          requestedAmount: formData.requestedAmount,
-          additionalData: formData
-        }
+      await submitPublicApplication({
+        programId: 'rv-park-financing',
+        programName: 'RV Park Financing',
+        borrowerName: formData.borrowerName,
+        borrowerEmail: formData.borrowerEmail,
+        borrowerPhone: formData.borrowerPhone,
+        propertyAddress: formData.parkAddress,
+        propertyCity: formData.parkCity,
+        propertyState: formData.parkState,
+        propertyZip: formData.parkZip,
+        requestedAmount: formData.requestedAmount ? parseFloat(formData.requestedAmount) : null,
+        loanPurpose: formData.loanType,
+        programSpecificData: formData as any
       });
-
-      toast({
-        title: "Application Submitted Successfully",
-        description: "Your RV Park application has been submitted. We'll contact you within 24-48 hours.",
-      });
-
-      // Reset form would go here
     } catch (error: any) {
-      toast({
-        title: "Submission Failed",
-        description: "Failed to submit application. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+      console.error('RV Park form submission error:', error);
     }
   };
 
@@ -574,8 +537,8 @@ export default function RVParkForm() {
             </div>
           </div>
 
-          <Button type="submit" disabled={isLoading || !formData.loanType} className="w-full">
-            {isLoading ? "Submitting Application..." : "Submit RV Park Application"}
+          <Button type="submit" disabled={isSubmitting || !formData.loanType} className="w-full">
+            {isSubmitting ? "Submitting Application..." : "Submit RV Park Application"}
           </Button>
         </form>
       </CardContent>

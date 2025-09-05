@@ -15,10 +15,14 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const rawData = await req.json();
+    // Handle both parameter naming conventions for backward compatibility
     const { 
       borrowerName, 
+      applicantName,
       borrowerEmail, 
+      applicantEmail,
       borrowerPhone, 
+      applicantPhone,
       programName, 
       propertyAddress,
       propertyCity,
@@ -29,12 +33,17 @@ const handler = async (req: Request): Promise<Response> => {
       programSpecificData
     } = rawData;
 
+    // Use consistent naming - prefer borrower* parameters
+    const finalBorrowerName = borrowerName || applicantName;
+    const finalBorrowerEmail = borrowerEmail || applicantEmail;
+    const finalBorrowerPhone = borrowerPhone || applicantPhone;
+
     // Validate required fields
-    if (!borrowerName || !borrowerEmail || !borrowerPhone || !programName) {
+    if (!finalBorrowerName || !finalBorrowerEmail || !finalBorrowerPhone || !programName) {
       console.error("Missing required fields:", { 
-        borrowerName: !!borrowerName, 
-        borrowerEmail: !!borrowerEmail, 
-        borrowerPhone: !!borrowerPhone, 
+        borrowerName: !!finalBorrowerName, 
+        borrowerEmail: !!finalBorrowerEmail, 
+        borrowerPhone: !!finalBorrowerPhone, 
         programName: !!programName 
       });
       return new Response(JSON.stringify({ error: "All basic fields are required" }), {
@@ -45,8 +54,8 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(borrowerEmail)) {
-      console.error("Invalid email format:", borrowerEmail);
+    if (!emailRegex.test(finalBorrowerEmail)) {
+      console.error("Invalid email format:", finalBorrowerEmail);
       return new Response(JSON.stringify({ error: "Invalid email format" }), {
         status: 400,
         headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -65,9 +74,9 @@ const handler = async (req: Request): Promise<Response> => {
       return map[match];
     });
 
-    const sanitizedName = sanitize(borrowerName.trim());
-    const sanitizedEmail = borrowerEmail.trim().toLowerCase();
-    const sanitizedPhone = sanitize(borrowerPhone.trim());
+    const sanitizedName = sanitize(finalBorrowerName.trim());
+    const sanitizedEmail = finalBorrowerEmail.trim().toLowerCase();
+    const sanitizedPhone = sanitize(finalBorrowerPhone.trim());
     const sanitizedProgram = sanitize(programName.trim());
 
     console.log("Processing program application:", { 

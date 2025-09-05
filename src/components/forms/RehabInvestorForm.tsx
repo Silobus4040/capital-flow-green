@@ -6,8 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/contexts/AuthContext";
+import { usePublicApplications } from "@/hooks/usePublicApplications";
 import ConditionalFormFields from "./ConditionalFormFields";
 
 interface RehabInvestorFormData {
@@ -65,9 +64,8 @@ interface RehabInvestorFormData {
 }
 
 export default function RehabInvestorForm() {
-  const { user } = useAuth();
+  const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<RehabInvestorFormData>({
     borrowerName: "",
     borrowerEmail: "",
@@ -128,58 +126,23 @@ export default function RehabInvestorForm() {
       return;
     }
 
-    setIsLoading(true);
-
     try {
-      const { error: dbError } = await supabase
-        .from('loan_program_applications')
-        .insert({
-          user_id: null, // Allow public submissions
-          program_id: 'rehab-investor',
-          program_name: 'Rehab/Investor Financing',
-          borrower_name: formData.borrowerName,
-          borrower_email: formData.borrowerEmail,
-          borrower_phone: formData.borrowerPhone,
-          property_address: formData.propertyAddress,
-          property_city: formData.propertyCity,
-          property_state: formData.propertyState,
-          property_zip: formData.propertyZip,
-          requested_amount: formData.requestedAmount ? parseFloat(formData.requestedAmount) : null,
-          loan_purpose: formData.loanType,
-          status: 'submitted',
-          program_specific_data: formData as any
-        });
-
-      if (dbError) throw dbError;
-
-      await supabase.functions.invoke('send-program-application', {
-        body: {
-          applicantName: formData.borrowerName,
-          applicantEmail: formData.borrowerEmail,
-          applicantPhone: formData.borrowerPhone,
-          programName: 'Rehab/Investor Financing',
-          programId: 'rehab-investor',
-          projectType: formData.loanType,
-          propertyAddress: `${formData.propertyAddress}, ${formData.propertyCity}, ${formData.propertyState} ${formData.propertyZip}`,
-          requestedAmount: formData.requestedAmount,
-          additionalData: formData
-        }
+      await submitPublicApplication({
+        programId: 'rehab-investor',
+        programName: 'Rehab/Investor Financing',
+        borrowerName: formData.borrowerName,
+        borrowerEmail: formData.borrowerEmail,
+        borrowerPhone: formData.borrowerPhone,
+        propertyAddress: formData.propertyAddress,
+        propertyCity: formData.propertyCity,
+        propertyState: formData.propertyState,
+        propertyZip: formData.propertyZip,
+        requestedAmount: formData.requestedAmount ? parseFloat(formData.requestedAmount) : null,
+        loanPurpose: formData.loanType,
+        programSpecificData: formData as any
       });
-
-      toast({
-        title: "Application Submitted Successfully",
-        description: "Your Rehab/Investor application has been submitted. We'll contact you within 24-48 hours.",
-      });
-
-      // Reset form would go here
     } catch (error: any) {
-      toast({
-        title: "Submission Failed",
-        description: "Failed to submit application. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+      console.error('Rehab form submission error:', error);
     }
   };
 
@@ -587,8 +550,8 @@ export default function RehabInvestorForm() {
             </div>
           </div>
 
-          <Button type="submit" disabled={isLoading || !formData.loanType} className="w-full">
-            {isLoading ? "Submitting Application..." : "Submit Rehab/Investor Application"}
+          <Button type="submit" disabled={isSubmitting || !formData.loanType} className="w-full">
+            {isSubmitting ? "Submitting Application..." : "Submit Rehab/Investor Application"}
           </Button>
         </form>
       </CardContent>
