@@ -208,33 +208,33 @@ export default function LoanPrograms() {
                       </ScrollArea>
                     </DialogContent>
                   </Dialog>
-
-                  <Dialog open={showApplicationForm?.id === program.id} onOpenChange={(open) => !open && setShowApplicationForm(null)}>
-                    <DialogTrigger asChild>
-                      <Button 
-                        className="w-full"
-                        onClick={() => setShowApplicationForm(program)}
-                      >
-                        Submit Application
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-                      <DialogHeader>
-                        <DialogTitle>Submit Application for {program.name}</DialogTitle>
-                      </DialogHeader>
-                      {showApplicationForm && (
-                        <ProgramApplicationForm 
-                          program={showApplicationForm} 
-                          onSubmitSuccess={handleApplicationFormSuccess}
-                        />
-                      )}
-                    </DialogContent>
-                  </Dialog>
+                  
+                  <Button 
+                    className="w-full"
+                    onClick={() => window.location.href = `/loan-programs/${program.id}`}
+                  >
+                    View Details & Apply
+                  </Button>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
+
+        {/* Application Form Dialog */}
+        <Dialog open={showApplicationForm !== null} onOpenChange={(open) => !open && setShowApplicationForm(null)}>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>Submit Application for {showApplicationForm?.name}</DialogTitle>
+            </DialogHeader>
+            {showApplicationForm && (
+              <ProgramApplicationForm 
+                program={showApplicationForm} 
+                onSubmitSuccess={handleApplicationFormSuccess}
+              />
+            )}
+          </DialogContent>
+        </Dialog>
 
       </div>
     </div>
