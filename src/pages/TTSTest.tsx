@@ -5,7 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import { Volume2, VolumeX, Loader2, ArrowLeft } from 'lucide-react';
+import { Volume2, VolumeX, Loader2, ArrowLeft, AlertTriangle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const voices = [
@@ -28,6 +28,8 @@ export default function TTSTest() {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioLoading, setAudioLoading] = useState(false);
+  const [audioFormat, setAudioFormat] = useState<'wav' | 'mp3'>('wav');
+  const [debugInfo, setDebugInfo] = useState<string>('');
   const { toast } = useToast();
   
   // Single audio element reference for proper control
@@ -46,6 +48,23 @@ export default function TTSTest() {
     };
   }, [audioUrl]);
 
+  // Check browser audio format support
+  useEffect(() => {
+    const audio = document.createElement('audio');
+    const supportsWav = audio.canPlayType('audio/wav') !== '';
+    const supportsMp3 = audio.canPlayType('audio/mpeg') !== '';
+    
+    console.log('Browser audio support - WAV:', supportsWav, 'MP3:', supportsMp3);
+    setDebugInfo(`Browser supports: WAV (${supportsWav}), MP3 (${supportsMp3})`);
+    
+    // Prefer WAV if supported, fallback to MP3
+    if (supportsWav) {
+      setAudioFormat('wav');
+    } else if (supportsMp3) {
+      setAudioFormat('mp3');
+    }
+  }, []);
+
   const generateSpeech = async () => {
     if (!text.trim()) {
       toast({
@@ -57,19 +76,28 @@ export default function TTSTest() {
     }
 
     setLoading(true);
+    setDebugInfo('Generating audio...');
     
     try {
+      console.log('Requesting TTS with format:', audioFormat);
       const { data, error } = await supabase.functions.invoke('text-to-speech', {
         body: {
           text: text.trim(),
-          voice: selectedVoice
+          voice: selectedVoice,
+          format: audioFormat
         }
       });
 
       if (error) throw error;
 
       if (data?.audioContent) {
-        console.log('Received audio content, length:', data.audioContent.length);
+        console.log('Received audio data:', {
+          contentLength: data.audioContent.length,
+          format: data.format,
+          size: data.size
+        });
+        
+        setDebugInfo(`Audio received: ${data.format}, ${Math.round((data.size || 0) / 1024)}KB`);
         
         // Enhanced base64 to blob conversion with validation
         try {
@@ -81,12 +109,24 @@ export default function TTSTest() {
             bytes[i] = binaryString.charCodeAt(i);
           }
           
-          const audioBlob = new Blob([bytes], { type: 'audio/mpeg' });
-          console.log('Created audio blob, size:', audioBlob.size, 'type:', audioBlob.type);
+          // Use correct MIME type based on format
+          const mimeType = audioFormat === 'wav' ? 'audio/wav' : 'audio/mpeg';
+          const audioBlob = new Blob([bytes], { type: mimeType });
+          
+          console.log('Created audio blob:', {
+            size: audioBlob.size,
+            type: audioBlob.type,
+            expectedSize: data.size
+          });
           
           // Validate blob
           if (audioBlob.size === 0) {
             throw new Error('Generated audio blob is empty');
+          }
+          
+          // Check if blob size matches expected size (with some tolerance)
+          if (data.size && Math.abs(audioBlob.size - data.size) > 100) {
+            console.warn('Blob size mismatch - Expected:', data.size, 'Actual:', audioBlob.size);
           }
           
           // Clean up previous URL
@@ -98,12 +138,23 @@ export default function TTSTest() {
           console.log('Created audio URL:', url);
           setAudioUrl(url);
           
+          // Test if the URL is accessible
+          try {
+            const testResponse = await fetch(url, { method: 'HEAD' });
+            console.log('Audio URL test response:', testResponse.status, testResponse.headers.get('content-type'));
+            setDebugInfo(`Audio ready: ${mimeType}, ${Math.round(audioBlob.size / 1024)}KB, URL OK`);
+          } catch (urlError) {
+            console.error('Audio URL test failed:', urlError);
+            setDebugInfo(`Audio URL test failed: ${urlError}`);
+          }
+          
           toast({
             title: 'Success',
-            description: `Audio generated successfully! (${Math.round(audioBlob.size / 1024)}KB)`
+            description: `Audio generated successfully! (${Math.round(audioBlob.size / 1024)}KB, ${audioFormat.toUpperCase()})`
           });
         } catch (conversionError) {
           console.error('Audio conversion error:', conversionError);
+          setDebugInfo(`Conversion error: ${conversionError}`);
           throw new Error('Failed to process generated audio');
         }
       } else {
@@ -111,6 +162,7 @@ export default function TTSTest() {
       }
     } catch (error: any) {
       console.error('TTS Error:', error);
+      setDebugInfo(`Error: ${error.message}`);
       toast({
         title: 'Error',
         description: error.message || 'Failed to generate speech',
@@ -282,6 +334,32 @@ export default function TTSTest() {
               </Select>
             </div>
 
+            {/* Audio Format Selection */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Audio Format</label>
+              <Select value={audioFormat} onValueChange={(value: 'wav' | 'mp3') => setAudioFormat(value)}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="wav">WAV (Uncompressed, better quality)</SelectItem>
+                  <SelectItem value="mp3">MP3 (Compressed, smaller size)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Debug Information */}
+            {debugInfo && (
+              <div className="p-3 bg-gray-100 rounded-lg border text-xs font-mono text-gray-600">
+                <div className="flex items-start space-x-2">
+                  <AlertTriangle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong>Debug Info:</strong> {debugInfo}
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Generate Button */}
             <div className="flex flex-col space-y-4">
               <Button 
@@ -360,11 +438,29 @@ export default function TTSTest() {
                         console.log('HTML5 audio: ended event');
                         setIsPlaying(false);
                       }}
-                      onError={(e) => {
-                        console.error('HTML5 audio error:', e.currentTarget.error);
+                       onError={(e) => {
+                        const error = e.currentTarget.error;
+                        const errorCodes = {
+                          1: 'MEDIA_ERR_ABORTED - Audio loading was aborted',
+                          2: 'MEDIA_ERR_NETWORK - Network error occurred',
+                          3: 'MEDIA_ERR_DECODE - Audio decoding failed',
+                          4: 'MEDIA_ERR_SRC_NOT_SUPPORTED - Audio format not supported'
+                        };
+                        
+                        const errorMessage = error ? errorCodes[error.code as keyof typeof errorCodes] || `Unknown error (code: ${error.code})` : 'Unknown audio error';
+                        
+                        console.error('HTML5 audio error details:', {
+                          code: error?.code,
+                          message: error?.message,
+                          src: e.currentTarget.src,
+                          readyState: e.currentTarget.readyState,
+                          networkState: e.currentTarget.networkState
+                        });
+                        
+                        setDebugInfo(`HTML5 Audio Error: ${errorMessage}`);
                         toast({
                           title: 'Audio Error',
-                          description: 'HTML5 audio player encountered an error',
+                          description: errorMessage,
                           variant: 'destructive'
                         });
                       }}

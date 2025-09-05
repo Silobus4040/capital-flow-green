@@ -12,7 +12,7 @@ serve(async (req) => {
   }
 
   try {
-    const { text, voice = 'Aria' } = await req.json()
+    const { text, voice = 'Aria', format = 'wav' } = await req.json()
 
     // Input validation
     if (!text || typeof text !== 'string') {
@@ -27,7 +27,7 @@ serve(async (req) => {
     // Sanitize text input
     const sanitizedText = text.trim().replace(/[<>]/g, '')
 
-    console.log("Processing TTS request, length:", sanitizedText.length)
+    console.log("Processing TTS request, length:", sanitizedText.length, "format:", format)
 
     const ELEVENLABS_API_KEY = Deno.env.get('ELEVENLABS_API_KEY')
     if (!ELEVENLABS_API_KEY) {
@@ -60,17 +60,24 @@ serve(async (req) => {
 
     const voiceId = voiceMap[voice] || voiceMap['Aria']
 
+    // Determine output format and content type
+    const outputFormat = format === 'wav' ? 'wav' : 'mp3_44100_128'
+    const contentType = format === 'wav' ? 'audio/wav' : 'audio/mpeg'
+    
+    console.log("Using voice ID:", voiceId, "output format:", outputFormat)
+
     // Generate speech from text using ElevenLabs
     const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
       method: 'POST',
       headers: {
-        'Accept': 'audio/mpeg',
+        'Accept': contentType,
         'Content-Type': 'application/json',
         'xi-api-key': ELEVENLABS_API_KEY,
       },
       body: JSON.stringify({
         text: sanitizedText,
         model_id: 'eleven_multilingual_v2',
+        output_format: outputFormat,
         voice_settings: {
           stability: 0.5,
           similarity_boost: 0.5,
@@ -101,8 +108,14 @@ serve(async (req) => {
     
     const base64Audio = btoa(binary)
 
+    console.log("Successfully generated audio, size:", arrayBuffer.byteLength, "bytes")
+
     return new Response(
-      JSON.stringify({ audioContent: base64Audio }),
+      JSON.stringify({ 
+        audioContent: base64Audio, 
+        format: format,
+        size: arrayBuffer.byteLength 
+      }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       },
