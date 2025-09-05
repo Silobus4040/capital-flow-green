@@ -22,6 +22,7 @@ export const usePublicApplications = () => {
   const { toast } = useToast();
 
   const submitPublicApplication = async (applicationData: ProgramApplicationData) => {
+    console.log('🔥 Starting form submission:', applicationData.programName);
     setIsSubmitting(true);
     
     try {
@@ -45,8 +46,11 @@ export const usePublicApplications = () => {
         });
 
       if (dbError) {
+        console.error('❌ Database insertion failed:', dbError);
         throw new Error(`Database error: ${dbError.message}`);
       }
+
+      console.log('✅ Database insertion successful');
 
       // Send email notification via edge function
       const { data: emailResult, error: emailError } = await supabase.functions.invoke(
@@ -69,7 +73,7 @@ export const usePublicApplications = () => {
       );
 
       if (emailError) {
-        console.error('Email sending failed:', emailError);
+        console.error('⚠️ Email sending failed:', emailError);
         // Don't fail the whole operation if email fails
         toast({
           title: "Application Submitted",
@@ -77,6 +81,7 @@ export const usePublicApplications = () => {
           variant: "default",
         });
       } else {
+        console.log('✅ Email notification sent successfully');
         toast({
           title: "Application Submitted Successfully",
           description: "Your loan application request has been submitted. You'll receive a confirmation email shortly.",
