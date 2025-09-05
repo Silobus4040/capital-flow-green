@@ -36,7 +36,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification to admin
     const adminEmailResponse = await resend.emails.send({
-      from: "CCIF Loans <noreply@ccifcapital.com>",
+      from: "CCIF-INC <noreply@ccif-inc.com>",
       to: [Deno.env.get("ADMIN_EMAIL") || "sundrycapitalsolutions@gmail.com"],
       subject: `New Loan Application - ${applicationData.programName}`,
       html: `
@@ -87,7 +87,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation to applicant
     const applicantEmailResponse = await resend.emails.send({
-      from: "CCIF Loans <noreply@ccifcapital.com>",
+      from: "CCIF-INC <noreply@ccif-inc.com>",
       to: [applicationData.borrowerEmail],
       subject: `Application Received - ${applicationData.programName}`,
       html: `

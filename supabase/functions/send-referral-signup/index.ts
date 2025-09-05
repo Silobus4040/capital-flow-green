@@ -67,7 +67,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Processing referral signup:", { email: sanitizedEmail, brokerType: sanitizedBrokerType });
 
     await resend.emails.send({
-      from: "CCIF Referrals <referrals@sundrycapitalsolutions.com>",
+      from: "CCIF-INC <referrals@ccif-inc.com>",
       to: [Deno.env.get("ADMIN_EMAIL") || "sundrycapitalsolutions@gmail.com"],
       subject: `New Referral Program Signup`,
       html: `
@@ -81,7 +81,7 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     await resend.emails.send({
-      from: "CCIF Referrals <referrals@sundrycapitalsolutions.com>",
+      from: "CCIF-INC <referrals@ccif-inc.com>",
       to: [sanitizedEmail],
       subject: `Welcome to the CCIF Referral Network`,
       html: `

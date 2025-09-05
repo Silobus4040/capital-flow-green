@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 
 interface User {
   id: string;
+  user_id: string;
   email: string;
   full_name: string;
   role: string;
@@ -24,11 +25,22 @@ interface Client {
   id: string;
   borrower_name: string;
   borrower_email: string;
-  loan_amount: number;
+  borrower_phone?: string;
+  loan_amount?: number;
+  requested_amount?: number;
   status: string;
   created_at: string;
   type?: string;
   project_name?: string;
+  program_name?: string;
+  property_address?: string;
+  property_city?: string;
+  property_state?: string;
+  property_zip?: string;
+  loan_purpose?: string;
+  project_description?: string;
+  admin_notes?: string;
+  program_specific_data?: any;
 }
 
 interface Assignment {
@@ -45,6 +57,7 @@ export default function AdminDashboard() {
   const [users, setUsers] = useState<User[]>([]);
   const [clients, setClients] = useState<Client[]>([]);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
+  const [expandedApplications, setExpandedApplications] = useState<Set<string>>(new Set());
   const [newUserEmail, setNewUserEmail] = useState('');
   const [newUserName, setNewUserName] = useState('');
   const [newUserRole, setNewUserRole] = useState('loan_officer');
@@ -236,7 +249,7 @@ export default function AdminDashboard() {
       const { error } = await supabase
         .from('profiles')
         .update({ role: newRole })
-        .eq('id', userId);
+        .eq('user_id', userId);
 
       if (error) throw error;
 
@@ -293,6 +306,38 @@ export default function AdminDashboard() {
         variant: 'destructive'
       });
     }
+  };
+
+  const toggleApplicationDetails = (applicationId: string) => {
+    const newExpanded = new Set(expandedApplications);
+    if (newExpanded.has(applicationId)) {
+      newExpanded.delete(applicationId);
+    } else {
+      newExpanded.add(applicationId);
+    }
+    setExpandedApplications(newExpanded);
+  };
+
+  const renderProgramSpecificData = (data: any) => {
+    if (!data || typeof data !== 'object') return null;
+    
+    return (
+      <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+        <h4 className="font-semibold mb-2 text-gray-800">Additional Application Details</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {Object.entries(data).map(([key, value]) => {
+            if (!value) return null;
+            const formattedKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+            return (
+              <div key={key} className="text-sm">
+                <span className="font-medium text-gray-600">{formattedKey}:</span>
+                <span className="ml-2 text-gray-800">{String(value)}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
   };
 
   // No loading screen - instant access
@@ -468,7 +513,7 @@ export default function AdminDashboard() {
                           </Badge>
                           <Select 
                             value={user.role} 
-                            onValueChange={(newRole) => updateUserRole(user.id, newRole)}
+                            onValueChange={(newRole) => updateUserRole(user.user_id, newRole)}
                           >
                             <SelectTrigger className="w-32">
                               <SelectValue />
@@ -497,23 +542,87 @@ export default function AdminDashboard() {
                 <CardContent>
                   <div className="space-y-3">
                     {clients.map((client) => (
-                      <div key={client.id} className="flex items-center justify-between p-4 border rounded-lg">
-                        <div>
-                          <p className="font-medium">{client.borrower_name}</p>
-                          <p className="text-sm text-muted-foreground">{client.borrower_email}</p>
-                          <p className="text-sm">Loan Amount: ${client.loan_amount?.toLocaleString()}</p>
-                          <p className="text-xs text-blue-600 font-medium">
-                            {client.type === 'loan_application' ? 'Loan Application' : `Loan Application - ${client.project_name}`}
-                          </p>
+                      <div key={client.id} className="border rounded-lg overflow-hidden">
+                        <div 
+                          className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50"
+                          onClick={() => toggleApplicationDetails(client.id)}
+                        >
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="font-medium text-lg">{client.borrower_name}</p>
+                                <p className="text-sm text-muted-foreground">{client.borrower_email}</p>
+                                <p className="text-sm text-muted-foreground">{client.borrower_phone}</p>
+                              </div>
+                              <div className="text-right">
+                                <p className="text-sm font-semibold">
+                                  Amount: ${client.loan_amount?.toLocaleString() || client.requested_amount?.toLocaleString() || 'N/A'}
+                                </p>
+                                <p className="text-xs text-blue-600 font-medium">
+                                  {client.type === 'loan_application' ? 'Loan Application' : `Program: ${client.program_name || client.project_name}`}
+                                </p>
+                              </div>
+                            </div>
+                            
+                            {client.property_address && (
+                              <p className="text-sm text-gray-600 mt-1">
+                                Property: {client.property_address}
+                                {client.property_city && `, ${client.property_city}`}
+                                {client.property_state && `, ${client.property_state}`}
+                                {client.property_zip && ` ${client.property_zip}`}
+                              </p>
+                            )}
+                            
+                            {client.loan_purpose && (
+                              <p className="text-sm text-gray-600">Purpose: {client.loan_purpose}</p>
+                            )}
+                          </div>
+                          
+                          <div className="flex items-center space-x-3 ml-4">
+                            <Badge variant={
+                              client.status === 'approved' ? 'default' : 
+                              client.status === 'pending' || client.status === 'submitted' ? 'secondary' : 
+                              'destructive'
+                            }>
+                              {client.status}
+                            </Badge>
+                            <div className="text-right">
+                              <p className="text-xs text-muted-foreground">
+                                {new Date(client.created_at).toLocaleDateString()}
+                              </p>
+                              <p className="text-xs text-muted-foreground">
+                                {expandedApplications.has(client.id) ? 'Hide Details' : 'View Details'}
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                        <div className="flex items-center space-x-2">
-                          <Badge variant={client.status === 'approved' ? 'default' : client.status === 'pending' ? 'secondary' : 'destructive'}>
-                            {client.status}
-                          </Badge>
-                          <p className="text-xs text-muted-foreground">
-                            {new Date(client.created_at).toLocaleDateString()}
-                          </p>
-                        </div>
+                        
+                        {expandedApplications.has(client.id) && (
+                          <div className="border-t bg-gray-25 p-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                              <div>
+                                <h4 className="font-semibold text-gray-800 mb-2">Basic Information</h4>
+                                <div className="space-y-1 text-sm">
+                                  <p><span className="font-medium">Email:</span> {client.borrower_email}</p>
+                                  <p><span className="font-medium">Phone:</span> {client.borrower_phone}</p>
+                                  {client.project_name && <p><span className="font-medium">Project:</span> {client.project_name}</p>}
+                                  {client.project_description && <p><span className="font-medium">Description:</span> {client.project_description}</p>}
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <h4 className="font-semibold text-gray-800 mb-2">Application Status</h4>
+                                <div className="space-y-1 text-sm">
+                                  <p><span className="font-medium">Status:</span> {client.status}</p>
+                                  <p><span className="font-medium">Submitted:</span> {new Date(client.created_at).toLocaleString()}</p>
+                                  {client.admin_notes && <p><span className="font-medium">Admin Notes:</span> {client.admin_notes}</p>}
+                                </div>
+                              </div>
+                            </div>
+                            
+                            {client.program_specific_data && renderProgramSpecificData(client.program_specific_data)}
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
