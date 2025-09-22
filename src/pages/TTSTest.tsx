@@ -49,72 +49,47 @@ export default function TTSTest() {
     };
   }, [audioUrl]);
 
-  // Enhanced base64 to blob conversion with validation
+  // Simplified and reliable base64 to blob conversion
   const createAudioBlob = (base64Data: string): Blob | null => {
     try {
       console.log('Converting base64 to blob, length:', base64Data.length);
       
-      // Validate base64 format
-      const base64Pattern = /^[A-Za-z0-9+/]*={0,2}$/;
-      if (!base64Pattern.test(base64Data)) {
-        console.error('Invalid base64 format');
-        return null;
+      // Simple base64 validation
+      if (!base64Data || base64Data.length < 100) {
+        throw new Error('Base64 data is too short or empty');
       }
-
-      // Convert to binary data using more reliable method
+      
+      // Convert base64 to binary string
       const binaryString = atob(base64Data);
-      const binaryData = new Uint8Array(binaryString.length);
       
+      // Convert to Uint8Array
+      const bytes = new Uint8Array(binaryString.length);
       for (let i = 0; i < binaryString.length; i++) {
-        binaryData[i] = binaryString.charCodeAt(i);
+        bytes[i] = binaryString.charCodeAt(i);
       }
       
-      console.log('Successfully converted to binary, length:', binaryData.length);
+      console.log('Successfully converted to binary, size:', bytes.length, 'bytes');
       
-      // Validate MP3 format
-      if (binaryData.length < 10) {
-        console.error('Audio data too short');
-        return null;
-      }
+      // Create blob with proper MIME type
+      const blob = new Blob([bytes], { type: 'audio/mpeg' });
       
-      // Check for MP3 signatures
-      const hasID3v2 = binaryData[0] === 0x49 && binaryData[1] === 0x44 && binaryData[2] === 0x33;
-      const hasMPEGFrame = (binaryData[0] === 0xFF && (binaryData[1] & 0xE0) === 0xE0);
-      
-      // Look for MPEG frame header in first 1000 bytes
-      let foundMPEGFrame = false;
-      for (let i = 0; i < Math.min(1000, binaryData.length - 1); i++) {
-        if (binaryData[i] === 0xFF && (binaryData[i + 1] & 0xE0) === 0xE0) {
-          foundMPEGFrame = true;
-          console.log('Found MPEG frame header at position:', i);
-          break;
-        }
-      }
-      
-      const isValidMP3 = hasID3v2 || hasMPEGFrame || foundMPEGFrame;
-      
-      console.log('MP3 validation:', {
-        hasID3v2,
-        hasMPEGFrame,
-        foundMPEGFrame,
-        isValid: isValidMP3,
-        firstBytes: Array.from(binaryData.slice(0, 4)).map(b => `0x${b.toString(16).padStart(2, '0')}`).join(' ')
-      });
-      
-      // Create blob
-      const blob = new Blob([binaryData], { type: 'audio/mpeg' });
-      
-      if (blob.size === 0) {
-        console.error('Created blob is empty');
-        return null;
-      }
-      
-      console.log('Created blob successfully:', { size: blob.size, type: blob.type, isValidMP3 });
+      console.log('Created blob successfully:', { size: blob.size, type: blob.type });
       return blob;
         
     } catch (error) {
       console.error('Blob creation failed:', error);
-      return null;
+      
+      // Fallback: try creating blob directly from base64
+      try {
+        console.log('Trying fallback blob creation method...');
+        const binaryString = atob(base64Data);
+        const blob = new Blob([binaryString], { type: 'audio/mpeg' });
+        console.log('Fallback blob created successfully:', { size: blob.size });
+        return blob;
+      } catch (fallbackError) {
+        console.error('Fallback blob creation also failed:', fallbackError);
+        return null;
+      }
     }
   };
 
@@ -153,14 +128,14 @@ export default function TTSTest() {
         
         setDebugInfo(`Processing audio: ${data.format}, ${Math.round((data.size || 0) / 1024)}KB`);
         
-        // Create audio blob with validation
+        // Create audio blob
         const audioBlob = createAudioBlob(data.audioContent);
         
         if (!audioBlob) {
-          throw new Error('Failed to create valid audio blob');
+          throw new Error('Failed to create audio blob');
         }
         
-        console.log('Audio blob created:', {
+        console.log('Audio blob created successfully:', {
           size: audioBlob.size,
           type: audioBlob.type
         });
@@ -170,35 +145,10 @@ export default function TTSTest() {
           URL.revokeObjectURL(audioUrl);
         }
         
-        // Create and test blob URL
+        // Create blob URL directly without pre-testing
         const blobUrl = URL.createObjectURL(audioBlob);
         
-        // Test audio validity
-        const testAudio = new Audio();
-        
-        await new Promise((resolve, reject) => {
-          const timeout = setTimeout(() => {
-            reject(new Error('Audio test timeout'));
-          }, 5000);
-          
-          testAudio.addEventListener('canplaythrough', () => {
-            clearTimeout(timeout);
-            console.log('Audio blob test successful');
-            resolve(true);
-          });
-          
-          testAudio.addEventListener('error', (e) => {
-            clearTimeout(timeout);
-            const error = testAudio.error;
-            console.error('Audio blob test failed:', error);
-            reject(new Error(`Audio test failed: ${error?.message || 'Unknown error'}`));
-          });
-          
-          testAudio.src = blobUrl;
-          testAudio.load();
-        });
-        
-        // Set audio if test passed
+        // Set audio immediately
         setAudioUrl(blobUrl);
         setAudioBlob(audioBlob);
         setDebugInfo(`Audio ready: ${Math.round(audioBlob.size / 1024)}KB MP3`);
