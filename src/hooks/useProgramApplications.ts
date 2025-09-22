@@ -59,7 +59,7 @@ export const useProgramApplications = () => {
 
       // Send email notification via edge function
       const { data: emailResult, error: emailError } = await supabase.functions.invoke(
-        'send-application-notification',
+        'send-program-application',
         {
           body: {
             borrowerName: applicationData.borrowerName,

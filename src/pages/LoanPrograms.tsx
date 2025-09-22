@@ -75,66 +75,18 @@ export default function LoanPrograms() {
                 </div>
                 <p className="loan-program-body text-muted-foreground mb-6">{program.description}</p>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button 
-                        variant="outline" 
-                        className="loan-program-button flex-1"
-                        onClick={() => setSelectedProgram(program)}
-                      >
-                        View Full Terms
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-4xl max-h-[80vh] overflow-hidden">
-                      <DialogHeader>
-                        <DialogTitle className="loan-program-subheader">{selectedProgram?.name} - Full Terms</DialogTitle>
-                        <DialogDescription className="loan-program-body">
-                          Complete terms and conditions for this loan program
-                        </DialogDescription>
-                      </DialogHeader>
-                      {selectedProgram && (
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                          <div>
-                            {programImages[selectedProgram.id] && (
-                              <img 
-                                src={programImages[selectedProgram.id]} 
-                                alt={selectedProgram.name}
-                                className="w-full h-64 object-cover rounded-lg mb-4"
-                              />
-                            )}
-                            <div className="space-y-4">
-                              <div className="bg-primary/5 p-4 rounded-lg">
-                                <h3 className="font-semibold text-primary mb-2">Key Details</h3>
-                                <div className="space-y-2 text-sm">
-                                  <div className="flex justify-between">
-                                    <span>Interest Rate:</span>
-                                    <span className="font-medium">{selectedProgram.interestRate}</span>
-                                  </div>
-                                  <div className="flex justify-between">
-                                    <span>Min. Loan Amount:</span>
-                                    <span className="font-medium">{selectedProgram.minimumLoanAmount}</span>
-                                  </div>
-                                </div>
-                              </div>
-                              <p className="loan-program-body text-muted-foreground">{selectedProgram.description}</p>
-                            </div>
-                          </div>
-                          <div className="flex flex-col">
-                            <h3 className="text-lg font-semibold mb-3">Terms & Conditions</h3>
-                            <LoanProgramTerms 
-                              terms={selectedProgram.terms} 
-                              className="flex-1"
-                            />
-                          </div>
-                        </div>
-                      )}
-                    </DialogContent>
-                  </Dialog>
                   <Button 
+                    variant="outline"
                     className="loan-program-button flex-1"
                     onClick={() => navigate(`/loan-programs/${program.id}`)}
                   >
-                    View Details & Apply
+                    View Details
+                  </Button>
+                  <Button 
+                    className="loan-program-button flex-1"
+                    onClick={() => setShowApplicationForm(program)}
+                  >
+                    Apply Now
                   </Button>
                 </div>
               </CardContent>
