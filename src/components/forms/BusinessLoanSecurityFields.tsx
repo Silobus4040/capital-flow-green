@@ -45,7 +45,7 @@ export default function BusinessLoanSecurityFields({ securityType, formData, upd
           </div>
           <div>
             <Label htmlFor="propertyTypeRE">Property Type</Label>
-            <Select onValueChange={(value) => updateFormData('propertyTypeRE', value)}>
+            <Select value={formData.propertyTypeRE || ""} onValueChange={(value) => updateFormData('propertyTypeRE', value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select property type" />
               </SelectTrigger>
@@ -59,7 +59,7 @@ export default function BusinessLoanSecurityFields({ securityType, formData, upd
           </div>
           <div>
             <Label htmlFor="existingLiens">Existing Liens</Label>
-            <Select onValueChange={(value) => updateFormData('existingLiens', value)}>
+            <Select value={formData.existingLiens || ""} onValueChange={(value) => updateFormData('existingLiens', value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select option" />
               </SelectTrigger>
@@ -125,7 +125,7 @@ export default function BusinessLoanSecurityFields({ securityType, formData, upd
           </div>
           <div>
             <Label htmlFor="paymentPlanPreference">Payment Plan Preference</Label>
-            <Select onValueChange={(value) => updateFormData('paymentPlanPreference', value)}>
+            <Select value={formData.paymentPlanPreference || ""} onValueChange={(value) => updateFormData('paymentPlanPreference', value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select payment plan" />
               </SelectTrigger>
@@ -342,7 +342,7 @@ export default function BusinessLoanSecurityFields({ securityType, formData, upd
           </div>
           <div>
             <Label htmlFor="existingAssetLiens">Existing Liens on Assets</Label>
-            <Select onValueChange={(value) => updateFormData('existingAssetLiens', value)}>
+            <Select value={formData.existingAssetLiens || ""} onValueChange={(value) => updateFormData('existingAssetLiens', value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select option" />
               </SelectTrigger>

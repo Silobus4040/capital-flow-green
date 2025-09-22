@@ -215,7 +215,7 @@ export default function SeniorLivingForm({ onSubmitSuccess }: SeniorLivingFormPr
           {/* Loan Type Selection */}
           <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
             <Label htmlFor="loanType" className="text-lg font-semibold">Senior Living Financing Type *</Label>
-            <Select onValueChange={(value) => updateFormData('loanType', value)}>
+            <Select value={formData.loanType || ""} onValueChange={(value) => updateFormData('loanType', value)}>
               <SelectTrigger className="mt-2">
                 <SelectValue placeholder="Select financing type for your senior living facility" />
               </SelectTrigger>
@@ -290,7 +290,7 @@ export default function SeniorLivingForm({ onSubmitSuccess }: SeniorLivingFormPr
               </div>
               <div>
                 <Label htmlFor="facilityType">Facility Type</Label>
-                <Select onValueChange={(value) => updateFormData('facilityType', value)}>
+                <Select value={formData.facilityType || ""} onValueChange={(value) => updateFormData('facilityType', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select facility type" />
                   </SelectTrigger>
@@ -514,7 +514,7 @@ export default function SeniorLivingForm({ onSubmitSuccess }: SeniorLivingFormPr
               </div>
               <div>
                 <Label htmlFor="staffingModel">Staffing Model</Label>
-                <Select onValueChange={(value) => updateFormData('staffingModel', value)}>
+                <Select value={formData.staffingModel || ""} onValueChange={(value) => updateFormData('staffingModel', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select staffing model" />
                   </SelectTrigger>
@@ -549,7 +549,7 @@ export default function SeniorLivingForm({ onSubmitSuccess }: SeniorLivingFormPr
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="stateLicense">State License Status</Label>
-                <Select onValueChange={(value) => updateFormData('stateLicense', value)}>
+                <Select value={formData.stateLicense || ""} onValueChange={(value) => updateFormData('stateLicense', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="State license status" />
                   </SelectTrigger>
@@ -563,7 +563,7 @@ export default function SeniorLivingForm({ onSubmitSuccess }: SeniorLivingFormPr
               </div>
               <div>
                 <Label htmlFor="medicaidCertified">Medicaid Certified</Label>
-                <Select onValueChange={(value) => updateFormData('medicaidCertified', value)}>
+                <Select value={formData.medicaidCertified || ""} onValueChange={(value) => updateFormData('medicaidCertified', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Medicaid certification" />
                   </SelectTrigger>
@@ -576,7 +576,7 @@ export default function SeniorLivingForm({ onSubmitSuccess }: SeniorLivingFormPr
               </div>
               <div>
                 <Label htmlFor="medicareCertified">Medicare Certified</Label>
-                <Select onValueChange={(value) => updateFormData('medicareCertified', value)}>
+                <Select value={formData.medicareCertified || ""} onValueChange={(value) => updateFormData('medicareCertified', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Medicare certification" />
                   </SelectTrigger>

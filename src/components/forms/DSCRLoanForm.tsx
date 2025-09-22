@@ -208,7 +208,7 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
           {/* Loan Type Selection */}
           <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
             <Label htmlFor="loanType" className="text-lg font-semibold">DSCR Loan Type *</Label>
-            <Select onValueChange={(value) => updateFormData('loanType', value)}>
+            <Select value={formData.loanType || ""} onValueChange={(value) => updateFormData('loanType', value)}>
               <SelectTrigger className="mt-2">
                 <SelectValue placeholder="Select DSCR loan type" />
               </SelectTrigger>

@@ -206,7 +206,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="downPaymentSource">Down Payment Source</Label>
-          <Select onValueChange={(value) => updateFormData('downPaymentSource', value)}>
+          <Select value={formData.downPaymentSource || ""} onValueChange={(value) => updateFormData('downPaymentSource', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select source" />
             </SelectTrigger>
@@ -419,7 +419,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="permitsObtained">Permits Obtained</Label>
-          <Select onValueChange={(value) => updateFormData('permitsObtained', value)}>
+          <Select value={formData.permitsObtained || ""} onValueChange={(value) => updateFormData('permitsObtained', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select status" />
             </SelectTrigger>
@@ -432,7 +432,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="architecturalPlansComplete">Architectural Plans Complete</Label>
-          <Select onValueChange={(value) => updateFormData('architecturalPlansComplete', value)}>
+          <Select value={formData.architecturalPlansComplete || ""} onValueChange={(value) => updateFormData('architecturalPlansComplete', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select option" />
             </SelectTrigger>
@@ -554,7 +554,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="currentPropertyListed">Current Property Listed for Sale</Label>
-          <Select onValueChange={(value) => updateFormData('currentPropertyListed', value)}>
+          <Select value={formData.currentPropertyListed || ""} onValueChange={(value) => updateFormData('currentPropertyListed', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select option" />
             </SelectTrigger>

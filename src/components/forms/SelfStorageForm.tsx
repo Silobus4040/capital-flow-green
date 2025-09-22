@@ -184,7 +184,7 @@ export default function SelfStorageForm({ onSubmitSuccess }: SelfStorageFormProp
           {/* Loan Type Selection */}
           <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
             <Label htmlFor="loanType" className="text-lg font-semibold">Self Storage Loan Type *</Label>
-            <Select onValueChange={(value) => updateFormData('loanType', value)}>
+            <Select value={formData.loanType || ""} onValueChange={(value) => updateFormData('loanType', value)}>
               <SelectTrigger className="mt-2">
                 <SelectValue placeholder="Select loan type for self storage facility" />
               </SelectTrigger>
@@ -392,7 +392,7 @@ export default function SelfStorageForm({ onSubmitSuccess }: SelfStorageFormProp
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="managementType">Management Type</Label>
-                <Select onValueChange={(value) => updateFormData('managementType', value)}>
+                <Select value={formData.managementType || ""} onValueChange={(value) => updateFormData('managementType', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select management type" />
                   </SelectTrigger>
@@ -406,7 +406,7 @@ export default function SelfStorageForm({ onSubmitSuccess }: SelfStorageFormProp
               </div>
               <div>
                 <Label htmlFor="onSiteManager">On-Site Manager</Label>
-                <Select onValueChange={(value) => updateFormData('onSiteManager', value)}>
+                <Select value={formData.onSiteManager || ""} onValueChange={(value) => updateFormData('onSiteManager', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Manager availability" />
                   </SelectTrigger>

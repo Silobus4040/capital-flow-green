@@ -211,7 +211,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
           {/* Loan Type Selection */}
           <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
             <Label htmlFor="loanType" className="text-lg font-semibold">Rehab/Investment Loan Type *</Label>
-            <Select onValueChange={(value) => updateFormData('loanType', value)}>
+            <Select value={formData.loanType || ""} onValueChange={(value) => updateFormData('loanType', value)}>
               <SelectTrigger className="mt-2">
                 <SelectValue placeholder="Select your rehab/investment loan type" />
               </SelectTrigger>
@@ -260,7 +260,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
               </div>
               <div>
                 <Label htmlFor="investorExperience">Investment Experience Level</Label>
-                <Select onValueChange={(value) => updateFormData('investorExperience', value)}>
+                <Select value={formData.investorExperience || ""} onValueChange={(value) => updateFormData('investorExperience', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select experience level" />
                   </SelectTrigger>
@@ -314,7 +314,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
               </div>
               <div>
                 <Label htmlFor="propertyType">Property Type</Label>
-                <Select onValueChange={(value) => updateFormData('propertyType', value)}>
+                <Select value={formData.propertyType || ""} onValueChange={(value) => updateFormData('propertyType', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select property type" />
                   </SelectTrigger>
@@ -329,7 +329,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
               </div>
               <div>
                 <Label htmlFor="currentCondition">Current Condition</Label>
-                <Select onValueChange={(value) => updateFormData('currentCondition', value)}>
+                <Select value={formData.currentCondition || ""} onValueChange={(value) => updateFormData('currentCondition', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select condition" />
                   </SelectTrigger>
@@ -428,7 +428,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
               </div>
               <div>
                 <Label htmlFor="exitStrategy">Exit Strategy</Label>
-                <Select onValueChange={(value) => updateFormData('exitStrategy', value)}>
+                <Select value={formData.exitStrategy || ""} onValueChange={(value) => updateFormData('exitStrategy', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select exit strategy" />
                   </SelectTrigger>
@@ -449,7 +449,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="kitchenRehab">Kitchen Renovation</Label>
-                <Select onValueChange={(value) => updateFormData('kitchenRehab', value)}>
+                <Select value={formData.kitchenRehab || ""} onValueChange={(value) => updateFormData('kitchenRehab', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Kitchen work needed" />
                   </SelectTrigger>
@@ -463,7 +463,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
               </div>
               <div>
                 <Label htmlFor="bathroomRehab">Bathroom Renovation</Label>
-                <Select onValueChange={(value) => updateFormData('bathroomRehab', value)}>
+                <Select value={formData.bathroomRehab || ""} onValueChange={(value) => updateFormData('bathroomRehab', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Bathroom work needed" />
                   </SelectTrigger>
@@ -477,7 +477,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
               </div>
               <div>
                 <Label htmlFor="flooringRehab">Flooring Work</Label>
-                <Select onValueChange={(value) => updateFormData('flooringRehab', value)}>
+                <Select value={formData.flooringRehab || ""} onValueChange={(value) => updateFormData('flooringRehab', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Flooring work needed" />
                   </SelectTrigger>
@@ -491,7 +491,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
               </div>
               <div>
                 <Label htmlFor="exteriorWork">Exterior Work</Label>
-                <Select onValueChange={(value) => updateFormData('exteriorWork', value)}>
+                <Select value={formData.exteriorWork || ""} onValueChange={(value) => updateFormData('exteriorWork', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Exterior work needed" />
                   </SelectTrigger>
@@ -505,7 +505,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
               </div>
               <div>
                 <Label htmlFor="projectTimeline">Project Timeline</Label>
-                <Select onValueChange={(value) => updateFormData('projectTimeline', value)}>
+                <Select value={formData.projectTimeline || ""} onValueChange={(value) => updateFormData('projectTimeline', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Expected completion time" />
                   </SelectTrigger>
@@ -536,7 +536,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="contractorSelected">Contractor Selected</Label>
-                <Select onValueChange={(value) => updateFormData('contractorSelected', value)}>
+                <Select value={formData.contractorSelected || ""} onValueChange={(value) => updateFormData('contractorSelected', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Contractor status" />
                   </SelectTrigger>
