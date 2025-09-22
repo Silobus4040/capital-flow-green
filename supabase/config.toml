@@ -1,4 +1,4 @@
-project_id = "YOUR_NEW_PROJECT_ID"
+project_id = "pkgeixqboxsgxbmttuww"
 
 [functions.send-program-application]
 verify_jwt = true
@@ -7,4 +7,7 @@ verify_jwt = true
 verify_jwt = false
 
 [functions.text-to-speech]
+verify_jwt = false
+
+[functions.elevenlabs-tts]
 verify_jwt = false
