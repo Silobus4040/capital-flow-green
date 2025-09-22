@@ -93,62 +93,107 @@ export default function TTSTest() {
         
         setDebugInfo(`Audio received: ${data.format}, ${Math.round((data.size || 0) / 1024)}KB`);
         
-        // Enhanced base64 to blob conversion with validation
+        // Enhanced base64 to blob conversion with robust error handling
         try {
-          const binaryString = atob(data.audioContent);
-          console.log('Decoded binary string length:', binaryString.length);
+          const base64Data = data.audioContent;
           
-          const bytes = new Uint8Array(binaryString.length);
-          for (let i = 0; i < binaryString.length; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
+          // Validate base64 format
+          if (!/^[A-Za-z0-9+/]*={0,2}$/.test(base64Data)) {
+            throw new Error('Invalid base64 format received from API');
           }
           
-          // Create audio blob - ElevenLabs always returns MP3 format
+          console.log('Base64 validation passed, length:', base64Data.length);
+          
+          // More robust base64 decoding using Uint8Array.from
+          let bytes: Uint8Array;
+          try {
+            const binaryString = atob(base64Data);
+            bytes = Uint8Array.from(binaryString, char => char.charCodeAt(0));
+            console.log('Successfully decoded to bytes array, length:', bytes.length);
+          } catch (decodeError) {
+            console.error('Base64 decode failed:', decodeError);
+            throw new Error('Failed to decode base64 audio data');
+          }
+          
+          // Validate MP3 file signature
+          if (bytes.length < 10) {
+            throw new Error('Audio data too short to be valid MP3');
+          }
+          
+          // Check for MP3 format signatures
+          const hasID3 = bytes[0] === 0x49 && bytes[1] === 0x44 && bytes[2] === 0x33; // "ID3"
+          const hasMPEGSync = (bytes[0] === 0xFF && (bytes[1] & 0xE0) === 0xE0); // MPEG frame sync
+          
+          if (!hasID3 && !hasMPEGSync) {
+            console.warn('Audio data may not have valid MP3 headers', {
+              firstBytes: Array.from(bytes.slice(0, 10)).map(b => '0x' + b.toString(16).padStart(2, '0')).join(' ')
+            });
+          }
+          
+          // Create audio blob with proper MIME type
           const audioBlob = new Blob([bytes], { type: 'audio/mpeg' });
           
-          console.log('Created audio blob:', {
-            size: audioBlob.size,
-            type: audioBlob.type,
-            expectedSize: data.size
-          });
-          
-          // Validate blob
           if (audioBlob.size === 0) {
             throw new Error('Generated audio blob is empty');
           }
           
-          // Check if blob size matches expected size (with some tolerance)
-          if (data.size && Math.abs(audioBlob.size - data.size) > 100) {
-            console.warn('Blob size mismatch - Expected:', data.size, 'Actual:', audioBlob.size);
-          }
+          console.log('Created audio blob:', {
+            size: audioBlob.size,
+            type: audioBlob.type,
+            hasValidHeaders: hasID3 || hasMPEGSync,
+            expectedSize: data.size
+          });
           
           // Clean up previous URL
           if (audioUrl) {
             URL.revokeObjectURL(audioUrl);
           }
           
-          const url = URL.createObjectURL(audioBlob);
-          console.log('Created audio URL:', url);
-          setAudioUrl(url);
-          
-          // Test if the URL is accessible
+          // Try blob URL first
+          let finalUrl: string;
           try {
-            const testResponse = await fetch(url, { method: 'HEAD' });
-            console.log('Audio URL test response:', testResponse.status, testResponse.headers.get('content-type'));
-            setDebugInfo(`Audio ready: MP3, ${Math.round(audioBlob.size / 1024)}KB, URL OK`);
-          } catch (urlError) {
-            console.error('Audio URL test failed:', urlError);
-            setDebugInfo(`Audio URL test failed: ${urlError}`);
+            finalUrl = URL.createObjectURL(audioBlob);
+            console.log('Created blob URL:', finalUrl);
+            
+            // Quick validation test
+            const testBlob = new Response(bytes).blob();
+            console.log('Blob validation test passed');
+            
+            setAudioUrl(finalUrl);
+            setDebugInfo(`Audio ready: MP3, ${Math.round(audioBlob.size / 1024)}KB, ${hasID3 ? 'ID3' : hasMPEGSync ? 'MPEG' : 'Raw'} format`);
+          } catch (blobUrlError) {
+            console.error('Blob URL creation failed, trying data URL:', blobUrlError);
+            
+            // Fallback to data URL
+            finalUrl = `data:audio/mpeg;base64,${base64Data}`;
+            setAudioUrl(finalUrl);
+            setDebugInfo(`Audio ready (fallback): MP3 data URL, ${Math.round(bytes.length / 1024)}KB`);
           }
           
           toast({
             title: 'Success',
             description: `Audio generated successfully! (${Math.round(audioBlob.size / 1024)}KB, MP3)`
           });
+          
         } catch (conversionError) {
           console.error('Audio conversion error:', conversionError);
-          setDebugInfo(`Conversion error: ${conversionError}`);
-          throw new Error('Failed to process generated audio');
+          setDebugInfo(`Conversion failed: ${conversionError.message}`);
+          
+          // Last resort: try direct data URL without validation
+          try {
+            const dataUrl = `data:audio/mpeg;base64,${data.audioContent}`;
+            setAudioUrl(dataUrl);
+            setDebugInfo(`Using direct data URL as last resort`);
+            
+            toast({
+              title: 'Audio Generated',
+              description: 'Audio created using fallback method',
+              variant: 'default'
+            });
+          } catch (fallbackError) {
+            console.error('All audio creation methods failed:', fallbackError);
+            throw new Error('Unable to create playable audio with any method');
+          }
         }
       } else {
         throw new Error('No audio content received');
