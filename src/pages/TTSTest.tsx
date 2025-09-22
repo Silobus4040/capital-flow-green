@@ -30,7 +30,7 @@ export default function TTSTest() {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioLoading, setAudioLoading] = useState(false);
-  const [audioFormat, setAudioFormat] = useState<'wav' | 'mp3'>('wav');
+  // ElevenLabs only supports MP3 format
   const [debugInfo, setDebugInfo] = useState<string>('');
   const { toast } = useToast();
   
@@ -50,21 +50,13 @@ export default function TTSTest() {
     };
   }, [audioUrl]);
 
-  // Check browser audio format support
+  // Check browser MP3 support (ElevenLabs only provides MP3)
   useEffect(() => {
     const audio = document.createElement('audio');
-    const supportsWav = audio.canPlayType('audio/wav') !== '';
     const supportsMp3 = audio.canPlayType('audio/mpeg') !== '';
     
-    console.log('Browser audio support - WAV:', supportsWav, 'MP3:', supportsMp3);
-    setDebugInfo(`Browser supports: WAV (${supportsWav}), MP3 (${supportsMp3})`);
-    
-    // Prefer WAV if supported, fallback to MP3
-    if (supportsWav) {
-      setAudioFormat('wav');
-    } else if (supportsMp3) {
-      setAudioFormat('mp3');
-    }
+    console.log('Browser MP3 support:', supportsMp3);
+    setDebugInfo(`Browser supports MP3: ${supportsMp3}`);
   }, []);
 
   const generateSpeech = async () => {
@@ -111,9 +103,8 @@ export default function TTSTest() {
             bytes[i] = binaryString.charCodeAt(i);
           }
           
-          // Use correct MIME type based on format
-          const mimeType = audioFormat === 'wav' ? 'audio/wav' : 'audio/mpeg';
-          const audioBlob = new Blob([bytes], { type: mimeType });
+          // Create audio blob - ElevenLabs always returns MP3 format
+          const audioBlob = new Blob([bytes], { type: 'audio/mpeg' });
           
           console.log('Created audio blob:', {
             size: audioBlob.size,
@@ -144,7 +135,7 @@ export default function TTSTest() {
           try {
             const testResponse = await fetch(url, { method: 'HEAD' });
             console.log('Audio URL test response:', testResponse.status, testResponse.headers.get('content-type'));
-            setDebugInfo(`Audio ready: ${mimeType}, ${Math.round(audioBlob.size / 1024)}KB, URL OK`);
+            setDebugInfo(`Audio ready: MP3, ${Math.round(audioBlob.size / 1024)}KB, URL OK`);
           } catch (urlError) {
             console.error('Audio URL test failed:', urlError);
             setDebugInfo(`Audio URL test failed: ${urlError}`);
@@ -152,7 +143,7 @@ export default function TTSTest() {
           
           toast({
             title: 'Success',
-            description: `Audio generated successfully! (${Math.round(audioBlob.size / 1024)}KB, ${audioFormat.toUpperCase()})`
+            description: `Audio generated successfully! (${Math.round(audioBlob.size / 1024)}KB, MP3)`
           });
         } catch (conversionError) {
           console.error('Audio conversion error:', conversionError);
@@ -334,20 +325,9 @@ export default function TTSTest() {
                   }
                 </SelectContent>
               </Select>
-            </div>
-
-            {/* Audio Format Selection */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Audio Format</label>
-              <Select value={audioFormat} onValueChange={(value: 'wav' | 'mp3') => setAudioFormat(value)}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="wav">WAV (Uncompressed, better quality)</SelectItem>
-                  <SelectItem value="mp3">MP3 (Compressed, smaller size)</SelectItem>
-                </SelectContent>
-              </Select>
+              <p className="text-sm text-muted-foreground">
+                ElevenLabs provides audio in MP3 format
+              </p>
             </div>
 
             {/* Debug Information */}
