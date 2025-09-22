@@ -193,17 +193,18 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
         </Select>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+        <div className="space-y-2">
           <Label htmlFor="borrowerName">Full Name *</Label>
           <Input
             id="borrowerName"
             value={formData.borrowerName}
             onChange={(e) => setFormData(prev => ({ ...prev, borrowerName: e.target.value }))}
             required
+            className="min-h-[44px]"
           />
         </div>
-        <div>
+        <div className="space-y-2">
           <Label htmlFor="borrowerEmail">Email Address *</Label>
           <Input
             id="borrowerEmail"
@@ -211,9 +212,10 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
             value={formData.borrowerEmail}
             onChange={(e) => setFormData(prev => ({ ...prev, borrowerEmail: e.target.value }))}
             required
+            className="min-h-[44px]"
           />
         </div>
-        <div>
+        <div className="space-y-2">
           <Label htmlFor="borrowerPhone">Phone Number *</Label>
           <Input
             id="borrowerPhone"
@@ -221,32 +223,36 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
             value={formData.borrowerPhone}
             onChange={(e) => setFormData(prev => ({ ...prev, borrowerPhone: e.target.value }))}
             required
+            className="min-h-[44px]"
           />
         </div>
-        <div>
+        <div className="space-y-2">
           <Label htmlFor="requestedAmount">Requested Amount</Label>
           <Input
             id="requestedAmount"
             type="number"
             value={formData.requestedAmount}
             onChange={(e) => setFormData(prev => ({ ...prev, requestedAmount: e.target.value }))}
+            className="min-h-[44px]"
           />
         </div>
       </div>
-      <div>
+      <div className="space-y-2">
         <Label htmlFor="propertyAddress">Property Address</Label>
         <Input
           id="propertyAddress"
           value={formData.propertyAddress}
           onChange={(e) => setFormData(prev => ({ ...prev, propertyAddress: e.target.value }))}
+          className="min-h-[44px]"
         />
       </div>
-      <div>
+      <div className="space-y-2">
         <Label htmlFor="loanPurpose">Loan Purpose</Label>
         <Textarea
           id="loanPurpose"
           value={formData.loanPurpose}
           onChange={(e) => setFormData(prev => ({ ...prev, loanPurpose: e.target.value }))}
+          className="min-h-[100px]"
         />
       </div>
 
@@ -259,7 +265,7 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
         />
       )}
 
-      <Button type="submit" disabled={isSubmitting || !formData.loanType} className="w-full">
+      <Button type="submit" disabled={isSubmitting || !formData.loanType} className="w-full min-h-[48px] text-base font-medium">
         {isSubmitting ? "Submitting..." : "Submit Application"}
       </Button>
     </form>

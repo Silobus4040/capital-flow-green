@@ -23,7 +23,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
   const RefinanceFields = () => (
     <div className="space-y-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
       <h3 className="text-lg font-semibold text-blue-800">Refinance Information</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <Label htmlFor="currentLoanBalance">Current Loan Balance ($)</Label>
           <Input
@@ -182,7 +182,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
   const PurchaseFields = () => (
     <div className="space-y-4 p-4 bg-green-50 rounded-lg border border-green-200">
       <h3 className="text-lg font-semibold text-green-800">Purchase Information</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <Label htmlFor="purchasePrice">Purchase Price ($)</Label>
           <Input
@@ -339,7 +339,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
   const ConstructionFields = () => (
     <div className="space-y-4 p-4 bg-orange-50 rounded-lg border border-orange-200">
       <h3 className="text-lg font-semibold text-orange-800">Construction/Development Information</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <Label htmlFor="landAlreadyOwned">Land Already Owned</Label>
           <Select onValueChange={(value) => updateFormData('landAlreadyOwned', value)}>

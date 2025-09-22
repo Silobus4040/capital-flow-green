@@ -27,34 +27,39 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-4">
+          <Link to="/" className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4 min-w-0 flex-1">
             <img 
               src={ccifLogo} 
               alt="CCIF - Commercial Capital & Investment Finance Logo" 
-              className="h-14 w-14 object-contain flex-shrink-0" 
+              className="h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 object-contain flex-shrink-0" 
             />
-            <div className="hidden lg:block">
-              <div className="text-xl font-bold text-primary leading-tight whitespace-nowrap">
+            <div className="hidden xl:block min-w-0">
+              <div className="text-lg xl:text-xl font-bold text-primary leading-tight">
                 COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.
               </div>
             </div>
-            <div className="hidden sm:block lg:hidden">
-              <div className="text-lg font-bold text-primary leading-tight whitespace-nowrap">
+            <div className="hidden lg:block xl:hidden min-w-0">
+              <div className="text-base lg:text-lg font-bold text-primary leading-tight">
                 COMMERCIAL CAPITAL & INVESTMENT FINANCE
               </div>
             </div>
-            <div className="text-lg font-bold text-primary sm:hidden leading-tight">
+            <div className="hidden sm:block lg:hidden min-w-0">
+              <div className="text-sm sm:text-base font-bold text-primary leading-tight">
+                CCIF - COMMERCIAL CAPITAL
+              </div>
+            </div>
+            <div className="block sm:hidden text-sm font-bold text-primary leading-tight">
               CCIF
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center justify-center space-x-4">
+          <nav className="hidden lg:flex items-center justify-center space-x-2 xl:space-x-3 flex-shrink-0">
             {navigationItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`px-2 xl:px-3 py-2 rounded-md text-xs xl:text-sm font-medium transition-colors whitespace-nowrap ${
                   isActive(item.href)
                     ? "bg-primary text-primary-foreground"
                     : "text-foreground hover:bg-accent hover:text-accent-foreground"
@@ -65,7 +70,7 @@ export default function Header() {
             ))}
             <Link
               to="/applicant-login"
-              className="px-4 py-2 rounded-md text-sm font-medium bg-accent text-accent-foreground hover:bg-primary hover:text-primary-foreground transition-colors ml-2"
+              className="px-3 xl:px-4 py-2 rounded-md text-xs xl:text-sm font-medium bg-accent text-accent-foreground hover:bg-primary hover:text-primary-foreground transition-colors ml-2 whitespace-nowrap"
             >
               Borrower Portal
             </Link>
@@ -75,8 +80,9 @@ export default function Header() {
           <Button
             variant="ghost"
             size="sm"
-            className="lg:hidden"
+            className="lg:hidden flex-shrink-0 p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle navigation menu"
           >
             {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
@@ -85,12 +91,12 @@ export default function Header() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t">
+            <div className="px-4 pt-4 pb-4 space-y-2 bg-background border-t shadow-lg">
               {navigationItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                  className={`block px-4 py-3 rounded-md text-base font-medium transition-colors min-h-[44px] flex items-center ${
                     isActive(item.href)
                       ? "bg-primary text-primary-foreground"
                       : "text-foreground hover:bg-accent hover:text-accent-foreground"
@@ -102,7 +108,7 @@ export default function Header() {
               ))}
               <Link
                 to="/applicant-login"
-                className="block px-3 py-2 rounded-md text-base font-medium bg-accent text-accent-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+                className="block px-4 py-3 rounded-md text-base font-medium bg-accent text-accent-foreground hover:bg-primary hover:text-primary-foreground transition-colors min-h-[44px] flex items-center"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Borrower Portal
