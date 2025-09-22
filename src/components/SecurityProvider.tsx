@@ -39,7 +39,7 @@ export const SecurityProvider = ({ children }: SecurityProviderProps) => {
 
     const metaFrameOptions = document.createElement('meta');
     metaFrameOptions.httpEquiv = 'X-Frame-Options';
-    metaFrameOptions.content = 'DENY';
+    metaFrameOptions.content = 'SAMEORIGIN';
     document.head.appendChild(metaFrameOptions);
 
     // Monitor for potential XSS attempts
