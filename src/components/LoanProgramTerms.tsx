@@ -15,9 +15,9 @@ export default function LoanProgramTerms({ terms, className = "" }: LoanProgramT
   });
 
   return (
-    <ScrollArea className={`h-96 w-full rounded-md border p-4 ${className}`}>
+    <ScrollArea className={`min-h-96 max-h-[600px] w-full rounded-md border p-4 md:p-8 ${className}`}>
       <div 
-        className="loan-program-terms prose prose-sm max-w-none"
+        className="loan-program-terms prose prose-base md:prose-lg max-w-none loan-terms-enhanced"
         dangerouslySetInnerHTML={{ __html: sanitizedTerms }}
       />
     </ScrollArea>
