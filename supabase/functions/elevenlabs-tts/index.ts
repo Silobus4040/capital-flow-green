@@ -105,21 +105,14 @@ serve(async (req) => {
     
     // Use chunked base64 conversion to prevent "Maximum call stack size exceeded"
     const chunkSize = 8192; // Process in 8KB chunks
-    let base64Audio = '';
-    
-    for (let i = 0; i < uint8Array.length; i += chunkSize) {
-      const chunk = uint8Array.slice(i, i + chunkSize);
-      const chunkString = String.fromCharCode.apply(null, Array.from(chunk));
-      base64Audio += btoa(chunkString);
-    }
-    
-    // Alternative method: Convert entire array to string in chunks then encode
     let binaryString = '';
+    
     for (let i = 0; i < uint8Array.length; i += chunkSize) {
       const chunk = uint8Array.slice(i, i + chunkSize);
       binaryString += String.fromCharCode.apply(null, Array.from(chunk));
     }
-    base64Audio = btoa(binaryString);
+    
+    const base64Audio = btoa(binaryString);
 
     console.log("Successfully generated ElevenLabs audio, size:", arrayBuffer.byteLength, "bytes")
 
