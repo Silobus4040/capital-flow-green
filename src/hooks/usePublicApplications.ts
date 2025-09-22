@@ -26,24 +26,14 @@ export const usePublicApplications = () => {
   const submitPublicApplication = async (applicationData: ProgramApplicationData) => {
     console.log('🔥 Starting form submission:', applicationData.programName);
     
-    // Require authentication for loan applications (security fix)
-    if (!user) {
-      toast({
-        title: "Authentication Required",
-        description: "Please sign in to submit a loan application. This helps us protect your sensitive information.",
-        variant: "destructive",
-      });
-      throw new Error('Authentication required');
-    }
-    
     setIsSubmitting(true);
     
     try {
-      // Insert application into database with authenticated user_id
+      // Insert application into database (supports both authenticated and anonymous users)
       const { error: dbError } = await supabase
         .from('loan_program_applications')
         .insert({
-          user_id: user.id, // Use authenticated user ID (security requirement)
+          user_id: user?.id || null, // Use authenticated user ID if available, null for anonymous
           program_id: applicationData.programId,
           program_name: applicationData.programName,
           borrower_name: applicationData.borrowerName,

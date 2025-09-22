@@ -68,52 +68,6 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
     loanType: ""
   });
 
-  // Show authentication requirement if user is not logged in
-  if (!isAuthenticated) {
-    return (
-      <div className="space-y-6">
-        <Alert className="border-amber-200 bg-amber-50">
-          <Shield className="h-4 w-4" />
-          <AlertDescription className="text-amber-800">
-            <div className="flex items-center justify-between">
-              <span>
-                <strong>Secure Application Required:</strong> Please sign in to submit your loan application. 
-                This helps us protect your sensitive financial information and comply with privacy regulations.
-              </span>
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={() => window.location.href = '/applicant/login'}
-                className="ml-4 border-amber-300 text-amber-800 hover:bg-amber-100"
-              >
-                <LogIn className="h-4 w-4 mr-2" />
-                Sign In
-              </Button>
-            </div>
-          </AlertDescription>
-        </Alert>
-        
-        <div className="text-center p-8 bg-gray-50 rounded-lg">
-          <Shield className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Authentication Required</h3>
-          <p className="text-gray-600 mb-4">
-            To protect your sensitive financial information, we require all loan applicants to create a secure account.
-          </p>
-          <div className="space-y-2">
-            <Button 
-              onClick={() => window.location.href = '/applicant/login'}
-              className="w-full"
-            >
-              Sign In to Continue
-            </Button>
-            <p className="text-sm text-gray-500">
-              Don't have an account? You can create one during the sign-in process.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
