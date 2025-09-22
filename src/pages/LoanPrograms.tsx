@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { loanPrograms, LoanProgram } from "@/data/loanPrograms";
 import ProgramApplicationForm from "@/components/ProgramApplicationForm";
 import LoanProgramTerms from "@/components/LoanProgramTerms";
@@ -15,7 +16,20 @@ import selfStorageImage from "@/assets/self-storage-facility.jpg";
 import seniorLivingImage from "@/assets/senior-living-facility.jpg";
 import residentialInvestmentImage from "@/assets/residential-investment.jpg";
 
+const programImages = {
+  "rv-park-financing": rvParkImage,
+  "commercial-mortgage": commercialMortgageImage,
+  "commercial-dscr-loan": commercialDscrImage,
+  "rehab-loan": rehabPropertyImage,
+  "mobile-home-park-financing": mobileHomeParkImage,
+  "acquisition-development-construction": constructionSiteImage,
+  "self-storage-financing": selfStorageImage,
+  "senior-living-financing": seniorLivingImage,
+  "residential-investment-loan": residentialInvestmentImage,
+};
+
 export default function LoanPrograms() {
+  const navigate = useNavigate();
   const [selectedProgram, setSelectedProgram] = useState<LoanProgram | null>(null);
   const [showApplicationForm, setShowApplicationForm] = useState<LoanProgram | null>(null);
 
@@ -24,153 +38,101 @@ export default function LoanPrograms() {
   };
 
   return (
-    <div className="min-h-screen py-12 px-4">
-      <div className="container mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
+      <div className="loan-program-container container mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Loan Programs</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Comprehensive commercial real estate financing solutions tailored to your specific needs. 
-            All programs feature asset-based underwriting with flexible terms.
+          <h1 className="loan-program-header bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            Commercial Loan Programs
+          </h1>
+          <p className="loan-program-body text-muted-foreground max-w-3xl mx-auto">
+            Explore our comprehensive range of commercial lending solutions designed to fuel your business growth and real estate investments.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="loan-program-grid mb-12">
           {loanPrograms.map((program) => (
-            <Card key={program.id} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="text-xl">{program.name}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">Interest Rate</p>
-                  <p className="text-lg font-bold text-primary">{program.interestRate}</p>
+            <Card key={program.id} className="loan-program-card h-full flex flex-col shadow-lg hover:shadow-xl transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm">
+              <div className="relative overflow-hidden rounded-t-lg">
+                {programImages[program.id] && (
+                  <img 
+                    src={programImages[program.id]} 
+                    alt={program.name}
+                    className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                )}
+              </div>
+              <CardContent className="flex-1 p-6">
+                <h2 className="loan-program-subheader text-foreground mb-4">{program.name}</h2>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-muted-foreground">Interest Rate:</span>
+                    <span className="font-semibold text-primary">{program.interestRate}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-muted-foreground">Min. Loan:</span>
+                    <span className="font-semibold text-primary">{program.minimumLoanAmount}</span>
+                  </div>
                 </div>
-                
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">Minimum Loan Amount</p>
-                  <p className="text-lg font-bold">{program.minimumLoanAmount}</p>
-                </div>
-
-                <p className="text-sm text-muted-foreground">{program.description}</p>
-
-                <div className="flex flex-col gap-2">
+                <p className="loan-program-body text-muted-foreground mb-6">{program.description}</p>
+                <div className="flex flex-col sm:flex-row gap-3">
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button 
                         variant="outline" 
+                        className="loan-program-button flex-1"
                         onClick={() => setSelectedProgram(program)}
-                        className="w-full"
                       >
                         View Full Terms
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="max-w-6xl max-h-[90vh]">
+                    <DialogContent className="max-w-4xl max-h-[80vh] overflow-hidden">
                       <DialogHeader>
-                        <DialogTitle className="text-2xl font-bold text-primary">
-                          {selectedProgram?.name} - Complete Terms & Conditions
-                        </DialogTitle>
+                        <DialogTitle className="loan-program-subheader">{selectedProgram?.name} - Full Terms</DialogTitle>
+                        <DialogDescription className="loan-program-body">
+                          Complete terms and conditions for this loan program
+                        </DialogDescription>
                       </DialogHeader>
-                      
-                      {selectedProgram?.id === "rv-park-financing" && (
-                        <div className="mb-4">
-                          <img 
-                            src={rvParkImage} 
-                            alt="RV Park and Campground Facility with Recreational Vehicles" 
-                            className="w-full h-48 object-cover rounded-lg shadow-lg"
-                          />
-                        </div>
-                      )}
-                      
-                      {selectedProgram?.id === "commercial-mortgage" && (
-                        <div className="mb-4">
-                          <img 
-                            src={commercialMortgageImage} 
-                            alt="Commercial Real Estate Property" 
-                            className="w-full h-48 object-cover rounded-lg shadow-lg"
-                          />
-                        </div>
-                      )}
-                      
-                      {selectedProgram?.id === "commercial-dscr-loan" && (
-                        <div className="mb-4">
-                          <img 
-                            src={commercialDscrImage} 
-                            alt="Commercial Rental Property for DSCR Loan" 
-                            className="w-full h-48 object-cover rounded-lg shadow-lg"
-                          />
-                        </div>
-                      )}
-                      
-                      {selectedProgram?.id === "rehab-loan" && (
-                        <div className="mb-4">
-                          <img 
-                            src={rehabPropertyImage} 
-                            alt="Property Needing Rehabilitation and Renovation" 
-                            className="w-full h-48 object-cover rounded-lg shadow-lg"
-                          />
-                        </div>
-                      )}
-                      
-                      {selectedProgram?.id === "mobile-home-park-financing" && (
-                        <div className="mb-4">
-                          <img 
-                            src={mobileHomeParkImage} 
-                            alt="Mobile Home Park Community with Well-Maintained Manufactured Homes" 
-                            className="w-full h-48 object-cover rounded-lg shadow-lg"
-                          />
-                        </div>
-                       )}
-                       
-                       {selectedProgram?.id === "acquisition-development-construction" && (
-                         <div className="mb-4">
-                           <img 
-                             src={constructionSiteImage} 
-                             alt="Modern Construction Site with Heavy Machinery and Development Activity" 
-                             className="w-full h-48 object-cover rounded-lg shadow-lg"
-                           />
-                         </div>
-                        )}
-                        
-                        {selectedProgram?.id === "self-storage-financing" && (
-                          <div className="mb-4">
-                            <img 
-                              src={selfStorageImage} 
-                              alt="Modern Self Storage Facility with Security Features and Climate Control" 
-                              className="w-full h-48 object-cover rounded-lg shadow-lg"
+                      {selectedProgram && (
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                          <div>
+                            {programImages[selectedProgram.id] && (
+                              <img 
+                                src={programImages[selectedProgram.id]} 
+                                alt={selectedProgram.name}
+                                className="w-full h-64 object-cover rounded-lg mb-4"
+                              />
+                            )}
+                            <div className="space-y-4">
+                              <div className="bg-primary/5 p-4 rounded-lg">
+                                <h3 className="font-semibold text-primary mb-2">Key Details</h3>
+                                <div className="space-y-2 text-sm">
+                                  <div className="flex justify-between">
+                                    <span>Interest Rate:</span>
+                                    <span className="font-medium">{selectedProgram.interestRate}</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span>Min. Loan Amount:</span>
+                                    <span className="font-medium">{selectedProgram.minimumLoanAmount}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <p className="loan-program-body text-muted-foreground">{selectedProgram.description}</p>
+                            </div>
+                          </div>
+                          <div className="flex flex-col">
+                            <h3 className="text-lg font-semibold mb-3">Terms & Conditions</h3>
+                            <LoanProgramTerms 
+                              terms={selectedProgram.terms} 
+                              className="flex-1"
                             />
                           </div>
-                         )}
-                         
-                          {selectedProgram?.id === "senior-living-financing" && (
-                            <div className="mb-4">
-                              <img 
-                                src={seniorLivingImage} 
-                                alt="Senior Living Care Facility with Caring Staff and Comfortable Environment" 
-                                className="w-full h-48 object-cover rounded-lg shadow-lg"
-                              />
-                            </div>
-                          )}
-                          
-                          {selectedProgram?.id === "residential-investment-loan" && (
-                            <div className="mb-4">
-                              <img 
-                                src={residentialInvestmentImage} 
-                                alt="Residential Investment Property Portfolio with Single-Family Homes and Rental Properties" 
-                                className="w-full h-48 object-cover rounded-lg shadow-lg"
-                              />
-                            </div>
-                          )}
-                      
-                      <LoanProgramTerms 
-                        terms={selectedProgram?.terms || ""} 
-                        className="max-h-[65vh]" 
-                      />
+                        </div>
+                      )}
                     </DialogContent>
                   </Dialog>
-                  
                   <Button 
-                    className="w-full"
-                    onClick={() => window.location.href = `/loan-programs/${program.id}`}
+                    className="loan-program-button flex-1"
+                    onClick={() => navigate(`/loan-programs/${program.id}`)}
                   >
                     View Details & Apply
                   </Button>
@@ -194,7 +156,6 @@ export default function LoanPrograms() {
             )}
           </DialogContent>
         </Dialog>
-
       </div>
     </div>
   );

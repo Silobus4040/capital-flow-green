@@ -118,7 +118,81 @@ All colors MUST be HSL.
 }
 
 /* Mobile-first responsive typography and layout fixes */
+/* Master Template Mobile Optimization - Based on Commercial DSCR Structure */
+.loan-program-container {
+  padding: 1rem;
+  max-width: 100%;
+}
+
+.loan-program-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.loan-program-card {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+}
+
+.loan-program-header {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.loan-program-subheader {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.loan-program-body {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.loan-program-terms {
+  font-size: 1rem;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.loan-program-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  min-height: 44px; /* Touch target */
+}
+
+/* Mobile adjustments */
 @media (max-width: 768px) {
+  .loan-program-container {
+    padding: 1rem;
+  }
+  
+  .loan-program-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .loan-program-card {
+    padding: 1rem;
+  }
+  
+  .loan-program-header {
+    font-size: 2rem;
+  }
+  
+  .loan-program-subheader {
+    font-size: 1.5rem;
+  }
+  
   .loan-program-terms {
     font-size: 0.875rem !important;
     line-height: 1.5 !important;
@@ -152,5 +226,17 @@ All colors MUST be HSL.
   * {
     word-wrap: break-word;
     overflow-wrap: break-word;
+  }
+  
+  .loan-program-header {
+    font-size: 1.75rem;
+  }
+  
+  .loan-program-subheader {
+    font-size: 1.25rem;
+  }
+  
+  .loan-program-body {
+    font-size: 1rem;
   }
 }

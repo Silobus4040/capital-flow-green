@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { loanPrograms } from "@/data/loanPrograms";
 import ProgramApplicationForm from "@/components/ProgramApplicationForm";
@@ -37,10 +38,13 @@ export default function LoanProgramDetail() {
 
   if (!program) {
     return (
-      <div className="min-h-screen py-12 px-4">
-        <div className="container mx-auto text-center">
-          <h1 className="text-2xl font-bold mb-4">Program Not Found</h1>
-          <Button onClick={() => navigate("/loan-programs")}>
+      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
+        <div className="loan-program-container container mx-auto text-center">
+          <h1 className="loan-program-subheader text-foreground mb-4">Program Not Found</h1>
+          <Button 
+            onClick={() => navigate("/loan-programs")}
+            className="loan-program-button"
+          >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to All Programs
           </Button>
@@ -53,82 +57,102 @@ export default function LoanProgramDetail() {
     setShowApplicationForm(false);
   };
 
-  const programImage = programImages[program.id as keyof typeof programImages];
+  const selectedImage = programImages[program.id as keyof typeof programImages];
 
   return (
-    <div className="min-h-screen py-12 px-4">
-      <div className="container mx-auto max-w-4xl">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
+      <div className="loan-program-container container mx-auto">
         <Button 
           variant="outline" 
-          onClick={() => navigate("/loan-programs")}
-          className="mb-6"
+          onClick={() => navigate('/loan-programs')}
+          className="loan-program-button mb-6 hover:bg-primary/10"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to All Programs
+          Back to Loan Programs
         </Button>
 
-        <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary">{program.name}</h1>
-          <div className="grid md:grid-cols-2 gap-4 mb-6">
-            <div>
-              <p className="text-sm font-medium text-muted-foreground">Interest Rate</p>
-              <p className="text-2xl font-bold text-primary">{program.interestRate}</p>
-            </div>
-            <div>
-              <p className="text-sm font-medium text-muted-foreground">Minimum Loan Amount</p>
-              <p className="text-2xl font-bold">{program.minimumLoanAmount}</p>
-            </div>
-          </div>
-          <p className="text-lg text-muted-foreground mb-6">{program.description}</p>
+        <div className="max-w-6xl mx-auto">
+          <Card className="loan-program-card shadow-2xl border-0 bg-card/80 backdrop-blur-sm">
+            <CardContent className="p-8">
+              <div className="loan-program-grid">
+                <div>
+                  <h1 className="loan-program-header bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-6">
+                    {program.name}
+                  </h1>
+                  
+                  <div className="space-y-6 mb-8">
+                    <div className="bg-primary/5 p-6 rounded-xl">
+                      <h2 className="loan-program-subheader text-primary mb-4">Key Information</h2>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="text-center p-4 bg-background/50 rounded-lg">
+                          <p className="text-sm text-muted-foreground mb-1">Interest Rate</p>
+                          <p className="loan-program-subheader text-primary">{program.interestRate}</p>
+                        </div>
+                        <div className="text-center p-4 bg-background/50 rounded-lg">
+                          <p className="text-sm text-muted-foreground mb-1">Minimum Loan</p>
+                          <p className="loan-program-subheader text-primary">{program.minimumLoanAmount}</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h3 className="loan-program-subheader text-foreground mb-3">Program Description</h3>
+                      <p className="loan-program-body text-muted-foreground">{program.description}</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  {selectedImage && (
+                    <img 
+                      src={selectedImage} 
+                      alt={program.name}
+                      className="w-full h-80 object-cover rounded-xl shadow-lg mb-6"
+                    />
+                  )}
+                  
+                  <div className="bg-secondary/10 p-6 rounded-xl">
+                    <h3 className="loan-program-subheader text-foreground mb-4">Terms & Conditions</h3>
+                    <LoanProgramTerms 
+                      terms={program.terms}
+                      className="h-64"
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-12 text-center">
+                <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-2xl">
+                  <h2 className="loan-program-header text-foreground mb-4">Ready to Apply?</h2>
+                  <p className="loan-program-body text-muted-foreground mb-6 max-w-2xl mx-auto">
+                    Start your application process today and take advantage of our competitive rates and flexible terms.
+                  </p>
+                  <Button 
+                    onClick={() => setShowApplicationForm(true)}
+                    size="lg"
+                    className="loan-program-button text-lg px-8 py-3 hover:scale-105 transition-transform"
+                  >
+                    Apply Now
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
-
-        {programImage && (
-          <div className="mb-8">
-            <img 
-              src={programImage} 
-              alt={`${program.name} visual representation`}
-              className="w-full h-64 md:h-80 object-cover rounded-lg shadow-lg"
-            />
-          </div>
-        )}
-
-        {/* Program Terms - Full detailed view */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4 text-primary">Complete Terms & Conditions</h2>
-          <LoanProgramTerms 
-            terms={program.terms} 
-            className="h-auto" 
-          />
-        </div>
-
-        {/* Submit Application Button - Prominently placed after terms */}
-        <div className="bg-gradient-to-r from-primary/10 to-blue-600/10 border border-primary/30 rounded-lg p-8 text-center">
-          <h3 className="text-2xl font-bold mb-4 text-primary">Ready to Apply?</h3>
-          <p className="text-muted-foreground mb-6">
-            Submit your application for {program.name} and get started with your commercial real estate financing.
-          </p>
-          <Button 
-            size="lg"
-            className="text-lg px-8 py-6"
-            onClick={() => setShowApplicationForm(true)}
-          >
-            Submit Application for {program.name}
-          </Button>
-        </div>
-
-        {/* Application Form Dialog */}
-        <Dialog open={showApplicationForm} onOpenChange={setShowApplicationForm}>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>Submit Application for {program.name}</DialogTitle>
-            </DialogHeader>
-            <ProgramApplicationForm 
-              program={program} 
-              onSubmitSuccess={handleApplicationFormSuccess}
-            />
-          </DialogContent>
-        </Dialog>
       </div>
+
+      {/* Application Form Dialog */}
+      <Dialog open={showApplicationForm} onOpenChange={setShowApplicationForm}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Submit Application for {program.name}</DialogTitle>
+          </DialogHeader>
+          <ProgramApplicationForm 
+            program={program} 
+            onSubmitSuccess={handleApplicationFormSuccess}
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
