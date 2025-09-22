@@ -9,17 +9,23 @@ import { Volume2, VolumeX, Loader2, ArrowLeft, AlertTriangle } from 'lucide-reac
 import { Link } from 'react-router-dom';
 
 const voices = [
-  { id: 'alloy', name: 'Alloy - Balanced and neutral' },
-  { id: 'echo', name: 'Echo - Clear and articulate' },
-  { id: 'fable', name: 'Fable - Warm and expressive' },
-  { id: 'onyx', name: 'Onyx - Deep and authoritative' },
-  { id: 'nova', name: 'Nova - Bright and energetic' },
-  { id: 'shimmer', name: 'Shimmer - Smooth and elegant' }
+  { id: 'aria', name: 'Aria - Natural and expressive' },
+  { id: 'roger', name: 'Roger - Clear and professional' },
+  { id: 'sarah', name: 'Sarah - Warm and friendly' },
+  { id: 'laura', name: 'Laura - Smooth and articulate' },
+  { id: 'charlie', name: 'Charlie - Youthful and energetic' },
+  { id: 'george', name: 'George - Deep and authoritative' },
+  { id: 'callum', name: 'Callum - British accent' },
+  { id: 'river', name: 'River - Calm and soothing' },
+  { id: 'liam', name: 'Liam - Confident and clear' },
+  { id: 'charlotte', name: 'Charlotte - Elegant and refined' },
+  { id: 'alice', name: 'Alice - Bright and cheerful' },
+  { id: 'matilda', name: 'Matilda - Storytelling voice' }
 ];
 
 export default function TTSTest() {
   const [text, setText] = useState('Welcome to CCIF Capital. We specialize in providing flexible financing solutions for your commercial real estate investments.');
-  const [selectedVoice, setSelectedVoice] = useState('alloy');
+  const [selectedVoice, setSelectedVoice] = useState('aria');
   const [loading, setLoading] = useState(false);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -75,12 +81,12 @@ export default function TTSTest() {
     setDebugInfo('Generating audio...');
     
     try {
-      console.log('Requesting TTS with format:', audioFormat);
-      const { data, error } = await supabase.functions.invoke('text-to-speech', {
+      console.log('Requesting ElevenLabs TTS with voice:', selectedVoice);
+      const { data, error } = await supabase.functions.invoke('elevenlabs-tts', {
         body: {
           text: text.trim(),
           voice: selectedVoice,
-          format: audioFormat
+          model: 'eleven_multilingual_v2'
         }
       });
 
@@ -277,7 +283,7 @@ export default function TTSTest() {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-slate-900">Text-to-Speech Test</h1>
-                <p className="text-slate-600">Test OpenAI voice synthesis</p>
+                <p className="text-slate-600">Test ElevenLabs voice synthesis</p>
               </div>
             </div>
           </div>
@@ -292,7 +298,7 @@ export default function TTSTest() {
               Text-to-Speech Generator
             </CardTitle>
             <CardDescription>
-              Enter text below and select a voice to generate natural-sounding speech using OpenAI's TTS API.
+              Enter text below and select a voice to generate natural-sounding speech using ElevenLabs' premium TTS API.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">

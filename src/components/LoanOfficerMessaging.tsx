@@ -195,10 +195,11 @@ export default function LoanOfficerMessaging({ clientId, clientName, clientEmail
 
     setIsGeneratingTTS(true);
     try {
-      const { data, error } = await supabase.functions.invoke('text-to-speech', {
+      const { data, error } = await supabase.functions.invoke('elevenlabs-tts', {
         body: { 
           text: newMessage,
-          voice: 'Aria'
+          voice: 'aria',
+          model: 'eleven_multilingual_v2'
         }
       });
 
