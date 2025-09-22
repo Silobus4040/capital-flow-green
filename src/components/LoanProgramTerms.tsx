@@ -1,4 +1,3 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
 import DOMPurify from "dompurify";
 
 interface LoanProgramTermsProps {
@@ -15,11 +14,11 @@ export default function LoanProgramTerms({ terms, className = "" }: LoanProgramT
   });
 
   return (
-    <ScrollArea className={`min-h-96 max-h-[600px] w-full rounded-md border p-4 md:p-8 ${className}`}>
+    <div className={`w-full p-4 sm:p-6 lg:p-8 ${className}`}>
       <div 
-        className="loan-program-terms prose prose-base md:prose-lg max-w-none loan-terms-enhanced"
+        className="loan-program-terms prose prose-sm sm:prose-base lg:prose-lg max-w-none loan-terms-enhanced space-y-4 sm:space-y-6"
         dangerouslySetInnerHTML={{ __html: sanitizedTerms }}
       />
-    </ScrollArea>
+    </div>
   );
 }

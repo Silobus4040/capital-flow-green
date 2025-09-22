@@ -74,16 +74,16 @@ export default function LoanPrograms() {
                   </div>
                 </div>
                 <p className="loan-program-body text-muted-foreground mb-6">{program.description}</p>
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
                   <Button 
                     variant="outline"
-                    className="loan-program-button flex-1"
+                    className="loan-program-button w-full h-12"
                     onClick={() => navigate(`/loan-programs/${program.id}`)}
                   >
                     View Details
                   </Button>
                   <Button 
-                    className="loan-program-button flex-1"
+                    className="loan-program-button w-full h-12"
                     onClick={() => setShowApplicationForm(program)}
                   >
                     Apply Now

@@ -115,7 +115,7 @@ export default function LoanProgramDetail() {
                     <h3 className="loan-program-subheader text-foreground mb-4">Terms & Conditions</h3>
                     <LoanProgramTerms 
                       terms={program.terms}
-                      className="h-64"
+                      className=""
                     />
                   </div>
                 </div>

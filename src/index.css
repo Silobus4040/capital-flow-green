@@ -241,10 +241,11 @@ All colors MUST be HSL.
   }
 }
 
-/* Enhanced Loan Terms Styling */
+/* Enhanced Loan Terms Styling - Full Width Responsive */
 .loan-terms-enhanced {
   font-size: 1rem;
-  line-height: 1.75;
+  line-height: 1.8;
+  color: hsl(var(--foreground));
 }
 
 .loan-terms-enhanced h1,
@@ -253,10 +254,11 @@ All colors MUST be HSL.
 .loan-terms-enhanced h4,
 .loan-terms-enhanced h5,
 .loan-terms-enhanced h6 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
   font-weight: 600;
   line-height: 1.4;
+  color: hsl(var(--primary));
 }
 
 .loan-terms-enhanced h1 {
@@ -273,19 +275,21 @@ All colors MUST be HSL.
 }
 
 .loan-terms-enhanced p {
-  margin-bottom: 1.25rem;
-  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  color: hsl(var(--muted-foreground));
 }
 
 .loan-terms-enhanced ul,
 .loan-terms-enhanced ol {
-  margin-bottom: 1.5rem;
-  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+  padding-left: 2rem;
 }
 
 .loan-terms-enhanced li {
-  margin-bottom: 0.5rem;
-  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+  color: hsl(var(--muted-foreground));
 }
 
 .loan-terms-enhanced strong {
