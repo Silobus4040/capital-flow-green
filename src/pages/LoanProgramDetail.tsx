@@ -110,18 +110,29 @@ export default function LoanProgramDetail() {
                       className="w-full h-80 object-cover rounded-xl shadow-lg mb-6"
                     />
                   )}
-                  
-                  <div>
-                    <h3 className="loan-program-subheader text-foreground mb-6">Terms & Conditions</h3>
-                    <LoanProgramTerms 
-                      terms={program.terms}
-                      className=""
-                    />
-                  </div>
                 </div>
               </div>
-              
-              <div className="mt-12 text-center">
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      {/* Full-Width Terms & Conditions Section */}
+      <div className="w-full py-12 px-4 sm:px-6 lg:px-8">
+        <div className="w-full">
+          <h3 className="loan-program-subheader text-foreground mb-8 text-center">Terms & Conditions</h3>
+          <LoanProgramTerms 
+            terms={program.terms}
+            className=""
+          />
+        </div>
+      </div>
+
+      <div className="loan-program-container container mx-auto">
+        <div className="max-w-6xl mx-auto">
+          <Card className="loan-program-card shadow-2xl border-0 bg-card/80 backdrop-blur-sm">
+            <CardContent className="p-8">
+              <div className="text-center">
                 <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-2xl">
                   <h2 className="loan-program-header text-foreground mb-4">Ready to Apply?</h2>
                   <p className="loan-program-body text-muted-foreground mb-6 max-w-2xl mx-auto">
