@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/contexts/AuthContext';
 
 export interface ProgramApplicationData {
   programId: string;
@@ -20,17 +21,29 @@ export interface ProgramApplicationData {
 export const usePublicApplications = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const { user } = useAuth();
 
   const submitPublicApplication = async (applicationData: ProgramApplicationData) => {
     console.log('🔥 Starting form submission:', applicationData.programName);
+    
+    // Require authentication for loan applications (security fix)
+    if (!user) {
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to submit a loan application. This helps us protect your sensitive information.",
+        variant: "destructive",
+      });
+      throw new Error('Authentication required');
+    }
+    
     setIsSubmitting(true);
     
     try {
-      // Insert application into database without user_id requirement
+      // Insert application into database with authenticated user_id
       const { error: dbError } = await supabase
         .from('loan_program_applications')
         .insert({
-          user_id: null, // Allow null for public submissions
+          user_id: user.id, // Use authenticated user ID (security requirement)
           program_id: applicationData.programId,
           program_name: applicationData.programName,
           borrower_name: applicationData.borrowerName,
@@ -52,7 +65,7 @@ export const usePublicApplications = () => {
 
       console.log('✅ Database insertion successful');
 
-      // Send email notification via edge function
+      // Send email notification via edge function (now requires JWT)
       const { data: emailResult, error: emailError } = await supabase.functions.invoke(
         'send-program-application',
         {
@@ -74,16 +87,14 @@ export const usePublicApplications = () => {
 
       if (emailError) {
         console.error('⚠️ Email sending failed:', emailError);
-        // Log the email failure internally but show professional success message to client
         console.log('📝 Application saved successfully, email notification failed (will be handled by admin team)');
       } else {
         console.log('✅ Email notification sent successfully');
       }
 
-      // Always show professional success message to clients
       toast({
-        title: "Thank you! Application Submitted Successfully",
-        description: "Your application has been submitted successfully. Our team will review your application and contact you within 24-48 hours.",
+        title: "Application Submitted Successfully",
+        description: "Your application has been submitted securely. Our team will review your application and contact you within 24-48 hours.",
         variant: "default",
       });
 
@@ -105,5 +116,6 @@ export const usePublicApplications = () => {
   return {
     submitPublicApplication,
     isSubmitting,
+    isAuthenticated: !!user,
   };
 };

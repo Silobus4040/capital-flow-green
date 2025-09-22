@@ -356,7 +356,7 @@ export type Database = {
           requested_amount: number | null
           status: string
           updated_at: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           admin_notes?: string | null
@@ -377,7 +377,7 @@ export type Database = {
           requested_amount?: number | null
           status?: string
           updated_at?: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           admin_notes?: string | null
@@ -398,7 +398,7 @@ export type Database = {
           requested_amount?: number | null
           status?: string
           updated_at?: string
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }

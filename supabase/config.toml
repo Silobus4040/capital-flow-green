@@ -1,13 +1,13 @@
 project_id = "pkgeixqboxsgxbmttuww"
 
 [functions.send-program-application]
-verify_jwt = false
+verify_jwt = true
 
 [functions.send-referral-signup]
 verify_jwt = false
 
 [functions.text-to-speech]
-verify_jwt = false
+verify_jwt = true
 
 [functions.elevenlabs-tts]
-verify_jwt = false
+verify_jwt = true
