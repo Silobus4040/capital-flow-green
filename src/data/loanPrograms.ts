@@ -15,23 +15,23 @@ export const loanPrograms: LoanProgram[] = [
     minimumLoanAmount: "$500,000.00",
     description: "Specialized financing for RV parks and campground facilities with flexible terms designed for seasonal cash flow patterns.",
     terms: `
-<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: clamp(1rem, 4vw, 2rem); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
-<div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
-  <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+<div style="text-align: center; margin-bottom: clamp(1.5rem, 5vw, 3rem); padding: clamp(1rem, 4vw, 2rem); background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
+  <h1 style="font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3); line-height: 1.2;">
     RV PARK & CAMPGROUND FINANCING
   </h1>
-  <h2 style="font-size: 1.5rem; font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem;">
+  <h2 style="font-size: clamp(1rem, 4vw, 1.5rem); font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.3;">
     COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC
   </h2>
-  <p style="font-size: 1.1rem; color: #e5e7eb; font-weight: 500;">
+  <p style="font-size: clamp(0.9rem, 3vw, 1.1rem); color: #e5e7eb; font-weight: 500; line-height: 1.4;">
     Asset-Based Lender Specializing in Recreational Property Financing
   </p>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
-    <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🚫 Industry Challenges We Solve</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem, 3vw, 1.5rem); margin-bottom: clamp(1.5rem, 5vw, 3rem);">
+  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+    <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🚫 Industry Challenges We Solve</h3>
     <ul style="color: #fecaca; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
         <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
@@ -52,8 +52,8 @@ export const loanPrograms: LoanProgram[] = [
     </ul>
   </div>
 
-  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
-    <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🎯 Our Specialized Solutions</h3>
+  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+    <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🎯 Our Specialized Solutions</h3>
     <ul style="color: #a7f3d0; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
         <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
@@ -76,26 +76,26 @@ export const loanPrograms: LoanProgram[] = [
 </div>
 
 <div style="margin-bottom: 3rem;">
-  <h2 style="font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 2rem; color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
     OUR FINANCING PROGRAMS
   </h2>
 
   <div style="display: grid; gap: 2rem;">
     
     <!-- Program 1 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
         PROGRAM #1
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
           Standard Purchase Loans
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
           Perfect for acquiring established RV parks with proven cash flow
         </p>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
           <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
             <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
             <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
@@ -494,23 +494,23 @@ export const loanPrograms: LoanProgram[] = [
     interestRate: "Starting at 5.31%",
     minimumLoanAmount: "$500,000.00",
     description: "100% financing available • No credit requirements • Fast approval for qualified commercial properties nationwide.",
-    terms: `<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    terms: `<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: clamp(1rem, 4vw, 2rem); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
-<div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
-  <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+<div style="text-align: center; margin-bottom: clamp(1.5rem, 5vw, 3rem); padding: clamp(1rem, 4vw, 2rem); background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
+  <h1 style="font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3); line-height: 1.2;">
     COMMERCIAL REAL ESTATE FINANCING
   </h1>
-  <h2 style="font-size: 1.5rem; font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem;">
+  <h2 style="font-size: clamp(1rem, 4vw, 1.5rem); font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.3;">
     COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.
   </h2>
-  <p style="font-size: 1.1rem; color: #e5e7eb; font-weight: 500;">
+  <p style="font-size: clamp(0.9rem, 3vw, 1.1rem); color: #e5e7eb; font-weight: 500; line-height: 1.4;">
     Premier Alternative Commercial Lending Institution
   </p>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
-    <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🚫 Market Challenges We Eliminate</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem, 3vw, 1.5rem); margin-bottom: clamp(1.5rem, 5vw, 3rem);">
+  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+    <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🚫 Market Challenges We Eliminate</h3>
     <ul style="color: #fecaca; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
         <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
@@ -531,8 +531,8 @@ export const loanPrograms: LoanProgram[] = [
     </ul>
   </div>
 
-  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
-    <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🎯 CCIF Strategic Advantages</h3>
+  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+    <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🎯 CCIF Strategic Advantages</h3>
     <ul style="color: #a7f3d0; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
         <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
@@ -555,26 +555,26 @@ export const loanPrograms: LoanProgram[] = [
 </div>
 
 <div style="margin-bottom: 3rem;">
-  <h2 style="font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 2rem; color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
     OUR FINANCING PROGRAMS
   </h2>
 
   <div style="display: grid; gap: 2rem;">
     
     <!-- Program 1 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
         PROGRAM #1
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
           First Mortgage Purchase Program
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
           The Foundation Builder for Smart Investors
         </p>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
           <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
             <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
             <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>

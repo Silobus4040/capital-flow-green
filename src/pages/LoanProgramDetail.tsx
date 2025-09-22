@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { loanPrograms } from "@/data/loanPrograms";
 import ProgramApplicationForm from "@/components/ProgramApplicationForm";
-import DOMPurify from "dompurify";
+import LoanProgramTerms from "@/components/LoanProgramTerms";
 import { ArrowLeft } from "lucide-react";
 import commercialMortgageImage from "@/assets/commercial-mortgage.jpg";
 import commercialDscrImage from "@/assets/commercial-dscr-rental.jpg";
@@ -96,15 +96,11 @@ export default function LoanProgramDetail() {
         {/* Program Terms - Full detailed view */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4 text-primary">Complete Terms & Conditions</h2>
-          <ScrollArea className="h-auto">
-            <div 
-              className="commercial-mortgage-terms prose prose-lg max-w-none"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(program.terms, {
-                  ALLOWED_TAGS: ['div', 'h1', 'h2', 'h3', 'h4', 'p', 'span', 'strong', 'em', 'ul', 'li', 'br'],
-                  ALLOWED_ATTR: ['class', 'style'],
-                  ALLOW_DATA_ATTR: false
-                })
+          <LoanProgramTerms 
+            terms={program.terms} 
+            className="h-auto" 
+          />
+        </div>
                   .replace(/^# (.*$)/gm, '<div class="hero-title text-3xl font-bold bg-gradient-to-r from-primary via-blue-600 to-green-600 bg-clip-text text-transparent mb-6 text-center">$1</div>')
                   .replace(/^## (.*$)/gm, '<h2 class="text-2xl font-bold text-primary mb-4 mt-8 border-l-4 border-primary pl-4 bg-primary/5 py-2 rounded-r">$1</h2>')
                   .replace(/^### (.*$)/gm, '<h3 class="text-xl font-semibold mb-3 mt-6 text-primary border-b border-primary/30 pb-2">$1</h3>')

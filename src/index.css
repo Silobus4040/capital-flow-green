@@ -116,3 +116,41 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Mobile-first responsive typography and layout fixes */
+@media (max-width: 768px) {
+  .loan-program-terms {
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  .loan-program-terms h1,
+  .loan-program-terms h2,
+  .loan-program-terms h3,
+  .loan-program-terms h4 {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+  }
+  
+  .loan-program-terms div,
+  .loan-program-terms p {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+}
+
+/* Global responsive text handling */
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  * {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
