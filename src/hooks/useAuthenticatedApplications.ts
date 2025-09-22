@@ -86,19 +86,18 @@ export const useAuthenticatedApplications = () => {
 
       if (emailError) {
         console.error('⚠️ Email sending failed:', emailError);
-        // Don't fail the whole operation if email fails
-        toast({
-          title: "Application Submitted",
-          description: "Your application was saved but email notification failed. We'll still process your request.",
-          variant: "default",
-        });
+        // Log the email failure internally but show professional success message to client
+        console.log('📝 Application saved successfully, email notification failed (will be handled by admin team)');
       } else {
         console.log('✅ Email notification sent successfully');
-        toast({
-          title: "Application Submitted Successfully",
-          description: "Your loan application request has been submitted. You'll receive a confirmation email shortly.",
-        });
       }
+
+      // Always show professional success message to clients
+      toast({
+        title: "Thank you! Application Submitted Successfully",
+        description: "Your application has been submitted successfully. Our team will review your application and contact you within 24-48 hours.",
+        variant: "default",
+      });
 
       return { success: true, emailResult };
       

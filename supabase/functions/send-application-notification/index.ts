@@ -85,45 +85,12 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    // Send confirmation to applicant
-    const applicantEmailResponse = await resend.emails.send({
-      from: "CCIF-INC <noreply@ccif-inc.com>",
-      to: [applicationData.borrowerEmail],
-      subject: `Application Received - ${applicationData.programName}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #2563eb;">Application Received</h2>
-          
-          <p>Dear ${applicationData.borrowerName},</p>
-          
-          <p>Thank you for submitting your loan application for <strong>${applicationData.programName}</strong>. We have received your application and it is now under review.</p>
-          
-          <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #2563eb;">
-            <h3 style="margin-top: 0; color: #1e40af;">What's Next?</h3>
-            <ul style="color: #334155;">
-              <li>Our team will review your application within 24-48 hours</li>
-              <li>A loan officer will be assigned to your case</li>
-              <li>You'll receive an email notification when your application status is updated</li>
-              <li>Your assigned loan officer will contact you directly to discuss next steps</li>
-            </ul>
-          </div>
-          
-          <p>If you have any questions, please don't hesitate to contact us.</p>
-          
-          <p>Best regards,<br>
-          CCIF Capital Team</p>
-        </div>
-      `,
-    });
-
     console.log("Admin email sent:", adminEmailResponse);
-    console.log("Applicant email sent:", applicantEmailResponse);
 
     return new Response(
       JSON.stringify({ 
         success: true, 
-        adminEmailResult: adminEmailResponse,
-        applicantEmailResult: applicantEmailResponse 
+        adminEmailResult: adminEmailResponse
       }),
       {
         status: 200,

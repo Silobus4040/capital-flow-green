@@ -131,21 +131,7 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    // Send confirmation email to borrower
-    await resend.emails.send({
-      from: "CCIF-INC <applications@ccif-inc.com>",
-      to: [sanitizedEmail],
-      subject: `Application Received: ${sanitizedProgram}`,
-      html: `
-        <h2>Application Received</h2>
-        <p>Dear ${sanitizedName},</p>
-        <p>Thank you for submitting your application for <strong>${sanitizedProgram}</strong>. We have received your request and will review it within 24-48 hours.</p>
-        <p>Our team will contact you at ${sanitizedPhone} or reply to this email with next steps.</p>
-        <p>Best regards,<br>CCIF Team<br>Sundry Capital Solutions</p>
-      `,
-    });
-
-    console.log("Emails sent successfully for program application:", sanitizedProgram);
+    console.log("Admin notification sent successfully for program application:", sanitizedProgram);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
