@@ -290,9 +290,24 @@ export default function AdminDashboard() {
 
       if (error) throw error;
 
+      // Auto-create conversation for the assignment
+      const { error: conversationError } = await supabase
+        .from('conversations')
+        .upsert({
+          borrower_id: selectedClient,
+          status: 'active'
+        }, {
+          onConflict: 'borrower_id'
+        });
+
+      if (conversationError) {
+        console.error('Error creating conversation:', conversationError);
+        // Don't fail assignment if conversation creation fails
+      }
+
       toast({
         title: 'Success',
-        description: 'Client assigned to loan officer successfully'
+        description: 'Client assigned to loan officer successfully. Messaging conversation created.',
       });
       
       setSelectedClient('');
