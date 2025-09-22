@@ -513,6 +513,48 @@ export type Database = {
         }
         Relationships: []
       }
+      security_audit_logs: {
+        Row: {
+          details: Json | null
+          id: string
+          ip_address: unknown | null
+          operation: string
+          record_id: string | null
+          risk_level: string | null
+          session_id: string | null
+          table_name: string
+          timestamp: string
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          details?: Json | null
+          id?: string
+          ip_address?: unknown | null
+          operation: string
+          record_id?: string | null
+          risk_level?: string | null
+          session_id?: string | null
+          table_name: string
+          timestamp?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          details?: Json | null
+          id?: string
+          ip_address?: unknown | null
+          operation?: string
+          record_id?: string | null
+          risk_level?: string | null
+          session_id?: string | null
+          table_name?: string
+          timestamp?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -521,6 +563,10 @@ export type Database = {
       get_current_user_role: {
         Args: Record<PropertyKey, never>
         Returns: string
+      }
+      log_security_incident: {
+        Args: { details?: Json; incident_type: string; risk_level?: string }
+        Returns: undefined
       }
     }
     Enums: {

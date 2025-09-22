@@ -64,20 +64,29 @@ export const SecurityProvider = ({ children }: SecurityProviderProps) => {
   const reportSecurityIncident = (incident: string, details?: any) => {
     console.warn('🚨 SECURITY INCIDENT:', incident, details);
     
-    // In production, send to security monitoring service
-    // For now, just log to console with clear security warning
-    if (process.env.NODE_ENV === 'production') {
-      // TODO: Implement security incident reporting to external service
-      fetch('/api/security-incident', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ incident, details, timestamp: new Date().toISOString() })
-      }).catch(err => console.error('Failed to report security incident:', err));
+    // Log to Supabase security audit system
+    if (typeof window !== 'undefined') {
+      import('@/integrations/supabase/client').then(({ supabase }) => {
+        supabase.rpc('log_security_incident', {
+          incident_type: incident,
+          details: {
+            ...details,
+            timestamp: new Date().toISOString(),
+            user_agent: navigator.userAgent,
+            url: window.location.href,
+            referrer: document.referrer
+          },
+          risk_level: 'high'
+        }).then(
+          () => {}, // Success - do nothing
+          (err) => console.error('Failed to log security incident:', err)
+        );
+      });
     }
   };
 
   const sanitizeUserInput = (input: string): string => {
-    return input
+    const sanitized = input
       .replace(/[<>\"'&]/g, (match) => {
         const map: { [key: string]: string } = {
           '<': '&lt;',
@@ -89,6 +98,18 @@ export const SecurityProvider = ({ children }: SecurityProviderProps) => {
         return map[match] || match;
       })
       .trim();
+    
+    // Log suspicious input patterns
+    if (input.length > 1000 || input.includes('script') || input.includes('javascript:')) {
+      reportSecurityIncident('suspicious_input_detected', {
+        original_length: input.length,
+        sanitized_length: sanitized.length,
+        contains_script: input.includes('script'),
+        contains_javascript: input.includes('javascript:')
+      });
+    }
+    
+    return sanitized;
   };
 
   const value: SecurityContextType = {

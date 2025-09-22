@@ -156,12 +156,42 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signIn = async (email: string, password: string) => {
     setLoading(true);
     try {
+      // Log security event for login attempt
+      const loginStartTime = Date.now();
+      
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
       });
       
-      if (!error && data.user) {
+      if (error) {
+        // Log failed login attempt
+        supabase.rpc('log_security_incident', {
+          incident_type: 'login_attempt',
+          details: {
+            success: false,
+            email: email,
+            error_message: error.message,
+            timestamp: new Date().toISOString(),
+            user_agent: navigator.userAgent
+          },
+          risk_level: 'medium'
+        }).then(() => {}, () => {}); // Don't block login on logging failure
+      } else if (data.user) {
+        // Log successful login
+        supabase.rpc('log_security_incident', {
+          incident_type: 'login_attempt',
+          details: {
+            success: true,
+            user_id: data.user.id,
+            email: email,
+            login_duration_ms: Date.now() - loginStartTime,
+            timestamp: new Date().toISOString(),
+            user_agent: navigator.userAgent
+          },
+          risk_level: 'low'
+        }).then(() => {}, () => {}); // Don't block login on logging failure
+
         setUser(data.user);
         setSession(data.session);
         
