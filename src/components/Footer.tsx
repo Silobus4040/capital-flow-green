@@ -37,6 +37,13 @@ export default function Footer() {
               <Link to="/referral-program" className="hover:text-primary-light transition-colors">
                 Referral Program
               </Link>
+              <Link 
+                to="/admin-portal-login" 
+                className="hover:text-primary-light transition-colors opacity-30 hover:opacity-100"
+                title="Admin Portal"
+              >
+                Admin
+              </Link>
             </nav>
           </div>
 

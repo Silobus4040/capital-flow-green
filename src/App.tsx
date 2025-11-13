@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { SecurityProvider } from "./components/SecurityProvider";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { useAdminShortcut } from "./hooks/useAdminShortcut";
 import Layout from "./components/Layout";
 import ApplicantLayout from "./components/ApplicantLayout";
 import HomePage from "./pages/HomePage";
@@ -40,17 +41,11 @@ import TTSTest from "./pages/TTSTest";
 
 const queryClient = new QueryClient();
 
-const App = () => {
-  console.log('🚀 App component loaded, routes configured');
+const AppRoutes = () => {
+  useAdminShortcut();
+  
   return (
-    <QueryClientProvider client={queryClient}>
-      <SecurityProvider>
-        <AuthProvider>
-          <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-          <Routes>
+    <Routes>
             {/* Public Website Routes */}
             <Route path="/" element={<Layout><HomePage /></Layout>} />
             <Route path="/loan-programs" element={<Layout><LoanPrograms /></Layout>} />
@@ -118,6 +113,20 @@ const App = () => {
             
             <Route path="*" element={<Layout><NotFound /></Layout>} />
           </Routes>
+  );
+};
+
+const App = () => {
+  console.log('🚀 App component loaded, routes configured');
+  return (
+    <QueryClientProvider client={queryClient}>
+      <SecurityProvider>
+        <AuthProvider>
+          <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <AppRoutes />
           </BrowserRouter>
         </TooltipProvider>
       </AuthProvider>
