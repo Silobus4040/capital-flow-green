@@ -14,6 +14,7 @@ export default function AdminPortalLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [redirectAfterLogin, setRedirectAfterLogin] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const { adminSignIn, user, profile } = useAuth();
   const { toast } = useToast();
 
@@ -118,6 +119,18 @@ export default function AdminPortalLogin() {
               </div>
             </div>
             
+            <div className="flex items-center justify-between">
+              <label className="flex items-center space-x-2 text-sm cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className="w-4 h-4 text-red-600 border-red-300 rounded focus:ring-red-500"
+                />
+                <span className="text-muted-foreground">Remember me</span>
+              </label>
+            </div>
+
             <Button 
               type="submit" 
               className="w-full bg-red-600 hover:bg-red-700"
@@ -127,6 +140,10 @@ export default function AdminPortalLogin() {
             </Button>
           </form>
           
+          <div className="mt-4 text-center text-sm text-muted-foreground">
+            <p>Temporary password: CCIFAdmin2024!Temp</p>
+            <p className="text-xs mt-1">Press Ctrl+Shift+A anywhere to access this page</p>
+          </div>
           <div className="mt-6 text-center">
             <p className="text-xs text-red-600">
               This portal is for authorized administrators only. All access is logged and monitored.
