@@ -158,32 +158,6 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
       if (onSubmitSuccess) {
         onSubmitSuccess();
       }
-      setFormData({
-        borrowerName: "",
-        borrowerEmail: "",
-        borrowerPhone: "",
-        propertyAddress: "",
-        propertyCity: "",
-        propertyState: "",
-        propertyZip: "",
-        loanType: "",
-        requestedAmount: "",
-        propertyType: "",
-        numberOfUnits: "",
-        grossRentalIncome: "",
-        operatingExpenses: "",
-        netOperatingIncome: "",
-        existingMortgage: "",
-        propertyValue: "",
-        yearBuilt: "",
-        squareFootage: "",
-        occupancyRate: "",
-        proposedPayment: "",
-        calculatedDSCR: "",
-        experienceLevel: "",
-        additionalProperties: "",
-        additionalComments: ""
-      });
       
     } catch (error: any) {
       // Error handling is done in the hook
@@ -257,7 +231,7 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
               </div>
               <div>
                 <Label htmlFor="experienceLevel">Real Estate Investment Experience</Label>
-                <Select onValueChange={(value) => updateFormData('experienceLevel', value)}>
+                <Select value={formData.experienceLevel || ""} onValueChange={(value) => updateFormData('experienceLevel', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select experience level" />
                   </SelectTrigger>
@@ -314,7 +288,7 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
               </div>
               <div>
                 <Label htmlFor="propertyType">Property Type *</Label>
-                <Select onValueChange={(value) => updateFormData('propertyType', value)}>
+                <Select value={formData.propertyType || ""} onValueChange={(value) => updateFormData('propertyType', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select property type" />
                   </SelectTrigger>

@@ -214,7 +214,7 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
               </div>
               <div>
                 <Label htmlFor="borrowerType">Borrower Type</Label>
-                <Select onValueChange={(value) => updateFormData('borrowerType', value)}>
+                <Select value={formData.borrowerType || ""} onValueChange={(value) => updateFormData('borrowerType', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select borrower type" />
                   </SelectTrigger>
@@ -272,7 +272,7 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
               </div>
               <div>
                 <Label htmlFor="propertyType">Property Type *</Label>
-                <Select onValueChange={(value) => updateFormData('propertyType', value)}>
+                <Select value={formData.propertyType || ""} onValueChange={(value) => updateFormData('propertyType', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select property type" />
                   </SelectTrigger>
@@ -334,7 +334,7 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
               </div>
               <div>
                 <Label htmlFor="loanPurpose">Loan Purpose *</Label>
-                <Select onValueChange={(value) => updateFormData('loanPurpose', value)}>
+                <Select value={formData.loanPurpose || ""} onValueChange={(value) => updateFormData('loanPurpose', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select loan purpose" />
                   </SelectTrigger>
@@ -350,7 +350,7 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
               </div>
               <div>
                 <Label htmlFor="loanTerm">Desired Loan Term</Label>
-                <Select onValueChange={(value) => updateFormData('loanTerm', value)}>
+                <Select value={formData.loanTerm || ""} onValueChange={(value) => updateFormData('loanTerm', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select loan term" />
                   </SelectTrigger>
@@ -426,7 +426,7 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="experience">Real Estate Experience</Label>
-                <Select onValueChange={(value) => updateFormData('experience', value)}>
+                <Select value={formData.experience || ""} onValueChange={(value) => updateFormData('experience', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select experience level" />
                   </SelectTrigger>
@@ -440,7 +440,7 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
               </div>
               <div>
                 <Label htmlFor="timeframe">Desired Closing Timeframe</Label>
-                <Select onValueChange={(value) => updateFormData('timeframe', value)}>
+                <Select value={formData.timeframe || ""} onValueChange={(value) => updateFormData('timeframe', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select timeframe" />
                   </SelectTrigger>

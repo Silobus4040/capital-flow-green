@@ -127,7 +127,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="prepaymentPenalty">Prepayment Penalty</Label>
-          <Select onValueChange={(value) => updateFormData('prepaymentPenalty', value)}>
+          <Select value={formData.prepaymentPenalty || ""} onValueChange={(value) => updateFormData('prepaymentPenalty', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select option" />
             </SelectTrigger>
@@ -161,7 +161,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="currentLoanType">Current Loan Type</Label>
-          <Select onValueChange={(value) => updateFormData('currentLoanType', value)}>
+          <Select value={formData.currentLoanType || ""} onValueChange={(value) => updateFormData('currentLoanType', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select loan type" />
             </SelectTrigger>
@@ -258,7 +258,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="purchaseContractSigned">Purchase Contract Signed</Label>
-          <Select onValueChange={(value) => updateFormData('purchaseContractSigned', value)}>
+          <Select value={formData.purchaseContractSigned || ""} onValueChange={(value) => updateFormData('purchaseContractSigned', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select option" />
             </SelectTrigger>
@@ -270,7 +270,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="propertyInspectionCompleted">Property Inspection Completed</Label>
-          <Select onValueChange={(value) => updateFormData('propertyInspectionCompleted', value)}>
+          <Select value={formData.propertyInspectionCompleted || ""} onValueChange={(value) => updateFormData('propertyInspectionCompleted', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select option" />
             </SelectTrigger>
@@ -282,7 +282,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="sellerFinancingAvailable">Seller Financing Available</Label>
-          <Select onValueChange={(value) => updateFormData('sellerFinancingAvailable', value)}>
+          <Select value={formData.sellerFinancingAvailable || ""} onValueChange={(value) => updateFormData('sellerFinancingAvailable', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select option" />
             </SelectTrigger>
@@ -342,7 +342,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <Label htmlFor="landAlreadyOwned">Land Already Owned</Label>
-          <Select onValueChange={(value) => updateFormData('landAlreadyOwned', value)}>
+          <Select value={formData.landAlreadyOwned || ""} onValueChange={(value) => updateFormData('landAlreadyOwned', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select option" />
             </SelectTrigger>
@@ -375,7 +375,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="generalContractorSelected">General Contractor Selected</Label>
-          <Select onValueChange={(value) => updateFormData('generalContractorSelected', value)}>
+          <Select value={formData.generalContractorSelected || ""} onValueChange={(value) => updateFormData('generalContractorSelected', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select option" />
             </SelectTrigger>
@@ -444,7 +444,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="drawSchedulePreferences">Draw Schedule Preferences</Label>
-          <Select onValueChange={(value) => updateFormData('drawSchedulePreferences', value)}>
+          <Select value={formData.drawSchedulePreferences || ""} onValueChange={(value) => updateFormData('drawSchedulePreferences', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select preference" />
             </SelectTrigger>
@@ -457,7 +457,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="constructionLoanToPerm">Construction Loan-to-Perm</Label>
-          <Select onValueChange={(value) => updateFormData('constructionLoanToPerm', value)}>
+          <Select value={formData.constructionLoanToPerm || ""} onValueChange={(value) => updateFormData('constructionLoanToPerm', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select option" />
             </SelectTrigger>
@@ -495,7 +495,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="interestReserveRequired">Interest Reserve Required</Label>
-          <Select onValueChange={(value) => updateFormData('interestReserveRequired', value)}>
+          <Select value={formData.interestReserveRequired || ""} onValueChange={(value) => updateFormData('interestReserveRequired', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select option" />
             </SelectTrigger>
@@ -516,7 +516,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <Label htmlFor="reasonForBridgeLoan">Reason for Bridge Loan</Label>
-          <Select onValueChange={(value) => updateFormData('reasonForBridgeLoan', value)}>
+          <Select value={formData.reasonForBridgeLoan || ""} onValueChange={(value) => updateFormData('reasonForBridgeLoan', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select reason" />
             </SelectTrigger>
@@ -540,7 +540,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="exitStrategy">Exit Strategy</Label>
-          <Select onValueChange={(value) => updateFormData('exitStrategy', value)}>
+          <Select value={formData.exitStrategy || ""} onValueChange={(value) => updateFormData('exitStrategy', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select exit strategy" />
             </SelectTrigger>
@@ -597,7 +597,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
         </div>
         <div>
           <Label htmlFor="bridgeToPermOption">Bridge-to-Perm Option Desired</Label>
-          <Select onValueChange={(value) => updateFormData('bridgeToPermOption', value)}>
+          <Select value={formData.bridgeToPermOption || ""} onValueChange={(value) => updateFormData('bridgeToPermOption', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select option" />
             </SelectTrigger>
@@ -687,7 +687,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
           </div>
           <div>
             <Label htmlFor="intendedUseOfCash">Intended Use of Cash</Label>
-            <Select onValueChange={(value) => updateFormData('intendedUseOfCash', value)}>
+            <Select value={formData.intendedUseOfCash || ""} onValueChange={(value) => updateFormData('intendedUseOfCash', value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select use" />
               </SelectTrigger>

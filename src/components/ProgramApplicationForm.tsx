@@ -185,7 +185,7 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
       {/* Loan Type Selection */}
       <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
         <Label htmlFor="loanType" className="text-lg font-semibold">Loan Type Selection *</Label>
-        <Select onValueChange={(value) => updateFormData('loanType', value)}>
+        <Select value={formData.loanType || ""} onValueChange={(value) => updateFormData('loanType', value)}>
           <SelectTrigger className="mt-2">
             <SelectValue placeholder="Select your loan type to view specific fields" />
           </SelectTrigger>
