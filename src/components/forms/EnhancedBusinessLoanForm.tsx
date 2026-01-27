@@ -134,28 +134,6 @@ export default function EnhancedBusinessLoanForm({ onSubmitSuccess }: EnhancedBu
       if (onSubmitSuccess) {
         onSubmitSuccess();
       }
-      setFormData({
-        businessName: "",
-        businessType: "",
-        yearEstablished: "",
-        federalTaxId: "",
-        contactName: "",
-        contactTitle: "",
-        contactEmail: "",
-        contactPhone: "",
-        businessAddress: "",
-        loanAmount: "",
-        loanPurpose: "",
-        securityType: "",
-        annualRevenue: "",
-        monthlyExpenses: "",
-        existingDebts: "",
-        businessBankAccount: "",
-        yearsInBusiness: "",
-        numberOfEmployees: "",
-        businessDescription: "",
-        additionalComments: ""
-      });
       
     } catch (error: any) {
       // Error handling is done in the hook
@@ -187,7 +165,7 @@ export default function EnhancedBusinessLoanForm({ onSubmitSuccess }: EnhancedBu
               </div>
               <div>
                 <Label htmlFor="businessType">Business Type</Label>
-                <Select onValueChange={(value) => updateFormData('businessType', value)}>
+                <Select value={formData.businessType || ""} onValueChange={(value) => updateFormData('businessType', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select business type" />
                   </SelectTrigger>
@@ -292,7 +270,7 @@ export default function EnhancedBusinessLoanForm({ onSubmitSuccess }: EnhancedBu
               </div>
               <div>
                 <Label htmlFor="securityType">Security Type *</Label>
-                <Select onValueChange={(value) => updateFormData('securityType', value)}>
+                <Select value={formData.securityType || ""} onValueChange={(value) => updateFormData('securityType', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select security type" />
                   </SelectTrigger>

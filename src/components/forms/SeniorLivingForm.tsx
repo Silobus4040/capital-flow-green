@@ -528,7 +528,7 @@ export default function SeniorLivingForm({ onSubmitSuccess }: SeniorLivingFormPr
               </div>
               <div>
                 <Label htmlFor="licensingStatus">Licensing Status</Label>
-                <Select onValueChange={(value) => updateFormData('licensingStatus', value)}>
+                <Select value={formData.licensingStatus || ""} onValueChange={(value) => updateFormData('licensingStatus', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select licensing status" />
                   </SelectTrigger>
