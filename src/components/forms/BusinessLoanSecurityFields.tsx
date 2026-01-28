@@ -15,7 +15,7 @@ interface BusinessLoanSecurityFieldsProps {
 export default function BusinessLoanSecurityFields({ securityType, formData, updateFormData }: BusinessLoanSecurityFieldsProps) {
 
   // Real Estate Security Fields
-  const RealEstateSecurityFields = () => (
+  const renderRealEstateSecurityFields = () => (
     <Card className="bg-blue-50 border-blue-200">
       <CardHeader>
         <CardTitle className="text-blue-800">Real Estate Security Information</CardTitle>
@@ -105,7 +105,7 @@ export default function BusinessLoanSecurityFields({ securityType, formData, upd
   );
 
   // Credit Protection Insurance Fields
-  const CreditProtectionInsuranceFields = () => (
+  const renderCreditProtectionInsuranceFields = () => (
     <Card className="bg-green-50 border-green-200">
       <CardHeader>
         <CardTitle className="text-green-800">Credit Protection Insurance Information</CardTitle>
@@ -171,7 +171,7 @@ export default function BusinessLoanSecurityFields({ securityType, formData, upd
   );
 
   // Personal Guarantee Fields
-  const PersonalGuaranteeFields = () => (
+  const renderPersonalGuaranteeFields = () => (
     <Card className="bg-orange-50 border-orange-200">
       <CardHeader>
         <CardTitle className="text-orange-800">Personal Guarantee Information</CardTitle>
@@ -235,7 +235,7 @@ export default function BusinessLoanSecurityFields({ securityType, formData, upd
   );
 
   // Bank Guarantee Fields
-  const BankGuaranteeFields = () => (
+  const renderBankGuaranteeFields = () => (
     <Card className="bg-purple-50 border-purple-200">
       <CardHeader>
         <CardTitle className="text-purple-800">Bank Guarantee Information</CardTitle>
@@ -312,7 +312,7 @@ export default function BusinessLoanSecurityFields({ securityType, formData, upd
   );
 
   // Business Assets Fields
-  const BusinessAssetsFields = () => (
+  const renderBusinessAssetsFields = () => (
     <Card className="bg-indigo-50 border-indigo-200">
       <CardHeader>
         <CardTitle className="text-indigo-800">Business Assets Security Information</CardTitle>
@@ -379,7 +379,7 @@ export default function BusinessLoanSecurityFields({ securityType, formData, upd
   );
 
   // Inventory Fields
-  const InventoryFields = () => (
+  const renderInventoryFields = () => (
     <Card className="bg-pink-50 border-pink-200">
       <CardHeader>
         <CardTitle className="text-pink-800">Inventory Security Information</CardTitle>
@@ -451,7 +451,7 @@ export default function BusinessLoanSecurityFields({ securityType, formData, upd
   );
 
   // Business Loan Terms Display (V6. 01-2025)
-  const BusinessLoanTerms = () => (
+  const renderBusinessLoanTerms = () => (
     <Card className="bg-yellow-50 border-yellow-400">
       <CardHeader>
         <CardTitle className="text-yellow-800">Business Loan Terms - V6. 01-2025</CardTitle>
@@ -479,22 +479,22 @@ export default function BusinessLoanSecurityFields({ securityType, formData, upd
   const renderSecurityFields = () => {
     switch (securityType) {
       case 'real-estate-security':
-        return <RealEstateSecurityFields />;
+        return renderRealEstateSecurityFields();
       
       case 'credit-protection-insurance':
-        return <CreditProtectionInsuranceFields />;
+        return renderCreditProtectionInsuranceFields();
       
       case 'personal-guarantee':
-        return <PersonalGuaranteeFields />;
+        return renderPersonalGuaranteeFields();
       
       case 'bank-guarantee':
-        return <BankGuaranteeFields />;
+        return renderBankGuaranteeFields();
       
       case 'business-assets':
-        return <BusinessAssetsFields />;
+        return renderBusinessAssetsFields();
       
       case 'inventory':
-        return <InventoryFields />;
+        return renderInventoryFields();
       
       default:
         return null;
@@ -503,7 +503,7 @@ export default function BusinessLoanSecurityFields({ securityType, formData, upd
 
   return (
     <div className="space-y-6">
-      <BusinessLoanTerms />
+      {renderBusinessLoanTerms()}
       {renderSecurityFields()}
     </div>
   );
