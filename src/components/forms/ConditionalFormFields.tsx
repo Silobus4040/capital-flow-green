@@ -20,7 +20,7 @@ interface ConditionalFormFieldsProps {
 export default function ConditionalFormFields({ loanType, formData, updateFormData }: ConditionalFormFieldsProps) {
   
   // Refinance Fields
-  const RefinanceFields = () => (
+  const renderRefinanceFields = () => (
     <div className="space-y-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
       <h3 className="text-lg font-semibold text-blue-800">Refinance Information</h3>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
@@ -179,7 +179,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
   );
 
   // Purchase Fields
-  const PurchaseFields = () => (
+  const renderPurchaseFields = () => (
     <div className="space-y-4 p-4 bg-green-50 rounded-lg border border-green-200">
       <h3 className="text-lg font-semibold text-green-800">Purchase Information</h3>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
@@ -336,7 +336,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
   );
 
   // Construction/Development Fields
-  const ConstructionFields = () => (
+  const renderConstructionFields = () => (
     <div className="space-y-4 p-4 bg-orange-50 rounded-lg border border-orange-200">
       <h3 className="text-lg font-semibold text-orange-800">Construction/Development Information</h3>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
@@ -510,7 +510,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
   );
 
   // Bridge Loan Fields
-  const BridgeLoanFields = () => (
+  const renderBridgeLoanFields = () => (
     <div className="space-y-4 p-4 bg-purple-50 rounded-lg border border-purple-200">
       <h3 className="text-lg font-semibold text-purple-800">Bridge Loan Information</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -612,7 +612,7 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
   );
 
   // 100% Financing Qualification Checklist
-  const HundredPercentFinancingFields = () => (
+  const renderHundredPercentFinancingFields = () => (
     <div className="space-y-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
       <h3 className="text-lg font-semibold text-yellow-800">100% Financing Qualification Checklist</h3>
       <div className="space-y-3">
@@ -669,9 +669,9 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
   );
 
   // Cash-Out Refinance Fields (includes all refinance fields plus additional)
-  const CashOutRefinanceFields = () => (
+  const renderCashOutRefinanceFields = () => (
     <div className="space-y-4">
-      <RefinanceFields />
+      {renderRefinanceFields()}
       <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
         <h3 className="text-lg font-semibold text-indigo-800 mb-4">Additional Cash-Out Information</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -741,31 +741,31 @@ export default function ConditionalFormFields({ loanType, formData, updateFormDa
     switch (loanType) {
       case 'refinance':
       case 'rate-and-term-refinance':
-        return <RefinanceFields />;
+        return renderRefinanceFields();
       
       case 'purchase':
       case 'first-mortgage':
       case 'purchase-loan':
-        return <PurchaseFields />;
+        return renderPurchaseFields();
       
       case 'construction':
       case 'development':
       case 'construction-development':
-        return <ConstructionFields />;
+        return renderConstructionFields();
       
       case 'bridge-loan':
       case 'bridge-financing':
-        return <BridgeLoanFields />;
+        return renderBridgeLoanFields();
       
       case 'cash-out-refinance':
-        return <CashOutRefinanceFields />;
+        return renderCashOutRefinanceFields();
       
       case '100-financing':
       case '100-percent-financing':
         return (
           <div className="space-y-4">
-            <PurchaseFields />
-            <HundredPercentFinancingFields />
+            {renderPurchaseFields()}
+            {renderHundredPercentFinancingFields()}
           </div>
         );
       
