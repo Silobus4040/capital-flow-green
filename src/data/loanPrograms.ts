@@ -2541,218 +2541,360 @@ Processing Time: 14-30 days`
     interestRate: "Starting at 5.00%",
     minimumLoanAmount: "$500,000.00",
     description: "Asset-based private lending providing flexible financing solutions for residential mortgage whether it's a primary residence or an investment property.",
-    terms: `# Private Residential Mortgage
+    terms: `
+<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: clamp(1rem, 4vw, 2rem); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
-<div class="hero-title">Commercial Capital & Investment Finance, Inc - Asset-Based Private Lender</div>
-
-<div class="highlight-box">
-🏠 **Flexible financing solutions for residential mortgage whether it's a primary residence or an investment property**
+<div style="text-align: center; margin-bottom: clamp(1.5rem, 5vw, 3rem); padding: clamp(1rem, 4vw, 2rem); background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
+  <h1 style="font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3); line-height: 1.2;">
+    PRIVATE RESIDENTIAL MORTGAGE
+  </h1>
+  <h2 style="font-size: clamp(1rem, 4vw, 1.5rem); font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.3;">
+    COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC
+  </h2>
+  <p style="font-size: clamp(0.9rem, 3vw, 1.1rem); color: #e5e7eb; font-weight: 500; line-height: 1.4;">
+    Asset-Based Private Lender - Flexible Financing for Primary Residences & Investment Properties
+  </p>
 </div>
 
----
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem, 3vw, 1.5rem); margin-bottom: clamp(1.5rem, 5vw, 3rem);">
+  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+    <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🏠 Our Financing Programs</h3>
+    <ul style="color: #a7f3d0; list-style: none; padding: 0;">
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">1.</span>
+        First Mortgage/Purchase
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">2.</span>
+        Rate and Term Refinance
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">3.</span>
+        Cash-Out Refinance
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">4.</span>
+        Bridge Loan
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">5.</span>
+        100% Financing Program
+      </li>
+    </ul>
+  </div>
 
-## 🔥 Financing Options Overview
-
-The financing options we cover under our Residential Loan programs are outlined below in this particular order:
-
-💰 **1. First Mortgage/Purchase**
-💰 **2. Rate and Term Refinance** 
-💰 **3. Cash-out Refinance**
-💰 **4. Bridge Loan**
-💰 **5. 100% Financing Program**
-
----
-
-## 1️⃣ First Mortgage/Purchase Terms
-
-<div class="qualification-grid">
-<div>
-💵 **Minimum Loan Amount:** $50,000<br>
-💵 **Maximum Loan Amount:** $5,000,000<br>
-⚡ **Interest Rate (Fixed):** Starting at 5.00% per annum<br>
-⚡ **Interest Rate (Variable):** Starting at Prime + 2.00%<br>
-🎯 **Term Length:** 15, 20, 30, or 40 years<br>
-🎯 **Loan-to-Value:** Up to 90% (100% financing available - See Primary Qualifications)
-</div>
-<div>
-📊 **Prepayment Penalty:** None - pay off anytime<br>
-💳 **Origination Fee:** 1-2% (financing available)
-</div>
-</div>
-
-### 💎 Payment Structure Options
-
-✅ **Fully Amortizing:** Principal and interest payments
-✅ **Interest-Only Period:** Available for 1-10 years  
-✅ **Interest-Only + Balloon:** For investment properties
-
----
-
-## 2️⃣ Rate and Term Refinance
-
-<div class="highlight-box">
-💵 **Minimum Loan Amount:** $50,000<br>
-⚡ **Interest Rate (Fixed):** Starting at 5.27%<br>
-🎯 **Term Length:** 15 to 30 years<br>
-📊 **Prepayment Penalty:** No prepayment penalty
-</div>
-
-### 💎 Payment Structure Options
-✅ **Fully Amortizing:** Principal and interest payments
-✅ **Interest-Only Period:** Available for 1-7 years
-✅ **Interest-Only + Balloon:** For investment properties
-
-### 🎯 Ideal For:
-• Reducing monthly payments
-• Securing a better interest rate  
-• Converting adjustable to fixed rate
-• Changing loan terms
-
----
-
-## 3️⃣ Cash-Out Refinance
-
-<div class="highlight-box">
-If you already own a property and are looking to tap into your equity, our cash-out refinance option may be perfect for you.
+  <div style="background: linear-gradient(45deg, #1e40af, #3b82f6); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+    <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🏢 Eligible Property Types</h3>
+    <ul style="color: #bfdbfe; list-style: none; padding: 0;">
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        Single-family homes & Condos
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        Multi-family (up to 4 units)
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        Townhouses & Modular Homes
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        Vacation & Investment Properties
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        Mixed-Use (with residential)
+      </li>
+    </ul>
+  </div>
 </div>
 
-### 💰 Typical Terms:
+<div style="margin-bottom: 3rem;">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
+    OUR FINANCING PROGRAMS
+  </h2>
 
-💵 **Maximum LTV Ratio:** Up to 85%<br>
-⚡ **Interest Rate (Fixed):** Starting at 5.77%<br>
-⚡ **Interest Rate (Variable):** Starting at Prime + 2.25%<br>
-🎯 **Term Length:** Up to 30 years<br>
-💎 **Cash-Out Amount:** Available for any use (no restrictions)<br>
-📊 **Seasoning Requirements:** None - refinance immediately after purchase
+  <div style="display: grid; gap: 2rem;">
+    
+    <!-- Program 1 -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
+        PROGRAM #1
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
+          First Mortgage/Purchase
+        </h3>
+        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
+          Primary financing for new property acquisitions
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LOAN RANGE</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$50K - $5M</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">FIXED RATE</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting 5.00%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 90%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">15-40 Years</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 PAYMENT OPTIONS:</div>
+          <div style="color: #a7f3d0;">Fully Amortizing • Interest-Only (1-10 years) • Interest-Only + Balloon • No Prepayment Penalty</div>
+        </div>
+      </div>
+    </div>
 
-### 💎 Payment Structure Options:
-✅ **Fully Amortizing:** Principal and interest payments
-✅ **Interest-Only Period:** Available for 1-5 years
-✅ **Interest-Only + Balloon:** For investment properties
+    <!-- Program 2 -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
+        PROGRAM #2
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
+          Rate and Term Refinance
+        </h3>
+        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
+          Lower payments and secure better terms
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$50,000</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">FIXED RATE</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting 5.27%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">15-30 Years</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">PREPAYMENT</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">No Penalty</div>
+          </div>
+        </div>
+        
+        <div style="background: rgba(30, 64, 175, 0.2); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6; margin-bottom: 1rem;">
+          <div style="color: #93c5fd; font-weight: 700;">🎯 IDEAL FOR:</div>
+          <div style="color: #dbeafe; font-size: 0.9rem;">
+            Reducing monthly payments • Securing better rates • Converting adjustable to fixed rate • Changing loan terms
+          </div>
+        </div>
+      </div>
+    </div>
 
----
+    <!-- Program 3 -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
+        PROGRAM #3
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
+          Cash-Out Refinance
+        </h3>
+        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
+          Access your property's equity for any purpose
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MAX LTV</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 85%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">FIXED RATE</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting 5.77%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 30 Years</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">SEASONING</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">None Required</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 FEATURES:</div>
+          <div style="color: #a7f3d0;">No restrictions on cash use • Variable rate: Prime + 2.25% • Interest-Only available 1-5 years</div>
+        </div>
+      </div>
+    </div>
 
-## 4️⃣ Bridge Loan Program
+    <!-- Program 4 -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
+        PROGRAM #4
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
+          Bridge Loan Program
+        </h3>
+        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
+          Short-term financing for immediate opportunities
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$100,000</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">9.5%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 75%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">3-24 Months</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 PAYMENT OPTIONS:</div>
+          <div style="color: #a7f3d0;">Deferred interest with balloon • Interest-only payments • Origination: 2% (50% financing available)</div>
+        </div>
+      </div>
+    </div>
 
-<div class="highlight-box">
-Our Bridge Loan product is designed to provide short-term financing solutions for clients who need immediate funds to bridge the gap between buying a new property and selling their existing one or other immediate financing needs such as investment opportunities.
+    <!-- Program 5 -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
+        PROGRAM #5
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
+          100% Financing Program
+        </h3>
+        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
+          Zero down payment options for qualified investors
+        </p>
+        
+        <div style="background: rgba(30, 64, 175, 0.2); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6; margin-bottom: 1rem;">
+          <div style="color: #93c5fd; font-weight: 700;">🎯 QUALIFICATION REQUIREMENTS (Meet Any 2):</div>
+          <div style="color: #dbeafe; font-size: 0.9rem; margin-top: 0.5rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.5rem;">
+              <div>• Minimum FICO: 680 credit score</div>
+              <div>• 3+ transactions in last 5 years</div>
+              <div>• Net worth: 1.5x loan amount</div>
+              <div>• 6 months reserves</div>
+              <div>• 2 years tax returns + 3 months bank statements</div>
+              <div>• Cross-collateralization available</div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 BENEFITS:</div>
+          <div style="color: #a7f3d0;">No down payment required • Industry-leading financing • Available for qualified investment properties</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-💵 **Minimum Loan Amount:** $100,000<br>
-🎯 **Term Length:** 3 to 24 months<br>
-⚡ **Interest Rate:** 9.5%<br>
-📊 **LTV:** Up to 75%<br>
-💳 **Origination Fee:** 2% (up to 50% financing available unless you prefer to pay out of pocket at closing)
-
-### 💎 Payment Structure Options:
-✅ **Deferred interest with backend balloon payment**
-✅ **Interest-only payments**
-
----
-
-## 5️⃣ 100% Financing Program
-
-<div class="highlight-box">
-🚀 **Industry-leading 100% financing options for qualified deals**
+<!-- Payment Structures Section -->
+<div style="background: linear-gradient(135deg, #1e40af, #3b82f6); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); margin-bottom: 2rem;">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: 1.5rem; color: #fbbf24;">
+    💎 PAYMENT STRUCTURE OPTIONS
+  </h2>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+      <h4 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Fully Amortizing</h4>
+      <ul style="color: #bfdbfe; list-style: none; padding: 0; font-size: 0.9rem;">
+        <li>✓ Principal and interest payments</li>
+        <li>✓ Loan fully paid at maturity</li>
+        <li>✓ Builds equity with each payment</li>
+        <li>✓ Best for primary residences</li>
+      </ul>
+    </div>
+    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+      <h4 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Interest-Only Period</h4>
+      <ul style="color: #bfdbfe; list-style: none; padding: 0; font-size: 0.9rem;">
+        <li>✓ Interest-only for 1-10 years</li>
+        <li>✓ Converts to fully amortizing</li>
+        <li>✓ Lower initial payments</li>
+        <li>✓ Good for property improvements</li>
+      </ul>
+    </div>
+    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+      <h4 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Interest-Only + Balloon</h4>
+      <ul style="color: #bfdbfe; list-style: none; padding: 0; font-size: 0.9rem;">
+        <li>✓ Interest-only entire term</li>
+        <li>✓ Principal due at maturity</li>
+        <li>✓ Lowest monthly payments</li>
+        <li>✓ Ideal for investment properties</li>
+      </ul>
+    </div>
+  </div>
 </div>
 
-**To qualify for zero down investment property loans, applicants must meet any two of the following enhanced criteria:**
-
-<div class="qualification-grid">
-<div>
-🎯 **Minimum FICO:** 680 credit score<br>
-🏆 **Experience:** 3+ residential real estate transactions in last 5 years OR verifiable residential property management track record<br>
-💎 **Net Worth:** Minimum 1.5x the loan amount
-</div>
-<div>
-💰 **Liquidity:** 6 months of debt service payments in reserves<br>
-📊 **Income Verification:** 2 years tax returns and 3 months bank statements<br>
-🏢 **Cross-collateralization:** Additional properties offered as collateral
-</div>
-</div>
-
----
-
-## 🏠 Eligible Property Types
-
-<div class="property-types">
-<div>
-🏢 Single-family homes<br>
-🏢 Condominiums<br>
-🏢 Townhouses<br>
-🏢 Multi-family homes (up to four units)<br>
-🏢 Modular homes
-</div>
-<div>
-🏢 Manufactured homes (mobile homes)<br>
-🏢 Co-ops (cooperative housing)<br>
-🏢 Mixed-use properties (with residential component)<br>
-🏢 Vacation properties & second homes<br>
-🏢 Residential investment properties
-</div>
+<!-- Required Documents -->
+<div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); margin-bottom: 2rem; border: 2px solid #fbbf24;">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 1.5rem); font-weight: 800; text-align: center; margin-bottom: 1rem; color: #fbbf24;">
+    📋 REQUIRED DOCUMENTATION
+  </h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.5rem; color: #e5e7eb;">
+    <div>📄 Government-issued ID</div>
+    <div>🏠 Property details (address, type, size)</div>
+    <div>📝 Purchase agreement (for purchases)</div>
+    <div>💳 Current mortgage statement (refinances)</div>
+    <div>🛡️ Proof of property insurance</div>
+    <div>📊 Recent property tax statement</div>
+    <div>📈 Recent appraisal report (if available)</div>
+  </div>
 </div>
 
----
+<!-- FAQ Section -->
+<div style="background: linear-gradient(135deg, #374151, #4b5563); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem);">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 1.5rem); font-weight: 800; text-align: center; margin-bottom: 1.5rem; color: #fbbf24;">
+    ❓ FREQUENTLY ASKED QUESTIONS
+  </h2>
+  
+  <div style="display: grid; gap: 1rem;">
+    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
+      <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Can I close if the property is tenant-occupied?</div>
+      <div style="color: #d1d5db; font-size: 0.9rem;">Yes, but occupancy arrangements may affect eligibility. We'll evaluate lease documentation and tenant payments.</div>
+    </div>
+    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
+      <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">How is the origination fee structured?</div>
+      <div style="color: #d1d5db; font-size: 0.9rem;">We provide up to 50% financing (interest charged) unless you prefer to pay at closing.</div>
+    </div>
+    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
+      <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">What about properties under renovation?</div>
+      <div style="color: #d1d5db; font-size: 0.9rem;">We review condition and scope. Renovation properties may require completion reserves or inspections, with potentially lower initial LTV.</div>
+    </div>
+    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
+      <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Can I get a loan on inherited property with multiple heirs?</div>
+      <div style="color: #d1d5db; font-size: 0.9rem;">Yes, all owners must join the application and sign at closing. Ongoing probate may require court clearance.</div>
+    </div>
+    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
+      <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">What if my property doesn't sell within the bridge loan term?</div>
+      <div style="color: #d1d5db; font-size: 0.9rem;">We work closely with you to assess exit strategies and may consider extensions based on circumstances and collateral value.</div>
+    </div>
+  </div>
+</div>
 
-## 💎 Payment Structure Options at Commercial Capital & Investment Finance, Inc
-
-We offer flexible payment structures to accommodate different financial strategies and cash flow needs:
-
-### **Fully Amortizing**
-✅ Principal and interest payments throughout loan term<br>
-✅ Loan is fully paid off at maturity<br>
-✅ Builds equity with each payment<br>
-✅ Available for all loan types<br>
-✅ Best for primary residences
-
-### **Interest-Only Period**
-✅ Interest-only payments for 1-10 years<br>
-✅ Converts to fully amortizing after interest-only period<br>
-✅ Lower initial payments<br>
-✅ Good for property improvement projects<br>
-✅ Available for all property types
-
-### **Interest-Only + Balloon**
-✅ Interest-only payments for entire term<br>
-✅ Principal due at maturity (balloon payment)<br>
-✅ Lowest monthly payments<br>
-✅ Ideal for investment properties
-
----
-
-## 📋 Required Documentation
-
-💡 Government-issued ID<br>
-💡 Property details (address, type, size)<br>
-💡 Purchase agreement (for purchases)<br>
-💡 Current mortgage statement (for refinances)<br>
-💡 Proof of property insurance<br>
-💡 Recent property tax statement<br>
-💡 Most recent appraisal report (if available)
-
----
-
-## ❓ Frequently Asked Questions (FAQ)
-
-### **Q: Can I close a deal if the property is currently tenant-occupied or leased?**
-**A:** Yes, but certain occupancy arrangements may affect eligibility and terms. We'll evaluate how existing leases impact collateral value and may request lease documentation or proof of tenant payments.
-
-### **Q: How is the origination fee structured?**
-**A:** We provide up to 50% financing (interest charged) unless applicant prefers to pay at closing.
-
-### **Q: What happens if my property is in the middle of major renovations, or if it's not fully habitable?**
-**A:** We review the current condition and scope of work. Funds for properties under renovation may have additional requirements, like a completion reserve or future inspection, and the initial LTV could be lower until work is completed.
-
-### **Q: What if there are title issues, such as liens, judgments, or boundary discrepancies?**
-**A:** All outstanding issues such as mechanic's liens, IRS liens, unpaid taxes, or encroachments must be resolved prior to closing. If discovered late, this may delay or jeopardize funding. Early title search is key.
-
-### **Q: Can I get a loan on an inherited property, or one with multiple heirs or owners?**
-**A:** Yes, but all owners must join the application, consent to the loan, and sign at closing. If probate is ongoing, loan funding may need official court clearance.
-
-### **Q: Are there limits or special conditions for mixed-use or non-traditional properties?**
-**A:** We lend on mixed-use so long as there's a residential component. We'll assess zoning compliance and the proportion of residential use. Unusual property types may take longer to review and may impact eligible LTV.
-
-### **Q: What happens if my existing property does not sell within the bridge loan term?**
-**A:** We work with you closely to assess exit strategies and may consider extensions based on your circumstances and collateral value.`
+</div>`
   }
 ];
