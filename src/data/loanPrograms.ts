@@ -153,9 +153,9 @@ export const loanPrograms: LoanProgram[] = [
           </div>
         </div>
         
-        <div style="background: rgba(30, 64, 175, 0.2); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6; margin-bottom: 1rem;">
-          <div style="color: #93c5fd; font-weight: 700;">🎯 DSCR REQUIREMENTS:</div>
-          <div style="color: #dbeafe; font-size: 0.9rem;">
+        <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24; margin-bottom: 1rem;">
+          <div style="color: #fbbf24; font-weight: 700;">🎯 DSCR REQUIREMENTS:</div>
+          <div style="color: #e5e7eb; font-size: 0.9rem;">
             • Minimum DSCR: 1.15x<br>
             • Long-term rentals: 100% of contract rent (60% minimum preferred)<br>
             • Transient/Seasonal: 65-80% of trailing 12-months income<br>
@@ -300,8 +300,8 @@ export const loanPrograms: LoanProgram[] = [
           Industry-leading zero-down financing for qualified investors
         </p>
         
-        <div style="background: rgba(30, 64, 175, 0.2); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
-          <div style="color: #93c5fd; font-weight: 700; font-size: 1.1rem; margin-bottom: 1rem;">
+        <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+          <div style="color: #fbbf24; font-weight: 700; font-size: 1.1rem; margin-bottom: 1rem;">
             🎯 QUALIFY WITH 2 OF THESE CRITERIA:
           </div>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
@@ -337,7 +337,7 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
-<div style="background: linear-gradient(45deg, #7c3aed, #8b5cf6); padding: 2rem; border-radius: 12px; margin-top: 3rem;">
+<div style="background: linear-gradient(135deg, #1f2937, #374151); padding: 2rem; border-radius: 12px; margin-top: 3rem; border: 2px solid #fbbf24;">
   <h2 style="color: #fbbf24; font-size: 2rem; font-weight: 800; margin-bottom: 2rem; text-align: center;">
     🏢 REQUIREMENTS & QUALIFICATIONS
   </h2>
@@ -759,7 +759,7 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
-<div style="background: linear-gradient(45deg, #7c3aed, #8b5cf6); padding: 2rem; border-radius: 12px; margin-top: 3rem; text-align: center;">
+<div style="background: linear-gradient(135deg, #1f2937, #374151); padding: 2rem; border-radius: 12px; margin-top: 3rem; text-align: center; border: 2px solid #fbbf24;">
   <h2 style="color: #fbbf24; font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">
     🎯 EXCLUSIVE 100% FINANCING PROGRAM
   </h2>
@@ -1060,9 +1060,9 @@ export const loanPrograms: LoanProgram[] = [
           </div>
         </div>
         
-        <div style="background: linear-gradient(45deg, #7c3aed, #8b5cf6); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">🏆 REWARD PERFORMANCE:</div>
-          <div style="color: #c4b5fd;">Higher cash flow properties earn lower interest rates automatically</div>
+          <div style="color: #a7f3d0;">Higher cash flow properties earn lower interest rates automatically</div>
         </div>
       </div>
     </div>
@@ -1190,79 +1190,79 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
-<div style="background: linear-gradient(45dc2626, #ef4444); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
-  <h2 style="color: white; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
+<div style="background: linear-gradient(135deg, #374151, #4b5563); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+  <h2 style="color: #fbbf24; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
     ❓ FREQUENTLY ASKED QUESTIONS
   </h2>
   
   <div style="display: grid; gap: 1.5rem;">
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: How is DSCR calculated and what does it mean?
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> DSCR = Net Operating Income ÷ Annual Debt Service. A 1.25 DSCR means the property generates 25% more income than needed to cover the loan payment, providing a safety cushion.
       </p>
     </div>
     
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: Do you require personal income verification?
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> No! DSCR loans qualify based solely on the property's cash flow performance. We don't require tax returns, W2s, or personal income documentation.
       </p>
     </div>
     
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: Can I finance multiple properties in one loan?
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> Yes! Our portfolio program allows you to finance 2-50+ properties in a single transaction with cross-collateralization benefits and streamlined processing.
       </p>
     </div>
     
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: What if my property is partially vacant?
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> We underwrite to both in-place income and pro forma rents. Partial vacancy is acceptable with appropriate DSCR adjustments and potential reserve requirements.
       </p>
     </div>
     
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
+      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: Are there prepayment penalties?
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> We offer flexible prepayment options including step-down schedules (5-4-3-2-1 or 3-2-1) and no-penalty options with slight rate adjustments for 10+ year terms.
       </p>
     </div>
   </div>
 </div>
 
-<div style="background: linear-gradient(45deg, #3b82f6, #1d4ed8); padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center; color: white;">
-  <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">
+<div style="background: linear-gradient(135deg, #166534, #16a34a); padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center; color: white;">
+  <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem; color: #fbbf24;">
     🚀 READY TO UNLOCK YOUR PORTFOLIO'S POTENTIAL?
   </h2>
-  <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem;">
+  <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem; color: white;">
     STREAMLINED DSCR FINANCING IN 30 DAYS
   </p>
   
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
     <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-      <div style="font-weight: 700; font-size: 1.1rem;">📞 CALL NOW</div>
-      <div style="font-size: 1.2rem; font-weight: 800;">1-800-CCIF-LOAN</div>
+      <div style="font-weight: 700; font-size: 1.1rem; color: #fbbf24;">📞 CALL NOW</div>
+      <div style="font-size: 1.2rem; font-weight: 800; color: white;">1-800-CCIF-LOAN</div>
     </div>
     <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-      <div style="font-weight: 700; font-size: 1.1rem;">📧 EMAIL</div>
-      <div style="font-size: 1.2rem; font-weight: 800;">admin@ccif-inc.com</div>
+      <div style="font-weight: 700; font-size: 1.1rem; color: #fbbf24;">📧 EMAIL</div>
+      <div style="font-size: 1.2rem; font-weight: 800; color: white;">admin@ccif-inc.com</div>
     </div>
   </div>
   
-  <p style="font-size: 1rem; font-weight: 600; margin-top: 1.5rem;">
+  <p style="font-size: 1rem; font-weight: 600; margin-top: 1.5rem; color: white;">
     <strong>Cash Flow-Based Financing Made Simple</strong><br>
     No personal income verification • Portfolio solutions • Competitive rates based on property performance
   </p>
@@ -1420,9 +1420,9 @@ export const loanPrograms: LoanProgram[] = [
           </div>
         </div>
         
-        <div style="background: linear-gradient(45deg, #7c3aed, #8b5cf6); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">🏆 SPECIAL FEATURES:</div>
-          <div style="color: #c4b5fd;">One-time closing • Staged conversion program • Performance-based discounts • Short-term holding costs available</div>
+          <div style="color: #a7f3d0;">One-time closing • Staged conversion program • Performance-based discounts • Short-term holding costs available</div>
         </div>
       </div>
     </div>
@@ -2583,9 +2583,9 @@ Processing Time: 14-30 days`
     </ul>
   </div>
 
-  <div style="background: linear-gradient(45deg, #1e40af, #3b82f6); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(135deg, #1f2937, #374151); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
     <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🏢 Eligible Property Types</h3>
-    <ul style="color: #bfdbfe; list-style: none; padding: 0;">
+    <ul style="color: #e5e7eb; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
         <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
         Single-family homes & Condos
@@ -2688,9 +2688,9 @@ Processing Time: 14-30 days`
           </div>
         </div>
         
-        <div style="background: rgba(30, 64, 175, 0.2); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6; margin-bottom: 1rem;">
-          <div style="color: #93c5fd; font-weight: 700;">🎯 IDEAL FOR:</div>
-          <div style="color: #dbeafe; font-size: 0.9rem;">
+        <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24; margin-bottom: 1rem;">
+          <div style="color: #fbbf24; font-weight: 700;">🎯 IDEAL FOR:</div>
+          <div style="color: #e5e7eb; font-size: 0.9rem;">
             Reducing monthly payments • Securing better rates • Converting adjustable to fixed rate • Changing loan terms
           </div>
         </div>
@@ -2788,9 +2788,9 @@ Processing Time: 14-30 days`
           Zero down payment options for qualified investors
         </p>
         
-        <div style="background: rgba(30, 64, 175, 0.2); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6; margin-bottom: 1rem;">
-          <div style="color: #93c5fd; font-weight: 700;">🎯 QUALIFICATION REQUIREMENTS (Meet Any 2):</div>
-          <div style="color: #dbeafe; font-size: 0.9rem; margin-top: 0.5rem;">
+        <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24; margin-bottom: 1rem;">
+          <div style="color: #fbbf24; font-weight: 700;">🎯 QUALIFICATION REQUIREMENTS (Meet Any 2):</div>
+          <div style="color: #e5e7eb; font-size: 0.9rem; margin-top: 0.5rem;">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.5rem;">
               <div>• Minimum FICO: 680 credit score</div>
               <div>• 3+ transactions in last 5 years</div>
@@ -2813,33 +2813,33 @@ Processing Time: 14-30 days`
 </div>
 
 <!-- Payment Structures Section -->
-<div style="background: linear-gradient(135deg, #1e40af, #3b82f6); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); margin-bottom: 2rem;">
+<div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); margin-bottom: 2rem; border: 2px solid #fbbf24;">
   <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: 1.5rem; color: #fbbf24;">
     💎 PAYMENT STRUCTURE OPTIONS
   </h2>
   
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
       <h4 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Fully Amortizing</h4>
-      <ul style="color: #bfdbfe; list-style: none; padding: 0; font-size: 0.9rem;">
+      <ul style="color: #e5e7eb; list-style: none; padding: 0; font-size: 0.9rem;">
         <li>✓ Principal and interest payments</li>
         <li>✓ Loan fully paid at maturity</li>
         <li>✓ Builds equity with each payment</li>
         <li>✓ Best for primary residences</li>
       </ul>
     </div>
-    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
       <h4 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Interest-Only Period</h4>
-      <ul style="color: #bfdbfe; list-style: none; padding: 0; font-size: 0.9rem;">
+      <ul style="color: #e5e7eb; list-style: none; padding: 0; font-size: 0.9rem;">
         <li>✓ Interest-only for 1-10 years</li>
         <li>✓ Converts to fully amortizing</li>
         <li>✓ Lower initial payments</li>
         <li>✓ Good for property improvements</li>
       </ul>
     </div>
-    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
       <h4 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Interest-Only + Balloon</h4>
-      <ul style="color: #bfdbfe; list-style: none; padding: 0; font-size: 0.9rem;">
+      <ul style="color: #e5e7eb; list-style: none; padding: 0; font-size: 0.9rem;">
         <li>✓ Interest-only entire term</li>
         <li>✓ Principal due at maturity</li>
         <li>✓ Lowest monthly payments</li>
