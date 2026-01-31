@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
-import { Users, UserPlus, MessageSquare, FileText, Settings, BarChart3, UserCheck, Volume2 } from 'lucide-react';
+import { Users, UserPlus, MessageSquare, FileText, Settings, BarChart3, UserCheck, Volume2, Handshake } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface User {
@@ -53,10 +53,21 @@ interface Assignment {
   client_name: string;
 }
 
+interface ReferralSignup {
+  id: string;
+  full_name: string;
+  email: string;
+  phone: string;
+  company: string;
+  experience_level: string;
+  created_at: string;
+}
+
 export default function AdminDashboard() {
   const [users, setUsers] = useState<User[]>([]);
   const [clients, setClients] = useState<Client[]>([]);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
+  const [referralSignups, setReferralSignups] = useState<ReferralSignup[]>([]);
   const [expandedApplications, setExpandedApplications] = useState<Set<string>>(new Set());
   const [newUserEmail, setNewUserEmail] = useState('');
   const [newUserName, setNewUserName] = useState('');
@@ -71,7 +82,8 @@ export default function AdminDashboard() {
     totalUsers: 0,
     totalClients: 0,
     totalApplications: 0,
-    pendingApplications: 0
+    pendingApplications: 0,
+    totalReferrals: 0
   });
 
   useEffect(() => {
@@ -130,6 +142,9 @@ export default function AdminDashboard() {
       ];
       setClients(allApplications);
       
+      // Store referral signups
+      setReferralSignups(referralData || []);
+      
       // Format assignments data with manual lookups
       const formattedAssignments = assignmentsData?.map(assignment => {
         const officer = usersData?.find(u => u.id === assignment.loan_officer_id);
@@ -147,7 +162,8 @@ export default function AdminDashboard() {
         totalUsers: usersData?.length || 0,
         totalClients: allApplications?.length || 0,
         totalApplications: allApplications?.length || 0,
-        pendingApplications: allApplications?.filter(c => c.status === 'pending').length || 0
+        pendingApplications: allApplications?.filter(c => c.status === 'pending').length || 0,
+        totalReferrals: referralData?.length || 0
       });
 
     } catch (error) {
@@ -433,13 +449,23 @@ export default function AdminDashboard() {
               <div className="text-2xl font-bold">{stats.pendingApplications}</div>
             </CardContent>
           </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Referrals</CardTitle>
+              <Handshake className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.totalReferrals}</div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Main Dashboard Content */}
         <Tabs defaultValue="users" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="users">User Management</TabsTrigger>
-            <TabsTrigger value="clients">Client Management</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-5">
+            <TabsTrigger value="users">Users</TabsTrigger>
+            <TabsTrigger value="clients">Clients</TabsTrigger>
+            <TabsTrigger value="referrals">Referrals</TabsTrigger>
             <TabsTrigger value="assignments">Assignments</TabsTrigger>
             <TabsTrigger value="messages">Messages</TabsTrigger>
           </TabsList>
@@ -642,6 +668,53 @@ export default function AdminDashboard() {
                     ))}
                   </div>
                 </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="referrals" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Handshake className="h-5 w-5 mr-2" />
+                  Referral Program Signups
+                </CardTitle>
+                <CardDescription>People who have signed up for the referral program</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {referralSignups.length === 0 ? (
+                  <div className="text-center py-8 text-muted-foreground">
+                    <Handshake className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                    <p>No referral signups yet.</p>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {referralSignups.map((referral) => (
+                      <div key={referral.id} className="border rounded-lg p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
+                            <p className="font-medium text-lg">{referral.full_name}</p>
+                            <p className="text-sm text-muted-foreground">{referral.email}</p>
+                            <p className="text-sm text-muted-foreground">{referral.phone}</p>
+                          </div>
+                          <div className="text-right">
+                            <Badge variant={referral.company === 'Institutional Broker' ? 'default' : 'secondary'}>
+                              {referral.company}
+                            </Badge>
+                            <p className="text-xs text-muted-foreground mt-1">
+                              {new Date(referral.created_at).toLocaleDateString()}
+                            </p>
+                          </div>
+                        </div>
+                        {referral.experience_level && (
+                          <p className="text-sm text-muted-foreground mt-2">
+                            {referral.experience_level}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
             </Card>
           </TabsContent>
 
