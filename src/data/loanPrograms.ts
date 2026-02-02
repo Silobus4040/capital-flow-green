@@ -3170,5 +3170,301 @@ Processing Time: 14-30 days`
     </div>
   </div>
 </div>`
+  },
+  {
+    id: "business-acquisition",
+    name: "Business Acquisition Financing",
+    interestRate: "7.25% – 9.00%",
+    minimumLoanAmount: "$500,000",
+    description: "Flexible funding solutions for business acquisitions, management buyouts, and partner buy-ins. Asset-based approach focused on business income strength rather than personal credit history.",
+    terms: `
+<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: clamp(1rem, 4vw, 2rem); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+
+<div style="text-align: center; margin-bottom: clamp(1.5rem, 5vw, 3rem); padding: clamp(1rem, 4vw, 2rem); background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
+  <h1 style="font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3); line-height: 1.2;">
+    BUSINESS ACQUISITION FINANCING
+  </h1>
+  <h2 style="font-size: clamp(1rem, 4vw, 1.5rem); font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.3;">
+    COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC
+  </h2>
+  <p style="font-size: clamp(0.9rem, 3vw, 1.1rem); color: #e5e7eb; font-weight: 500; line-height: 1.4;">
+    Private Lending for Business Acquisitions, Buyouts & Partner Transitions
+  </p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem, 3vw, 1.5rem); margin-bottom: clamp(1.5rem, 5vw, 3rem);">
+  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+    <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🚫 Traditional Bank Limitations</h3>
+    <ul style="color: #fecaca; list-style: none; padding: 0;">
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        Heavy reliance on personal credit scores
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        Lengthy approval processes
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        Rigid collateral requirements
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        Limited flexibility for buyouts
+      </li>
+    </ul>
+  </div>
+
+  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+    <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🎯 Our Business-First Approach</h3>
+    <ul style="color: #a7f3d0; list-style: none; padding: 0;">
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        Focus on business income strength
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        Fast processing (2-4 weeks)
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        Tiered business-first collateral model
+      </li>
+      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        In-house Credit Protection Insurance
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div style="margin-bottom: 3rem;">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
+    FINANCING OPTIONS
+  </h2>
+
+  <div style="display: grid; gap: 2rem;">
+    
+    <!-- Program 1: Standard Acquisition Loan -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
+        PROGRAM #1
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
+          Standard Acquisition Loan
+        </h3>
+        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
+          For purchasing or acquiring ownership in an existing business or franchise
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting at 7.25%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">5-10 Years</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV / LTC</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 85%</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">ORIGINATION FEE</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">1.5%</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+          <div style="color: white; font-weight: 700;">💡 KEY FEATURES:</div>
+          <div style="color: #a7f3d0;">Up to 50% financing on origination fee available • Fee can be rolled into loan or paid at closing • 1% prepayment penalty if paid within 2 years</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Program 2: Collateral Structure -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        COLLATERAL
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+          Collateral Structure
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Business-first approach with secondary collateral only when needed
+        </p>
+        
+        <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 6px; border-left: 3px solid #fbbf24; margin-bottom: 1rem;">
+          <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">🏢 PRIMARY COLLATERAL:</div>
+          <div style="color: #e5e7eb; font-size: 0.95rem;">
+            Business assets including equipment, receivables, intellectual property (case-by-case), inventory, and business real estate
+          </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MAX LTV</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 85%</div>
+            <div style="color: #a7f3d0; font-size: 0.85rem;">Of verified asset value</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">SECONDARY COLLATERAL</div>
+            <div style="color: white; font-size: 1.1rem; font-weight: 800;">Real Estate</div>
+            <div style="color: #a7f3d0; font-size: 0.85rem;">Only if business assets insufficient</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">PERSONAL GUARANTEE</div>
+            <div style="color: white; font-size: 1.1rem; font-weight: 800;">Required</div>
+            <div style="color: #a7f3d0; font-size: 0.85rem;">For 20%+ ownership holders</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Program 3: Credit Protection Insurance -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        OPTIONAL
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+          Credit Protection Insurance (CPI)
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          In-house protection program for borrower security
+        </p>
+        
+        <div style="background: rgba(16, 185, 129, 0.2); padding: 1.5rem; border-radius: 6px; border-left: 3px solid #10b981; margin-bottom: 1rem;">
+          <div style="color: #a7f3d0; font-weight: 700; margin-bottom: 0.5rem;">📋 INSURED EVENTS MAY INCLUDE:</div>
+          <ul style="color: #e5e7eb; padding-left: 1.5rem; margin: 0;">
+            <li style="margin-bottom: 0.3rem;">Unexpected death, disability, or severe illness of key owner/guarantor</li>
+            <li style="margin-bottom: 0.3rem;">Significant business interruption due to natural disaster</li>
+            <li style="margin-bottom: 0.3rem;">Other qualifying insured losses impairing loan repayment</li>
+          </ul>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">SAVINGS</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 40% Lower</div>
+            <div style="color: #a7f3d0; font-size: 0.85rem;">Than third-party coverage</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">ENROLLMENT</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Same-Day</div>
+            <div style="color: #a7f3d0; font-size: 0.85rem;">At loan closing</div>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px;">
+          <div style="color: white; font-weight: 700;">📧 CONTACT FOR QUOTE:</div>
+          <div style="color: #a7f3d0;">Insuranceunderwriter@ccif-inc.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Program 4: Documentation & Underwriting -->
+    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+        UNDERWRITING
+      </div>
+      <div style="margin-top: 1rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+          Documentation & Underwriting
+        </h3>
+        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+          Approval based on business ability to repay—not borrower credit score
+        </p>
+        
+        <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 6px; border-left: 3px solid #fbbf24; margin-bottom: 1rem;">
+          <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">📄 REQUIRED DOCUMENTATION:</div>
+          <ul style="color: #e5e7eb; padding-left: 1.5rem; margin: 0;">
+            <li style="margin-bottom: 0.3rem;">2 years of business and/or personal tax returns</li>
+            <li style="margin-bottom: 0.3rem;">Current Year-to-Date Profit & Loss and Balance Sheet</li>
+            <li style="margin-bottom: 0.3rem;">Purchase agreement or letter of intent</li>
+            <li style="margin-bottom: 0.3rem;">Business valuation or asset appraisal (if applicable)</li>
+            <li style="margin-bottom: 0.3rem;">Collateral summary for all pledged assets</li>
+          </ul>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TARGET DSCR</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">≥ 1.25x</div>
+          </div>
+          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
+            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">PROCESSING TIME</div>
+            <div style="color: white; font-size: 1.3rem; font-weight: 800;">2-4 Weeks</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Borrower Advantages Section -->
+<div style="margin-bottom: 2rem;">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
+    BORROWER ADVANTAGES
+  </h2>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; text-align: center;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💳</div>
+      <h3 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Credit-Flexible</h3>
+      <p style="color: #e5e7eb; font-size: 0.95rem;">Approval based on business strength, not credit history</p>
+    </div>
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; text-align: center;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⚡</div>
+      <h3 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Fast Processing</h3>
+      <p style="color: #e5e7eb; font-size: 0.95rem;">Funding in as little as 2-4 weeks</p>
+    </div>
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; text-align: center;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🏦</div>
+      <h3 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Tiered Collateral</h3>
+      <p style="color: #e5e7eb; font-size: 0.95rem;">Business-first approach, with add-ons only as needed</p>
+    </div>
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; text-align: center;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🛡️</div>
+      <h3 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">In-House Protection</h3>
+      <p style="color: #e5e7eb; font-size: 0.95rem;">Affordable Credit Protection Insurance for security</p>
+    </div>
+  </div>
+</div>
+
+<!-- Financing Options Summary -->
+<div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 1.8rem); font-weight: 800; text-align: center; margin-bottom: 1.5rem; color: #fbbf24;">
+    ALL FINANCING OPTIONS
+  </h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #fbbf24;">
+      <div style="color: #fbbf24; font-weight: 700;">Business Acquisition Loan</div>
+      <div style="color: #e5e7eb; font-size: 0.85rem;">Asset or Stock Purchase</div>
+    </div>
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #fbbf24;">
+      <div style="color: #fbbf24; font-weight: 700;">Management Buyout</div>
+      <div style="color: #e5e7eb; font-size: 0.85rem;">MBO Financing</div>
+    </div>
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #fbbf24;">
+      <div style="color: #fbbf24; font-weight: 700;">Partner Buy-In/Buyout</div>
+      <div style="color: #e5e7eb; font-size: 0.85rem;">Partnership Transitions</div>
+    </div>
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #fbbf24;">
+      <div style="color: #fbbf24; font-weight: 700;">Seller Carry Blend</div>
+      <div style="color: #e5e7eb; font-size: 0.85rem;">Hybrid Financing</div>
+    </div>
+    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #fbbf24;">
+      <div style="color: #fbbf24; font-weight: 700;">Bridge-to-Acquisition</div>
+      <div style="color: #e5e7eb; font-size: 0.85rem;">Short-Term Financing</div>
+    </div>
+  </div>
+</div>
+
+</div>`
   }
 ];

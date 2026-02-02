@@ -26,6 +26,7 @@ const programImages: Record<string, string> = {
   "self-storage-financing": selfStorageImage,
   "senior-living-financing": seniorLivingImage,
   "residential-investment-loan": residentialInvestmentImage,
+  "business-acquisition": commercialMortgageImage,
 };
 
 export default function LoanPrograms() {
