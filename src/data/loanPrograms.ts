@@ -2896,5 +2896,279 @@ Processing Time: 14-30 days`
 </div>
 
 </div>`
+  },
+  {
+    id: "mobile-home-park-financing",
+    name: "Mobile Home Park Financing",
+    interestRate: "6.00% - 7.25%",
+    minimumLoanAmount: "$500,000.00",
+    description: "Specialized private loans tailored for mobile home park acquisitions, refinances, and expansions with an asset-based approach focused on property performance.",
+    terms: `<div class="space-y-8 bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl">
+  <div class="text-center">
+    <h1 class="text-4xl font-bold text-green-800 mb-4">Mobile Home Park Financing Program</h1>
+    <p class="text-xl text-green-700 mb-2">We offer specialized private loans tailored for mobile home park acquisitions, refinances, and expansions.</p>
+    <p class="text-lg text-green-600">Our asset-based approach focuses primarily on property performance and income generation—not just borrower credit history.</p>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h2 class="text-3xl font-bold text-green-800 mb-6 text-center">Financing Options</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">1. Standard Purchase Loan</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">2. Rate & Term Refinance</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">3. DSCR-Based Purchase Loan</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">4. Cash-Out Refinance</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">5. Bridge Loan</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">6. 100% Financing Program</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">1. Standard Purchase Loan</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">Minimum $250,000</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 6.00%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Term:</span>
+          <span class="text-green-700 font-bold">5 to 30 years</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 85%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Origination Fee:</span>
+          <span class="text-green-700 font-bold">2% (50% financing available)</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Prepayment Penalty:</span>
+          <span class="text-green-700 font-bold">1% if paid off within first 3 years</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">2. Rate & Term Refinance</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Eligibility:</span>
+          <span class="text-green-700 font-bold">Operational for at least 1 year</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 6.00%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 80%</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Cash-Out Option:</span>
+          <span class="text-green-700 font-bold">Available for improvements</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Origination Fee:</span>
+          <span class="text-green-700 font-bold">2% (50% financing available)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">3. DSCR-Based Purchase Loan</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Minimum DSCR:</span>
+          <span class="text-green-700 font-bold">1.30x</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 6.25%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 80%</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">Based on projected NOI</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Origination Fee:</span>
+          <span class="text-green-700 font-bold">2% (50% financing available)</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Repayment:</span>
+          <span class="text-green-700 font-bold">Based on park performance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">4. Cash-Out Refinance</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Purpose:</span>
+          <span class="text-green-700 font-bold">Unlock equity for reinvestment or expansion</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Minimum Loan:</span>
+          <span class="text-green-700 font-bold">$300,000</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 7.25%</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 80%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Terms:</span>
+          <span class="text-green-700 font-bold">5 to 30 years fixed</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Origination Fee:</span>
+          <span class="text-green-700 font-bold">2% (50% financing available)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">5. Bridge Loan</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Purpose:</span>
+          <span class="text-green-700 font-bold">Short-term acquisition or repositioning</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Term Length:</span>
+          <span class="text-green-700 font-bold">6 to 24 months</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 6.50%</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 85%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Origination Fee:</span>
+          <span class="text-green-700 font-bold">2% (50% financing available)</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Requirements:</span>
+          <span class="text-green-700 font-bold">Cash flow projections required</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">6. 100% Financing Program</h3>
+    <p class="text-gray-700 mb-4">Available for strong borrowers with additional collateral or extensive industry experience. To qualify, applicants must meet <strong>at least 2 of the following criteria:</strong></p>
+    
+    <div class="bg-green-50 p-6 rounded-lg">
+      <h4 class="text-xl font-bold text-green-800 mb-4">Qualification Requirements</h4>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Minimum FICO:</span>
+          <span class="text-green-700 font-bold">680</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Experience:</span>
+          <span class="text-green-700 font-bold">3+ comparable transactions OR proven operational record</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Net Worth:</span>
+          <span class="text-green-700 font-bold">Minimum 1.5x loan amount</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Liquidity:</span>
+          <span class="text-green-700 font-bold">6 months of debt service reserves</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Income Verification:</span>
+          <span class="text-green-700 font-bold">2 years tax returns + 3 months bank statements</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Cross-Collateralization:</span>
+          <span class="text-green-700 font-bold">Additional properties accepted</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">Property & Borrower Requirements</h3>
+    <div class="space-y-6">
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Operational Status</h4>
+        <p class="text-gray-700">Park must be active and properly zoned for mobile home use.</p>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Preferred Park Features</h4>
+        <p class="text-gray-700">Updated utilities, stable tenant base, and solid infrastructure are ideal. We can adjust financing based on specific property characteristics.</p>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Minimum Size</h4>
+        <p class="text-gray-700">Typically 50 units, but flexible for smaller, high-performing parks with strong cash flow and management.</p>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Target DSCR</h4>
+        <p class="text-gray-700">1.30x, adjustable based on market strength and borrower experience. Lower ratios may be considered for exceptional properties.</p>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Value-Add or Expansion Deals</h4>
+        <p class="text-gray-700">Allowed with supporting feasibility studies. We partner with operators to assess potential and structure appropriate financing.</p>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Mixed-Use Parks</h4>
+        <p class="text-gray-700">Considered with clear income separation by asset type. We conduct prorated NOI evaluation for mixed-use properties.</p>
+      </div>
+    </div>
+  </div>
+</div>`
   }
 ];
