@@ -16,7 +16,7 @@ import selfStorageImage from "@/assets/self-storage-facility.jpg";
 import seniorLivingImage from "@/assets/senior-living-facility.jpg";
 import residentialInvestmentImage from "@/assets/residential-investment.jpg";
 
-const programImages = {
+const programImages: Record<string, string> = {
   "rv-park-financing": rvParkImage,
   "commercial-mortgage": commercialMortgageImage,
   "commercial-dscr-loan": commercialDscrImage,
