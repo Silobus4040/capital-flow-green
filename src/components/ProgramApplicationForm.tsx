@@ -17,6 +17,7 @@ import SelfStorageForm from "./forms/SelfStorageForm";
 import RehabInvestorForm from "./forms/RehabInvestorForm";
 import RVParkForm from "./forms/RVParkForm";
 import SeniorLivingForm from "./forms/SeniorLivingForm";
+import BusinessAcquisitionForm from "./forms/BusinessAcquisitionForm";
 import ConditionalFormFields from "./forms/ConditionalFormFields";
 
 interface ProgramApplicationFormProps {
@@ -54,6 +55,10 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
 
   if (program.id === 'senior-living' || program.name.toLowerCase().includes('senior living')) {
     return <SeniorLivingForm onSubmitSuccess={onSubmitSuccess} />;
+  }
+
+  if (program.id === 'business-acquisition' || program.name.toLowerCase().includes('business acquisition')) {
+    return <BusinessAcquisitionForm onSubmitSuccess={onSubmitSuccess} />;
   }
 
   const { toast } = useToast();
