@@ -14,479 +14,270 @@ export const loanPrograms: LoanProgram[] = [
     interestRate: "Starting at 5.75%",
     minimumLoanAmount: "$500,000.00",
     description: "Specialized financing for RV parks and campground facilities with flexible terms designed for seasonal cash flow patterns.",
-    terms: `
-<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: clamp(1rem, 4vw, 2rem); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-
-<div style="text-align: center; margin-bottom: clamp(1.5rem, 5vw, 3rem); padding: clamp(1rem, 4vw, 2rem); background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
-  <h1 style="font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3); line-height: 1.2;">
-    RV PARK & CAMPGROUND FINANCING
-  </h1>
-  <h2 style="font-size: clamp(1rem, 4vw, 1.5rem); font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.3;">
-    COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC
-  </h2>
-  <p style="font-size: clamp(0.9rem, 3vw, 1.1rem); color: #e5e7eb; font-weight: 500; line-height: 1.4;">
-    Asset-Based Lender Specializing in Recreational Property Financing
-  </p>
-</div>
-
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem, 3vw, 1.5rem); margin-bottom: clamp(1.5rem, 5vw, 3rem);">
-  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
-    <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🚫 Industry Challenges We Solve</h3>
-    <ul style="color: #fecaca; list-style: none; padding: 0;">
-      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
-        Seasonal cash flow variations
-      </li>
-      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
-        Limited financing options for recreational properties
-      </li>
-      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
-        Complex property valuations
-      </li>
-      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
-        Rigid payment structures
-      </li>
-    </ul>
+    terms: `<div class="space-y-8 bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl">
+  <div class="text-center">
+    <h1 class="text-4xl font-bold text-green-800 mb-4">RV Park & Campground Financing Program</h1>
+    <p class="text-xl text-green-700 mb-2">As an asset-based lender, we specialize in providing unique financial solutions exclusively focused on recreational property financing.</p>
+    <p class="text-lg text-green-600">Our approach focuses on property potential and performance, with seasonal payment flexibility built into our programs.</p>
   </div>
 
-  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
-    <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🎯 Our Specialized Solutions</h3>
-    <ul style="color: #a7f3d0; list-style: none; padding: 0;">
-      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
-        Seasonal payment flexibility
-      </li>
-      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
-        Industry expertise and understanding
-      </li>
-      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
-        Asset-based underwriting approach
-      </li>
-      <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
-        100% financing options available
-      </li>
-    </ul>
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h2 class="text-3xl font-bold text-green-800 mb-6 text-center">Financing Options</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">1. Standard Purchase Loan</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">2. Purchase with DSCR Loan</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">3. Cash-Out Refinance</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">4. Rate and Term Refinance</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">5. Bridge Financing</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg text-center">
+        <div class="text-lg font-semibold text-green-800">6. 100% Financing Program</div>
+      </div>
+    </div>
   </div>
-</div>
 
-<div style="margin-bottom: 3rem;">
-  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
-    OUR FINANCING PROGRAMS
-  </h2>
-
-  <div style="display: grid; gap: 2rem;">
-    
-    <!-- Program 1 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
-        PROGRAM #1
-      </div>
-      <div style="margin-top: 1rem;">
-        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
-          Standard Purchase Loans
-        </h3>
-        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
-          Perfect for acquiring established RV parks with proven cash flow
-        </p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">5.75%</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 80%</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">AMORTIZATION</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">30 Years</div>
-          </div>
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">1. Standard Purchase Loan</h3>
+    <p class="text-gray-700 mb-4">Perfect for acquiring established RV parks with proven cash flow.</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">Minimum $500,000</span>
         </div>
-        
-        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
-          <div style="color: white; font-weight: 700;">💡 SPECIAL FEATURES:</div>
-          <div style="color: #a7f3d0;">Payment frequency adjustments • Interest-only during off-peak seasons • Professional appraisal required</div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 5.75%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 80%</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Amortization:</span>
+          <span class="text-green-700 font-bold">30 Years</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Payment Options:</span>
+          <span class="text-green-700 font-bold">Seasonal flexibility available</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Features:</span>
+          <span class="text-green-700 font-bold">Interest-only during off-peak</span>
         </div>
       </div>
     </div>
-
-    <!-- Program 2 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
-        PROGRAM #2
-      </div>
-      <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
-          Purchase with DSCR Loan
-        </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
-          Asset-based financing focused on property performance
-        </p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">6.00%</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 85%</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">15 Years</div>
-          </div>
-        </div>
-        
-        <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24; margin-bottom: 1rem;">
-          <div style="color: #fbbf24; font-weight: 700;">🎯 DSCR REQUIREMENTS:</div>
-          <div style="color: #e5e7eb; font-size: 0.9rem;">
-            • Minimum DSCR: 1.15x<br>
-            • Long-term rentals: 100% of contract rent (60% minimum preferred)<br>
-            • Transient/Seasonal: 65-80% of trailing 12-months income<br>
-            • Mixed-income parks: Weighted DSCR or blended discounts
-          </div>
-        </div>
-        
-        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
-          <div style="color: white; font-weight: 700;">💡 BENEFITS:</div>
-          <div style="color: #a7f3d0;">Biannual payment options • Streamlined refinance after 2 years • No personal income verification</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Program 3 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
-        PROGRAM #3
-      </div>
-      <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
-          Cash-Out Refinance
-        </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
-          Access your property's equity for expansion or investments
-        </p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">6.25%</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 70%</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">20 Years</div>
-          </div>
-        </div>
-        
-        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
-          <div style="color: white; font-weight: 700;">💡 FLEXIBLE TERMS:</div>
-          <div style="color: #a7f3d0;">Interest-only first 5 years • Customized seasonal payment schedules • Flexible amortization</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Program 4 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
-        PROGRAM #4
-      </div>
-      <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
-          Rate and Term Refinance
-        </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
-          Lower payments and improve cash flow with better terms
-        </p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">5.75%</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 80%</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">AMORTIZATION</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">25 Years</div>
-          </div>
-        </div>
-        
-        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
-          <div style="color: white; font-weight: 700;">💡 ADVANTAGES:</div>
-          <div style="color: #a7f3d0;">Lower interest rates • Improved cash flow • Pure refinance benefits</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Program 5 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
-        PROGRAM #5
-      </div>
-      <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
-          Bridge Financing
-        </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
-          Fast, temporary financing for time-sensitive opportunities
-        </p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 80%</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">6.50%</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">12 Months</div>
-          </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">PAYMENT STRUCTURE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Interest-Only</div>
-          </div>
-        </div>
-        
-        <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
-          <div style="color: white; font-weight: 700;">💡 FEATURES:</div>
-          <div style="color: #a7f3d0;">Tailored exit strategies • Quick approval process • Perfect for fast closings</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Program 6 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
-        PROGRAM #6
-      </div>
-      <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
-          100% Financing Program
-        </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
-          Industry-leading zero-down financing for qualified investors
-        </p>
-        
-        <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
-          <div style="color: #fbbf24; font-weight: 700; font-size: 1.1rem; margin-bottom: 1rem;">
-            🎯 QUALIFY WITH 2 OF THESE CRITERIA:
-          </div>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px;">
-              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💳 CREDIT SCORE</div>
-              <div style="color: white; font-size: 1.1rem;">Minimum 680 FICO</div>
-            </div>
-            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px;">
-              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">🏆 EXPERIENCE</div>
-              <div style="color: white; font-size: 1.1rem;">3+ comparable transactions in 5 years</div>
-            </div>
-            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px;">
-              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💰 NET WORTH</div>
-              <div style="color: white; font-size: 1.1rem;">Minimum 1.5x loan amount</div>
-            </div>
-            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px;">
-              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💎 LIQUIDITY</div>
-              <div style="color: white; font-size: 1.1rem;">6 months debt service reserves</div>
-            </div>
-            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px;">
-              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">📊 INCOME VERIFICATION</div>
-              <div style="color: white; font-size: 1.1rem;">2 years tax returns + 3 months bank statements</div>
-            </div>
-            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px;">
-              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">🏢 CROSS-COLLATERAL</div>
-              <div style="color: white; font-size: 1.1rem;">Additional properties as collateral</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
-</div>
 
-<div style="background: linear-gradient(135deg, #1f2937, #374151); padding: 2rem; border-radius: 12px; margin-top: 3rem; border: 2px solid #fbbf24;">
-  <h2 style="color: #fbbf24; font-size: 2rem; font-weight: 800; margin-bottom: 2rem; text-align: center;">
-    🏢 REQUIREMENTS & QUALIFICATIONS
-  </h2>
-  
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-    
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
-        🎯 Strong Ownership & Management
-      </h3>
-      <ul style="color: #e5e7eb; list-style: none; padding: 0; font-size: 0.9rem;">
-        <li style="margin-bottom: 0.5rem;">• Clear ownership structure and operational responsibility</li>
-        <li style="margin-bottom: 0.5rem;">• Experience managing RV parks or similar properties</li>
-        <li style="margin-bottom: 0.5rem;">• Professional management in place or planned</li>
-      </ul>
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">2. Purchase with DSCR Loan</h3>
+    <p class="text-gray-700 mb-4">Asset-based financing focused on property performance.</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">Minimum $500,000</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 6.00%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 85%</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Term Length:</span>
+          <span class="text-green-700 font-bold">15 Years</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Minimum DSCR:</span>
+          <span class="text-green-700 font-bold">1.15x</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Income Verification:</span>
+          <span class="text-green-700 font-bold">Not required</span>
+        </div>
+      </div>
     </div>
-    
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
-        🏆 Property Quality & Experience
-      </h3>
-      <ul style="color: #e5e7eb; list-style: none; padding: 0; font-size: 0.9rem;">
-        <li style="margin-bottom: 0.5rem;">• Total sites (transient, seasonal, long-term)</li>
-        <li style="margin-bottom: 0.5rem;">• Key amenities and special features</li>
-        <li style="margin-bottom: 0.5rem;">• Clean, safe environment focus</li>
-        <li style="margin-bottom: 0.5rem;">• Recent renovations or upgrades</li>
-      </ul>
-    </div>
-    
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
-        📊 Consistent Revenue Streams
-      </h3>
-      <ul style="color: #e5e7eb; list-style: none; padding: 0; font-size: 0.9rem;">
-        <li style="margin-bottom: 0.5rem;">• Stable or growing occupancy year-round</li>
-        <li style="margin-bottom: 0.5rem;">• Multiple revenue streams</li>
-        <li style="margin-bottom: 0.5rem;">• Seasonal management strategies</li>
-        <li style="margin-bottom: 0.5rem;">• Off-peak period planning</li>
-      </ul>
-    </div>
-    
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
-        🚀 Market Position
-      </h3>
-      <ul style="color: #e5e7eb; list-style: none; padding: 0; font-size: 0.9rem;">
-        <li style="margin-bottom: 0.5rem;">• Strong position in local travel market</li>
-        <li style="margin-bottom: 0.5rem;">• Clear competitive advantages</li>
-        <li style="margin-bottom: 0.5rem;">• Positive online reviews</li>
-        <li style="margin-bottom: 0.5rem;">• Tourist destination proximity</li>
-      </ul>
-    </div>
-    
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
-        ✅ Compliance & Permits
-      </h3>
-      <ul style="color: #e5e7eb; list-style: none; padding: 0; font-size: 0.9rem;">
-        <li style="margin-bottom: 0.5rem;">• Proper local licensing compliance</li>
-        <li style="margin-bottom: 0.5rem;">• Health and safety certifications</li>
-        <li style="margin-bottom: 0.5rem;">• Environmental compliance history</li>
-        <li style="margin-bottom: 0.5rem;">• Improvement project planning</li>
-      </ul>
-    </div>
-    
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
-        💰 Financial Responsibility
-      </h3>
-      <ul style="color: #e5e7eb; list-style: none; padding: 0; font-size: 0.9rem;">
-        <li style="margin-bottom: 0.5rem;">• Strong financial stewardship demonstration</li>
-        <li style="margin-bottom: 0.5rem;">• Transparent debt and future planning</li>
-        <li style="margin-bottom: 0.5rem;">• Clear budget management</li>
-        <li style="margin-bottom: 0.5rem;">• Seasonal cash flow strategies</li>
-      </ul>
-    </div>
-    
   </div>
-</div>
 
-<div style="background: linear-gradient(45deg, #059669, #10b981); padding: 2rem; border-radius: 12px; margin-top: 3rem;">
-  <h2 style="color: white; font-size: 1.8rem; font-weight: 800; margin-bottom: 2rem; text-align: center;">
-    💡 FREQUENTLY ASKED QUESTIONS
-  </h2>
-  
-  <div style="display: grid; gap: 1.5rem;">
-    
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
-        Q: How do you handle seasonal revenue variations?
-      </h3>
-      <p style="color: #a7f3d0; font-size: 0.95rem; line-height: 1.4;">
-        We offer interest-only payment options during off-peak seasons and customized repayment schedules that align with your cash flow patterns. Our industry expertise allows us to structure loans that work with your seasonal business model.
-      </p>
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">3. Cash-Out Refinance</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">Minimum $500,000</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 6.25%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 70%</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Term Length:</span>
+          <span class="text-green-700 font-bold">20 Years</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest-Only:</span>
+          <span class="text-green-700 font-bold">First 5 years available</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Amortization:</span>
+          <span class="text-green-700 font-bold">Flexible</span>
+        </div>
+      </div>
     </div>
-    
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
-        Q: What makes RV park financing different from other commercial loans?
-      </h3>
-      <p style="color: #a7f3d0; font-size: 0.95rem; line-height: 1.4;">
-        RV parks have unique operational characteristics including seasonal income, mixed revenue streams (transient vs. long-term), and specialized amenities that require industry expertise to properly underwrite. We understand these nuances.
-      </p>
-    </div>
-    
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
-        Q: Can I finance improvements along with the purchase?
-      </h3>
-      <p style="color: #a7f3d0; font-size: 0.95rem; line-height: 1.4;">
-        Yes, our programs can include renovation and improvement costs. We'll need detailed project plans, contractor bids, and ROI projections to structure the appropriate financing solution.
-      </p>
-    </div>
-    
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
-        Q: What's the typical approval timeline?
-      </h3>
-      <p style="color: #a7f3d0; font-size: 0.95rem; line-height: 1.4;">
-        Standard loans typically close in 30-45 days, while bridge financing can close in 10-15 days depending on documentation completeness and property complexity.
-      </p>
-    </div>
-    
-    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
-        Q: Do you finance RV parks in all states?
-      </h3>
-      <p style="color: #a7f3d0; font-size: 0.95rem; line-height: 1.4;">
-        We finance RV parks nationwide, with particular expertise in tourist destinations and areas with strong seasonal demand. Each market is evaluated based on local dynamics and growth potential.
-      </p>
-    </div>
-    
   </div>
-</div>
 
-<div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
-  <h2 style="color: #fbbf24; font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem;">
-    📞 Ready to Discuss Your RV Park Financing?
-  </h2>
-  <p style="color: #e5e7eb; font-size: 1.1rem; margin-bottom: 1.5rem;">
-    Contact Commercial Capital & Investment Finance, Inc today for a personalized consultation tailored to your specific RV park investment goals.
-  </p>
-  <div style="color: #fbbf24; font-size: 1.2rem; font-weight: 700;">
-    🚀 Turn Your RV Park Vision Into Reality
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">4. Rate and Term Refinance</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Loan Amount:</span>
+          <span class="text-green-700 font-bold">Minimum $500,000</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 5.75%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 80%</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Amortization:</span>
+          <span class="text-green-700 font-bold">25 Years</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Benefit:</span>
+          <span class="text-green-700 font-bold">Lower interest rates</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Goal:</span>
+          <span class="text-green-700 font-bold">Improved cash flow</span>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
-</div>
-    `
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">5. Bridge Financing</h3>
+    <p class="text-gray-700 mb-4">Fast, temporary financing for time-sensitive opportunities.</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">LTV:</span>
+          <span class="text-green-700 font-bold">Up to 80%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Interest Rate:</span>
+          <span class="text-green-700 font-bold">Starting at 6.50%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Term Length:</span>
+          <span class="text-green-700 font-bold">12 Months</span>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Payment Structure:</span>
+          <span class="text-green-700 font-bold">Interest-Only</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Extensions:</span>
+          <span class="text-green-700 font-bold">Available</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Purpose:</span>
+          <span class="text-green-700 font-bold">Acquisition or Repositioning</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">6. 100% Financing Program</h3>
+    <p class="text-gray-700 mb-4">Available for strong borrowers with additional collateral or extensive industry experience. To qualify, applicants must meet <strong>at least 2 of the following criteria:</strong></p>
+    
+    <div class="bg-green-50 p-6 rounded-lg">
+      <h4 class="text-xl font-bold text-green-800 mb-4">Qualification Requirements</h4>
+      <div class="space-y-3">
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Minimum FICO:</span>
+          <span class="text-green-700 font-bold">680</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Experience:</span>
+          <span class="text-green-700 font-bold">3+ comparable transactions OR proven operational record</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Net Worth:</span>
+          <span class="text-green-700 font-bold">Minimum 1.5x loan amount</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Liquidity:</span>
+          <span class="text-green-700 font-bold">6 months of debt service reserves</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Income Verification:</span>
+          <span class="text-green-700 font-bold">2 years tax returns + 3 months bank statements</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="font-semibold text-gray-700">Cross-Collateralization:</span>
+          <span class="text-green-700 font-bold">Additional properties accepted</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-6 shadow-lg">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">Property Requirements</h3>
+    <div class="space-y-6">
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Operational Status</h4>
+        <p class="text-gray-700">Park must be operational and appropriately zoned for RV/campground use.</p>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Key Features</h4>
+        <p class="text-gray-700">Amenities, utility hookups, and easy access to major roadways are preferred. We can adjust financing based on property specifics.</p>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">Seasonal Considerations</h4>
+        <p class="text-gray-700">We understand seasonal cash flow variations and offer payment flexibility to accommodate off-peak periods.</p>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h4 class="text-lg font-bold text-green-800 mb-2">DSCR Calculation</h4>
+        <p class="text-gray-700">Long-term rentals at 100% contract rent, transient/seasonal at 65-80% of trailing 12-months income. Mixed-income parks use weighted DSCR.</p>
+      </div>
+    </div>
+  </div>
+</div>`
   },
   {
     id: "commercial-mortgage",
