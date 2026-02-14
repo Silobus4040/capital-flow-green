@@ -14,7 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      loan_program_applications: {
+        Row: {
+          application_type: string | null
+          borrower_email: string
+          borrower_name: string
+          borrower_phone: string
+          created_at: string
+          id: string
+          loan_purpose: string | null
+          program_id: string
+          program_name: string
+          program_specific_data: Json | null
+          property_address: string | null
+          property_city: string | null
+          property_state: string | null
+          property_zip: string | null
+          requested_amount: number | null
+          status: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          application_type?: string | null
+          borrower_email: string
+          borrower_name: string
+          borrower_phone: string
+          created_at?: string
+          id?: string
+          loan_purpose?: string | null
+          program_id: string
+          program_name: string
+          program_specific_data?: Json | null
+          property_address?: string | null
+          property_city?: string | null
+          property_state?: string | null
+          property_zip?: string | null
+          requested_amount?: number | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          application_type?: string | null
+          borrower_email?: string
+          borrower_name?: string
+          borrower_phone?: string
+          created_at?: string
+          id?: string
+          loan_purpose?: string | null
+          program_id?: string
+          program_name?: string
+          program_specific_data?: Json | null
+          property_address?: string | null
+          property_city?: string | null
+          property_state?: string | null
+          property_zip?: string | null
+          requested_amount?: number | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
