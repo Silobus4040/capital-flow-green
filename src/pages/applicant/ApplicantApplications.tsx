@@ -16,7 +16,7 @@ interface Application {
   property_city: string | null;
   property_state: string | null;
   created_at: string;
-  admin_notes: string | null;
+  admin_notes?: string | null;
   program_specific_data: any;
 }
 

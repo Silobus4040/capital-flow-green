@@ -141,7 +141,6 @@ export default function AdminPortalLogin() {
           </form>
           
           <div className="mt-4 text-center text-sm text-muted-foreground">
-            <p>Temporary password: CCIFAdmin2024!Temp</p>
             <p className="text-xs mt-1">Press Ctrl+Shift+A anywhere to access this page</p>
           </div>
           <div className="mt-6 text-center">
