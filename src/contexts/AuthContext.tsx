@@ -41,10 +41,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [profileFetched, setProfileFetched] = useState(false);
 
   const fetchProfile = async (userId: string, userEmail: string, userMetadata: any) => {
-    if (profileFetched) return; // Prevent duplicate fetches
+    if (profileFetched) return;
     
     try {
-      console.log('🔐 Fetching profile for user:', userId);
       const { data: profileData, error } = await supabase
         .from('profiles')
         .select('*')
@@ -52,66 +51,44 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         .maybeSingle();
       
       if (error) {
-        console.error('🔐 Profile fetch error:', error);
-        console.warn('🚨 SECURITY: Profile fetch failed - user should re-authenticate');
-        // SECURITY FIX: Never fallback to admin role, always use borrower as default
+        console.error('Profile fetch error:', error);
         setProfile({
-          id: userId,
-          user_id: userId,
-          email: userEmail || '',
-          full_name: userMetadata?.full_name || userEmail,
-          role: 'borrower' // Always fallback to borrower role for security
+          id: userId, user_id: userId, email: userEmail || '',
+          full_name: userMetadata?.full_name || userEmail, role: 'borrower'
         } as Profile);
       } else if (profileData) {
-        console.log('🔐 Profile loaded:', profileData);
-        setProfile(profileData as Profile);
+        setProfile(profileData as unknown as Profile);
       } else {
-        console.log('🔐 No profile found, creating default profile');
         setProfile({
-          id: userId,
-          user_id: userId,
-          email: userEmail || '',
-          full_name: userMetadata?.full_name || userEmail,
-          role: 'borrower'
+          id: userId, user_id: userId, email: userEmail || '',
+          full_name: userMetadata?.full_name || userEmail, role: 'borrower'
         } as Profile);
       }
     } catch (error) {
-      console.error('🔐 Profile fetch failed:', error);
-      // Create fallback profile on any error
+      console.error('Profile fetch failed:', error);
       setProfile({
-        id: userId,
-        user_id: userId,
-        email: userEmail || '',
-        full_name: userMetadata?.full_name || userEmail,
-        role: 'borrower'
+        id: userId, user_id: userId, email: userEmail || '',
+        full_name: userMetadata?.full_name || userEmail, role: 'borrower'
       } as Profile);
     } finally {
       setProfileFetched(true);
       setLoading(false);
-      console.log('🔐 Auth initialization complete');
     }
   };
 
   useEffect(() => {
-    console.log('🔐 AuthProvider: Setting up auth state listener');
-    
-    // Set up auth state listener FIRST - MUST BE SYNCHRONOUS
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        console.log('🔐 Auth state changed:', event, 'User:', session?.user?.email);
-        
         setSession(session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          // All users: fetch profile from database to determine role securely
           setTimeout(() => {
             if (!profileFetched) {
               fetchProfile(session.user.id, session.user.email || '', session.user.user_metadata);
             }
           }, 0);
         } else {
-          console.log('🔐 No user session, clearing state');
           setProfile(null);
           setProfileFetched(false);
           setLoading(false);
@@ -119,89 +96,41 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     );
 
-    // Get initial session AFTER setting up listener
-    console.log('🔐 Checking for existing session...');
     supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log('🔐 Initial session check:', session?.user?.email || 'no session');
       if (!session) {
-        // No session - clear everything and stop loading
         setSession(null);
         setUser(null);
         setProfile(null);
         setLoading(false);
       }
-      // If session exists, the auth state change handler will process it
     });
 
     return () => subscription.unsubscribe();
   }, []);
 
   const signUp = async (email: string, password: string, fullName: string) => {
-    const redirectUrl = `${window.location.origin}/applicant-dashboard`;
-    
     const { error } = await supabase.auth.signUp({
-      email,
-      password,
+      email, password,
       options: {
-        emailRedirectTo: redirectUrl,
-        data: {
-          full_name: fullName
-        }
+        emailRedirectTo: `${window.location.origin}/applicant-dashboard`,
+        data: { full_name: fullName }
       }
     });
-    
     return { error };
   };
 
   const signIn = async (email: string, password: string) => {
     setLoading(true);
     try {
-      // Log security event for login attempt
-      const loginStartTime = Date.now();
-      
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
-      
-      if (error) {
-        // Log failed login attempt
-        supabase.rpc('log_security_incident', {
-          incident_type: 'login_attempt',
-          details: {
-            success: false,
-            email: email,
-            error_message: error.message,
-            timestamp: new Date().toISOString(),
-            user_agent: navigator.userAgent
-          },
-          risk_level: 'medium'
-        }).then(() => {}, () => {}); // Don't block login on logging failure
-      } else if (data.user) {
-        // Log successful login
-        supabase.rpc('log_security_incident', {
-          incident_type: 'login_attempt',
-          details: {
-            success: true,
-            user_id: data.user.id,
-            email: email,
-            login_duration_ms: Date.now() - loginStartTime,
-            timestamp: new Date().toISOString(),
-            user_agent: navigator.userAgent
-          },
-          risk_level: 'low'
-        }).then(() => {}, () => {}); // Don't block login on logging failure
-
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (!error && data.user) {
         setUser(data.user);
         setSession(data.session);
-        
-        // Fetch profile to determine role-based redirection
         setTimeout(async () => {
           setProfileFetched(false);
           await fetchProfile(data.user.id, data.user.email || '', data.user.user_metadata);
         }, 0);
       }
-      
       return { error };
     } finally {
       setLoading(false);
@@ -209,33 +138,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const adminSignIn = async (email: string, password: string) => {
-    console.log('🔐 ADMIN SIGN IN STARTED:', email);
-    const startTime = Date.now();
-    
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
-      
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       if (!error && data.user) {
-        console.log('🔐 ADMIN AUTH SUCCESS in', Date.now() - startTime + 'ms');
-        
-        // Fetch actual profile from database to verify admin role
         setUser(data.user);
         setSession(data.session);
-        
         setTimeout(async () => {
           setProfileFetched(false);
           await fetchProfile(data.user.id, data.user.email || '', data.user.user_metadata);
         }, 0);
-        
-        console.log('🔐 ADMIN SIGN IN COMPLETE in', Date.now() - startTime + 'ms');
       }
-      
       return { error };
     } catch (err) {
-      console.error('🔐 ADMIN SIGN IN ERROR:', err);
       setLoading(false);
       return { error: err };
     }
@@ -246,29 +160,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const resetPassword = async (email: string) => {
-    const redirectUrl = `${window.location.origin}/applicant-login?reset=true`;
-    
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: redirectUrl
+      redirectTo: `${window.location.origin}/applicant-login?reset=true`
     });
-    
     return { error };
   };
 
-  const value = {
-    user,
-    session,
-    profile,
-    loading,
-    signUp,
-    signIn,
-    adminSignIn,
-    signOut,
-    resetPassword
-  };
-
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{ user, session, profile, loading, signUp, signIn, adminSignIn, signOut, resetPassword }}>
       {children}
     </AuthContext.Provider>
   );
