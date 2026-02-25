@@ -50,6 +50,23 @@ export default function ContactUs() {
         return;
       }
 
+      // Send Telegram notification (fire-and-forget)
+      supabase.functions.invoke('send-telegram-notification', {
+        body: {
+          applicationType: 'contact',
+          borrowerName: sanitizeInput(formData.name),
+          borrowerEmail: sanitizeInput(formData.email),
+          borrowerPhone: sanitizeInput(formData.phone),
+          programName: 'Contact Form Inquiry',
+          extras: {
+            Company: formData.company,
+            'Loan Amount': formData.loanAmount,
+            'Property Type': formData.propertyType,
+            Message: formData.message,
+          },
+        },
+      }).catch(err => console.error('⚠️ Telegram notification failed:', err));
+
       toast({ title: "Message Sent Successfully", description: "Thank you for contacting us. We'll respond within 24 hours." });
       setFormData({ name: "", email: "", phone: "", company: "", loanAmount: "", propertyType: "", message: "" });
     } catch (error) {
