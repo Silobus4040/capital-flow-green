@@ -55,6 +55,19 @@ export const usePublicApplications = () => {
 
       console.log('✅ Database insertion successful');
 
+      // Send Telegram notification (fire-and-forget)
+      supabase.functions.invoke('send-telegram-notification', {
+        body: {
+          applicationType: 'loan',
+          borrowerName: applicationData.borrowerName,
+          borrowerEmail: applicationData.borrowerEmail,
+          borrowerPhone: applicationData.borrowerPhone,
+          programName: applicationData.programName,
+          requestedAmount: applicationData.requestedAmount,
+          propertyAddress: [applicationData.propertyAddress, applicationData.propertyCity, applicationData.propertyState, applicationData.propertyZip].filter(Boolean).join(', '),
+        },
+      }).catch(err => console.error('⚠️ Telegram notification failed:', err));
+
       // Send email notification via edge function (now requires JWT)
       const { data: emailResult, error: emailError } = await supabase.functions.invoke(
         'send-program-application',

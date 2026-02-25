@@ -78,6 +78,18 @@ export default function ReferralProgram() {
         return;
       }
 
+      // Send Telegram notification (fire-and-forget)
+      supabase.functions.invoke('send-telegram-notification', {
+        body: {
+          applicationType: 'referral',
+          borrowerName: fullName,
+          borrowerEmail: sanitizeInput(formData.email),
+          borrowerPhone: sanitizeInput(formData.phone),
+          programName: 'Referral Program Signup',
+          extras: { 'Broker Type': brokerType, Address: address },
+        },
+      }).catch(err => console.error('⚠️ Telegram notification failed:', err));
+
       // Send email notification
       try {
         await supabase.functions.invoke('send-referral-signup', {
