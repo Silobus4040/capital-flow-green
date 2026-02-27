@@ -11,8 +11,8 @@ serve(async (req) => {
   }
 
   try {
-    const TELEGRAM_BOT_TOKEN = Deno.env.get('TELEGRAM_BOT_TOKEN');
-    const TELEGRAM_CHAT_ID = Deno.env.get('TELEGRAM_CHAT_ID');
+    const TELEGRAM_BOT_TOKEN = Deno.env.get('TELEGRAM_BOT_TOKEN')?.trim();
+    const TELEGRAM_CHAT_ID = Deno.env.get('TELEGRAM_CHAT_ID')?.trim();
 
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
       console.error('Missing Telegram configuration');
@@ -21,29 +21,7 @@ serve(async (req) => {
       });
     }
 
-    const body = await req.json();
-
-    // Debug mode: get updates to find correct chat ID
-    if (body.action === 'getUpdates') {
-      const updatesUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates`;
-      const updatesResponse = await fetch(updatesUrl);
-      const updates = await updatesResponse.json();
-      return new Response(JSON.stringify(updates), {
-        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-
-    // Debug mode: show config (masked)
-    if (body.action === 'debug') {
-      return new Response(JSON.stringify({ 
-        chatId: TELEGRAM_CHAT_ID,
-        tokenPrefix: TELEGRAM_BOT_TOKEN?.substring(0, 10) + '...',
-      }), {
-        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-
-    const { applicationType, borrowerName, borrowerEmail, borrowerPhone, programName, requestedAmount, propertyAddress, extras } = body;
+    const { applicationType, borrowerName, borrowerEmail, borrowerPhone, programName, requestedAmount, propertyAddress, extras } = await req.json();
 
     // Build message based on type
     let header = '🆕 NEW LOAN APPLICATION';
