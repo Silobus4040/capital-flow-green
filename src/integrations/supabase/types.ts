@@ -136,6 +136,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_application_email: { Args: { _email: string }; Returns: boolean }
       get_borrower_display_name: {
         Args: { _email: string; _loan_id: string }
         Returns: string
