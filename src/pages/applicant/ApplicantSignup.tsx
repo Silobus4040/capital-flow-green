@@ -110,7 +110,7 @@ export default function ApplicantSignup() {
       }
 
       // Get display name from the loan application
-      const { data: displayName } = await supabase.rpc('get_borrower_display_name', {
+      const { data: displayName } = await (supabase.rpc as any)('get_borrower_display_name', {
         _email: normalizedEmail,
         _loan_id: loanId.trim(),
       });
