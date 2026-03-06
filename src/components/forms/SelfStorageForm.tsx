@@ -63,7 +63,9 @@ export default function SelfStorageForm({ onSubmitSuccess }: SelfStorageFormProp
   const { toast } = useToast();
   const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const [formData, setFormData] = useState<SelfStorageFormData>({
-    borrowerName: "",
+    entityName: "",
+    firstName: "",
+    lastName: "",
     borrowerEmail: "",
     borrowerPhone: "",
     facilityName: "",
