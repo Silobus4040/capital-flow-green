@@ -148,6 +148,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      link_application_to_user: {
+        Args: { _email: string; _loan_id: string; _user_id: string }
+        Returns: Json
+      }
       verify_loan_id: {
         Args: { _email: string; _loan_id: string }
         Returns: boolean
