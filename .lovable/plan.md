@@ -1,81 +1,60 @@
 
 
-## Plan: Fix Loan ID Verification + Full-Page Loan ID & Success Steps
+## Telegram Notification Integration Plan
 
-### Problems Found
+Thank you for providing your Telegram credentials. Here is the plan to send all application notifications to your Telegram.
 
-1. **`verify_loan_id` SQL function** has `AND user_id IS NULL` — fails if app was already linked (e.g., re-signup attempts)
-2. **Application linking fails silently** — the direct `UPDATE loan_program_applications SET user_id = ...` on line 153-157 is blocked by RLS (only admins can update that table). Need a SECURITY DEFINER function.
-3. **Loan ID step is a popup Dialog** — user wants a full-page green-themed step with a Cancel button
-4. **No success screen with loan details** — user wants to see: Borrower Name, Loan Amount, Property Address, Program Type, Submission Date + days in process
+### What Will Be Built
 
-### Database Migration
+**1. New backend function: `send-telegram-notification`**
+- Accepts application data (type, name, email, phone, program, amount, etc.)
+- Formats a clean, readable Telegram message
+- Sends it to your Telegram chat via the Bot API
+- Non-blocking: if Telegram fails, the form submission still succeeds
 
-```sql
--- 1. Fix verify_loan_id: remove user_id IS NULL restriction
-CREATE OR REPLACE FUNCTION public.verify_loan_id(_email text, _loan_id text)
-RETURNS boolean LANGUAGE sql STABLE SECURITY DEFINER SET search_path = public
-AS $$ SELECT EXISTS (
-  SELECT 1 FROM public.loan_program_applications
-  WHERE borrower_email = _email AND loan_id = _loan_id
-) $$;
+**2. Store your credentials as backend secrets**
+- `TELEGRAM_BOT_TOKEN` = `8613102452:AAGvnbVmXKCI1mSdpXMqh0ZTzDdPPLnBag4`
+- `TELEGRAM_CHAT_ID` = `8156908905`
 
--- 2. New function to link application (bypasses RLS)
-CREATE OR REPLACE FUNCTION public.link_application_to_user(
-  _email text, _loan_id text, _user_id uuid
-) RETURNS jsonb LANGUAGE plpgsql SECURITY DEFINER SET search_path = public
-AS $$
-DECLARE
-  _app record;
-BEGIN
-  UPDATE public.loan_program_applications
-  SET user_id = _user_id
-  WHERE borrower_email = _email AND loan_id = _loan_id
-  RETURNING borrower_name, requested_amount, property_address,
-    program_name, created_at, property_city, property_state
-  INTO _app;
+**3. Hook Telegram into all 3 submission flows**
 
-  IF NOT FOUND THEN RETURN NULL; END IF;
+| Flow | File | Change |
+|------|------|--------|
+| Loan applications (public) | `usePublicApplications.ts` | Add `send-telegram-notification` call after DB insert |
+| Loan applications (auth) | `useProgramApplications.ts` | Add `send-telegram-notification` call after DB insert |
+| Referral signups | `ReferralProgram.tsx` | Add `send-telegram-notification` call after DB insert |
+| Contact form | `ContactUs.tsx` | Add `send-telegram-notification` call after DB insert |
 
-  RETURN jsonb_build_object(
-    'borrower_name', _app.borrower_name,
-    'requested_amount', _app.requested_amount,
-    'property_address', _app.property_address,
-    'property_city', _app.property_city,
-    'property_state', _app.property_state,
-    'program_name', _app.program_name,
-    'created_at', _app.created_at
-  );
-END $$;
+**4. Telegram message format example**
+
+```text
+🆕 NEW LOAN APPLICATION
+
+📋 Program: Commercial Mortgage
+👤 Name: John Smith
+📧 Email: john@example.com
+📞 Phone: 619-555-1234
+💰 Amount: $1,000,000
+📍 Property: 123 Main St, San Diego, CA
+
+⏰ Submitted: 2/25/2026 2:30 PM ET
 ```
 
-### Code Changes — `src/pages/applicant/ApplicantSignup.tsx`
+Different headers for each type: loan, referral, and contact.
 
-1. **Add `'success'` to `SignupStep` type**
+### Steps
 
-2. **Replace the `<Dialog>` Loan ID step** with a full-page inline step:
-   - Green background (`bg-green-50`) matching existing brand
-   - CCIF logo at top, checkmark icon, "One Last Step" heading
-   - Loan ID input with label and helper text
-   - "Link My Application" button + "Cancel" button (signs out, redirects to login)
-   - Responsive for mobile and desktop
+1. Store `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as backend secrets (2 secret prompts)
+2. Create `supabase/functions/send-telegram-notification/index.ts` -- calls Telegram Bot API `sendMessage` endpoint
+3. Update `usePublicApplications.ts` -- add Telegram notification call (fire-and-forget)
+4. Update `useProgramApplications.ts` -- add Telegram notification call (fire-and-forget)
+5. Update `ContactUs.tsx` -- add Telegram notification call after successful DB insert
+6. Update `ReferralProgram.tsx` -- add Telegram notification call after successful DB insert
 
-3. **Replace `handleLoanIdSubmit` logic**:
-   - Call new `link_application_to_user` RPC instead of direct UPDATE (fixes RLS block)
-   - Store returned loan details in state
-   - Navigate to `'success'` step instead of redirecting
+### Technical Details
 
-4. **Add full-page success step** showing:
-   - Green background with checkmark
-   - Borrower Name, Loan Amount, Property Address, Program Type
-   - Submission Date with "Day X of Y" calculation
-   - "Continue to Dashboard" button
-
-5. **Cancel button**: calls `supabase.auth.signOut()` and navigates to `/applicant-login`
-
-### Files to Modify
-| File | Change |
-|------|--------|
-| Database migration | Fix `verify_loan_id`, add `link_application_to_user` RPC |
-| `src/pages/applicant/ApplicantSignup.tsx` | Replace Dialog with full-page steps, use new RPC, add success screen |
+- The edge function calls `https://api.telegram.org/bot{TOKEN}/sendMessage` with `parse_mode: "HTML"` for formatted messages
+- All Telegram calls are wrapped in try/catch so failures never block form submissions
+- The function accepts a generic payload with `applicationType`, `borrowerName`, `borrowerEmail`, `borrowerPhone`, `programName`, `requestedAmount`, and optional `extras` object for additional details
+- JWT verification disabled for this function since it's called from both authenticated and anonymous contexts
 

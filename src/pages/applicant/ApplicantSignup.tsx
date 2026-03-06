@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useToast } from '@/components/ui/use-toast';
-import { Eye, EyeOff, AlertCircle, Info, Mail, Lock, KeyRound, CheckCircle2, BarChart3, FileText, MessageSquare, Shield, CreditCard, Archive } from 'lucide-react';
+import { Eye, EyeOff, AlertCircle, Info, Mail, Lock, KeyRound, CheckCircle2, BarChart3, FileText, MessageSquare, CreditCard, Archive, ArrowRight, XCircle } from 'lucide-react';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import ccifLogo from '@/assets/ccif-logo-enhanced.png';
 import heroImage from '@/assets/loan-management-hero.jpg';
 
-type SignupStep = 'credentials' | 'otp' | 'loan-id';
+type SignupStep = 'credentials' | 'otp' | 'loan-id' | 'success';
+
+interface LoanDetails {
+  borrower_name: string;
+  requested_amount: number | null;
+  property_address: string | null;
+  property_city: string | null;
+  property_state: string | null;
+  program_name: string;
+  created_at: string;
+}
 
 const FEATURES = [
   { icon: BarChart3, label: 'Draw Schedule Management' },
@@ -33,10 +42,11 @@ export default function ApplicantSignup() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [showLoanIdDialog, setShowLoanIdDialog] = useState(false);
   const [isSigningUp, setIsSigningUp] = useState(false);
+  const [loanDetails, setLoanDetails] = useState<LoanDetails | null>(null);
   const { user } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   if (user && !isSigningUp) {
     return <Navigate to="/applicant-dashboard" replace />;
@@ -50,7 +60,6 @@ export default function ApplicantSignup() {
     try {
       const normalizedEmail = email.trim().toLowerCase();
 
-      // Check if email exists in applications
       const { data: emailExists, error: checkError } = await supabase.rpc('check_application_email', {
         _email: normalizedEmail,
       });
@@ -102,7 +111,6 @@ export default function ApplicantSignup() {
       if (error) {
         setErrorMessage('Invalid or expired verification code. Please try again.');
       } else {
-        setShowLoanIdDialog(true);
         setStep('loan-id');
       }
     } catch {
@@ -131,39 +139,44 @@ export default function ApplicantSignup() {
         return;
       }
 
-      const { data: displayName } = await (supabase.rpc as any)('get_borrower_display_name', {
+      const { data: { user: currentUser } } = await supabase.auth.getUser();
+
+      if (!currentUser) {
+        setErrorMessage('Session expired. Please sign up again.');
+        setLoading(false);
+        return;
+      }
+
+      // Link application and get details via SECURITY DEFINER function
+      const { data: appDetails, error: linkError } = await (supabase.rpc as any)('link_application_to_user', {
         _email: normalizedEmail,
         _loan_id: loanId.trim(),
+        _user_id: currentUser.id,
       });
 
+      if (linkError || !appDetails) {
+        setErrorMessage('Could not link application. Please contact your account executive.');
+        setLoading(false);
+        return;
+      }
+
+      // Update user metadata
+      const displayName = appDetails.borrower_name || normalizedEmail;
       await supabase.auth.updateUser({
         data: {
           loan_id: loanId.trim(),
-          borrower_display_name: displayName || normalizedEmail,
+          borrower_display_name: displayName,
         }
       });
 
-      const { data: { user: currentUser } } = await supabase.auth.getUser();
-      if (currentUser) {
-        await supabase
-          .from('profiles')
-          .update({ full_name: displayName || normalizedEmail })
-          .eq('user_id', currentUser.id);
+      // Update profile
+      await supabase
+        .from('profiles')
+        .update({ full_name: displayName })
+        .eq('user_id', currentUser.id);
 
-        await supabase
-          .from('loan_program_applications')
-          .update({ user_id: currentUser.id })
-          .eq('borrower_email', normalizedEmail)
-          .eq('loan_id', loanId.trim());
-      }
-
-      toast({
-        title: 'Account Linked Successfully!',
-        description: 'Your loan application has been linked to your account.',
-        className: 'bg-green-50 border-green-200 text-green-800',
-      });
-
-      window.location.href = '/applicant-dashboard';
+      setLoanDetails(appDetails as LoanDetails);
+      setStep('success');
     } catch {
       setErrorMessage('An unexpected error occurred. Please try again.');
     } finally {
@@ -171,9 +184,137 @@ export default function ApplicantSignup() {
     }
   };
 
+  const handleCancel = async () => {
+    await supabase.auth.signOut();
+    navigate('/applicant-login');
+  };
+
+  const getDaysInProcess = (createdAt: string) => {
+    const created = new Date(createdAt);
+    const now = new Date();
+    const diffMs = now.getTime() - created.getTime();
+    return Math.max(1, Math.ceil(diffMs / (1000 * 60 * 60 * 24)));
+  };
+
+  const formatCurrency = (amount: number | null) => {
+    if (!amount) return 'N/A';
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(amount);
+  };
+
+  const formatAddress = (details: LoanDetails) => {
+    const parts = [details.property_address, details.property_city, details.property_state].filter(Boolean);
+    return parts.length > 0 ? parts.join(', ') : 'N/A';
+  };
+
+  // Full-page Loan ID step
+  if (step === 'loan-id') {
+    return (
+      <div className="min-h-screen bg-green-50 flex flex-col items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          <div className="flex justify-center mb-6">
+            <img src={ccifLogo} alt="CCIF Logo" className="h-10 lg:h-14 w-auto" />
+          </div>
+
+          <div className="bg-background rounded-2xl shadow-lg p-6 lg:p-8">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                <CheckCircle2 className="h-5 w-5 text-green-600" />
+              </div>
+              <h2 className="text-xl lg:text-2xl font-bold text-foreground font-serif">One Last Step!</h2>
+            </div>
+            <p className="text-muted-foreground text-sm mb-5">
+              Enter your Loan ID to link your application to this account.
+            </p>
+
+            {errorMessage && (
+              <Alert variant="destructive" className="mb-4 bg-destructive/10 border-destructive/30">
+                <AlertCircle className="h-4 w-4 text-destructive" />
+                <AlertDescription className="text-destructive font-medium">{errorMessage}</AlertDescription>
+              </Alert>
+            )}
+
+            <form onSubmit={handleLoanIdSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="loanId" className="flex items-center gap-1.5">
+                  <KeyRound className="h-4 w-4 text-primary" /> Loan ID
+                </Label>
+                <Input
+                  id="loanId"
+                  type="text"
+                  value={loanId}
+                  onChange={(e) => { setLoanId(e.target.value); setErrorMessage(''); }}
+                  required
+                  placeholder="e.g. CCIF-2026-0042"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Your Loan ID was provided by your account executive.
+                </p>
+              </div>
+
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? 'Linking Application...' : 'Link My Application'}
+              </Button>
+
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full text-muted-foreground"
+                onClick={handleCancel}
+              >
+                <XCircle className="h-4 w-4 mr-2" /> Cancel
+              </Button>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Full-page success step with loan details
+  if (step === 'success' && loanDetails) {
+    const days = getDaysInProcess(loanDetails.created_at);
+    return (
+      <div className="min-h-screen bg-green-50 flex flex-col items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          <div className="flex justify-center mb-6">
+            <img src={ccifLogo} alt="CCIF Logo" className="h-10 lg:h-14 w-auto" />
+          </div>
+
+          <div className="bg-background rounded-2xl shadow-lg p-6 lg:p-8 text-center">
+            <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+              <CheckCircle2 className="h-7 w-7 text-green-600" />
+            </div>
+            <h2 className="text-xl lg:text-2xl font-bold text-foreground font-serif mb-1">
+              Account Linked Successfully!
+            </h2>
+            <p className="text-muted-foreground text-sm mb-6">
+              Your loan application has been linked. Our team will review and contact you within 24–48 hours.
+            </p>
+
+            <div className="bg-muted/50 rounded-xl p-4 text-left space-y-3 mb-6">
+              <DetailRow label="Borrower" value={loanDetails.borrower_name} />
+              <DetailRow label="Loan Amount" value={formatCurrency(loanDetails.requested_amount)} />
+              <DetailRow label="Property Address" value={formatAddress(loanDetails)} />
+              <DetailRow label="Program Type" value={loanDetails.program_name} />
+              <DetailRow
+                label="Submission Date"
+                value={`${new Date(loanDetails.created_at).toLocaleDateString()} — Day ${days} of 14`}
+              />
+            </div>
+
+            <Button className="w-full" onClick={() => { window.location.href = '/applicant-dashboard'; }}>
+              Continue to Dashboard <ArrowRight className="h-4 w-4 ml-2" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Main signup form (credentials + OTP steps)
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
-      {/* Hero Panel - compact banner on mobile, full side panel on desktop */}
+      {/* Hero Panel */}
       <div className="relative flex h-[32vh] lg:h-auto lg:w-1/2 bg-primary overflow-hidden">
         <img
           src={heroImage}
@@ -287,7 +428,7 @@ export default function ApplicantSignup() {
           )}
 
           {/* Step 2: OTP Verification */}
-          {step === 'otp' && !showLoanIdDialog && (
+          {step === 'otp' && (
             <form onSubmit={handleOtpVerify} className="space-y-5">
               <p className="text-sm text-muted-foreground text-center">
                 We sent a 6-digit code to <strong>{email}</strong>
@@ -320,51 +461,6 @@ export default function ApplicantSignup() {
             </form>
           )}
 
-          {/* Loan ID Dialog */}
-          <Dialog open={showLoanIdDialog} onOpenChange={() => {}}>
-            <DialogContent className="sm:max-w-md" onPointerDownOutside={(e) => e.preventDefault()}>
-              <DialogHeader>
-                <DialogTitle className="flex items-center gap-2 text-xl">
-                  <CheckCircle2 className="h-6 w-6 text-primary" />
-                  One Last Step!
-                </DialogTitle>
-                <DialogDescription>
-                  Enter your Loan ID to link your application to this account.
-                </DialogDescription>
-              </DialogHeader>
-
-              {errorMessage && (
-                <Alert variant="destructive" className="bg-destructive/10 border-destructive/30">
-                  <AlertCircle className="h-4 w-4 text-destructive" />
-                  <AlertDescription className="text-destructive font-medium">{errorMessage}</AlertDescription>
-                </Alert>
-              )}
-
-              <form onSubmit={handleLoanIdSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="loanId" className="flex items-center gap-1.5">
-                    <KeyRound className="h-4 w-4 text-primary" /> Loan ID
-                  </Label>
-                  <Input
-                    id="loanId"
-                    type="text"
-                    value={loanId}
-                    onChange={(e) => { setLoanId(e.target.value); setErrorMessage(''); }}
-                    required
-                    placeholder="e.g. CCIF-2026-0042"
-                  />
-                  <p className="text-xs text-muted-foreground">
-                    Your Loan ID was provided by your account executive.
-                  </p>
-                </div>
-
-                <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? 'Linking Application...' : 'Link My Application'}
-                </Button>
-              </form>
-            </DialogContent>
-          </Dialog>
-
           <div className="mt-4 lg:mt-6 text-center">
             <p className="text-sm text-muted-foreground">
               Already have an account?{' '}
@@ -375,6 +471,15 @@ export default function ApplicantSignup() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function DetailRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex justify-between items-start gap-2">
+      <span className="text-xs text-muted-foreground font-medium">{label}</span>
+      <span className="text-sm font-semibold text-foreground text-right">{value}</span>
     </div>
   );
 }
