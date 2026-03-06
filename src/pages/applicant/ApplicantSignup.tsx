@@ -34,10 +34,11 @@ export default function ApplicantSignup() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [showLoanIdDialog, setShowLoanIdDialog] = useState(false);
+  const [isSigningUp, setIsSigningUp] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
 
-  if (user) {
+  if (user && !isSigningUp) {
     return <Navigate to="/applicant-dashboard" replace />;
   }
 
@@ -71,10 +72,12 @@ export default function ApplicantSignup() {
       if (error) {
         setErrorMessage(error.message);
       } else {
+        setIsSigningUp(true);
         setStep('otp');
         toast({
           title: 'Verification Code Sent',
           description: 'Please check your email for a 6-digit verification code.',
+          className: 'bg-green-50 border-green-200 text-green-800',
         });
       }
     } catch {
@@ -157,6 +160,7 @@ export default function ApplicantSignup() {
       toast({
         title: 'Account Linked Successfully!',
         description: 'Your loan application has been linked to your account.',
+        className: 'bg-green-50 border-green-200 text-green-800',
       });
 
       window.location.href = '/applicant-dashboard';
