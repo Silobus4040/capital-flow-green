@@ -58,7 +58,9 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
   const { toast } = useToast();
   const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const [formData, setFormData] = useState<DSCRLoanFormData>({
-    borrowerName: "",
+    entityName: "",
+    firstName: "",
+    lastName: "",
     borrowerEmail: "",
     borrowerPhone: "",
     propertyAddress: "",
