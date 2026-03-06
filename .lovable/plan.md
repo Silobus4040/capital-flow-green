@@ -1,60 +1,46 @@
 
 
-## Telegram Notification Integration Plan
+## Secure Signup with Loan ID Verification
 
-Thank you for providing your Telegram credentials. Here is the plan to send all application notifications to your Telegram.
+### Problem
+Auto-linking by email alone is risky -- anyone who guesses a borrower's email could claim their applications. Adding a **Loan ID** as a second verification factor solves this.
 
-### What Will Be Built
+### Plan
 
-**1. New backend function: `send-telegram-notification`**
-- Accepts application data (type, name, email, phone, program, amount, etc.)
-- Formats a clean, readable Telegram message
-- Sends it to your Telegram chat via the Bot API
-- Non-blocking: if Telegram fails, the form submission still succeeds
+**1. Database: Add `loan_id` column to `loan_program_applications`**
 
-**2. Store your credentials as backend secrets**
-- `TELEGRAM_BOT_TOKEN` = `8613102452:AAGvnbVmXKCI1mSdpXMqh0ZTzDdPPLnBag4`
-- `TELEGRAM_CHAT_ID` = `8156908905`
+- New column `loan_id` (text, nullable, unique) on `loan_program_applications`
+- Admin manually sets this value per application (e.g. "CCIF-2026-0042")
+- This is the ID you share with the borrower so they can sign up
 
-**3. Hook Telegram into all 3 submission flows**
+**2. Signup page: Add Loan ID field**
 
-| Flow | File | Change |
-|------|------|--------|
-| Loan applications (public) | `usePublicApplications.ts` | Add `send-telegram-notification` call after DB insert |
-| Loan applications (auth) | `useProgramApplications.ts` | Add `send-telegram-notification` call after DB insert |
-| Referral signups | `ReferralProgram.tsx` | Add `send-telegram-notification` call after DB insert |
-| Contact form | `ContactUs.tsx` | Add `send-telegram-notification` call after DB insert |
+- Add a required "Loan ID" input to `ApplicantSignup.tsx`
+- Before creating the account, verify the email + Loan ID combo exists in `loan_program_applications` via a server-side check (edge function or RPC) so we don't expose application data client-side
+- If no match → block signup with "Invalid Loan ID or email" error
+- If match → proceed with signup, store Loan ID in user metadata for the trigger to use
 
-**4. Telegram message format example**
+**3. Database trigger: Auto-link using email + Loan ID**
 
-```text
-🆕 NEW LOAN APPLICATION
+- New `SECURITY DEFINER` function `link_applications_on_signup()` fires after profile insert
+- Matches on BOTH `borrower_email = email` AND `loan_id = metadata.loan_id`
+- Only links where `user_id IS NULL` (prevents double-linking)
 
-📋 Program: Commercial Mortgage
-👤 Name: John Smith
-📧 Email: john@example.com
-📞 Phone: 619-555-1234
-💰 Amount: $1,000,000
-📍 Property: 123 Main St, San Diego, CA
+**4. Verification RPC (database function)**
 
-⏰ Submitted: 2/25/2026 2:30 PM ET
-```
+Create a `SECURITY DEFINER` function `verify_loan_id(email text, loan_id text)` that returns a boolean. This runs without RLS so the signup form can check the combo without exposing any data. Called from the signup page before `signUp()`.
 
-Different headers for each type: loan, referral, and contact.
+**5. Admin Dashboard: Show/edit Loan ID**
 
-### Steps
+- Display `loan_id` column in the applications list
+- Allow admin to set/edit it inline (this is how you assign IDs to applications)
 
-1. Store `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as backend secrets (2 secret prompts)
-2. Create `supabase/functions/send-telegram-notification/index.ts` -- calls Telegram Bot API `sendMessage` endpoint
-3. Update `usePublicApplications.ts` -- add Telegram notification call (fire-and-forget)
-4. Update `useProgramApplications.ts` -- add Telegram notification call (fire-and-forget)
-5. Update `ContactUs.tsx` -- add Telegram notification call after successful DB insert
-6. Update `ReferralProgram.tsx` -- add Telegram notification call after successful DB insert
+### Files affected
 
-### Technical Details
-
-- The edge function calls `https://api.telegram.org/bot{TOKEN}/sendMessage` with `parse_mode: "HTML"` for formatted messages
-- All Telegram calls are wrapped in try/catch so failures never block form submissions
-- The function accepts a generic payload with `applicationType`, `borrowerName`, `borrowerEmail`, `borrowerPhone`, `programName`, `requestedAmount`, and optional `extras` object for additional details
-- JWT verification disabled for this function since it's called from both authenticated and anonymous contexts
+| Action | File |
+|--------|------|
+| Migration | Add `loan_id` column, create `verify_loan_id` RPC, create `link_applications_on_signup` trigger |
+| Modify | `src/pages/applicant/ApplicantSignup.tsx` -- add Loan ID field + verification call |
+| Modify | `src/contexts/AuthContext.tsx` -- pass loan_id in signUp metadata |
+| Modify | `src/pages/admin/AdminDashboard.tsx` -- show/edit Loan ID per application |
 
