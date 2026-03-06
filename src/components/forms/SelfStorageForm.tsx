@@ -11,7 +11,9 @@ import ConditionalFormFields from "./ConditionalFormFields";
 
 interface SelfStorageFormData {
   // Basic Information
-  borrowerName: string;
+  entityName: string;
+  firstName: string;
+  lastName: string;
   borrowerEmail: string;
   borrowerPhone: string;
   
