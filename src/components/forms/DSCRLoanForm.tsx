@@ -12,7 +12,9 @@ import ConditionalFormFields from "./ConditionalFormFields";
 
 interface DSCRLoanFormData {
   // Basic Information
-  borrowerName: string;
+  entityName: string;
+  firstName: string;
+  lastName: string;
   borrowerEmail: string;
   borrowerPhone: string;
   propertyAddress: string;
@@ -56,7 +58,9 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
   const { toast } = useToast();
   const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const [formData, setFormData] = useState<DSCRLoanFormData>({
-    borrowerName: "",
+    entityName: "",
+    firstName: "",
+    lastName: "",
     borrowerEmail: "",
     borrowerPhone: "",
     propertyAddress: "",
@@ -99,7 +103,7 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.borrowerName || !formData.borrowerEmail || !formData.loanType || !formData.requestedAmount) {
+    if ((!formData.entityName && (!formData.firstName || !formData.lastName)) || !formData.borrowerEmail || !formData.loanType || !formData.requestedAmount) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
@@ -112,7 +116,7 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
       const applicationData = {
         programId: 'commercial-dscr-loan',
         programName: 'Commercial DSCR Loan',
-        borrowerName: formData.borrowerName,
+        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
         borrowerEmail: formData.borrowerEmail,
         borrowerPhone: formData.borrowerPhone,
         propertyAddress: formData.propertyAddress,
@@ -128,7 +132,9 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
 
       // Reset form on success  
       setFormData({
-        borrowerName: "",
+        entityName: "",
+        firstName: "",
+        lastName: "",
         borrowerEmail: "",
         borrowerPhone: "",
         propertyAddress: "",
@@ -200,13 +206,31 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold border-b pb-2">Borrower Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="borrowerName">Full Name *</Label>
+              <div className="md:col-span-2">
+                <Label htmlFor="entityName">Company/Entity Name</Label>
                 <Input
-                  id="borrowerName"
-                  value={formData.borrowerName}
-                  onChange={(e) => updateFormData('borrowerName', e.target.value)}
-                  required
+                  id="entityName"
+                  value={formData.entityName}
+                  onChange={(e) => updateFormData('entityName', e.target.value)}
+                  placeholder="If borrowing as a company/entity"
+                />
+              </div>
+              <div>
+                <Label htmlFor="firstName">First Name {!formData.entityName ? '*' : ''}</Label>
+                <Input
+                  id="firstName"
+                  value={formData.firstName}
+                  onChange={(e) => updateFormData('firstName', e.target.value)}
+                  required={!formData.entityName}
+                />
+              </div>
+              <div>
+                <Label htmlFor="lastName">Last Name {!formData.entityName ? '*' : ''}</Label>
+                <Input
+                  id="lastName"
+                  value={formData.lastName}
+                  onChange={(e) => updateFormData('lastName', e.target.value)}
+                  required={!formData.entityName}
                 />
               </div>
               <div>

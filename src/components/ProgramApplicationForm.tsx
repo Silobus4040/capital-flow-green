@@ -64,7 +64,9 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
   const { toast } = useToast();
   const { submitPublicApplication, isSubmitting, isAuthenticated } = usePublicApplications();
   const [formData, setFormData] = useState({
-    borrowerName: "",
+    entityName: "",
+    firstName: "",
+    lastName: "",
     borrowerEmail: "",
     borrowerPhone: "",
     propertyAddress: "",
@@ -77,7 +79,7 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.borrowerName || !formData.borrowerEmail || !formData.borrowerPhone) {
+    if ((!formData.entityName && (!formData.firstName || !formData.lastName)) || !formData.borrowerEmail || !formData.borrowerPhone) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
@@ -90,7 +92,7 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
       const applicationData: ProgramApplicationData = {
         programId: program.id,
         programName: program.name,
-        borrowerName: formData.borrowerName,
+        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
         borrowerEmail: formData.borrowerEmail,
         borrowerPhone: formData.borrowerPhone,
         propertyAddress: formData.propertyAddress,
@@ -205,13 +207,33 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-        <div className="space-y-2">
-          <Label htmlFor="borrowerName">Full Name *</Label>
+        <div className="space-y-2 lg:col-span-2">
+          <Label htmlFor="entityName">Company/Entity Name</Label>
           <Input
-            id="borrowerName"
-            value={formData.borrowerName}
-            onChange={(e) => setFormData(prev => ({ ...prev, borrowerName: e.target.value }))}
-            required
+            id="entityName"
+            value={formData.entityName}
+            onChange={(e) => setFormData(prev => ({ ...prev, entityName: e.target.value }))}
+            placeholder="If borrowing as a company/entity"
+            className="min-h-[44px]"
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="firstName">First Name {!formData.entityName ? '*' : ''}</Label>
+          <Input
+            id="firstName"
+            value={formData.firstName}
+            onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+            required={!formData.entityName}
+            className="min-h-[44px]"
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="lastName">Last Name {!formData.entityName ? '*' : ''}</Label>
+          <Input
+            id="lastName"
+            value={formData.lastName}
+            onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+            required={!formData.entityName}
             className="min-h-[44px]"
           />
         </div>
