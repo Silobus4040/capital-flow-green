@@ -89,6 +89,21 @@ export default function AdminDashboard() {
     setExpandedApplications(newExpanded);
   };
 
+  const saveLoanId = async (applicationId: string) => {
+    const { error } = await supabase
+      .from('loan_program_applications')
+      .update({ loan_id: loanIdValue.trim() || null } as any)
+      .eq('id', applicationId);
+
+    if (error) {
+      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+    } else {
+      toast({ title: 'Loan ID Updated', description: `Loan ID set to "${loanIdValue.trim()}"` });
+      setClients(prev => prev.map(c => c.id === applicationId ? { ...c, loan_id: loanIdValue.trim() || undefined } : c));
+      setEditingLoanId(null);
+    }
+  };
+
   const renderProgramSpecificData = (data: any) => {
     if (!data || typeof data !== 'object') return null;
     return (
