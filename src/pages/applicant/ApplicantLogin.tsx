@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/components/ui/use-toast';
-import { Eye, EyeOff, AlertCircle, Mail, Lock, BarChart3, FileText, MessageSquare, Shield, CreditCard, CheckCircle2, Archive } from 'lucide-react';
+import { Eye, EyeOff, AlertCircle, Mail, Lock, BarChart3, FileText, MessageSquare, CreditCard, CheckCircle2, Archive } from 'lucide-react';
 import ccifLogo from '@/assets/ccif-logo-enhanced.png';
 import heroImage from '@/assets/loan-management-hero.jpg';
 
@@ -14,7 +14,6 @@ const FEATURES = [
   { icon: BarChart3, label: 'Draw Schedule Management' },
   { icon: CreditCard, label: 'Loan Repayment Tracking' },
   { icon: FileText, label: 'Document Submission & E-Signing' },
-  { icon: Shield, label: 'Live Bidding Feed' },
   { icon: MessageSquare, label: 'Secure Communication Portal' },
   { icon: CheckCircle2, label: 'Closing Checklist & Payment Portal' },
   { icon: Archive, label: 'Post-Close Access & Archives' },
@@ -52,8 +51,8 @@ export default function ApplicantLogin() {
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
-      {/* Left Panel - Hero */}
-      <div className="relative lg:w-1/2 bg-primary overflow-hidden">
+      {/* Left Panel - Hero: hidden on mobile */}
+      <div className="relative hidden lg:flex lg:w-1/2 bg-primary overflow-hidden">
         <img
           src={heroImage}
           alt="Professional managing loan on phone"
@@ -76,7 +75,7 @@ export default function ApplicantLogin() {
                 <div className="w-8 h-8 rounded-full bg-primary-foreground/20 flex items-center justify-center flex-shrink-0">
                   <Icon className="h-4 w-4" />
                 </div>
-                <span className="text-sm font-medium opacity-90">{label}</span>
+                <span className="text-sm font-bold opacity-90 font-serif">{label}</span>
               </div>
             ))}
           </div>
@@ -88,10 +87,13 @@ export default function ApplicantLogin() {
       </div>
 
       {/* Right Panel - Form */}
-      <div className="flex-1 flex items-center justify-center p-6 lg:p-12 bg-background">
+      <div className="flex-1 flex items-center justify-center p-6 lg:p-12 bg-background min-h-screen lg:min-h-0">
         <div className="w-full max-w-md">
-          <div className="text-center mb-8 lg:hidden">
-            <img src={ccifLogo} alt="CCIF Logo" className="h-10 w-auto mx-auto mb-4" />
+          {/* Mobile logo + branding */}
+          <div className="text-center mb-6 lg:hidden">
+            <img src={ccifLogo} alt="CCIF Logo" className="h-10 w-auto mx-auto mb-3" />
+            <h1 className="text-xl font-bold text-foreground font-serif">Welcome Back</h1>
+            <p className="text-xs text-muted-foreground mt-1">Access your loan applicant dashboard.</p>
           </div>
 
           <h2 className="text-2xl font-bold text-foreground mb-1">Sign In</h2>
@@ -101,7 +103,7 @@ export default function ApplicantLogin() {
 
           {errorMessage && (
             <Alert variant="destructive" className="mb-4 bg-destructive/10 border-destructive/30">
-              <AlertCircle className="h-4 w-4" />
+              <AlertCircle className="h-4 w-4 text-destructive" />
               <AlertDescription className="text-destructive font-medium">{errorMessage}</AlertDescription>
             </Alert>
           )}
