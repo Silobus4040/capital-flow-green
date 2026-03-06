@@ -92,7 +92,7 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
       const applicationData: ProgramApplicationData = {
         programId: program.id,
         programName: program.name,
-        borrowerName: formData.borrowerName,
+        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
         borrowerEmail: formData.borrowerEmail,
         borrowerPhone: formData.borrowerPhone,
         propertyAddress: formData.propertyAddress,
