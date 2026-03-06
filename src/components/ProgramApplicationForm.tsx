@@ -64,7 +64,9 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
   const { toast } = useToast();
   const { submitPublicApplication, isSubmitting, isAuthenticated } = usePublicApplications();
   const [formData, setFormData] = useState({
-    borrowerName: "",
+    entityName: "",
+    firstName: "",
+    lastName: "",
     borrowerEmail: "",
     borrowerPhone: "",
     propertyAddress: "",
