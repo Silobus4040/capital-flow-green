@@ -5,7 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { DollarSign, MapPin, Calendar, AlertCircle, FileText, MessageSquare, User } from 'lucide-react';
+import { DollarSign, MapPin, Calendar, AlertCircle, FileText, MessageSquare, User, TrendingUp } from 'lucide-react';
+import LiveBiddingFeed from '@/components/closing/LiveBiddingFeed';
 import { useToast } from '@/components/ui/use-toast';
 
 interface LoanApplication {
