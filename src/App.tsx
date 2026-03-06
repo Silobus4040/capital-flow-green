@@ -30,6 +30,9 @@ import ApplicantDashboard from "./pages/applicant/ApplicantDashboard";
 import ApplicantMessages from "./pages/applicant/ApplicantMessages";
 import ApplicantDocuments from "./pages/applicant/ApplicantDocuments";
 import ApplicantApplications from "./pages/applicant/ApplicantApplications";
+import ClosingDashboard from "./pages/applicant/ClosingDashboard";
+import DrawSchedule from "./pages/applicant/DrawSchedule";
+import LoanRepayment from "./pages/applicant/LoanRepayment";
 
 // Admin Portal Pages
 import AdminPortalLogin from "./pages/admin/AdminPortalLogin";
