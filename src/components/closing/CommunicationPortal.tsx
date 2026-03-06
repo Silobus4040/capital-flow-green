@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Send, Play, Pause, Shield, Loader2, CheckCheck } from 'lucide-react';
+import { Send, Play, Pause, Shield, Loader2, Check, CheckCheck } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import VoiceRecorder from '@/components/VoiceRecorder';
 
@@ -19,6 +19,7 @@ interface Message {
   transcript: string | null;
   is_read: boolean;
   created_at: string;
+  _optimistic?: boolean;
 }
 
 interface CommunicationPortalProps {
@@ -50,7 +51,7 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
     fetchMessages();
     const channel = supabase
       .channel(`messages-${applicationId}`)
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'closing_messages', filter: `application_id=eq.${applicationId}` }, () => fetchMessages())
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'closing_messages', filter: `application_id=eq.${applicationId}` }, () => fetchMessages())
       .subscribe();
     return () => { supabase.removeChannel(channel); };
   }, [applicationId]);
@@ -61,18 +62,35 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
 
   const sendTextMessage = async () => {
     if (!newMessage.trim() || !user) return;
+    const text = newMessage.trim();
+    setNewMessage('');
     setSending(true);
+
+    // Optimistic update
+    const tempMsg: Message = {
+      id: `temp-${Date.now()}`,
+      sender_id: user.id,
+      sender_role: 'borrower',
+      message_type: 'text',
+      content: text,
+      audio_url: null,
+      transcript: null,
+      is_read: false,
+      created_at: new Date().toISOString(),
+      _optimistic: true,
+    };
+    setMessages(prev => [...prev, tempMsg]);
+
     const { error } = await supabase.from('closing_messages').insert({
       application_id: applicationId,
       sender_id: user.id,
       sender_role: 'borrower',
       message_type: 'text',
-      content: newMessage.trim(),
+      content: text,
     });
     if (error) {
       toast({ title: 'Error', description: 'Failed to send message', variant: 'destructive' });
-    } else {
-      setNewMessage('');
+      setMessages(prev => prev.filter(m => m.id !== tempMsg.id));
     }
     setSending(false);
   };
@@ -86,15 +104,13 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
       toast({ title: 'Error', description: 'Failed to upload voice recording', variant: 'destructive' });
       return;
     }
-    // Use signed URL since bucket is private
-    const { data: urlData } = await supabase.storage.from('closing-files').createSignedUrl(filePath, 60 * 60 * 24 * 365);
-    const audioUrl = urlData?.signedUrl || '';
+    // Store the raw file path, NOT the signed URL
     await supabase.from('closing_messages').insert({
       application_id: applicationId,
       sender_id: user.id,
       sender_role: 'borrower',
       message_type: 'voice',
-      audio_url: audioUrl,
+      audio_url: filePath,
       content: `Voice message (${duration}s)`,
     });
   };
@@ -106,18 +122,29 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
       return;
     }
 
-    let url = msg.audio_url;
-    // If URL is a Supabase storage URL and might be expired, get a fresh signed URL
-    if (url && url.includes('closing-files')) {
-      // Extract the path from the URL
-      const pathMatch = url.match(/closing-files\/(.+?)(\?|$)/);
+    const storedPath = msg.audio_url;
+    if (!storedPath) return;
+
+    // Always generate a fresh signed URL from the raw path
+    let url = storedPath;
+    if (!storedPath.startsWith('http')) {
+      // It's a raw storage path
+      const { data } = await supabase.storage.from('closing-files').createSignedUrl(storedPath, 3600);
+      if (data?.signedUrl) {
+        url = data.signedUrl;
+      } else {
+        toast({ title: 'Playback Error', description: 'Could not generate audio URL', variant: 'destructive' });
+        return;
+      }
+    } else if (storedPath.includes('closing-files')) {
+      // Legacy: try to extract path from old signed URL
+      const pathMatch = storedPath.match(/closing-files\/(.+?)(\?|$)/);
       if (pathMatch) {
-        const { data } = await supabase.storage.from('closing-files').createSignedUrl(pathMatch[1], 3600);
+        const { data } = await supabase.storage.from('closing-files').createSignedUrl(decodeURIComponent(pathMatch[1]), 3600);
         if (data?.signedUrl) url = data.signedUrl;
       }
     }
 
-    if (!url) return;
     if (audioRef.current) audioRef.current.pause();
     const audio = new Audio(url);
     audioRef.current = audio;
@@ -162,7 +189,7 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
               const isOwn = msg.sender_id === user?.id;
               return (
                 <div key={msg.id} className={`flex ${isOwn ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[70%] space-y-1`}>
+                  <div className="max-w-[70%] space-y-1">
                     <div className={`rounded-2xl px-4 py-2.5 ${
                       isOwn
                         ? 'bg-primary text-primary-foreground rounded-br-md'
@@ -186,7 +213,11 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
                     </div>
                     <div className={`flex items-center gap-1 px-1 ${isOwn ? 'justify-end' : 'justify-start'}`}>
                       <span className="text-[10px] text-muted-foreground">{formatTime(msg.created_at)}</span>
-                      {isOwn && <CheckCheck className={`h-3 w-3 ${msg.is_read ? 'text-primary' : 'text-muted-foreground/50'}`} />}
+                      {isOwn && (
+                        msg._optimistic
+                          ? <Check className="h-3 w-3 text-muted-foreground/50" />
+                          : <CheckCheck className={`h-3 w-3 ${msg.is_read ? 'text-primary' : 'text-muted-foreground/50'}`} />
+                      )}
                     </div>
                   </div>
                 </div>

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Send, Play, Pause, Loader2, MessageSquare, Mic, CheckCheck } from 'lucide-react';
+import { Send, Play, Pause, Loader2, MessageSquare, Mic, Check, CheckCheck } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 interface Message {
@@ -18,6 +18,7 @@ interface Message {
   transcript: string | null;
   is_read: boolean | null;
   created_at: string;
+  _optimistic?: boolean;
 }
 
 interface AppWithMessages {
@@ -88,7 +89,7 @@ export default function AdminMessaging() {
     fetchMessages(selectedAppId);
     const channel = supabase
       .channel(`admin-messages-${selectedAppId}`)
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'closing_messages', filter: `application_id=eq.${selectedAppId}` }, () => fetchMessages(selectedAppId))
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'closing_messages', filter: `application_id=eq.${selectedAppId}` }, () => fetchMessages(selectedAppId))
       .subscribe();
     return () => { supabase.removeChannel(channel); };
   }, [selectedAppId]);
@@ -99,16 +100,36 @@ export default function AdminMessaging() {
 
   const sendText = async () => {
     if (!newMessage.trim() || !user || !selectedAppId) return;
+    const text = newMessage.trim();
+    setNewMessage('');
     setSending(true);
+
+    // Optimistic update
+    const tempMsg: Message = {
+      id: `temp-${Date.now()}`,
+      sender_id: user.id,
+      sender_role: 'admin',
+      message_type: 'text',
+      content: text,
+      audio_url: null,
+      transcript: null,
+      is_read: false,
+      created_at: new Date().toISOString(),
+      _optimistic: true,
+    };
+    setMessages(prev => [...prev, tempMsg]);
+
     const { error } = await supabase.from('closing_messages').insert({
       application_id: selectedAppId,
       sender_id: user.id,
       sender_role: 'admin',
       message_type: 'text',
-      content: newMessage.trim(),
+      content: text,
     });
-    if (error) toast({ title: 'Error', description: error.message, variant: 'destructive' });
-    else setNewMessage('');
+    if (error) {
+      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+      setMessages(prev => prev.filter(m => m.id !== tempMsg.id));
+    }
     setSending(false);
   };
 
@@ -130,35 +151,30 @@ export default function AdminMessaging() {
       );
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
-        throw new Error(errData.error || 'TTS failed');
+        throw new Error(errData.error || `TTS failed (${response.status})`);
       }
       const data = await response.json();
-      
-      // Convert base64 to blob
-      const audioUrl = `data:audio/mpeg;base64,${data.audioContent}`;
-      
-      // Upload to storage
+
+      // Convert base64 to blob for upload
       const binaryString = atob(data.audioContent);
       const bytes = new Uint8Array(binaryString.length);
       for (let i = 0; i < binaryString.length; i++) {
         bytes[i] = binaryString.charCodeAt(i);
       }
       const audioBlob = new Blob([bytes], { type: 'audio/mpeg' });
-      
+
       const fileName = `tts-${Date.now()}.mp3`;
       const filePath = `${selectedAppId}/${fileName}`;
       const { error: upErr } = await supabase.storage.from('closing-files').upload(filePath, audioBlob);
       if (upErr) throw upErr;
-      
-      // Get signed URL
-      const { data: urlData } = await supabase.storage.from('closing-files').createSignedUrl(filePath, 60 * 60 * 24 * 365);
 
+      // Store raw file path, NOT signed URL
       await supabase.from('closing_messages').insert({
         application_id: selectedAppId,
         sender_id: user.id,
         sender_role: 'admin',
         message_type: 'voice',
-        audio_url: urlData?.signedUrl || '',
+        audio_url: filePath,
         transcript: newMessage.trim(),
         content: 'Voice note from Account Executive',
       });
@@ -177,16 +193,27 @@ export default function AdminMessaging() {
       return;
     }
 
-    let url = msg.audio_url;
-    if (url && url.includes('closing-files')) {
-      const pathMatch = url.match(/closing-files\/(.+?)(\?|$)/);
+    const storedPath = msg.audio_url;
+    if (!storedPath) return;
+
+    // Always generate a fresh signed URL
+    let url = storedPath;
+    if (!storedPath.startsWith('http')) {
+      const { data } = await supabase.storage.from('closing-files').createSignedUrl(storedPath, 3600);
+      if (data?.signedUrl) {
+        url = data.signedUrl;
+      } else {
+        toast({ title: 'Playback Error', description: 'Could not generate audio URL', variant: 'destructive' });
+        return;
+      }
+    } else if (storedPath.includes('closing-files')) {
+      const pathMatch = storedPath.match(/closing-files\/(.+?)(\?|$)/);
       if (pathMatch) {
-        const { data } = await supabase.storage.from('closing-files').createSignedUrl(pathMatch[1], 3600);
+        const { data } = await supabase.storage.from('closing-files').createSignedUrl(decodeURIComponent(pathMatch[1]), 3600);
         if (data?.signedUrl) url = data.signedUrl;
       }
     }
 
-    if (!url) return;
     if (audioRef.current) audioRef.current.pause();
     const audio = new Audio(url);
     audioRef.current = audio;
@@ -211,7 +238,6 @@ export default function AdminMessaging() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4" style={{ height: '600px' }}>
-      {/* App list */}
       <Card className="md:col-span-1 overflow-y-auto">
         <CardHeader className="pb-2">
           <CardTitle className="text-base">Conversations</CardTitle>
@@ -233,7 +259,6 @@ export default function AdminMessaging() {
         </CardContent>
       </Card>
 
-      {/* Chat panel */}
       <Card className="md:col-span-2 flex flex-col">
         {!selectedAppId ? (
           <CardContent className="flex-1 flex items-center justify-center text-muted-foreground">
@@ -282,7 +307,11 @@ export default function AdminMessaging() {
                         </div>
                         <div className={`flex items-center gap-1 px-1 ${isAdmin ? 'justify-end' : 'justify-start'}`}>
                           <span className="text-[10px] text-muted-foreground">{formatTime(msg.created_at)}</span>
-                          {isAdmin && <CheckCheck className={`h-3 w-3 ${msg.is_read ? 'text-primary' : 'text-muted-foreground/50'}`} />}
+                          {isAdmin && (
+                            msg._optimistic
+                              ? <Check className="h-3 w-3 text-muted-foreground/50" />
+                              : <CheckCheck className={`h-3 w-3 ${msg.is_read ? 'text-primary' : 'text-muted-foreground/50'}`} />
+                          )}
                         </div>
                       </div>
                     </div>

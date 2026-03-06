@@ -1,64 +1,60 @@
 
 
-## Plan: Critical Fixes — Voice Playback, TTS, Real-Time Messaging, Green Colors
+## Telegram Notification Integration Plan
 
-### Root Causes Identified
+Thank you for providing your Telegram credentials. Here is the plan to send all application notifications to your Telegram.
 
-1. **TTS 404 Error**: The ElevenLabs voice IDs in the edge function are **outdated/invalid**. Logs show `voice_not_found` for `9BWtsMINqrJLrRacOk9x` (aria). The correct IDs from ElevenLabs docs differ from what's hardcoded.
+### What Will Be Built
 
-2. **Voice Playback Failure**: The signed URL path extraction regex works on the stored URL, but the issue is likely that the `createSignedUrl` call itself fails silently (returns null) or the path has URL-encoded segments. Need to store the raw file path separately and always generate fresh signed URLs from it, rather than trying to regex-parse a signed URL.
+**1. New backend function: `send-telegram-notification`**
+- Accepts application data (type, name, email, phone, program, amount, etc.)
+- Formats a clean, readable Telegram message
+- Sends it to your Telegram chat via the Bot API
+- Non-blocking: if Telegram fails, the form submission still succeeds
 
-3. **Messaging Lag**: No optimistic updates — messages only appear after the full DB round-trip + realtime event fires. Need to immediately append the sent message to local state.
+**2. Store your credentials as backend secrets**
+- `TELEGRAM_BOT_TOKEN` = `8613102452:AAGvnbVmXKCI1mSdpXMqh0ZTzDdPPLnBag4`
+- `TELEGRAM_CHAT_ID` = `8156908905`
 
-4. **Colors**: `--primary: 266 4% 20.8%` is dark gray/purple. Need to change to green (`142 71% 45%`) to match the website's green theme.
+**3. Hook Telegram into all 3 submission flows**
 
----
+| Flow | File | Change |
+|------|------|--------|
+| Loan applications (public) | `usePublicApplications.ts` | Add `send-telegram-notification` call after DB insert |
+| Loan applications (auth) | `useProgramApplications.ts` | Add `send-telegram-notification` call after DB insert |
+| Referral signups | `ReferralProgram.tsx` | Add `send-telegram-notification` call after DB insert |
+| Contact form | `ContactUs.tsx` | Add `send-telegram-notification` call after DB insert |
 
-### Fix 1: ElevenLabs TTS — Update Voice IDs
-**File**: `supabase/functions/elevenlabs-tts/index.ts`
-- Replace the entire `ELEVENLABS_VOICES` map with the correct IDs from the ElevenLabs docs:
-  - `roger`: `CwhRBWXzGAHq8TQ4Fs17` (same)
-  - `george`: `JBFqnCBsd6RMkjVDRZzb` (same)
-  - **Remove `aria`** (no longer valid) — set default voice to `george` or `roger`
-  - Keep only documented voices: Roger, Sarah, Laura, Charlie, George, Callum, River, Liam, Alice, Matilda, Will, Jessica, Eric, Chris, Brian, Daniel, Lily, Bill
-- Also use proper Deno base64 encoding: `import { encode } from "https://deno.land/std@0.168.0/encoding/base64.ts"` instead of the chunked `btoa` approach
-- Change default voice from `aria` to `george`
+**4. Telegram message format example**
 
-### Fix 2: Voice Playback — Store File Path, Not Signed URL
-**Files**: `CommunicationPortal.tsx`, `AdminMessaging.tsx`
-- **On upload**: Store the raw storage path (e.g., `APP_ID/voice-xxx.webm`) in `audio_url` instead of a signed URL that expires
-- **On playback**: Always call `createSignedUrl(storedPath, 3600)` to get a fresh URL
-- This fixes the root cause: expired/malformed signed URLs stored in DB
-- Update both borrower `handleVoiceSend` and admin `sendAsTTS` to store paths
+```text
+🆕 NEW LOAN APPLICATION
 
-### Fix 3: Optimistic Updates for Instant Messaging
-**Files**: `CommunicationPortal.tsx`, `AdminMessaging.tsx`
-- After successful insert, immediately append the new message to local `messages` state with a temporary ID
-- When the realtime event fires, replace the temp message with the real one (or just re-fetch, deduplicating)
-- This gives <100ms perceived send time
-- Add message status: show single check (✓) on send, double check (✓✓) when `is_read` is true
+📋 Program: Commercial Mortgage
+👤 Name: John Smith
+📧 Email: john@example.com
+📞 Phone: 619-555-1234
+💰 Amount: $1,000,000
+📍 Property: 123 Main St, San Diego, CA
 
-### Fix 4: Green Color Scheme
-**File**: `src/index.css`
-- Change `:root` primary color from `266 4% 20.8%` (dark gray) to `142 71% 45%` (green)
-- Change `--primary-foreground` to `0 0% 100%` (white on green)
-- Update sidebar primary to match: `--sidebar-primary: 142 71% 45%`
-- Update `--secondary-foreground` and `--accent-foreground` to use the green
-- Keep background white (`0 0% 100%`), cards white
+⏰ Submitted: 2/25/2026 2:30 PM ET
+```
 
-### Fix 5: Admin Default Voice Change
-**File**: `src/components/AdminMessaging.tsx` (line 128)
-- Change voice from `george` to `george` (keep, but the edge function default changes from `aria` to `george`)
-- This ensures TTS works since `george` voice ID is confirmed valid
+Different headers for each type: loan, referral, and contact.
 
----
+### Steps
 
-### Files Summary
+1. Store `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as backend secrets (2 secret prompts)
+2. Create `supabase/functions/send-telegram-notification/index.ts` -- calls Telegram Bot API `sendMessage` endpoint
+3. Update `usePublicApplications.ts` -- add Telegram notification call (fire-and-forget)
+4. Update `useProgramApplications.ts` -- add Telegram notification call (fire-and-forget)
+5. Update `ContactUs.tsx` -- add Telegram notification call after successful DB insert
+6. Update `ReferralProgram.tsx` -- add Telegram notification call after successful DB insert
 
-| Action | File | Change |
-|--------|------|--------|
-| Redeploy | `supabase/functions/elevenlabs-tts/index.ts` | Fix voice IDs, use Deno base64, default to `george` |
-| Modify | `src/components/closing/CommunicationPortal.tsx` | Store paths not signed URLs, optimistic updates |
-| Modify | `src/components/AdminMessaging.tsx` | Store paths not signed URLs, optimistic updates |
-| Modify | `src/index.css` | Primary color → green `142 71% 45%` |
+### Technical Details
+
+- The edge function calls `https://api.telegram.org/bot{TOKEN}/sendMessage` with `parse_mode: "HTML"` for formatted messages
+- All Telegram calls are wrapped in try/catch so failures never block form submissions
+- The function accepts a generic payload with `applicationType`, `borrowerName`, `borrowerEmail`, `borrowerPhone`, `programName`, `requestedAmount`, and optional `extras` object for additional details
+- JWT verification disabled for this function since it's called from both authenticated and anonymous contexts
 
