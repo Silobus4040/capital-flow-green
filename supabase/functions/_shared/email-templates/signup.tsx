@@ -21,6 +21,7 @@ interface SignupEmailProps {
   siteUrl: string
   recipient: string
   confirmationUrl: string
+  token?: string
 }
 
 export const SignupEmail = ({
@@ -28,10 +29,11 @@ export const SignupEmail = ({
   siteUrl,
   recipient,
   confirmationUrl,
+  token,
 }: SignupEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>Verify your email for CCIF Capital</Preview>
+    <Preview>Your verification code for CCIF Capital</Preview>
     <Body style={main}>
       <Container style={container}>
         <Section style={logoSection}>
@@ -45,15 +47,17 @@ export const SignupEmail = ({
         </Section>
         <Heading style={h1}>Welcome to CCIF Capital</Heading>
         <Text style={text}>
-          Thanks for creating your account! Please verify your email address (
+          Thanks for creating your account! Use the verification code below to confirm your email address (
           <Link href={`mailto:${recipient}`} style={link}>
             {recipient}
           </Link>
-          ) to get started with your loan application.
+          ).
         </Text>
-        <Button style={button} href={confirmationUrl}>
-          Verify Email
-        </Button>
+        <Section style={codeSection}>
+          <Text style={codeLabel}>Your verification code:</Text>
+          <Text style={codeStyle}>{token || '------'}</Text>
+        </Section>
+        <Text style={expiry}>This code expires in 10 minutes.</Text>
         <Text style={footer}>
           If you didn't create an account, you can safely ignore this email.
         </Text>
@@ -62,7 +66,6 @@ export const SignupEmail = ({
     </Body>
   </Html>
 )
-
 export default SignupEmail
 
 const main = { backgroundColor: '#ffffff', fontFamily: "'Inter', 'Lora', Arial, sans-serif" }
@@ -83,14 +86,28 @@ const text = {
   margin: '0 0 28px',
 }
 const link = { color: '#333136', textDecoration: 'underline' }
-const button = {
-  backgroundColor: '#333136',
-  color: '#fbfbfc',
-  fontSize: '15px',
-  borderRadius: '6px',
-  padding: '14px 28px',
-  textDecoration: 'none',
-  fontWeight: 'bold' as const,
+const codeSection = {
+  textAlign: 'center' as const,
+  margin: '28px 0',
+  padding: '24px',
+  backgroundColor: '#f5f5f5',
+  borderRadius: '8px',
 }
+const codeLabel = {
+  fontSize: '13px',
+  color: '#877f90',
+  margin: '0 0 8px',
+  textAlign: 'center' as const,
+}
+const codeStyle = {
+  fontSize: '36px',
+  fontWeight: 'bold' as const,
+  letterSpacing: '8px',
+  color: '#333136',
+  margin: '0',
+  fontFamily: "'Courier New', monospace",
+  textAlign: 'center' as const,
+}
+const expiry = { fontSize: '13px', color: '#877f90', margin: '0 0 28px', textAlign: 'center' as const }
 const footer = { fontSize: '13px', color: '#999999', margin: '32px 0 0' }
 const copyright = { fontSize: '11px', color: '#bbbbbb', margin: '16px 0 0', textAlign: 'center' as const }
