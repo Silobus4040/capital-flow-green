@@ -208,6 +208,15 @@ export default function AdminDashboard() {
                           <p className="text-xs text-muted-foreground">{new Date(client.created_at).toLocaleDateString()}</p>
                         </div>
                       </div>
+                      {expandedApplications.has(client.id) && (
+                        <div className="border-t p-4 bg-muted/30">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            {client.property_address && <p><span className="font-medium">Property:</span> {client.property_address}{client.property_city && `, ${client.property_city}`}{client.property_state && `, ${client.property_state}`}</p>}
+                            {client.loan_purpose && <p><span className="font-medium">Purpose:</span> {client.loan_purpose}</p>}
+                          </div>
+                          {client.program_specific_data && renderProgramSpecificData(client.program_specific_data)}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
