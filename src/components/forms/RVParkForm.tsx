@@ -73,7 +73,9 @@ export default function RVParkForm({ onSubmitSuccess }: RVParkFormProps = {}) {
   const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const { toast } = useToast();
   const [formData, setFormData] = useState<RVParkFormData>({
-    borrowerName: "",
+    entityName: "",
+    firstName: "",
+    lastName: "",
     borrowerEmail: "",
     borrowerPhone: "",
     parkName: "",
