@@ -126,6 +126,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (!error && data.user) {
         setUser(data.user);
         setSession(data.session);
+        trackLogin(data.user.id);
         setTimeout(async () => {
           setProfileFetched(false);
           await fetchProfile(data.user.id, data.user.email || '', data.user.user_metadata);

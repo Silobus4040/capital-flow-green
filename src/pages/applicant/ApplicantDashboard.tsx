@@ -172,6 +172,17 @@ export default function ApplicantDashboard() {
                     </div>
                   </div>
 
+                  {/* Live Bids for closing/funded applications */}
+                  {(app.status === 'closing' || app.status === 'funded') && app.requested_amount && (
+                    <div className="pt-2">
+                      <div className="flex items-center gap-2 mb-2">
+                        <TrendingUp className="h-4 w-4 text-primary" />
+                        <span className="font-semibold text-sm">Live Investor Bids</span>
+                      </div>
+                      <LiveBiddingFeed applicationId={app.id} requestedAmount={app.requested_amount} />
+                    </div>
+                  )}
+
                   {/* Actions */}
                   <div className="flex gap-3 pt-2">
                     <a href="/applicant-messages" className="inline-flex items-center px-3 py-2 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90">
