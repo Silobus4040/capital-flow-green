@@ -4,9 +4,10 @@ import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
-import { Users, FileText, Settings, BarChart3, Handshake, Volume2 } from 'lucide-react';
+import { Users, FileText, Settings, BarChart3, Handshake, Volume2, Check, X, Pencil } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Client {
@@ -25,11 +26,14 @@ interface Client {
   property_zip?: string;
   loan_purpose?: string;
   program_specific_data?: any;
+  loan_id?: string;
 }
 
 export default function AdminDashboard() {
   const [clients, setClients] = useState<Client[]>([]);
   const [expandedApplications, setExpandedApplications] = useState<Set<string>>(new Set());
+  const [editingLoanId, setEditingLoanId] = useState<string | null>(null);
+  const [loanIdValue, setLoanIdValue] = useState('');
   const [loading, setLoading] = useState(true);
   const { signOut } = useAuth();
   const { toast } = useToast();
@@ -83,6 +87,21 @@ export default function AdminDashboard() {
     if (newExpanded.has(applicationId)) newExpanded.delete(applicationId);
     else newExpanded.add(applicationId);
     setExpandedApplications(newExpanded);
+  };
+
+  const saveLoanId = async (applicationId: string) => {
+    const { error } = await supabase
+      .from('loan_program_applications')
+      .update({ loan_id: loanIdValue.trim() || null } as any)
+      .eq('id', applicationId);
+
+    if (error) {
+      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+    } else {
+      toast({ title: 'Loan ID Updated', description: `Loan ID set to "${loanIdValue.trim()}"` });
+      setClients(prev => prev.map(c => c.id === applicationId ? { ...c, loan_id: loanIdValue.trim() || undefined } : c));
+      setEditingLoanId(null);
+    }
   };
 
   const renderProgramSpecificData = (data: any) => {
@@ -150,20 +169,47 @@ export default function AdminDashboard() {
                     <div className="text-center py-8 text-muted-foreground">No loan applications yet.</div>
                   ) : loanApplications.map((client) => (
                     <div key={client.id} className="border rounded-lg overflow-hidden">
-                      <div className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50" onClick={() => toggleApplicationDetails(client.id)}>
+                      <div className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50" onClick={() => toggleApplicationDetails(client.id)}>
                         <div className="flex-1">
                           <p className="font-medium text-lg">{client.borrower_name}</p>
                           <p className="text-sm text-muted-foreground">{client.borrower_email} • {client.borrower_phone}</p>
-                          <p className="text-xs text-blue-600 font-medium">Program: {client.program_name}</p>
+                          <p className="text-xs text-primary font-medium">Program: {client.program_name}</p>
                           {client.requested_amount && <p className="text-sm font-semibold">Amount: ${client.requested_amount.toLocaleString()}</p>}
                         </div>
                         <div className="flex items-center space-x-3">
+                          {/* Loan ID inline edit */}
+                          <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
+                            {editingLoanId === client.id ? (
+                              <>
+                                <Input
+                                  value={loanIdValue}
+                                  onChange={(e) => setLoanIdValue(e.target.value)}
+                                  placeholder="CCIF-2026-0001"
+                                  className="h-7 w-40 text-xs"
+                                />
+                                <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => saveLoanId(client.id)}>
+                                  <Check className="h-3.5 w-3.5 text-green-600" />
+                                </Button>
+                                <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => setEditingLoanId(null)}>
+                                  <X className="h-3.5 w-3.5 text-destructive" />
+                                </Button>
+                              </>
+                            ) : (
+                              <Badge
+                                variant={client.loan_id ? 'default' : 'outline'}
+                                className="cursor-pointer text-xs"
+                                onClick={() => { setEditingLoanId(client.id); setLoanIdValue(client.loan_id || ''); }}
+                              >
+                                {client.loan_id || <span className="flex items-center gap-1"><Pencil className="h-3 w-3" /> Set Loan ID</span>}
+                              </Badge>
+                            )}
+                          </div>
                           <Badge variant={client.status === 'approved' ? 'default' : client.status === 'pending' ? 'secondary' : 'destructive'}>{client.status}</Badge>
                           <p className="text-xs text-muted-foreground">{new Date(client.created_at).toLocaleDateString()}</p>
                         </div>
                       </div>
                       {expandedApplications.has(client.id) && (
-                        <div className="border-t p-4 bg-gray-50">
+                        <div className="border-t p-4 bg-muted/30">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                             {client.property_address && <p><span className="font-medium">Property:</span> {client.property_address}{client.property_city && `, ${client.property_city}`}{client.property_state && `, ${client.property_state}`}</p>}
                             {client.loan_purpose && <p><span className="font-medium">Purpose:</span> {client.loan_purpose}</p>}

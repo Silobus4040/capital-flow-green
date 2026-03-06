@@ -22,6 +22,7 @@ export type Database = {
           borrower_phone: string
           created_at: string
           id: string
+          loan_id: string | null
           loan_purpose: string | null
           program_id: string
           program_name: string
@@ -42,6 +43,7 @@ export type Database = {
           borrower_phone: string
           created_at?: string
           id?: string
+          loan_id?: string | null
           loan_purpose?: string | null
           program_id: string
           program_name: string
@@ -62,6 +64,7 @@ export type Database = {
           borrower_phone?: string
           created_at?: string
           id?: string
+          loan_id?: string | null
           loan_purpose?: string | null
           program_id?: string
           program_name?: string
@@ -138,6 +141,10 @@ export type Database = {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      verify_loan_id: {
+        Args: { _email: string; _loan_id: string }
         Returns: boolean
       }
     }
