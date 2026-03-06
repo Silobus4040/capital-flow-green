@@ -1,60 +1,50 @@
 
 
-## Telegram Notification Integration Plan
+## Plan: Fix CommercialMortgageForm Validation + Full-Page Success Redirect + Dashboard Linking
 
-Thank you for providing your Telegram credentials. Here is the plan to send all application notifications to your Telegram.
+### 3 Issues to Address
 
-### What Will Be Built
+**Issue 1: CommercialMortgageForm validation not treating Entity Name as primary**
+All other 10 forms correctly use entityName as the single source of truth. `CommercialMortgageForm` (line 90) still requires `firstName` AND `lastName` always, ignoring entityName. Need to fix validation to match the pattern used in all other forms: require either entityName OR (firstName + lastName).
 
-**1. New backend function: `send-telegram-notification`**
-- Accepts application data (type, name, email, phone, program, amount, etc.)
-- Formats a clean, readable Telegram message
-- Sends it to your Telegram chat via the Bot API
-- Non-blocking: if Telegram fails, the form submission still succeeds
+**Issue 2: Application form is a popup Dialog — user wants full-page redirect after submission**
+Currently `LoanProgramDetail.tsx` opens application forms in a `<Dialog>` (line 157). After successful submission, user wants to be redirected to a full-page green-themed success screen showing:
+- "Thank you for choosing Commercial Capital & Investment Inc for your financing needs!"
+- "We've received your loan request and will review it shortly."
+- "Expect a tailored Term Sheet & Loan Estimate in your email within 1–2 business days, detailing your potential rates, terms, and clear next steps."
 
-**2. Store your credentials as backend secrets**
-- `TELEGRAM_BOT_TOKEN` = `8613102452:AAGvnbVmXKCI1mSdpXMqh0ZTzDdPPLnBag4`
-- `TELEGRAM_CHAT_ID` = `8156908905`
+**Issue 3: Dashboard linking**
+Already implemented via `link_application_to_user` RPC and the signup flow. Need to verify no code gap exists — the `handleLoanIdSubmit` in `ApplicantSignup.tsx` calls the RPC and links the user. The dashboard fetches applications where `user_id = auth.uid()`. This should work end-to-end once Issues 1-2 are fixed.
 
-**3. Hook Telegram into all 3 submission flows**
+---
 
-| Flow | File | Change |
-|------|------|--------|
-| Loan applications (public) | `usePublicApplications.ts` | Add `send-telegram-notification` call after DB insert |
-| Loan applications (auth) | `useProgramApplications.ts` | Add `send-telegram-notification` call after DB insert |
-| Referral signups | `ReferralProgram.tsx` | Add `send-telegram-notification` call after DB insert |
-| Contact form | `ContactUs.tsx` | Add `send-telegram-notification` call after DB insert |
+### Changes
 
-**4. Telegram message format example**
+**1. `src/components/CommercialMortgageForm.tsx`**
+- Update validation (line 90) from requiring firstName+lastName always, to: `(!entityName && (!firstName || !lastName))`
+- Update firstName/lastName labels to show conditional `*` based on entityName presence
+- Move entityName field above firstName/lastName in the form layout
 
-```text
-🆕 NEW LOAN APPLICATION
+**2. `src/pages/LoanProgramDetail.tsx`**
+- Replace `<Dialog>` approach with navigation-based flow
+- Add a `submitted` state that, when true, replaces the entire page content with a full-page green success screen
+- Success screen content:
+  - Green gradient background (matching existing brand)
+  - CCIF logo
+  - "Thank you for choosing Commercial Capital & Investment Inc for your financing needs!"
+  - "We've received your loan request and will review it shortly."
+  - "Expect a tailored Term Sheet & Loan Estimate in your email within 1–2 business days..."
+  - "Back to Loan Programs" button
+  - "Apply for Another Program" button
+- Update `handleApplicationFormSuccess` to set `submitted = true` instead of closing dialog
+- When `submitted` is true, render the full-page success screen instead of the program detail page
+- Keep the inline form (no dialog) — show the application form directly on the page when "Apply Now" is clicked, and show the success page after submission
 
-📋 Program: Commercial Mortgage
-👤 Name: John Smith
-📧 Email: john@example.com
-📞 Phone: 619-555-1234
-💰 Amount: $1,000,000
-📍 Property: 123 Main St, San Diego, CA
+**3. No database changes needed** — the `link_application_to_user` function and dashboard query are already correctly implemented.
 
-⏰ Submitted: 2/25/2026 2:30 PM ET
-```
-
-Different headers for each type: loan, referral, and contact.
-
-### Steps
-
-1. Store `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as backend secrets (2 secret prompts)
-2. Create `supabase/functions/send-telegram-notification/index.ts` -- calls Telegram Bot API `sendMessage` endpoint
-3. Update `usePublicApplications.ts` -- add Telegram notification call (fire-and-forget)
-4. Update `useProgramApplications.ts` -- add Telegram notification call (fire-and-forget)
-5. Update `ContactUs.tsx` -- add Telegram notification call after successful DB insert
-6. Update `ReferralProgram.tsx` -- add Telegram notification call after successful DB insert
-
-### Technical Details
-
-- The edge function calls `https://api.telegram.org/bot{TOKEN}/sendMessage` with `parse_mode: "HTML"` for formatted messages
-- All Telegram calls are wrapped in try/catch so failures never block form submissions
-- The function accepts a generic payload with `applicationType`, `borrowerName`, `borrowerEmail`, `borrowerPhone`, `programName`, `requestedAmount`, and optional `extras` object for additional details
-- JWT verification disabled for this function since it's called from both authenticated and anonymous contexts
+### Files to Modify
+| File | Change |
+|------|--------|
+| `src/components/CommercialMortgageForm.tsx` | Fix validation to treat entityName as primary, reorder fields |
+| `src/pages/LoanProgramDetail.tsx` | Replace Dialog with inline form + full-page green success screen |
 
