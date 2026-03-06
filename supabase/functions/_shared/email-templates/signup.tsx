@@ -86,14 +86,28 @@ const text = {
   margin: '0 0 28px',
 }
 const link = { color: '#333136', textDecoration: 'underline' }
-const button = {
-  backgroundColor: '#333136',
-  color: '#fbfbfc',
-  fontSize: '15px',
-  borderRadius: '6px',
-  padding: '14px 28px',
-  textDecoration: 'none',
-  fontWeight: 'bold' as const,
+const codeSection = {
+  textAlign: 'center' as const,
+  margin: '28px 0',
+  padding: '24px',
+  backgroundColor: '#f5f5f5',
+  borderRadius: '8px',
 }
+const codeLabel = {
+  fontSize: '13px',
+  color: '#877f90',
+  margin: '0 0 8px',
+  textAlign: 'center' as const,
+}
+const codeStyle = {
+  fontSize: '36px',
+  fontWeight: 'bold' as const,
+  letterSpacing: '8px',
+  color: '#333136',
+  margin: '0',
+  fontFamily: "'Courier New', monospace",
+  textAlign: 'center' as const,
+}
+const expiry = { fontSize: '13px', color: '#877f90', margin: '0 0 28px', textAlign: 'center' as const }
 const footer = { fontSize: '13px', color: '#999999', margin: '32px 0 0' }
 const copyright = { fontSize: '11px', color: '#bbbbbb', margin: '16px 0 0', textAlign: 'center' as const }
