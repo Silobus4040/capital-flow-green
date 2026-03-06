@@ -138,7 +138,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
       await submitPublicApplication({
         programId: 'rehab-investor',
         programName: 'Rehab/Investor Financing',
-        borrowerName: formData.borrowerName,
+        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
         borrowerEmail: formData.borrowerEmail,
         borrowerPhone: formData.borrowerPhone,
         propertyAddress: formData.propertyAddress,
