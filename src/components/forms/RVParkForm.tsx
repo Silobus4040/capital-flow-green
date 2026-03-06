@@ -129,7 +129,7 @@ export default function RVParkForm({ onSubmitSuccess }: RVParkFormProps = {}) {
       await submitPublicApplication({
         programId: 'rv-park-financing',
         programName: 'RV Park Financing',
-        borrowerName: formData.borrowerName,
+        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
         borrowerEmail: formData.borrowerEmail,
         borrowerPhone: formData.borrowerPhone,
         propertyAddress: formData.parkAddress,
