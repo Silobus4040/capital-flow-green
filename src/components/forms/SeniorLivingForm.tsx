@@ -151,7 +151,9 @@ export default function SeniorLivingForm({ onSubmitSuccess }: SeniorLivingFormPr
 
       // Reset form on success
       setFormData({
-        borrowerName: "",
+        entityName: "",
+        firstName: "",
+        lastName: "",
         borrowerEmail: "",
         borrowerPhone: "",
         facilityName: "",
