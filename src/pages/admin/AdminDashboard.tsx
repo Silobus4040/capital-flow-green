@@ -169,27 +169,45 @@ export default function AdminDashboard() {
                     <div className="text-center py-8 text-muted-foreground">No loan applications yet.</div>
                   ) : loanApplications.map((client) => (
                     <div key={client.id} className="border rounded-lg overflow-hidden">
-                      <div className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50" onClick={() => toggleApplicationDetails(client.id)}>
+                      <div className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50" onClick={() => toggleApplicationDetails(client.id)}>
                         <div className="flex-1">
                           <p className="font-medium text-lg">{client.borrower_name}</p>
                           <p className="text-sm text-muted-foreground">{client.borrower_email} • {client.borrower_phone}</p>
-                          <p className="text-xs text-blue-600 font-medium">Program: {client.program_name}</p>
+                          <p className="text-xs text-primary font-medium">Program: {client.program_name}</p>
                           {client.requested_amount && <p className="text-sm font-semibold">Amount: ${client.requested_amount.toLocaleString()}</p>}
                         </div>
                         <div className="flex items-center space-x-3">
+                          {/* Loan ID inline edit */}
+                          <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
+                            {editingLoanId === client.id ? (
+                              <>
+                                <Input
+                                  value={loanIdValue}
+                                  onChange={(e) => setLoanIdValue(e.target.value)}
+                                  placeholder="CCIF-2026-0001"
+                                  className="h-7 w-40 text-xs"
+                                />
+                                <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => saveLoanId(client.id)}>
+                                  <Check className="h-3.5 w-3.5 text-green-600" />
+                                </Button>
+                                <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => setEditingLoanId(null)}>
+                                  <X className="h-3.5 w-3.5 text-destructive" />
+                                </Button>
+                              </>
+                            ) : (
+                              <Badge
+                                variant={client.loan_id ? 'default' : 'outline'}
+                                className="cursor-pointer text-xs"
+                                onClick={() => { setEditingLoanId(client.id); setLoanIdValue(client.loan_id || ''); }}
+                              >
+                                {client.loan_id || <span className="flex items-center gap-1"><Pencil className="h-3 w-3" /> Set Loan ID</span>}
+                              </Badge>
+                            )}
+                          </div>
                           <Badge variant={client.status === 'approved' ? 'default' : client.status === 'pending' ? 'secondary' : 'destructive'}>{client.status}</Badge>
                           <p className="text-xs text-muted-foreground">{new Date(client.created_at).toLocaleDateString()}</p>
                         </div>
                       </div>
-                      {expandedApplications.has(client.id) && (
-                        <div className="border-t p-4 bg-gray-50">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                            {client.property_address && <p><span className="font-medium">Property:</span> {client.property_address}{client.property_city && `, ${client.property_city}`}{client.property_state && `, ${client.property_state}`}</p>}
-                            {client.loan_purpose && <p><span className="font-medium">Purpose:</span> {client.loan_purpose}</p>}
-                          </div>
-                          {client.program_specific_data && renderProgramSpecificData(client.program_specific_data)}
-                        </div>
-                      )}
                     </div>
                   ))}
                 </div>
