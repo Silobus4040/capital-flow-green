@@ -73,7 +73,9 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
   const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const { toast } = useToast();
   const [formData, setFormData] = useState<RehabInvestorFormData>({
-    borrowerName: "",
+    entityName: "",
+    firstName: "",
+    lastName: "",
     borrowerEmail: "",
     borrowerPhone: "",
     projectType: "",
