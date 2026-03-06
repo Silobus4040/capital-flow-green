@@ -12,7 +12,9 @@ import ConditionalFormFields from "./ConditionalFormFields";
 
 interface DSCRLoanFormData {
   // Basic Information
-  borrowerName: string;
+  entityName: string;
+  firstName: string;
+  lastName: string;
   borrowerEmail: string;
   borrowerPhone: string;
   propertyAddress: string;
