@@ -132,7 +132,9 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
 
       // Reset form on success  
       setFormData({
-        borrowerName: "",
+        entityName: "",
+        firstName: "",
+        lastName: "",
         borrowerEmail: "",
         borrowerPhone: "",
         propertyAddress: "",
