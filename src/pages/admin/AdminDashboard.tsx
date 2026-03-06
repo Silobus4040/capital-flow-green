@@ -32,6 +32,8 @@ interface Client {
 export default function AdminDashboard() {
   const [clients, setClients] = useState<Client[]>([]);
   const [expandedApplications, setExpandedApplications] = useState<Set<string>>(new Set());
+  const [editingLoanId, setEditingLoanId] = useState<string | null>(null);
+  const [loanIdValue, setLoanIdValue] = useState('');
   const [loading, setLoading] = useState(true);
   const { signOut } = useAuth();
   const { toast } = useToast();
