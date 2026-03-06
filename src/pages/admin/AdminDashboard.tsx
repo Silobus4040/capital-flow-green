@@ -4,9 +4,10 @@ import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
-import { Users, FileText, Settings, BarChart3, Handshake, Volume2 } from 'lucide-react';
+import { Users, FileText, Settings, BarChart3, Handshake, Volume2, Check, X, Pencil } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Client {
@@ -25,6 +26,7 @@ interface Client {
   property_zip?: string;
   loan_purpose?: string;
   program_specific_data?: any;
+  loan_id?: string;
 }
 
 export default function AdminDashboard() {
