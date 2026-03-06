@@ -101,7 +101,7 @@ export default function LoanRepayment() {
       </div>
 
       {repayments.length === 0 ? (
-        <Card><CardContent className="p-6 text-center text-muted-foreground">No repayment schedule available yet.</CardContent></Card>
+        <Card><CardContent className="p-6 text-center text-muted-foreground font-medium">No repayment schedule available yet until Loan is closed.</CardContent></Card>
       ) : (
         <Card>
           <CardHeader><CardTitle className="text-base">Payment Schedule</CardTitle></CardHeader>

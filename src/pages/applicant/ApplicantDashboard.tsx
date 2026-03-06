@@ -5,7 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { DollarSign, MapPin, Calendar, AlertCircle, FileText, MessageSquare, User } from 'lucide-react';
+import { DollarSign, MapPin, Calendar, AlertCircle, FileText, MessageSquare, User, TrendingUp } from 'lucide-react';
+import LiveBiddingFeed from '@/components/closing/LiveBiddingFeed';
 import { useToast } from '@/components/ui/use-toast';
 
 interface LoanApplication {
@@ -170,6 +171,17 @@ export default function ApplicantDashboard() {
                       </div>
                     </div>
                   </div>
+
+                  {/* Live Bids for closing/funded applications */}
+                  {(app.status === 'closing' || app.status === 'funded') && app.requested_amount && (
+                    <div className="pt-2">
+                      <div className="flex items-center gap-2 mb-2">
+                        <TrendingUp className="h-4 w-4 text-primary" />
+                        <span className="font-semibold text-sm">Live Investor Bids</span>
+                      </div>
+                      <LiveBiddingFeed applicationId={app.id} requestedAmount={app.requested_amount} />
+                    </div>
+                  )}
 
                   {/* Actions */}
                   <div className="flex gap-3 pt-2">

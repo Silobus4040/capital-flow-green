@@ -7,8 +7,10 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
-import { Users, FileText, Settings, BarChart3, Handshake, Volume2, Check, X, Pencil } from 'lucide-react';
+import { Users, FileText, Settings, BarChart3, Handshake, Volume2, Check, X, Pencil, MessageSquare, Activity, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import AdminMessaging from '@/components/AdminMessaging';
+import AdminBidManager from '@/components/admin/AdminBidManager';
 
 interface Client {
   id: string;
@@ -29,12 +31,23 @@ interface Client {
   loan_id?: string;
 }
 
+interface BorrowerActivity {
+  user_id: string;
+  email: string;
+  full_name: string | null;
+  login_count: number;
+  last_login: string | null;
+  fingerprint_id: string | null;
+}
+
 export default function AdminDashboard() {
   const [clients, setClients] = useState<Client[]>([]);
   const [expandedApplications, setExpandedApplications] = useState<Set<string>>(new Set());
   const [editingLoanId, setEditingLoanId] = useState<string | null>(null);
   const [loanIdValue, setLoanIdValue] = useState('');
   const [loading, setLoading] = useState(true);
+  const [borrowerActivity, setBorrowerActivity] = useState<BorrowerActivity[]>([]);
+  const [activityLoading, setActivityLoading] = useState(false);
   const { signOut } = useAuth();
   const { toast } = useToast();
 
@@ -82,6 +95,47 @@ export default function AdminDashboard() {
     }
   };
 
+  const loadBorrowerActivity = async () => {
+    setActivityLoading(true);
+    try {
+      const { data: profiles } = await supabase
+        .from('profiles')
+        .select('user_id, email, full_name')
+        .eq('role', 'borrower');
+
+      const { data: logins } = await supabase
+        .from('borrower_logins' as any)
+        .select('user_id, fingerprint_id, logged_in_at');
+
+      const loginMap: Record<string, { count: number; last: string; fingerprint: string | null }> = {};
+      (logins || []).forEach((l: any) => {
+        if (!loginMap[l.user_id]) {
+          loginMap[l.user_id] = { count: 0, last: l.logged_in_at, fingerprint: l.fingerprint_id };
+        }
+        loginMap[l.user_id].count++;
+        if (l.logged_in_at > loginMap[l.user_id].last) {
+          loginMap[l.user_id].last = l.logged_in_at;
+          loginMap[l.user_id].fingerprint = l.fingerprint_id;
+        }
+      });
+
+      const activity: BorrowerActivity[] = (profiles || []).map((p: any) => ({
+        user_id: p.user_id,
+        email: p.email,
+        full_name: p.full_name,
+        login_count: loginMap[p.user_id]?.count || 0,
+        last_login: loginMap[p.user_id]?.last || null,
+        fingerprint_id: loginMap[p.user_id]?.fingerprint || null,
+      }));
+
+      activity.sort((a, b) => b.login_count - a.login_count);
+      setBorrowerActivity(activity);
+    } catch (err) {
+      console.error('Error loading activity:', err);
+    }
+    setActivityLoading(false);
+  };
+
   const toggleApplicationDetails = (applicationId: string) => {
     const newExpanded = new Set(expandedApplications);
     if (newExpanded.has(applicationId)) newExpanded.delete(applicationId);
@@ -107,17 +161,22 @@ export default function AdminDashboard() {
   const renderProgramSpecificData = (data: any) => {
     if (!data || typeof data !== 'object') return null;
     return (
-      <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-        <h4 className="font-semibold mb-2 text-gray-800">Additional Details</h4>
+      <div className="mt-4 p-4 bg-muted/50 rounded-lg">
+        <h4 className="font-semibold mb-2">Additional Details</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {Object.entries(data).map(([key, value]) => {
             if (!value) return null;
             const formattedKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-            return (<div key={key} className="text-sm"><span className="font-medium text-gray-600">{formattedKey}:</span><span className="ml-2 text-gray-800">{String(value)}</span></div>);
+            return (<div key={key} className="text-sm"><span className="font-medium text-muted-foreground">{formattedKey}:</span><span className="ml-2">{String(value)}</span></div>);
           })}
         </div>
       </div>
     );
+  };
+
+  const isActiveNow = (lastLogin: string | null) => {
+    if (!lastLogin) return false;
+    return (Date.now() - new Date(lastLogin).getTime()) < 5 * 60 * 1000;
   };
 
   const loanApplications = clients.filter(c => c.application_type !== 'referral' && c.application_type !== 'contact');
@@ -125,16 +184,16 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      <div className="border-b bg-white shadow-sm">
+      <div className="border-b bg-background shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="bg-red-100 w-10 h-10 rounded-lg flex items-center justify-center">
-                <Settings className="h-5 w-5 text-red-600" />
+              <div className="bg-destructive/10 w-10 h-10 rounded-lg flex items-center justify-center">
+                <Settings className="h-5 w-5 text-destructive" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-slate-900">Admin Dashboard</h1>
-                <p className="text-slate-600">Manage applications and system settings</p>
+                <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+                <p className="text-muted-foreground">Manage applications and system settings</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -154,10 +213,13 @@ export default function AdminDashboard() {
         </div>
 
         <Tabs defaultValue="applications" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="applications">Applications</TabsTrigger>
             <TabsTrigger value="referrals">Referrals</TabsTrigger>
-            <TabsTrigger value="all">All Submissions</TabsTrigger>
+            <TabsTrigger value="messages" onClick={() => {}}>Messages</TabsTrigger>
+            <TabsTrigger value="bidding">Bidding</TabsTrigger>
+            <TabsTrigger value="activity" onClick={loadBorrowerActivity}>Activity</TabsTrigger>
+            <TabsTrigger value="all">All</TabsTrigger>
           </TabsList>
 
           <TabsContent value="applications" className="space-y-6">
@@ -177,29 +239,15 @@ export default function AdminDashboard() {
                           {client.requested_amount && <p className="text-sm font-semibold">Amount: ${client.requested_amount.toLocaleString()}</p>}
                         </div>
                         <div className="flex items-center space-x-3">
-                          {/* Loan ID inline edit */}
                           <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
                             {editingLoanId === client.id ? (
                               <>
-                                <Input
-                                  value={loanIdValue}
-                                  onChange={(e) => setLoanIdValue(e.target.value)}
-                                  placeholder="CCIF-2026-0001"
-                                  className="h-7 w-40 text-xs"
-                                />
-                                <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => saveLoanId(client.id)}>
-                                  <Check className="h-3.5 w-3.5 text-green-600" />
-                                </Button>
-                                <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => setEditingLoanId(null)}>
-                                  <X className="h-3.5 w-3.5 text-destructive" />
-                                </Button>
+                                <Input value={loanIdValue} onChange={(e) => setLoanIdValue(e.target.value)} placeholder="CCIF-2026-0001" className="h-7 w-40 text-xs" />
+                                <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => saveLoanId(client.id)}><Check className="h-3.5 w-3.5 text-green-600" /></Button>
+                                <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => setEditingLoanId(null)}><X className="h-3.5 w-3.5 text-destructive" /></Button>
                               </>
                             ) : (
-                              <Badge
-                                variant={client.loan_id ? 'default' : 'outline'}
-                                className="cursor-pointer text-xs"
-                                onClick={() => { setEditingLoanId(client.id); setLoanIdValue(client.loan_id || ''); }}
-                              >
+                              <Badge variant={client.loan_id ? 'default' : 'outline'} className="cursor-pointer text-xs" onClick={() => { setEditingLoanId(client.id); setLoanIdValue(client.loan_id || ''); }}>
                                 {client.loan_id || <span className="flex items-center gap-1"><Pencil className="h-3 w-3" /> Set Loan ID</span>}
                               </Badge>
                             )}
@@ -250,6 +298,74 @@ export default function AdminDashboard() {
             </Card>
           </TabsContent>
 
+          <TabsContent value="messages" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center"><MessageSquare className="h-5 w-5 mr-2" />Borrower Messaging</CardTitle>
+                <CardDescription>Send text and voice messages to borrowers</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <AdminMessaging />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="bidding" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center"><TrendingUp className="h-5 w-5 mr-2" />Investor Bid Management</CardTitle>
+                <CardDescription>Manage up to 9 investor bids per application</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <AdminBidManager />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="activity" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center"><Activity className="h-5 w-5 mr-2" />Borrower Activity</CardTitle>
+                <CardDescription>Login tracking and device fingerprints</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {activityLoading ? (
+                  <div className="text-center py-8 text-muted-foreground">Loading activity...</div>
+                ) : borrowerActivity.length === 0 ? (
+                  <div className="text-center py-8 text-muted-foreground">No borrower logins recorded yet.</div>
+                ) : (
+                  <div className="space-y-3">
+                    {borrowerActivity.map(b => (
+                      <div key={b.user_id} className="border rounded-lg p-4 flex items-center justify-between">
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <p className="font-medium">{b.full_name || b.email}</p>
+                            {isActiveNow(b.last_login) && (
+                              <span className="flex items-center gap-1 text-xs text-green-600 font-medium">
+                                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> Active Now
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-sm text-muted-foreground">{b.email}</p>
+                          {b.fingerprint_id && <p className="text-xs text-muted-foreground font-mono">FP: {b.fingerprint_id.slice(0, 12)}...</p>}
+                        </div>
+                        <div className="text-right">
+                          <p className="font-bold text-lg">{b.login_count}</p>
+                          <p className="text-xs text-muted-foreground">logins</p>
+                          {b.last_login && (
+                            <p className="text-xs text-muted-foreground mt-1">
+                              Last: {new Date(b.last_login).toLocaleString()}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
           <TabsContent value="all" className="space-y-6">
             <Card>
               <CardHeader><CardTitle>All Submissions</CardTitle><CardDescription>Every submission across all forms</CardDescription></CardHeader>
@@ -260,7 +376,7 @@ export default function AdminDashboard() {
                       <div>
                         <p className="font-medium">{client.borrower_name}</p>
                         <p className="text-sm text-muted-foreground">{client.borrower_email}</p>
-                        <p className="text-xs text-blue-600">{client.program_name}</p>
+                        <p className="text-xs text-primary">{client.program_name}</p>
                       </div>
                       <div className="text-right">
                         <Badge variant="outline">{client.application_type || 'loan'}</Badge>
