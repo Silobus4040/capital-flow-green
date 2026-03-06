@@ -1,75 +1,60 @@
 
 
-## Plan: Update Borrower Name Logic + Rename to "Loan Applicant"
+## Telegram Notification Integration Plan
 
-### What Changes
+Thank you for providing your Telegram credentials. Here is the plan to send all application notifications to your Telegram.
 
-**1. Update how `borrower_name` is saved during loan application submission**
+### What Will Be Built
 
-In all loan application forms (e.g., `CommercialMortgageForm.tsx` and similar), change the `borrowerName` logic from:
-```
-borrowerName: `${firstName} ${lastName}`
-```
-to:
-```
-borrowerName: entityName?.trim() || `${firstName} ${lastName}`
-```
+**1. New backend function: `send-telegram-notification`**
+- Accepts application data (type, name, email, phone, program, amount, etc.)
+- Formats a clean, readable Telegram message
+- Sends it to your Telegram chat via the Bot API
+- Non-blocking: if Telegram fails, the form submission still succeeds
 
-This applies to all form components that submit via `usePublicApplications`. I will audit each form to apply this.
+**2. Store your credentials as backend secrets**
+- `TELEGRAM_BOT_TOKEN` = `8613102452:AAGvnbVmXKCI1mSdpXMqh0ZTzDdPPLnBag4`
+- `TELEGRAM_CHAT_ID` = `8156908905`
 
-**2. Update the signup flow to pull the correct name**
+**3. Hook Telegram into all 3 submission flows**
 
-In `ApplicantSignup.tsx`, after Loan ID verification, create an RPC `get_borrower_display_name(_email, _loan_id)` that returns `borrower_name` from the matched `loan_program_applications` row. This already contains the correct name (entity name or first+last) from step 1. Remove the "Full Name" input field; use the fetched name for the profile instead.
+| Flow | File | Change |
+|------|------|--------|
+| Loan applications (public) | `usePublicApplications.ts` | Add `send-telegram-notification` call after DB insert |
+| Loan applications (auth) | `useProgramApplications.ts` | Add `send-telegram-notification` call after DB insert |
+| Referral signups | `ReferralProgram.tsx` | Add `send-telegram-notification` call after DB insert |
+| Contact form | `ContactUs.tsx` | Add `send-telegram-notification` call after DB insert |
 
-**3. Rename "Borrower" to "Loan Applicant" on dashboard**
+**4. Telegram message format example**
 
-In `ApplicantDashboard.tsx`:
-- Change welcome text from "Welcome back, {name}!" keeping same greeting but using "Loan Applicant" as the fallback
-- Change page title references from "Borrower" to "Loan Applicant"
+```text
+🆕 NEW LOAN APPLICATION
 
-In `ApplicantSignup.tsx`:
-- Change "Borrower Portal Sign Up" to "Loan Applicant Portal Sign Up"
+📋 Program: Commercial Mortgage
+👤 Name: John Smith
+📧 Email: john@example.com
+📞 Phone: 619-555-1234
+💰 Amount: $1,000,000
+📍 Property: 123 Main St, San Diego, CA
 
-**4. DB migration: New RPC function**
-
-```sql
-CREATE OR REPLACE FUNCTION public.get_borrower_display_name(_email text, _loan_id text)
-RETURNS text
-LANGUAGE sql
-STABLE SECURITY DEFINER
-SET search_path = public
-AS $$
-  SELECT borrower_name
-  FROM public.loan_program_applications
-  WHERE borrower_email = _email
-    AND loan_id = _loan_id
-  LIMIT 1
-$$;
+⏰ Submitted: 2/25/2026 2:30 PM ET
 ```
 
-**5. Update `handle_new_user` trigger**
+Different headers for each type: loan, referral, and contact.
 
-Pull `full_name` from user metadata's `borrower_display_name` if present, falling back to `full_name`, then email.
+### Steps
 
-### Files to Modify
+1. Store `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as backend secrets (2 secret prompts)
+2. Create `supabase/functions/send-telegram-notification/index.ts` -- calls Telegram Bot API `sendMessage` endpoint
+3. Update `usePublicApplications.ts` -- add Telegram notification call (fire-and-forget)
+4. Update `useProgramApplications.ts` -- add Telegram notification call (fire-and-forget)
+5. Update `ContactUs.tsx` -- add Telegram notification call after successful DB insert
+6. Update `ReferralProgram.tsx` -- add Telegram notification call after successful DB insert
 
-| File | Change |
-|------|--------|
-| `src/components/CommercialMortgageForm.tsx` | Use entityName as primary borrowerName |
-| All other form components (`DSCRLoanForm`, `RehabInvestorForm`, etc.) | Same entityName-first logic where applicable |
-| `src/pages/applicant/ApplicantSignup.tsx` | Remove Full Name field, fetch name from DB after Loan ID verify, rename to "Loan Applicant" |
-| `src/pages/applicant/ApplicantDashboard.tsx` | Rename "Borrower" to "Loan Applicant" |
-| `src/contexts/AuthContext.tsx` | Pass fetched display name in signUp metadata |
-| DB migration | Add `get_borrower_display_name` RPC, update `handle_new_user` |
+### Technical Details
 
-### Next Steps Reminder (from previous discussion)
-
-After this signup flow is complete, the remaining steps are:
-
-1. **Test the full signup flow end-to-end** -- email entry, OTP 6-digit code verification, Loan ID linking
-2. **Implement the multi-step signup with OTP** -- email confirmation via 6-digit code before Loan ID entry (discussed previously, still pending)
-3. **Move error messages to top of form in red** (discussed previously, still pending)
-4. **Add info banner** telling users to use their loan application email
-5. **Test Resend email delivery** -- verify confirmation emails are actually being sent
-6. **Verify the full borrower portal** -- dashboard, messages, documents all working after signup
+- The edge function calls `https://api.telegram.org/bot{TOKEN}/sendMessage` with `parse_mode: "HTML"` for formatted messages
+- All Telegram calls are wrapped in try/catch so failures never block form submissions
+- The function accepts a generic payload with `applicationType`, `borrowerName`, `borrowerEmail`, `borrowerPhone`, `programName`, `requestedAmount`, and optional `extras` object for additional details
+- JWT verification disabled for this function since it's called from both authenticated and anonymous contexts
 

@@ -67,7 +67,7 @@ export default function ApplicantDashboard() {
   return (
     <div className="p-6 space-y-6">
       <div className="bg-gradient-to-r from-primary to-primary/80 rounded-lg p-6 text-primary-foreground">
-        <h1 className="text-3xl font-bold mb-2">Welcome back, {profile?.full_name || 'Borrower'}!</h1>
+        <h1 className="text-3xl font-bold mb-2">Welcome back, {profile?.full_name || 'Loan Applicant'}!</h1>
         <p className="text-primary-foreground/80">Track your loan progress and manage your applications.</p>
       </div>
 

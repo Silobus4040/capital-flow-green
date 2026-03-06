@@ -136,6 +136,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_borrower_display_name: {
+        Args: { _email: string; _loan_id: string }
+        Returns: string
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
