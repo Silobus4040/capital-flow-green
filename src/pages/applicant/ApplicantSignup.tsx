@@ -211,10 +211,6 @@ export default function ApplicantSignup() {
     return (
       <div className="min-h-screen bg-green-50 flex flex-col items-center justify-center p-4">
         <div className="w-full max-w-md">
-          <div className="flex justify-center mb-6">
-            <img src={ccifLogo} alt="CCIF Logo" className="h-10 lg:h-14 w-auto" />
-          </div>
-
           <div className="bg-background rounded-2xl shadow-lg p-6 lg:p-8">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
