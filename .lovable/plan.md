@@ -1,45 +1,60 @@
 
 
-## Plan: Show Compact Hero on Mobile + Email Field Visible Without Scrolling
+## Telegram Notification Integration Plan
 
-### Problem
-On mobile, the hero panel is completely hidden (`hidden lg:flex`), so users only see a plain form. The user wants the hero to be visible on mobile but compact enough that the email input is visible without scrolling.
+Thank you for providing your Telegram credentials. Here is the plan to send all application notifications to your Telegram.
 
-### Changes to Both `ApplicantSignup.tsx` and `ApplicantLogin.tsx`
+### What Will Be Built
 
-**Mobile hero panel (visible on all screens, compact on mobile)**:
-- Change the left panel from `hidden lg:flex lg:w-1/2` to always visible
-- On mobile: render as a compact banner at the top (~40vh max) with the hero image, CCIF logo, heading, and a condensed 2-column feature grid (smaller icons/text)
-- On desktop: keep the current full-height side panel layout
-- Use responsive classes: `h-[35vh] lg:h-auto lg:w-1/2` so on mobile it's a short banner, on desktop it's the full side panel
-- Hide the copyright line on mobile to save space
-- Reduce padding on mobile (`p-4 lg:p-12`)
-- Features list: show in a 2-column grid on mobile with smaller text, or show only 3 features on mobile to save space
+**1. New backend function: `send-telegram-notification`**
+- Accepts application data (type, name, email, phone, program, amount, etc.)
+- Formats a clean, readable Telegram message
+- Sends it to your Telegram chat via the Bot API
+- Non-blocking: if Telegram fails, the form submission still succeeds
 
-**Form panel adjustments**:
-- Remove the duplicate mobile-only branding block (`lg:hidden` section with logo) since the hero is now always visible
-- Reduce top padding on mobile so the form starts right after the hero
-- The email field should be visible at the top of the viewport or just barely below the fold
+**2. Store your credentials as backend secrets**
+- `TELEGRAM_BOT_TOKEN` = `8613102452:AAGvnbVmXKCI1mSdpXMqh0ZTzDdPPLnBag4`
+- `TELEGRAM_CHAT_ID` = `8156908905`
 
-### Layout on Mobile (top to bottom)
+**3. Hook Telegram into all 3 submission flows**
+
+| Flow | File | Change |
+|------|------|--------|
+| Loan applications (public) | `usePublicApplications.ts` | Add `send-telegram-notification` call after DB insert |
+| Loan applications (auth) | `useProgramApplications.ts` | Add `send-telegram-notification` call after DB insert |
+| Referral signups | `ReferralProgram.tsx` | Add `send-telegram-notification` call after DB insert |
+| Contact form | `ContactUs.tsx` | Add `send-telegram-notification` call after DB insert |
+
+**4. Telegram message format example**
+
 ```text
-┌──────────────────────┐
-│ Hero image (35vh)    │
-│ CCIF Logo            │
-│ "Your Loan..."       │
-│ 2-col features grid  │
-├──────────────────────┤
-│ Create Your Account  │
-│ [Email input]        │  ← visible without scrolling
-│ ─ scroll for rest ─  │
-│ [Password input]     │
-│ [Continue button]    │
-└──────────────────────┘
+🆕 NEW LOAN APPLICATION
+
+📋 Program: Commercial Mortgage
+👤 Name: John Smith
+📧 Email: john@example.com
+📞 Phone: 619-555-1234
+💰 Amount: $1,000,000
+📍 Property: 123 Main St, San Diego, CA
+
+⏰ Submitted: 2/25/2026 2:30 PM ET
 ```
 
-### Files to Modify
-| File | Change |
-|------|--------|
-| `src/pages/applicant/ApplicantSignup.tsx` | Make hero visible on mobile (compact ~35vh), remove duplicate mobile branding, tighten spacing |
-| `src/pages/applicant/ApplicantLogin.tsx` | Same mobile hero treatment |
+Different headers for each type: loan, referral, and contact.
+
+### Steps
+
+1. Store `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as backend secrets (2 secret prompts)
+2. Create `supabase/functions/send-telegram-notification/index.ts` -- calls Telegram Bot API `sendMessage` endpoint
+3. Update `usePublicApplications.ts` -- add Telegram notification call (fire-and-forget)
+4. Update `useProgramApplications.ts` -- add Telegram notification call (fire-and-forget)
+5. Update `ContactUs.tsx` -- add Telegram notification call after successful DB insert
+6. Update `ReferralProgram.tsx` -- add Telegram notification call after successful DB insert
+
+### Technical Details
+
+- The edge function calls `https://api.telegram.org/bot{TOKEN}/sendMessage` with `parse_mode: "HTML"` for formatted messages
+- All Telegram calls are wrapped in try/catch so failures never block form submissions
+- The function accepts a generic payload with `applicationType`, `borrowerName`, `borrowerEmail`, `borrowerPhone`, `programName`, `requestedAmount`, and optional `extras` object for additional details
+- JWT verification disabled for this function since it's called from both authenticated and anonymous contexts
 

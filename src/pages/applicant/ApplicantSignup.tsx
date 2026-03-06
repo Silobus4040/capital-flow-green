@@ -169,53 +169,46 @@ export default function ApplicantSignup() {
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
-      {/* Left Panel - Hero: hidden on mobile, visible on lg+ */}
-      <div className="relative hidden lg:flex lg:w-1/2 bg-primary overflow-hidden">
+      {/* Hero Panel - compact banner on mobile, full side panel on desktop */}
+      <div className="relative flex h-[32vh] lg:h-auto lg:w-1/2 bg-primary overflow-hidden">
         <img
           src={heroImage}
           alt="Professional managing loan on phone"
           className="absolute inset-0 w-full h-full object-cover opacity-40"
         />
-        <div className="relative z-10 flex flex-col justify-between h-full p-8 lg:p-12 text-primary-foreground">
+        <div className="relative z-10 flex flex-col justify-between h-full w-full p-4 lg:p-12 text-primary-foreground">
           <div>
-            <img src={ccifLogo} alt="CCIF Logo" className="h-12 w-auto mb-6 brightness-0 invert" />
-            <h1 className="text-3xl lg:text-4xl font-bold mb-3 font-serif">
+            <img src={ccifLogo} alt="CCIF Logo" className="h-8 lg:h-12 w-auto mb-2 lg:mb-6 brightness-0 invert" />
+            <h1 className="text-xl lg:text-4xl font-bold mb-1 lg:mb-3 font-serif">
               Your Loan. Your Dashboard.
             </h1>
-            <p className="text-lg opacity-90 mb-8 max-w-md">
+            <p className="text-xs lg:text-lg opacity-90 mb-2 lg:mb-8 max-w-md hidden lg:block">
               A full-suite closing dashboard to manage every aspect of your loan — from draw schedules to post-close access.
             </p>
           </div>
 
-          <div className="space-y-3">
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 lg:grid-cols-1 lg:gap-y-3">
             {FEATURES.map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-primary-foreground/20 flex items-center justify-center flex-shrink-0">
-                  <Icon className="h-4 w-4" />
+              <div key={label} className="flex items-center gap-2 lg:gap-3">
+                <div className="w-5 h-5 lg:w-8 lg:h-8 rounded-full bg-primary-foreground/20 flex items-center justify-center flex-shrink-0">
+                  <Icon className="h-3 w-3 lg:h-4 lg:w-4" />
                 </div>
-                <span className="text-sm font-bold opacity-90 font-serif">{label}</span>
+                <span className="text-[10px] lg:text-sm font-bold opacity-90 font-serif">{label}</span>
               </div>
             ))}
           </div>
 
-          <p className="text-xs opacity-60 mt-8">
+          <p className="text-xs opacity-60 mt-8 hidden lg:block">
             © {new Date().getFullYear()} CCIF Capital. All rights reserved.
           </p>
         </div>
       </div>
 
       {/* Right Panel - Form */}
-      <div className="flex-1 flex items-center justify-center p-6 lg:p-12 bg-background min-h-screen lg:min-h-0">
+      <div className="flex-1 flex items-start lg:items-center justify-center p-4 pt-4 lg:p-12 bg-background">
         <div className="w-full max-w-md">
-          {/* Mobile logo + branding */}
-          <div className="text-center mb-6 lg:hidden">
-            <img src={ccifLogo} alt="CCIF Logo" className="h-10 w-auto mx-auto mb-3" />
-            <h1 className="text-xl font-bold text-foreground font-serif">Your Loan. Your Dashboard.</h1>
-            <p className="text-xs text-muted-foreground mt-1">Full-suite closing dashboard for your loan.</p>
-          </div>
-
-          <h2 className="text-2xl font-bold text-foreground mb-1">Create Your Account</h2>
-          <p className="text-muted-foreground mb-6">
+          <h2 className="text-xl lg:text-2xl font-bold text-foreground mb-1">Create Your Account</h2>
+          <p className="text-muted-foreground text-sm mb-4 lg:mb-6">
             {step === 'credentials' && 'Sign up to access your loan applicant dashboard.'}
             {step === 'otp' && 'Enter the 6-digit code sent to your email.'}
           </p>
@@ -230,15 +223,15 @@ export default function ApplicantSignup() {
           {/* Step 1: Email + Password */}
           {step === 'credentials' && (
             <>
-              <Alert className="mb-5 bg-primary/5 border-primary/20">
+              <Alert className="mb-4 bg-primary/5 border-primary/20">
                 <Info className="h-4 w-4 text-primary" />
                 <AlertDescription className="text-sm">
                   Use the <strong>same email address</strong> from your loan application.
                 </AlertDescription>
               </Alert>
 
-              <form onSubmit={handleCredentialsSubmit} className="space-y-4">
-                <div className="space-y-2">
+              <form onSubmit={handleCredentialsSubmit} className="space-y-3 lg:space-y-4">
+                <div className="space-y-1.5">
                   <Label htmlFor="email" className="flex items-center gap-1.5">
                     <Mail className="h-4 w-4 text-primary" /> Email
                   </Label>
@@ -252,7 +245,7 @@ export default function ApplicantSignup() {
                   />
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <Label htmlFor="password" className="flex items-center gap-1.5">
                     <Lock className="h-4 w-4 text-primary" /> Password
                   </Label>
@@ -323,7 +316,7 @@ export default function ApplicantSignup() {
             </form>
           )}
 
-          {/* Loan ID Dialog - "One Last Step!" */}
+          {/* Loan ID Dialog */}
           <Dialog open={showLoanIdDialog} onOpenChange={() => {}}>
             <DialogContent className="sm:max-w-md" onPointerDownOutside={(e) => e.preventDefault()}>
               <DialogHeader>
@@ -368,7 +361,7 @@ export default function ApplicantSignup() {
             </DialogContent>
           </Dialog>
 
-          <div className="mt-6 text-center">
+          <div className="mt-4 lg:mt-6 text-center">
             <p className="text-sm text-muted-foreground">
               Already have an account?{' '}
               <Link to="/applicant-login" className="text-primary hover:text-primary/80 font-medium">
