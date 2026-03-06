@@ -52,6 +52,7 @@ export default function ApplicantLayout({ children }: ApplicantLayoutProps) {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <NewsTicker />
       {/* Header */}
       <header className="bg-primary text-primary-foreground shadow-soft">
         <div className="container mx-auto px-4 py-4">

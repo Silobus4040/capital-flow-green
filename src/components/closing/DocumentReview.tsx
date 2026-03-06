@@ -15,7 +15,7 @@ interface Doc {
   file_type: string | null;
   uploaded_by_role: string;
   esign_status: string | null;
-  audit_trail: any[];
+  audit_trail: any;
   created_at: string;
 }
 

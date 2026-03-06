@@ -93,7 +93,21 @@ const AppRoutes = () => {
                 <ApplicantLayout><div className="p-6"><h1>Profile - Coming Soon</h1></div></ApplicantLayout>
               </ProtectedRoute>
             } />
-            
+            <Route path="/applicant-closing" element={
+              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+                <ApplicantLayout><ClosingDashboard /></ApplicantLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/applicant-draw-schedule" element={
+              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+                <ApplicantLayout><DrawSchedule /></ApplicantLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/applicant-repayment" element={
+              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+                <ApplicantLayout><LoanRepayment /></ApplicantLayout>
+              </ProtectedRoute>
+            } />
             {/* Hidden Admin Portal Routes */}
             <Route path="/admin-portal-login" element={<AdminPortalLogin />} />
             <Route path="/admin-test-login" element={<AdminTestLogin />} />
