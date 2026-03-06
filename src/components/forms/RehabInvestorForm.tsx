@@ -125,7 +125,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.borrowerName || !formData.borrowerEmail || !formData.loanType || !formData.requestedAmount) {
+    if ((!formData.entityName && (!formData.firstName || !formData.lastName)) || !formData.borrowerEmail || !formData.loanType || !formData.requestedAmount) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
