@@ -18,22 +18,74 @@ export interface ProgramApplicationData {
   programSpecificData?: any;
 }
 
+const formatTelegramLabel = (key: string) =>
+  key
+    .replace(/_/g, ' ')
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const flattenTelegramDetails = (
+  value: unknown,
+  parentKey = '',
+  output: Record<string, string> = {}
+): Record<string, string> => {
+  if (value === null || value === undefined || value === '') {
+    return output;
+  }
+
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => {
+      const nextKey = parentKey ? `${parentKey} ${index + 1}` : String(index + 1);
+      flattenTelegramDetails(item, nextKey, output);
+    });
+    return output;
+  }
+
+  if (typeof value === 'object') {
+    Object.entries(value as Record<string, unknown>).forEach(([key, nestedValue]) => {
+      const nextKey = parentKey ? `${parentKey} ${formatTelegramLabel(key)}` : formatTelegramLabel(key);
+      flattenTelegramDetails(nestedValue, nextKey, output);
+    });
+    return output;
+  }
+
+  output[parentKey || 'value'] = String(value);
+  return output;
+};
+
+const buildLoanTelegramExtras = (applicationData: ProgramApplicationData) => {
+  const baseDetails: Record<string, unknown> = {
+    'Program ID': applicationData.programId,
+    'Property City': applicationData.propertyCity,
+    'Property State': applicationData.propertyState,
+    'Property ZIP': applicationData.propertyZip,
+    'Loan Purpose': applicationData.loanPurpose,
+  };
+
+  const mergedDetails = {
+    ...baseDetails,
+    ...(applicationData.programSpecificData && typeof applicationData.programSpecificData === 'object'
+      ? applicationData.programSpecificData
+      : {}),
+  };
+
+  return flattenTelegramDetails(mergedDetails);
+};
+
 export const usePublicApplications = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const { user } = useAuth();
 
   const submitPublicApplication = async (applicationData: ProgramApplicationData) => {
-    console.log('🔥 Starting form submission:', applicationData.programName);
-    
     setIsSubmitting(true);
-    
+
     try {
-      // Insert application into database (supports both authenticated and anonymous users)
-      const { error: dbError } = await supabase
+      const { data: insertedApplication, error: dbError } = await supabase
         .from('loan_program_applications')
         .insert({
-          user_id: user?.id || null, // Use authenticated user ID if available, null for anonymous
+          user_id: user?.id || null,
           program_id: applicationData.programId,
           program_name: applicationData.programName,
           borrower_name: applicationData.borrowerName,
@@ -46,17 +98,27 @@ export const usePublicApplications = () => {
           requested_amount: applicationData.requestedAmount,
           loan_purpose: applicationData.loanPurpose,
           program_specific_data: applicationData.programSpecificData || {},
-        });
+        })
+        .select('id, loan_id')
+        .single();
 
       if (dbError) {
-        console.error('❌ Database insertion failed:', dbError);
         throw new Error(`Database error: ${dbError.message}`);
       }
 
-      console.log('✅ Database insertion successful');
+      const propertyAddress = [
+        applicationData.propertyAddress,
+        applicationData.propertyCity,
+        applicationData.propertyState,
+        applicationData.propertyZip,
+      ]
+        .filter(Boolean)
+        .join(', ');
 
-      // Send Telegram notification (fire-and-forget)
-      supabase.functions.invoke('send-telegram-notification', {
+      const { data: telegramResult, error: telegramError } = await supabase.functions.invoke<{
+        success: boolean;
+        error?: string;
+      }>('send-telegram-notification', {
         body: {
           applicationType: 'loan',
           borrowerName: applicationData.borrowerName,
@@ -64,11 +126,22 @@ export const usePublicApplications = () => {
           borrowerPhone: applicationData.borrowerPhone,
           programName: applicationData.programName,
           requestedAmount: applicationData.requestedAmount,
-          propertyAddress: [applicationData.propertyAddress, applicationData.propertyCity, applicationData.propertyState, applicationData.propertyZip].filter(Boolean).join(', '),
+          propertyAddress,
+          extras: {
+            'Loan ID': insertedApplication?.loan_id,
+            ...buildLoanTelegramExtras(applicationData),
+          },
         },
-      }).catch(err => console.error('⚠️ Telegram notification failed:', err));
+      });
 
-      // Send email notification via edge function (now requires JWT)
+      if (telegramError || !telegramResult?.success) {
+        throw new Error(
+          telegramError?.message ||
+            telegramResult?.error ||
+            'Application saved, but Telegram delivery failed. Please submit again so our team is notified.'
+        );
+      }
+
       const { data: emailResult, error: emailError } = await supabase.functions.invoke(
         'send-program-application',
         {
@@ -90,25 +163,15 @@ export const usePublicApplications = () => {
 
       if (emailError) {
         console.error('⚠️ Email sending failed:', emailError);
-        console.log('📝 Application saved successfully, email notification failed (will be handled by admin team)');
-      } else {
-        console.log('✅ Email notification sent successfully');
       }
 
-      toast({
-        title: "Application Submitted Successfully",
-        description: "Your application has been submitted securely. Our team will review your application and contact you within 24-48 hours.",
-        variant: "default",
-      });
-
-      return { success: true, emailResult };
-      
+      return { success: true, emailResult, telegramResult };
     } catch (error: any) {
       console.error('Application submission error:', error);
       toast({
-        title: "Submission Failed",
-        description: error.message || "Failed to submit your application. Please try again.",
-        variant: "destructive",
+        title: 'Submission Failed',
+        description: error.message || 'Failed to submit your application. Please try again.',
+        variant: 'destructive',
       });
       throw error;
     } finally {

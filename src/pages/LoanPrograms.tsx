@@ -1,11 +1,7 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
-import { loanPrograms, LoanProgram } from "@/data/loanPrograms";
-import ProgramApplicationForm from "@/components/ProgramApplicationForm";
-import LoanProgramTerms from "@/components/LoanProgramTerms";
+import { loanPrograms } from "@/data/loanPrograms";
 import commercialMortgageImage from "@/assets/commercial-mortgage.jpg";
 import commercialDscrImage from "@/assets/commercial-dscr-rental.jpg";
 import rehabPropertyImage from "@/assets/rehab-property.jpg";
@@ -31,12 +27,6 @@ const programImages: Record<string, string> = {
 
 export default function LoanPrograms() {
   const navigate = useNavigate();
-  const [selectedProgram, setSelectedProgram] = useState<LoanProgram | null>(null);
-  const [showApplicationForm, setShowApplicationForm] = useState<LoanProgram | null>(null);
-
-  const handleApplicationFormSuccess = () => {
-    setShowApplicationForm(null);
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
@@ -55,8 +45,8 @@ export default function LoanPrograms() {
             <Card key={program.id} className="loan-program-card h-full flex flex-col shadow-lg hover:shadow-xl transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm">
               <div className="relative overflow-hidden rounded-t-lg">
                 {programImages[program.id] && (
-                  <img 
-                    src={programImages[program.id]} 
+                  <img
+                    src={programImages[program.id]}
                     alt={program.name}
                     className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
                   />
@@ -76,16 +66,16 @@ export default function LoanPrograms() {
                 </div>
                 <p className="loan-program-body text-muted-foreground mb-6">{program.description}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-                  <Button 
+                  <Button
                     variant="outline"
                     className="loan-program-button w-full h-12"
                     onClick={() => navigate(`/loan-programs/${program.id}`)}
                   >
                     View Details
                   </Button>
-                  <Button 
+                  <Button
                     className="loan-program-button w-full h-12"
-                    onClick={() => setShowApplicationForm(program)}
+                    onClick={() => navigate(`/loan-programs/${program.id}`)}
                   >
                     Apply Now
                   </Button>
@@ -94,21 +84,6 @@ export default function LoanPrograms() {
             </Card>
           ))}
         </div>
-
-        {/* Application Form Dialog */}
-        <Dialog open={showApplicationForm !== null} onOpenChange={(open) => !open && setShowApplicationForm(null)}>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>Submit Application for {showApplicationForm?.name}</DialogTitle>
-            </DialogHeader>
-            {showApplicationForm && (
-              <ProgramApplicationForm 
-                program={showApplicationForm} 
-                onSubmitSuccess={handleApplicationFormSuccess}
-              />
-            )}
-          </DialogContent>
-        </Dialog>
       </div>
     </div>
   );

@@ -87,7 +87,7 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if ((!formData.entityName?.trim() && (!formData.firstName || !formData.lastName)) || !formData.email || !formData.phone) {
+    if ((!formData.entityName?.trim() && (!formData.firstName?.trim() || !formData.lastName?.trim())) || !formData.email || !formData.phone) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
@@ -100,7 +100,7 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
       const applicationData = {
         programId: 'commercial-mortgage',
         programName: 'Commercial Mortgage',
-        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`,
+        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
         borrowerEmail: formData.email,
         borrowerPhone: formData.phone,
         propertyAddress: formData.propertyAddress,
@@ -167,7 +167,7 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
             <h3 className="text-lg font-semibold border-b pb-2">Borrower Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="md:col-span-2">
-                <Label htmlFor="entityName">Company/Entity Name *</Label>
+                <Label htmlFor="entityName">Company/Entity Name</Label>
                 <Input
                   id="entityName"
                   value={formData.entityName}
