@@ -126,7 +126,7 @@ export default function BusinessAcquisitionForm({ onSubmitSuccess }: BusinessAcq
       const applicationData = {
         programId: 'business-acquisition',
         programName: 'Business Acquisition Financing',
-        borrowerName: formData.borrowerName,
+        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
         borrowerEmail: formData.borrowerEmail,
         borrowerPhone: formData.borrowerPhone,
         propertyAddress: formData.targetBusinessAddress,
