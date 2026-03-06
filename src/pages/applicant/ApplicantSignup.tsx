@@ -72,10 +72,12 @@ export default function ApplicantSignup() {
       if (error) {
         setErrorMessage(error.message);
       } else {
+        setIsSigningUp(true);
         setStep('otp');
         toast({
           title: 'Verification Code Sent',
           description: 'Please check your email for a 6-digit verification code.',
+          className: 'bg-green-50 border-green-200 text-green-800',
         });
       }
     } catch {
