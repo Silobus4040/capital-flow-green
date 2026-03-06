@@ -34,10 +34,11 @@ export default function ApplicantSignup() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [showLoanIdDialog, setShowLoanIdDialog] = useState(false);
+  const [isSigningUp, setIsSigningUp] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
 
-  if (user) {
+  if (user && !isSigningUp) {
     return <Navigate to="/applicant-dashboard" replace />;
   }
 
