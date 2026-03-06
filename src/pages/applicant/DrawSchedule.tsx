@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, DollarSign, Plus, Loader2 } from 'lucide-react';
+import { Calendar, DollarSign, Plus, Loader2, Ban } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 interface Draw {
@@ -26,7 +26,10 @@ interface Draw {
 interface App {
   id: string;
   program_name: string;
+  program_id: string;
 }
+
+const DRAW_ELIGIBLE_PROGRAMS = ['rehab-loan', 'acquisition-development-construction'];
 
 export default function DrawSchedule() {
   const { user } = useAuth();
@@ -40,12 +43,15 @@ export default function DrawSchedule() {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
 
+  const selectedApp = apps.find(a => a.id === selectedAppId);
+  const isEligible = selectedApp ? DRAW_ELIGIBLE_PROGRAMS.includes(selectedApp.program_id) : false;
+
   useEffect(() => {
     const fetch = async () => {
       if (!user) return;
       const { data: appData } = await supabase
         .from('loan_program_applications')
-        .select('id, program_name')
+        .select('id, program_name, program_id')
         .eq('user_id', user.id);
       if (appData && appData.length > 0) {
         setApps(appData);
@@ -68,6 +74,18 @@ export default function DrawSchedule() {
     };
     fetchDraws();
   }, [selectedAppId]);
+
+  const handleNewDrawClick = () => {
+    if (!isEligible) {
+      toast({
+        title: 'Ineligible for Draws',
+        description: 'Draws are only available for Rehab, Fix & Flip, and Construction deals.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    setShowForm(!showForm);
+  };
 
   const submitDraw = async () => {
     if (!description.trim() || !amount || !selectedAppId) return;
@@ -112,7 +130,14 @@ export default function DrawSchedule() {
           <h1 className="text-2xl font-bold font-serif">Draw Schedule</h1>
           <p className="text-muted-foreground text-sm">Manage and track draw requests</p>
         </div>
-        <Button onClick={() => setShowForm(!showForm)} size="sm"><Plus className="h-4 w-4 mr-1" /> New Draw</Button>
+        {isEligible ? (
+          <Button onClick={handleNewDrawClick} size="sm"><Plus className="h-4 w-4 mr-1" /> New Draw</Button>
+        ) : (
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <Ban className="h-4 w-4" />
+            <span className="text-sm font-medium">Ineligible for draws</span>
+          </div>
+        )}
       </div>
 
       {apps.length > 1 && (
@@ -121,7 +146,7 @@ export default function DrawSchedule() {
         </select>
       )}
 
-      {showForm && (
+      {showForm && isEligible && (
         <Card>
           <CardHeader><CardTitle className="text-base">New Draw Request</CardTitle></CardHeader>
           <CardContent className="space-y-3">

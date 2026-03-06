@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      borrower_logins: {
+        Row: {
+          fingerprint_id: string | null
+          id: string
+          ip_address: string | null
+          logged_in_at: string
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          fingerprint_id?: string | null
+          id?: string
+          ip_address?: string | null
+          logged_in_at?: string
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          fingerprint_id?: string | null
+          id?: string
+          ip_address?: string | null
+          logged_in_at?: string
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       closing_bids: {
         Row: {
           application_id: string
