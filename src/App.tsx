@@ -30,6 +30,9 @@ import ApplicantDashboard from "./pages/applicant/ApplicantDashboard";
 import ApplicantMessages from "./pages/applicant/ApplicantMessages";
 import ApplicantDocuments from "./pages/applicant/ApplicantDocuments";
 import ApplicantApplications from "./pages/applicant/ApplicantApplications";
+import ClosingDashboard from "./pages/applicant/ClosingDashboard";
+import DrawSchedule from "./pages/applicant/DrawSchedule";
+import LoanRepayment from "./pages/applicant/LoanRepayment";
 
 // Admin Portal Pages
 import AdminPortalLogin from "./pages/admin/AdminPortalLogin";
@@ -90,7 +93,21 @@ const AppRoutes = () => {
                 <ApplicantLayout><div className="p-6"><h1>Profile - Coming Soon</h1></div></ApplicantLayout>
               </ProtectedRoute>
             } />
-            
+            <Route path="/applicant-closing" element={
+              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+                <ApplicantLayout><ClosingDashboard /></ApplicantLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/applicant-draw-schedule" element={
+              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+                <ApplicantLayout><DrawSchedule /></ApplicantLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/applicant-repayment" element={
+              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+                <ApplicantLayout><LoanRepayment /></ApplicantLayout>
+              </ProtectedRoute>
+            } />
             {/* Hidden Admin Portal Routes */}
             <Route path="/admin-portal-login" element={<AdminPortalLogin />} />
             <Route path="/admin-test-login" element={<AdminTestLogin />} />

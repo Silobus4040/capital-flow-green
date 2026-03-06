@@ -2,13 +2,18 @@ import { ReactNode } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
+import NewsTicker from './NewsTicker';
 import { 
   MessageSquare, 
   LayoutDashboard, 
   FileText, 
   User, 
   LogOut,
-  Building2
+  Building2,
+  Gavel,
+  Calendar,
+  DollarSign,
+  Shield
 } from 'lucide-react';
 
 interface ApplicantLayoutProps {
@@ -38,12 +43,16 @@ export default function ApplicantLayout({ children }: ApplicantLayoutProps) {
 
   const navItems = [
     { icon: LayoutDashboard, label: 'Dashboard', path: '/applicant-dashboard' },
+    { icon: Gavel, label: 'Closing Dashboard', path: '/applicant-closing' },
     { icon: MessageSquare, label: 'Messages', path: '/applicant-messages' },
     { icon: FileText, label: 'Documents', path: '/applicant-documents' },
+    { icon: Calendar, label: 'Draw Schedule', path: '/applicant-draw-schedule' },
+    { icon: DollarSign, label: 'Repayments', path: '/applicant-repayment' },
   ];
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <NewsTicker />
       {/* Header */}
       <header className="bg-primary text-primary-foreground shadow-soft">
         <div className="container mx-auto px-4 py-4">

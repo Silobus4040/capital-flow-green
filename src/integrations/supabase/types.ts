@@ -14,6 +14,306 @@ export type Database = {
   }
   public: {
     Tables: {
+      closing_bids: {
+        Row: {
+          application_id: string
+          bid_amount: number
+          created_at: string
+          id: string
+          investor_label: string
+          notes: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          application_id: string
+          bid_amount?: number
+          created_at?: string
+          id?: string
+          investor_label: string
+          notes?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          application_id?: string
+          bid_amount?: number
+          created_at?: string
+          id?: string
+          investor_label?: string
+          notes?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "closing_bids_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "loan_program_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      closing_checklist_items: {
+        Row: {
+          application_id: string
+          category: string
+          completed_at: string | null
+          completed_by: string | null
+          created_at: string
+          deadline: string | null
+          id: string
+          is_completed: boolean | null
+          notes: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          application_id: string
+          category?: string
+          completed_at?: string | null
+          completed_by?: string | null
+          created_at?: string
+          deadline?: string | null
+          id?: string
+          is_completed?: boolean | null
+          notes?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          application_id?: string
+          category?: string
+          completed_at?: string | null
+          completed_by?: string | null
+          created_at?: string
+          deadline?: string | null
+          id?: string
+          is_completed?: boolean | null
+          notes?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "closing_checklist_items_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "loan_program_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      closing_documents: {
+        Row: {
+          application_id: string
+          audit_trail: Json | null
+          created_at: string
+          esign_completed_at: string | null
+          esign_status: string | null
+          file_name: string
+          file_size: number | null
+          file_type: string | null
+          file_url: string
+          id: string
+          uploaded_by: string
+          uploaded_by_role: string
+        }
+        Insert: {
+          application_id: string
+          audit_trail?: Json | null
+          created_at?: string
+          esign_completed_at?: string | null
+          esign_status?: string | null
+          file_name: string
+          file_size?: number | null
+          file_type?: string | null
+          file_url: string
+          id?: string
+          uploaded_by: string
+          uploaded_by_role?: string
+        }
+        Update: {
+          application_id?: string
+          audit_trail?: Json | null
+          created_at?: string
+          esign_completed_at?: string | null
+          esign_status?: string | null
+          file_name?: string
+          file_size?: number | null
+          file_type?: string | null
+          file_url?: string
+          id?: string
+          uploaded_by?: string
+          uploaded_by_role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "closing_documents_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "loan_program_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      closing_messages: {
+        Row: {
+          application_id: string
+          audio_url: string | null
+          content: string | null
+          created_at: string
+          id: string
+          is_read: boolean | null
+          message_type: string
+          sender_id: string
+          sender_role: string
+          transcript: string | null
+        }
+        Insert: {
+          application_id: string
+          audio_url?: string | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          message_type?: string
+          sender_id: string
+          sender_role?: string
+          transcript?: string | null
+        }
+        Update: {
+          application_id?: string
+          audio_url?: string | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          message_type?: string
+          sender_id?: string
+          sender_role?: string
+          transcript?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "closing_messages_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "loan_program_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      closing_payments: {
+        Row: {
+          amount: number
+          application_id: string
+          created_at: string
+          description: string
+          due_date: string | null
+          escrow_balance: number | null
+          id: string
+          paid_at: string | null
+          payment_type: string
+          status: string
+          updated_at: string
+          wire_reference: string | null
+        }
+        Insert: {
+          amount?: number
+          application_id: string
+          created_at?: string
+          description: string
+          due_date?: string | null
+          escrow_balance?: number | null
+          id?: string
+          paid_at?: string | null
+          payment_type?: string
+          status?: string
+          updated_at?: string
+          wire_reference?: string | null
+        }
+        Update: {
+          amount?: number
+          application_id?: string
+          created_at?: string
+          description?: string
+          due_date?: string | null
+          escrow_balance?: number | null
+          id?: string
+          paid_at?: string | null
+          payment_type?: string
+          status?: string
+          updated_at?: string
+          wire_reference?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "closing_payments_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "loan_program_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      draw_schedules: {
+        Row: {
+          application_id: string
+          approved_amount: number | null
+          approved_at: string | null
+          created_at: string
+          description: string
+          draw_number: number
+          funded_at: string | null
+          id: string
+          notes: string | null
+          requested_amount: number
+          requested_at: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          application_id: string
+          approved_amount?: number | null
+          approved_at?: string | null
+          created_at?: string
+          description: string
+          draw_number?: number
+          funded_at?: string | null
+          id?: string
+          notes?: string | null
+          requested_amount?: number
+          requested_at?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          application_id?: string
+          approved_amount?: number | null
+          approved_at?: string | null
+          created_at?: string
+          description?: string
+          draw_number?: number
+          funded_at?: string | null
+          id?: string
+          notes?: string | null
+          requested_amount?: number
+          requested_at?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "draw_schedules_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "loan_program_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       loan_program_applications: {
         Row: {
           application_type: string | null
@@ -79,6 +379,100 @@ export type Database = {
           user_id?: string | null
         }
         Relationships: []
+      }
+      loan_repayments: {
+        Row: {
+          application_id: string
+          created_at: string
+          due_date: string
+          id: string
+          interest: number
+          paid_at: string | null
+          payment_number: number
+          principal: number
+          remaining_balance: number | null
+          status: string
+          total_amount: number
+        }
+        Insert: {
+          application_id: string
+          created_at?: string
+          due_date: string
+          id?: string
+          interest?: number
+          paid_at?: string | null
+          payment_number?: number
+          principal?: number
+          remaining_balance?: number | null
+          status?: string
+          total_amount?: number
+        }
+        Update: {
+          application_id?: string
+          created_at?: string
+          due_date?: string
+          id?: string
+          interest?: number
+          paid_at?: string | null
+          payment_number?: number
+          principal?: number
+          remaining_balance?: number | null
+          status?: string
+          total_amount?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "loan_repayments_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "loan_program_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      post_close_documents: {
+        Row: {
+          application_id: string
+          archived_at: string | null
+          created_at: string
+          description: string | null
+          document_type: string
+          file_name: string
+          file_url: string
+          id: string
+          is_archived: boolean | null
+        }
+        Insert: {
+          application_id: string
+          archived_at?: string | null
+          created_at?: string
+          description?: string | null
+          document_type?: string
+          file_name: string
+          file_url: string
+          id?: string
+          is_archived?: boolean | null
+        }
+        Update: {
+          application_id?: string
+          archived_at?: string | null
+          created_at?: string
+          description?: string | null
+          document_type?: string
+          file_name?: string
+          file_url?: string
+          id?: string
+          is_archived?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_close_documents_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "loan_program_applications"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
