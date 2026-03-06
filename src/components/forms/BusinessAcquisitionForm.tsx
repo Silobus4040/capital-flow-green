@@ -23,7 +23,9 @@ interface BusinessAcquisitionFormData {
   acquisitionType: string;
   
   // Contact Information
-  borrowerName: string;
+  entityName: string;
+  firstName: string;
+  lastName: string;
   borrowerEmail: string;
   borrowerPhone: string;
   borrowerTitle: string;
