@@ -79,7 +79,7 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.borrowerName || !formData.borrowerEmail || !formData.borrowerPhone) {
+    if ((!formData.entityName && (!formData.firstName || !formData.lastName)) || !formData.borrowerEmail || !formData.borrowerPhone) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
