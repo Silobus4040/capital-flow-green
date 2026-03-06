@@ -77,7 +77,9 @@ export default function SeniorLivingForm({ onSubmitSuccess }: SeniorLivingFormPr
   const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const { toast } = useToast();
   const [formData, setFormData] = useState<SeniorLivingFormData>({
-    borrowerName: "",
+    entityName: "",
+    firstName: "",
+    lastName: "",
     borrowerEmail: "",
     borrowerPhone: "",
     facilityName: "",
