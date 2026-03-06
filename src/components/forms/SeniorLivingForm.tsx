@@ -135,7 +135,7 @@ export default function SeniorLivingForm({ onSubmitSuccess }: SeniorLivingFormPr
       await submitPublicApplication({
         programId: 'senior-living',
         programName: 'Senior Living Financing',
-        borrowerName: formData.borrowerName,
+        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
         borrowerEmail: formData.borrowerEmail,
         borrowerPhone: formData.borrowerPhone,
         propertyAddress: formData.facilityAddress,
