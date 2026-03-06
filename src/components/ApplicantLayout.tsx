@@ -2,13 +2,18 @@ import { ReactNode } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
+import NewsTicker from './NewsTicker';
 import { 
   MessageSquare, 
   LayoutDashboard, 
   FileText, 
   User, 
   LogOut,
-  Building2
+  Building2,
+  Gavel,
+  Calendar,
+  DollarSign,
+  Shield
 } from 'lucide-react';
 
 interface ApplicantLayoutProps {
