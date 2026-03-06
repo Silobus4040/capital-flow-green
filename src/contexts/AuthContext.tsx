@@ -108,12 +108,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string, fullName: string, loanId?: string) => {
+  const signUp = async (email: string, password: string) => {
     const { error } = await supabase.auth.signUp({
       email, password,
       options: {
         emailRedirectTo: `${window.location.origin}/applicant-dashboard`,
-        data: { full_name: fullName, ...(loanId ? { loan_id: loanId } : {}) }
       }
     });
     return { error };
