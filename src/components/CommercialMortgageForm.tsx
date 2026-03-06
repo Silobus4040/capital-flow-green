@@ -100,7 +100,7 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
       const applicationData = {
         programId: 'commercial-mortgage',
         programName: 'Commercial Mortgage',
-        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`,
+        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
         borrowerEmail: formData.email,
         borrowerPhone: formData.phone,
         propertyAddress: formData.propertyAddress,
