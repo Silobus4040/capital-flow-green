@@ -116,7 +116,7 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
       const applicationData = {
         programId: 'commercial-dscr-loan',
         programName: 'Commercial DSCR Loan',
-        borrowerName: formData.borrowerName,
+        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
         borrowerEmail: formData.borrowerEmail,
         borrowerPhone: formData.borrowerPhone,
         propertyAddress: formData.propertyAddress,
