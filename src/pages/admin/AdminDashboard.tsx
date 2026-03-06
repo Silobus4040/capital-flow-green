@@ -252,7 +252,30 @@ export default function AdminDashboard() {
                               </Badge>
                             )}
                           </div>
-                          <Badge variant={client.status === 'approved' ? 'default' : client.status === 'pending' ? 'secondary' : 'destructive'}>{client.status}</Badge>
+                          <select
+                            className="border rounded px-2 py-1 text-xs bg-background"
+                            value={client.status}
+                            onClick={(e) => e.stopPropagation()}
+                            onChange={async (e) => {
+                              const newStatus = e.target.value;
+                              const { error } = await supabase
+                                .from('loan_program_applications')
+                                .update({ status: newStatus } as any)
+                                .eq('id', client.id);
+                              if (error) {
+                                toast({ title: 'Error', description: error.message, variant: 'destructive' });
+                              } else {
+                                setClients(prev => prev.map(c => c.id === client.id ? { ...c, status: newStatus } : c));
+                                toast({ title: 'Status Updated', description: `Set to "${newStatus}"` });
+                              }
+                            }}
+                          >
+                            <option value="pending">Under Review</option>
+                            <option value="approved">Approved</option>
+                            <option value="closing">Closing</option>
+                            <option value="funded">Funded</option>
+                            <option value="declined">Declined</option>
+                          </select>
                           <p className="text-xs text-muted-foreground">{new Date(client.created_at).toLocaleDateString()}</p>
                         </div>
                       </div>

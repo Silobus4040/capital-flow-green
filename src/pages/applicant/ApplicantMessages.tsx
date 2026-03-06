@@ -40,7 +40,7 @@ export default function ApplicantMessages() {
           <MessageSquare className="h-8 w-8 text-primary" />
           <div>
             <h1 className="text-2xl font-bold">Message Center</h1>
-            <p className="text-muted-foreground">Communicate with your loan team</p>
+            <p className="text-muted-foreground">Communicate with your Dedicated Account Manager</p>
           </div>
         </div>
 
