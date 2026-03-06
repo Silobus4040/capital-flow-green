@@ -113,7 +113,7 @@ export default function SelfStorageForm({ onSubmitSuccess }: SelfStorageFormProp
       const applicationData = {
         programId: 'self-storage-financing',
         programName: 'Self Storage Financing',
-        borrowerName: formData.borrowerName,
+        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
         borrowerEmail: formData.borrowerEmail,
         borrowerPhone: formData.borrowerPhone,
         propertyAddress: formData.facilityAddress,
