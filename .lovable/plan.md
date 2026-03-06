@@ -1,60 +1,25 @@
 
 
-## Telegram Notification Integration Plan
+## Plan: Scaffold & Deploy Custom Auth Email Templates
 
-Thank you for providing your Telegram credentials. Here is the plan to send all application notifications to your Telegram.
-
-### What Will Be Built
-
-**1. New backend function: `send-telegram-notification`**
-- Accepts application data (type, name, email, phone, program, amount, etc.)
-- Formats a clean, readable Telegram message
-- Sends it to your Telegram chat via the Bot API
-- Non-blocking: if Telegram fails, the form submission still succeeds
-
-**2. Store your credentials as backend secrets**
-- `TELEGRAM_BOT_TOKEN` = `8613102452:AAGvnbVmXKCI1mSdpXMqh0ZTzDdPPLnBag4`
-- `TELEGRAM_CHAT_ID` = `8156908905`
-
-**3. Hook Telegram into all 3 submission flows**
-
-| Flow | File | Change |
-|------|------|--------|
-| Loan applications (public) | `usePublicApplications.ts` | Add `send-telegram-notification` call after DB insert |
-| Loan applications (auth) | `useProgramApplications.ts` | Add `send-telegram-notification` call after DB insert |
-| Referral signups | `ReferralProgram.tsx` | Add `send-telegram-notification` call after DB insert |
-| Contact form | `ContactUs.tsx` | Add `send-telegram-notification` call after DB insert |
-
-**4. Telegram message format example**
-
-```text
-🆕 NEW LOAN APPLICATION
-
-📋 Program: Commercial Mortgage
-👤 Name: John Smith
-📧 Email: john@example.com
-📞 Phone: 619-555-1234
-💰 Amount: $1,000,000
-📍 Property: 123 Main St, San Diego, CA
-
-⏰ Submitted: 2/25/2026 2:30 PM ET
-```
-
-Different headers for each type: loan, referral, and contact.
+Your domain `ccif-inc.com` is verified. Now we need to create branded email templates so OTP codes, password resets, etc. come from your domain with CCIF branding.
 
 ### Steps
 
-1. Store `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as backend secrets (2 secret prompts)
-2. Create `supabase/functions/send-telegram-notification/index.ts` -- calls Telegram Bot API `sendMessage` endpoint
-3. Update `usePublicApplications.ts` -- add Telegram notification call (fire-and-forget)
-4. Update `useProgramApplications.ts` -- add Telegram notification call (fire-and-forget)
-5. Update `ContactUs.tsx` -- add Telegram notification call after successful DB insert
-6. Update `ReferralProgram.tsx` -- add Telegram notification call after successful DB insert
+1. **Scaffold auth email templates** using the built-in tool — this creates all 6 template types (signup confirmation, password recovery, magic link, invite, email change, reauthentication)
 
-### Technical Details
+2. **Brand the templates** to match CCIF's visual identity:
+   - Extract colors from `src/index.css` (primary gold/amber, dark backgrounds)
+   - Apply CCIF logo from `src/assets/ccif-logo-enhanced.png` (upload to storage bucket)
+   - Match button styles, fonts, and tone to the app
+   - Keep email body background white (required for email client compatibility)
 
-- The edge function calls `https://api.telegram.org/bot{TOKEN}/sendMessage` with `parse_mode: "HTML"` for formatted messages
-- All Telegram calls are wrapped in try/catch so failures never block form submissions
-- The function accepts a generic payload with `applicationType`, `borrowerName`, `borrowerEmail`, `borrowerPhone`, `programName`, `requestedAmount`, and optional `extras` object for additional details
-- JWT verification disabled for this function since it's called from both authenticated and anonymous contexts
+3. **Deploy the `auth-email-hook` edge function** so emails route through the custom templates
+
+4. **Verify** by testing signup/password reset to confirm branded emails arrive from `notify@ccif-inc.com`
+
+### Result
+- All auth emails (OTP verification, password reset, etc.) will come from your `ccif-inc.com` domain
+- Emails will have CCIF branding (logo, colors, professional layout)
+- Improved deliverability since emails come from a verified domain
 
