@@ -28,7 +28,7 @@ export default function LoanOfficerSignup() {
     setLoading(true);
 
     try {
-      const { error } = await signUp(email, password, fullName);
+      const { error } = await signUp(email, password);
       
       if (error) {
         toast({
