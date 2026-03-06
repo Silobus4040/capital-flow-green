@@ -160,6 +160,7 @@ export default function ApplicantSignup() {
       toast({
         title: 'Account Linked Successfully!',
         description: 'Your loan application has been linked to your account.',
+        className: 'bg-green-50 border-green-200 text-green-800',
       });
 
       window.location.href = '/applicant-dashboard';
