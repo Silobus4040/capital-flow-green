@@ -143,7 +143,9 @@ export default function RVParkForm({ onSubmitSuccess }: RVParkFormProps = {}) {
 
       // Reset form on success
       setFormData({
-        borrowerName: "",
+        entityName: "",
+        firstName: "",
+        lastName: "",
         borrowerEmail: "",
         borrowerPhone: "",
         parkName: "",
