@@ -2,11 +2,10 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { loanPrograms } from "@/data/loanPrograms";
 import ProgramApplicationForm from "@/components/ProgramApplicationForm";
 import LoanProgramTerms from "@/components/LoanProgramTerms";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Mail, FileText } from "lucide-react";
 import commercialMortgageImage from "@/assets/commercial-mortgage.jpg";
 import commercialDscrImage from "@/assets/commercial-dscr-rental.jpg";
 import rehabPropertyImage from "@/assets/rehab-property.jpg";
@@ -16,6 +15,7 @@ import constructionSiteImage from "@/assets/construction-site.jpg";
 import selfStorageImage from "@/assets/self-storage-facility.jpg";
 import seniorLivingImage from "@/assets/senior-living-facility.jpg";
 import residentialInvestmentImage from "@/assets/residential-investment.jpg";
+import ccifLogo from "@/assets/ccif-logo-enhanced.png";
 
 const programImages: Record<string, string> = {
   "rv-park-financing": rvParkImage,
@@ -34,6 +34,7 @@ export default function LoanProgramDetail() {
   const { programId } = useParams<{ programId: string }>();
   const navigate = useNavigate();
   const [showApplicationForm, setShowApplicationForm] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const program = loanPrograms.find(p => p.id === programId);
 
@@ -56,9 +57,66 @@ export default function LoanProgramDetail() {
 
   const handleApplicationFormSuccess = () => {
     setShowApplicationForm(false);
+    setSubmitted(true);
   };
 
   const selectedImage = programImages[program.id as keyof typeof programImages];
+
+  // Full-page success screen
+  if (submitted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4" style={{ background: 'linear-gradient(135deg, hsl(142 71% 35%), hsl(142 71% 25%))' }}>
+        <div className="max-w-2xl w-full text-center space-y-8">
+          <img src={ccifLogo} alt="CCIF Logo" className="h-20 mx-auto mb-4" />
+
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-10 space-y-6 border border-white/20">
+            <CheckCircle2 className="h-20 w-20 text-white mx-auto" />
+
+            <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+              Thank you for choosing Commercial Capital & Investment Inc for your financing needs!
+            </h1>
+
+            <div className="space-y-4">
+              <div className="flex items-start gap-3 text-white/90 text-lg text-left max-w-lg mx-auto">
+                <FileText className="h-6 w-6 mt-1 shrink-0" />
+                <p>We've received your loan request and will review it shortly.</p>
+              </div>
+
+              <div className="flex items-start gap-3 text-white/90 text-lg text-left max-w-lg mx-auto">
+                <Mail className="h-6 w-6 mt-1 shrink-0" />
+                <p>
+                  Expect a tailored <strong>Term Sheet & Loan Estimate</strong> in your email within{" "}
+                  <strong>1–2 business days</strong>, detailing your potential rates, terms, and clear next steps.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+            <Button
+              onClick={() => navigate("/loan-programs")}
+              size="lg"
+              className="bg-white text-green-800 hover:bg-white/90 font-semibold px-8"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Loan Programs
+            </Button>
+            <Button
+              onClick={() => {
+                setSubmitted(false);
+                setShowApplicationForm(false);
+              }}
+              size="lg"
+              variant="outline"
+              className="border-white text-white hover:bg-white/10 font-semibold px-8"
+            >
+              Apply for Another Program
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
@@ -131,40 +189,44 @@ export default function LoanProgramDetail() {
 
       <div className="loan-program-container container mx-auto">
         <div className="max-w-6xl mx-auto">
-          <Card className="loan-program-card shadow-2xl border-0 bg-card/80 backdrop-blur-sm">
-            <CardContent className="p-8">
-              <div className="text-center">
-                <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-2xl">
-                  <h2 className="loan-program-header text-foreground mb-4">Ready to Apply?</h2>
-                  <p className="loan-program-body text-muted-foreground mb-6 max-w-2xl mx-auto">
-                    Start your application process today and take advantage of our competitive rates and flexible terms.
-                  </p>
-                  <Button 
-                    onClick={() => setShowApplicationForm(true)}
-                    size="lg"
-                    className="loan-program-button text-lg px-8 py-3 hover:scale-105 transition-transform"
-                  >
-                    Apply Now
-                  </Button>
+          {!showApplicationForm ? (
+            <Card className="loan-program-card shadow-2xl border-0 bg-card/80 backdrop-blur-sm">
+              <CardContent className="p-8">
+                <div className="text-center">
+                  <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-2xl">
+                    <h2 className="loan-program-header text-foreground mb-4">Ready to Apply?</h2>
+                    <p className="loan-program-body text-muted-foreground mb-6 max-w-2xl mx-auto">
+                      Start your application process today and take advantage of our competitive rates and flexible terms.
+                    </p>
+                    <Button 
+                      onClick={() => setShowApplicationForm(true)}
+                      size="lg"
+                      className="loan-program-button text-lg px-8 py-3 hover:scale-105 transition-transform"
+                    >
+                      Apply Now
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="mb-12">
+              <Button 
+                variant="outline" 
+                onClick={() => setShowApplicationForm(false)}
+                className="mb-4"
+              >
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Back to Program Details
+              </Button>
+              <ProgramApplicationForm 
+                program={program} 
+                onSubmitSuccess={handleApplicationFormSuccess}
+              />
+            </div>
+          )}
         </div>
       </div>
-
-      {/* Application Form Dialog */}
-      <Dialog open={showApplicationForm} onOpenChange={setShowApplicationForm}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>Submit Application for {program.name}</DialogTitle>
-          </DialogHeader>
-          <ProgramApplicationForm 
-            program={program} 
-            onSubmitSuccess={handleApplicationFormSuccess}
-          />
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }
