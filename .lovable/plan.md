@@ -1,25 +1,60 @@
 
 
-## Plan: Update Email Sender Name + Confirm OTP Setup
+## Telegram Notification Integration Plan
 
-### Context
-The custom email domain setup is complete. The screenshot shows emails are being sent from `capital-flow-green <noreply@ccif-inc.com>`. The user wants the display name changed to "Commercial Capital & Investment Inc".
+Thank you for providing your Telegram credentials. Here is the plan to send all application notifications to your Telegram.
 
-Regarding the tech stack: this project uses Lovable's managed email system (not manual Resend). The `RESEND_API_KEY` secret exists but Lovable handles email delivery automatically through the `auth-email-hook`. No changes needed on any Resend account.
+### What Will Be Built
 
-### Changes
+**1. New backend function: `send-telegram-notification`**
+- Accepts application data (type, name, email, phone, program, amount, etc.)
+- Formats a clean, readable Telegram message
+- Sends it to your Telegram chat via the Bot API
+- Non-blocking: if Telegram fails, the form submission still succeeds
 
-**File: `supabase/functions/auth-email-hook/index.ts`**
-- Change `SITE_NAME` from `"capital-flow-green"` to `"Commercial Capital & Investment Inc"`
-- This updates the From display name in emails: `Commercial Capital & Investment Inc <noreply@ccif-inc.com>`
+**2. Store your credentials as backend secrets**
+- `TELEGRAM_BOT_TOKEN` = `8613102452:AAGvnbVmXKCI1mSdpXMqh0ZTzDdPPLnBag4`
+- `TELEGRAM_CHAT_ID` = `8156908905`
 
-**Redeploy**: Deploy `auth-email-hook` edge function after the change.
+**3. Hook Telegram into all 3 submission flows**
 
-### About 6-Digit OTP Codes
-Now that custom email is set up, the OTP/code confirmation type needs to be enabled in auth settings. This is a configuration change (not a code change). I will use the auth configuration tool to switch from link-based confirmation to OTP-based confirmation if possible, or guide you to toggle it in Cloud settings.
+| Flow | File | Change |
+|------|------|--------|
+| Loan applications (public) | `usePublicApplications.ts` | Add `send-telegram-notification` call after DB insert |
+| Loan applications (auth) | `useProgramApplications.ts` | Add `send-telegram-notification` call after DB insert |
+| Referral signups | `ReferralProgram.tsx` | Add `send-telegram-notification` call after DB insert |
+| Contact form | `ContactUs.tsx` | Add `send-telegram-notification` call after DB insert |
 
-### Files to Modify
-| File | Change |
-|------|--------|
-| `supabase/functions/auth-email-hook/index.ts` | Update `SITE_NAME` to "Commercial Capital & Investment Inc" |
+**4. Telegram message format example**
+
+```text
+🆕 NEW LOAN APPLICATION
+
+📋 Program: Commercial Mortgage
+👤 Name: John Smith
+📧 Email: john@example.com
+📞 Phone: 619-555-1234
+💰 Amount: $1,000,000
+📍 Property: 123 Main St, San Diego, CA
+
+⏰ Submitted: 2/25/2026 2:30 PM ET
+```
+
+Different headers for each type: loan, referral, and contact.
+
+### Steps
+
+1. Store `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as backend secrets (2 secret prompts)
+2. Create `supabase/functions/send-telegram-notification/index.ts` -- calls Telegram Bot API `sendMessage` endpoint
+3. Update `usePublicApplications.ts` -- add Telegram notification call (fire-and-forget)
+4. Update `useProgramApplications.ts` -- add Telegram notification call (fire-and-forget)
+5. Update `ContactUs.tsx` -- add Telegram notification call after successful DB insert
+6. Update `ReferralProgram.tsx` -- add Telegram notification call after successful DB insert
+
+### Technical Details
+
+- The edge function calls `https://api.telegram.org/bot{TOKEN}/sendMessage` with `parse_mode: "HTML"` for formatted messages
+- All Telegram calls are wrapped in try/catch so failures never block form submissions
+- The function accepts a generic payload with `applicationType`, `borrowerName`, `borrowerEmail`, `borrowerPhone`, `programName`, `requestedAmount`, and optional `extras` object for additional details
+- JWT verification disabled for this function since it's called from both authenticated and anonymous contexts
 
