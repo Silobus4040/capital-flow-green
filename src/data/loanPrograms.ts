@@ -1341,7 +1341,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         📋 Documentation Requirements
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         Detailed scope of work required for all projects • Licensed contractors required for major work • All renovations must comply with local building codes
       </p>
     </div>
