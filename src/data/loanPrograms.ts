@@ -1073,7 +1073,7 @@ export const loanPrograms: LoanProgram[] = [
     interestRate: "Starting at 6.49%",
     minimumLoanAmount: "$500,000.00",
     description: "Financing for property renovation and rehabilitation projects • Fix-and-flip • Fix-and-hold • 100% rehab financing available.",
-    terms: `<div style="background: linear-gradient(135deg, #7c2d12 0%, #ea580c 50%, #f97316 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    terms: `<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
 <div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
   <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">
