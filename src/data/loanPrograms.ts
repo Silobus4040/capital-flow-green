@@ -288,57 +288,57 @@ export const loanPrograms: LoanProgram[] = [
     terms: `<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: clamp(1rem, 4vw, 2rem); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
 <div style="text-align: center; margin-bottom: clamp(1.5rem, 5vw, 3rem); padding: clamp(1rem, 4vw, 2rem); background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
-  <h1 style="font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3); line-height: 1.2;">
+  <h1 style="font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #16a34a, #15803d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3); line-height: 1.2;">
     COMMERCIAL REAL ESTATE FINANCING
   </h1>
-  <h2 style="font-size: clamp(1rem, 4vw, 1.5rem); font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.3;">
+  <h2 style="font-size: clamp(1rem, 4vw, 1.5rem); font-weight: 600; color: #16a34a; margin-bottom: 0.5rem; line-height: 1.3;">
     COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.
   </h2>
-  <p style="font-size: clamp(0.9rem, 3vw, 1.1rem); color: #e5e7eb; font-weight: 500; line-height: 1.4;">
+  <p style="font-size: clamp(0.9rem, 3vw, 1.1rem); color: #4b5563; font-weight: 500; line-height: 1.4;">
     Premier Alternative Commercial Lending Institution
   </p>
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem, 3vw, 1.5rem); margin-bottom: clamp(1.5rem, 5vw, 3rem);">
-  <div style="background: linear-gradient(135deg, #374151, #4b5563); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(135deg, #f0fdf4, #4b5563); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #16a34a;">
     <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🚫 Market Challenges We Eliminate</h3>
-    <ul style="color: #e5e7eb; list-style: none; padding: 0;">
+    <ul style="color: #4b5563; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Traditional bank rejections due to credit requirements
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Excessive down payment demands (20-30%)
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Extended approval timelines (90+ days)
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Rigid lending criteria limiting deals
       </li>
     </ul>
   </div>
 
-  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #16a34a;">
     <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🎯 CCIF Strategic Advantages</h3>
-    <ul style="color: #a7f3d0; list-style: none; padding: 0;">
+    <ul style="color: #86efac; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         100% Financing Available
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Asset-Based Underwriting
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         15-30 Day Closings Standard
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         All Commercial Property Types
       </li>
     </ul>
@@ -346,203 +346,203 @@ export const loanPrograms: LoanProgram[] = [
 </div>
 
 <div style="margin-bottom: 3rem;">
-  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #16a34a; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
     OUR FINANCING PROGRAMS
   </h2>
 
   <div style="display: grid; gap: 2rem;">
     
     <!-- Program 1 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
         PROGRAM #1
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #16a34a; margin-bottom: 0.5rem; line-height: 1.2;">
           First Mortgage Purchase Program
         </h3>
-        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
+        <p style="color: #374151; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
           The Foundation Builder for Smart Investors
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">From 5.31%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">From 5.31%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">1-30 Years</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">1-30 Years</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 90%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 90%</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
-          <div style="color: #a7f3d0;">First-time commercial buyers • Portfolio expansion • Seasoned investors</div>
+          <div style="color: #86efac;">First-time commercial buyers • Portfolio expansion • Seasoned investors</div>
         </div>
       </div>
     </div>
 
     <!-- Program 2 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         PROGRAM #2
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Second Mortgage & Mezzanine Program
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Supercharge Your Buying Power
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">From 7.56%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">From 7.56%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">COMBINED LTV</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 85%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">COMBINED LTV</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 85%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">1-10 Years</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">1-10 Years</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
-          <div style="color: #a7f3d0;">Maximizing leverage • Cash preservation • Multiple acquisitions</div>
+          <div style="color: #86efac;">Maximizing leverage • Cash preservation • Multiple acquisitions</div>
         </div>
       </div>
     </div>
 
     <!-- Program 3 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         PROGRAM #3
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Rate & Term Refinance Program
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Slash Your Payments, Boost Your Cashflow
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">From 5.50%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">From 5.50%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">1-30 Years</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">1-30 Years</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">AMORTIZATION</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 40 Years</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">AMORTIZATION</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 40 Years</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
-          <div style="color: #a7f3d0;">Payment reduction • Capital optimization • Portfolio restructuring</div>
+          <div style="color: #86efac;">Payment reduction • Capital optimization • Portfolio restructuring</div>
         </div>
       </div>
     </div>
 
     <!-- Program 4 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         PROGRAM #4
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Cash-Out Refinance Program
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Turn Equity Into Opportunity
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">From 6.15%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">From 6.15%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 80%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 80%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">CUSTOM TERMS</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">1-30 Years</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">CUSTOM TERMS</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">1-30 Years</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
-          <div style="color: #a7f3d0;">Portfolio expansion • Business growth • Personal liquidity</div>
+          <div style="color: #86efac;">Portfolio expansion • Business growth • Personal liquidity</div>
         </div>
       </div>
     </div>
 
     <!-- Program 5 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         PROGRAM #5
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Bridge Financing Program
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Move At The Speed Of Opportunity
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">~9.5%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">~9.5%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">3-24 Months</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">3-24 Months</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 75%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 75%</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
-          <div style="color: #a7f3d0;">Auction purchases • 1031 exchanges • Fix-and-flip projects • Opportunistic acquisitions</div>
+          <div style="color: #86efac;">Auction purchases • 1031 exchanges • Fix-and-flip projects • Opportunistic acquisitions</div>
         </div>
       </div>
     </div>
@@ -550,8 +550,8 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
-<div style="background: linear-gradient(135deg, #1f2937, #374151); padding: 2rem; border-radius: 12px; margin-top: 3rem; text-align: center; border: 2px solid #fbbf24;">
-  <h2 style="color: #fbbf24; font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">
+<div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; padding: 2rem; border-radius: 12px; margin-top: 3rem; text-align: center; border: 2px solid #16a34a;">
+  <h2 style="color: #16a34a; font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">
     🎯 EXCLUSIVE 100% FINANCING PROGRAM
   </h2>
   <p style="color: white; font-size: 1.2rem; margin-bottom: 1.5rem;">
@@ -559,40 +559,40 @@ export const loanPrograms: LoanProgram[] = [
   </p>
   
   <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-    <h3 style="color: #fbbf24; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">
+    <h3 style="color: #16a34a; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">
       🔓 UNLOCK 100% FINANCING - Meet Just 2 of These Criteria:
     </h3>
     
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
-      <div style="background: rgba(251, 191, 36, 0.2); padding: 1rem; border-radius: 6px; text-align: left;">
-        <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💳 CREDIT SCORE</div>
-        <div style="color: white; font-size: 1.1rem; font-weight: 600;">680+ FICO</div>
+      <div style="background: rgba(22, 163, 74, 0.15); padding: 1rem; border-radius: 6px; text-align: left;">
+        <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">💳 CREDIT SCORE</div>
+        <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">680+ FICO</div>
       </div>
-      <div style="background: rgba(251, 191, 36, 0.2); padding: 1rem; border-radius: 6px; text-align: left;">
-        <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">🏆 EXPERIENCE</div>
-        <div style="color: white; font-size: 1.1rem; font-weight: 600;">3+ commercial deals</div>
+      <div style="background: rgba(22, 163, 74, 0.15); padding: 1rem; border-radius: 6px; text-align: left;">
+        <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">🏆 EXPERIENCE</div>
+        <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">3+ commercial deals</div>
       </div>
-      <div style="background: rgba(251, 191, 36, 0.2); padding: 1rem; border-radius: 6px; text-align: left;">
-        <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💰 NET WORTH</div>
-        <div style="color: white; font-size: 1.1rem; font-weight: 600;">1.5x loan amount</div>
+      <div style="background: rgba(22, 163, 74, 0.15); padding: 1rem; border-radius: 6px; text-align: left;">
+        <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">💰 NET WORTH</div>
+        <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">1.5x loan amount</div>
       </div>
-      <div style="background: rgba(251, 191, 36, 0.2); padding: 1rem; border-radius: 6px; text-align: left;">
-        <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💵 LIQUIDITY</div>
-        <div style="color: white; font-size: 1.1rem; font-weight: 600;">6 months reserves</div>
+      <div style="background: rgba(22, 163, 74, 0.15); padding: 1rem; border-radius: 6px; text-align: left;">
+        <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">💵 LIQUIDITY</div>
+        <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">6 months reserves</div>
       </div>
     </div>
   </div>
 </div>
 
-<div style="background: linear-gradient(45deg, #1f2937, #374151); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
-  <h2 style="color: #fbbf24; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
+<div style="background: linear-gradient(45deg, #ffffff, #f0fdf4); color: #14532d; padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+  <h2 style="color: #16a34a; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
     🏢 COMPREHENSIVE PROPERTY COVERAGE
   </h2>
   
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏢 TRADITIONAL COMMERCIAL</h3>
-      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏢 TRADITIONAL COMMERCIAL</h3>
+      <ul style="color: #374151; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
         <li>• Office Buildings (All Classes)</li>
         <li>• Retail & Shopping Centers</li>
         <li>• Industrial & Warehouse</li>
@@ -602,9 +602,9 @@ export const loanPrograms: LoanProgram[] = [
       </ul>
     </div>
     
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🎯 SPECIALTY PROPERTIES</h3>
-      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🎯 SPECIALTY PROPERTIES</h3>
+      <ul style="color: #374151; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
         <li>• Car Washes & Gas Stations</li>
         <li>• Restaurants & Entertainment</li>
         <li>• Cannabis Facilities</li>
@@ -616,69 +616,69 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
-<div style="background: linear-gradient(135deg, #374151, #4b5563); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+<div style="background: linear-gradient(135deg, #f0fdf4, #4b5563); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
   <h2 style="color: white; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
     ❓ FREQUENTLY ASKED QUESTIONS
   </h2>
   
   <div style="display: grid; gap: 1.5rem;">
     <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: How fast can I actually get approved and funded?
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> Pre-approval in 48-72 hours, full approval in 15-30 days, funding immediately after closing. We've closed deals in as little as 10 days for urgent situations.
       </p>
     </div>
     
     <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: Do you really offer 100% financing with no money down?
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> Yes! For qualified borrowers meeting our criteria, we provide true 100% financing. This includes purchase price plus reasonable closing costs.
       </p>
     </div>
     
     <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: What if I have credit issues or past bankruptcies?
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> We focus on the asset, not just credit. Many of our successful borrowers had credit challenges. We evaluate the total picture - property strength, experience, and ability to service debt.
       </p>
     </div>
     
     <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: How do your rates compare to banks?
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> Our rates are competitive with banks, but we approve deals banks reject. Speed, flexibility, and approval certainty often save you more money than a slightly lower rate elsewhere.
       </p>
     </div>
     
     <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: Can I finance multiple properties at once?
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> Absolutely! We offer portfolio financing, blanket loans, and cross-collateralization. Many clients finance entire portfolios in single transactions.
       </p>
     </div>
     
     <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: What about environmental issues or special property types?
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> We're experts in complex deals. Environmental issues can often be resolved with remediation plans or insurance. We finance cannabis, car washes, gas stations, and other specialty properties others avoid.
       </p>
     </div>
   </div>
 </div>
 
-<div style="background: linear-gradient(45deg, #fbbf24, #f59e0b); padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center; color: #1f2937;">
+<div style="background: linear-gradient(45deg, #16a34a, #15803d); padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center; color: #ffffff;">
   <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">
     🚀 READY TO DOMINATE YOUR MARKET?
   </h2>
@@ -704,7 +704,7 @@ export const loanPrograms: LoanProgram[] = [
 </div>
 
 <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
-  <p style="color: #d1d5db; font-size: 0.9rem; line-height: 1.6;">
+  <p style="color: #374151; font-size: 0.9rem; line-height: 1.6;">
     <strong>Licensed in all 50 states • $2.5B+ in funded loans • Asset-based lending specialists</strong>
   </p>
 </div>
@@ -717,60 +717,60 @@ export const loanPrograms: LoanProgram[] = [
     interestRate: "Starting at 6.57%",
     minimumLoanAmount: "$500,000.00",
     description: "Cash flow-based financing without personal income verification • Portfolio loans available • Fast closings for income-producing properties.",
-    terms: `<div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    terms: `<div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%); color: #14532d; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
 <div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
-  <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #3b82f6, #1d4ed8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+  <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #16a34a, #15803d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">
     COMMERCIAL DSCR FINANCING
   </h1>
-  <h2 style="font-size: 1.5rem; font-weight: 600; color: #3b82f6; margin-bottom: 0.5rem;">
+  <h2 style="font-size: 1.5rem; font-weight: 600; color: #16a34a; margin-bottom: 0.5rem;">
     COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.
   </h2>
-  <p style="font-size: 1.1rem; color: #e5e7eb; font-weight: 500;">
+  <p style="font-size: 1.1rem; color: #4b5563; font-weight: 500;">
     Cash Flow-Based Commercial Real Estate Lending
   </p>
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-  <div style="background: linear-gradient(135deg, #374151, #4b5563); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
+  <div style="background: linear-gradient(135deg, #f0fdf4, #4b5563); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a;">
     <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🚫 Traditional Lending Obstacles We Eliminate</h3>
-    <ul style="color: #e5e7eb; list-style: none; padding: 0;">
+    <ul style="color: #4b5563; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #3b82f6;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Personal income verification requirements
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #3b82f6;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Restrictive credit score minimums
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #3b82f6;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Complex debt-to-income calculations
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #3b82f6;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Single property limitations
       </li>
     </ul>
   </div>
 
-  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
+  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a;">
     <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🎯 CCIF DSCR Advantages</h3>
-    <ul style="color: #a7f3d0; list-style: none; padding: 0;">
+    <ul style="color: #86efac; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #3b82f6;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Property Cash Flow Focus Only
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #3b82f6;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         No Personal Income Documentation
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #3b82f6;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Portfolio Financing Available
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #3b82f6;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Non-Recourse Structure Options
       </li>
     </ul>
@@ -778,158 +778,158 @@ export const loanPrograms: LoanProgram[] = [
 </div>
 
 <div style="margin-bottom: 3rem;">
-  <h2 style="font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 2rem; color: #3b82f6; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+  <h2 style="font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 2rem; color: #16a34a; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
     DSCR LOAN PROGRAM FEATURES
   </h2>
 
   <div style="display: grid; gap: 2rem;">
     
     <!-- Core Program -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #3b82f6; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #3b82f6; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         CORE PROGRAM
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #3b82f6; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Cash Flow-Based Financing
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Qualify Based on Property Performance, Not Personal Income
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
-            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
           </div>
-          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
-            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting at 6.57%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Starting at 6.57%</div>
           </div>
-          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
-            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">MINIMUM DSCR</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">1.15x</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM DSCR</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">1.15x</div>
           </div>
-          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
-            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">LOAN-TO-VALUE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 75%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LOAN-TO-VALUE</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 75%</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
-          <div style="color: #a7f3d0;">Rental properties • Apartment buildings • Commercial income properties • Real estate investors</div>
+          <div style="color: #86efac;">Rental properties • Apartment buildings • Commercial income properties • Real estate investors</div>
         </div>
       </div>
     </div>
 
     <!-- Rate Structure -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #3b82f6; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #3b82f6; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         SMART PRICING
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #3b82f6; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Performance-Based Rate Structure
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Better Cash Flow = Better Rates
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
-            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">DSCR 1.15-1.24</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Base Rate 6.57%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">DSCR 1.15-1.24</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Base Rate 6.57%</div>
           </div>
-          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
-            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">DSCR 1.25-1.49</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Rate Discount -0.125%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">DSCR 1.25-1.49</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Rate Discount -0.125%</div>
           </div>
-          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
-            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">DSCR 1.50+</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Rate Discount -0.25%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">DSCR 1.50+</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Rate Discount -0.25%</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">🏆 REWARD PERFORMANCE:</div>
-          <div style="color: #a7f3d0;">Higher cash flow properties earn lower interest rates automatically</div>
+          <div style="color: #86efac;">Higher cash flow properties earn lower interest rates automatically</div>
         </div>
       </div>
     </div>
 
     <!-- Terms & Structure -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #3b82f6; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #3b82f6; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         FLEXIBLE TERMS
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #3b82f6; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Customizable Loan Structure
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Tailored to Your Investment Strategy
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
-            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">10-30 Years</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LOAN TERMS</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">10-30 Years</div>
           </div>
-          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
-            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">AMORTIZATION</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">20-30 Years</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">AMORTIZATION</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">20-30 Years</div>
           </div>
-          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
-            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">INTEREST-ONLY</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 10 Years</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST-ONLY</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 10 Years</div>
           </div>
-          <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #3b82f6;">
-            <div style="color: #3b82f6; font-weight: 700; font-size: 0.9rem;">PREPAYMENT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Flexible Options</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">PREPAYMENT</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Flexible Options</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 PAYMENT OPTIONS:</div>
-          <div style="color: #a7f3d0;">Fixed payments • Interest-only periods • Balloon structures • Full amortization</div>
+          <div style="color: #86efac;">Fixed payments • Interest-only periods • Balloon structures • Full amortization</div>
         </div>
       </div>
     </div>
 
     <!-- 100% Financing -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         100% FINANCING
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Zero Down Payment Program
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Qualified Investors Can Finance 100% of Purchase
         </p>
         
-        <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
-          <h4 style="color: #fbbf24; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
+        <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <h4 style="color: #16a34a; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
             Qualify by Meeting Any 2 of These Criteria:
           </h4>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💳 CREDIT SCORE</div>
-              <div style="color: white; font-size: 1.1rem; font-weight: 600;">680+ FICO</div>
+            <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+              <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">💳 CREDIT SCORE</div>
+              <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">680+ FICO</div>
             </div>
-            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">📊 PROPERTY DSCR</div>
-              <div style="color: white; font-size: 1.1rem; font-weight: 600;">1.35x or Higher</div>
+            <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+              <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">📊 PROPERTY DSCR</div>
+              <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">1.35x or Higher</div>
             </div>
-            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💰 NET WORTH</div>
-              <div style="color: white; font-size: 1.1rem; font-weight: 600;">1.5x Loan Amount</div>
+            <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+              <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">💰 NET WORTH</div>
+              <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">1.5x Loan Amount</div>
             </div>
-            <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-              <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">💵 LIQUIDITY</div>
-              <div style="color: white; font-size: 1.1rem; font-weight: 600;">6 Months Reserves</div>
+            <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+              <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">💵 LIQUIDITY</div>
+              <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">6 Months Reserves</div>
             </div>
           </div>
         </div>
@@ -939,15 +939,15 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
-<div style="background: linear-gradient(45deg, #1f2937, #374151); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
-  <h2 style="color: #3b82f6; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
+<div style="background: linear-gradient(45deg, #ffffff, #f0fdf4); color: #14532d; padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+  <h2 style="color: #16a34a; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
     🏢 ELIGIBLE INCOME-PRODUCING PROPERTIES
   </h2>
   
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-    <div style="background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
-      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏢 MULTIFAMILY PROPERTIES</h3>
-      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏢 MULTIFAMILY PROPERTIES</h3>
+      <ul style="color: #374151; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
         <li>• Apartment Buildings (5+ units)</li>
         <li>• Apartment Complexes (up to 300 units)</li>
         <li>• Multifamily Portfolios</li>
@@ -956,9 +956,9 @@ export const loanPrograms: LoanProgram[] = [
       </ul>
     </div>
     
-    <div style="background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
-      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏪 COMMERCIAL PROPERTIES</h3>
-      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏪 COMMERCIAL PROPERTIES</h3>
+      <ul style="color: #374151; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
         <li>• Office Buildings</li>
         <li>• Retail Centers</li>
         <li>• Industrial Facilities</li>
@@ -968,9 +968,9 @@ export const loanPrograms: LoanProgram[] = [
       </ul>
     </div>
     
-    <div style="background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
-      <h3 style="color: #3b82f6; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">📊 PORTFOLIO FINANCING</h3>
-      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">📊 PORTFOLIO FINANCING</h3>
+      <ul style="color: #374151; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
         <li>• 2-50+ Properties</li>
         <li>• Cross-Collateralization</li>
         <li>• Weighted Average DSCR</li>
@@ -981,53 +981,53 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
-<div style="background: linear-gradient(135deg, #374151, #4b5563); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
-  <h2 style="color: #fbbf24; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
+<div style="background: linear-gradient(135deg, #f0fdf4, #4b5563); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+  <h2 style="color: #16a34a; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
     ❓ FREQUENTLY ASKED QUESTIONS
   </h2>
   
   <div style="display: grid; gap: 1.5rem;">
-    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: How is DSCR calculated and what does it mean?
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> DSCR = Net Operating Income ÷ Annual Debt Service. A 1.25 DSCR means the property generates 25% more income than needed to cover the loan payment, providing a safety cushion.
       </p>
     </div>
     
-    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: Do you require personal income verification?
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> No! DSCR loans qualify based solely on the property's cash flow performance. We don't require tax returns, W2s, or personal income documentation.
       </p>
     </div>
     
-    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: Can I finance multiple properties in one loan?
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> Yes! Our portfolio program allows you to finance 2-50+ properties in a single transaction with cross-collateralization benefits and streamlined processing.
       </p>
     </div>
     
-    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: What if my property is partially vacant?
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> We underwrite to both in-place income and pro forma rents. Partial vacancy is acceptable with appropriate DSCR adjustments and potential reserve requirements.
       </p>
     </div>
     
-    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 3px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: Are there prepayment penalties?
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> We offer flexible prepayment options including step-down schedules (5-4-3-2-1 or 3-2-1) and no-penalty options with slight rate adjustments for 10+ year terms.
       </p>
     </div>
@@ -1035,7 +1035,7 @@ export const loanPrograms: LoanProgram[] = [
 </div>
 
 <div style="background: linear-gradient(135deg, #166534, #16a34a); padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center; color: white;">
-  <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem; color: #fbbf24;">
+  <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem; color: #16a34a;">
     🚀 READY TO UNLOCK YOUR PORTFOLIO'S POTENTIAL?
   </h2>
   <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem; color: white;">
@@ -1044,11 +1044,11 @@ export const loanPrograms: LoanProgram[] = [
   
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
     <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-      <div style="font-weight: 700; font-size: 1.1rem; color: #fbbf24;">📞 CALL NOW</div>
+      <div style="font-weight: 700; font-size: 1.1rem; color: #16a34a;">📞 CALL NOW</div>
       <div style="font-size: 1.2rem; font-weight: 800; color: white;">1-800-CCIF-LOAN</div>
     </div>
     <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-      <div style="font-weight: 700; font-size: 1.1rem; color: #fbbf24;">📧 EMAIL</div>
+      <div style="font-weight: 700; font-size: 1.1rem; color: #16a34a;">📧 EMAIL</div>
       <div style="font-size: 1.2rem; font-weight: 800; color: white;">admin@ccif-inc.com</div>
     </div>
   </div>
@@ -1060,7 +1060,7 @@ export const loanPrograms: LoanProgram[] = [
 </div>
 
 <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
-  <p style="color: #d1d5db; font-size: 0.9rem; line-height: 1.6;">
+  <p style="color: #374151; font-size: 0.9rem; line-height: 1.6;">
     <strong>Specialized DSCR Lending • Licensed in all 50 states • $2.5B+ in funded loans • Income property financing experts</strong>
   </p>
 </div>
@@ -1076,57 +1076,57 @@ export const loanPrograms: LoanProgram[] = [
     terms: `<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
 <div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
-  <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+  <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #16a34a, #15803d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">
     REHABILITATION FINANCING PROGRAM
   </h1>
-  <h2 style="font-size: 1.5rem; font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem;">
+  <h2 style="font-size: 1.5rem; font-weight: 600; color: #16a34a; margin-bottom: 0.5rem;">
     COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC.
   </h2>
-  <p style="font-size: 1.1rem; color: #e5e7eb; font-weight: 500;">
+  <p style="font-size: 1.1rem; color: #4b5563; font-weight: 500;">
     Transform Properties Into Profitable Investments
   </p>
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-  <div style="background: linear-gradient(135deg, #374151, #4b5563); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(135deg, #f0fdf4, #4b5563); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a;">
     <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🚫 Traditional Rehab Financing Challenges</h3>
-    <ul style="color: #e5e7eb; list-style: none; padding: 0;">
+    <ul style="color: #4b5563; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Limited renovation financing options
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Strict credit and income requirements
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Complex draw process and delays
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         High down payment requirements
       </li>
     </ul>
   </div>
 
-  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a;">
     <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🎯 CCIF Rehab Loan Advantages</h3>
-    <ul style="color: #a7f3d0; list-style: none; padding: 0;">
+    <ul style="color: #86efac; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         100% Renovation Financing Available
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Fast Approvals & Quick Funding
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Flexible Draw Schedules
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Multiple Program Options
       </li>
     </ul>
@@ -1134,131 +1134,131 @@ export const loanPrograms: LoanProgram[] = [
 </div>
 
 <div style="margin-bottom: 3rem;">
-  <h2 style="font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 2rem; color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+  <h2 style="font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 2rem; color: #16a34a; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
     REHABILITATION LOAN PROGRAMS
   </h2>
 
   <div style="display: grid; gap: 2rem;">
     
     <!-- Fix-and-Flip Program -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         PROGRAM #1
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Fix-and-Flip Loan Program
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Transform Properties Faster with Lightning-Fast Approvals
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting at 6.99%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Starting at 6.99%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LOAN TERM</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">6-18 Months</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LOAN TERM</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">6-18 Months</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">90% Purchase + 100% Rehab</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LTV</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">90% Purchase + 100% Rehab</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 KEY FEATURES:</div>
-          <div style="color: #a7f3d0;">Interest-only payments • Deferred payment options • Portfolio financing • Extension options available</div>
+          <div style="color: #86efac;">Interest-only payments • Deferred payment options • Portfolio financing • Extension options available</div>
         </div>
       </div>
     </div>
 
     <!-- Fix-and-Hold Program -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         PROGRAM #2
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Fix-and-Hold Loan Program
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Seamless Transition to Long-Term Mortgage Without Refinancing
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting at 6.49%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Starting at 6.49%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 80% Stabilized Value</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LTV</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 80% Stabilized Value</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">PAYMENT STRUCTURE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Interest-Only to Full Amortization</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">PAYMENT STRUCTURE</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Interest-Only to Full Amortization</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">🏆 SPECIAL FEATURES:</div>
-          <div style="color: #a7f3d0;">One-time closing • Staged conversion program • Performance-based discounts • Short-term holding costs available</div>
+          <div style="color: #86efac;">One-time closing • Staged conversion program • Performance-based discounts • Short-term holding costs available</div>
         </div>
       </div>
     </div>
 
     <!-- Rehab-Only Program -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         PROGRAM #3
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Rehab-Only Loan Program
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Fast, Flexible Financing Based on Property Potential After Repairs
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">FOCUS</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Property Potential</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">FOCUS</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Property Potential</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">APPROVAL</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Quick & Flexible</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">APPROVAL</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Quick & Flexible</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">DRAW SCHEDULE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Convenient & Flexible</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">DRAW SCHEDULE</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Convenient & Flexible</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 IDEAL FOR:</div>
-          <div style="color: #a7f3d0;">Property value enhancement • Single property improvements • Portfolio building • Value-add projects</div>
+          <div style="color: #86efac;">Property value enhancement • Single property improvements • Portfolio building • Value-add projects</div>
         </div>
       </div>
     </div>
 
     <!-- 100% Financing Program -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #10b981; position: relative; overflow: hidden;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #10b981; position: relative; overflow: hidden;">
       <div style="position: absolute; top: -10px; left: 20px; background: #10b981; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         100% FINANCING
       </div>
@@ -1266,7 +1266,7 @@ export const loanPrograms: LoanProgram[] = [
         <h3 style="font-size: 1.8rem; font-weight: 800; color: #10b981; margin-bottom: 0.5rem;">
           Zero Down Payment Program
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Industry-Leading 100% Financing for New and Experienced Investors
         </p>
         
@@ -1277,24 +1277,24 @@ export const loanPrograms: LoanProgram[] = [
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
             <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #10b981;">
               <div style="color: #10b981; font-weight: 700; font-size: 0.9rem;">💳 CREDIT SCORE</div>
-              <div style="color: white; font-size: 1.1rem; font-weight: 600;">Minimum 680 FICO</div>
+              <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">Minimum 680 FICO</div>
             </div>
             <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #10b981;">
               <div style="color: #10b981; font-weight: 700; font-size: 0.9rem;">🏆 EXPERIENCE</div>
-              <div style="color: white; font-size: 1.1rem; font-weight: 600;">3+ Successful Projects</div>
+              <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">3+ Successful Projects</div>
             </div>
             <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #10b981;">
               <div style="color: #10b981; font-weight: 700; font-size: 0.9rem;">🏠 COLLATERAL</div>
-              <div style="color: white; font-size: 1.1rem; font-weight: 600;">Cross-Collateralization</div>
+              <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">Cross-Collateralization</div>
             </div>
             <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #10b981;">
               <div style="color: #10b981; font-weight: 700; font-size: 0.9rem;">💰 RESERVES</div>
-              <div style="color: white; font-size: 1.1rem; font-weight: 600;">6 Months Interest Reserve</div>
+              <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">6 Months Interest Reserve</div>
             </div>
           </div>
           <div style="background: rgba(16, 185, 129, 0.2); padding: 1rem; border-radius: 6px; margin-top: 1rem; text-align: center;">
             <div style="color: #10b981; font-weight: 700; font-size: 0.9rem;">MAXIMUM LTV</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">65% Loan-to-ARV</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">65% Loan-to-ARV</div>
           </div>
         </div>
       </div>
@@ -1303,15 +1303,15 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
-<div style="background: linear-gradient(45deg, #1f2937, #374151); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
-  <h2 style="color: #fbbf24; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
+<div style="background: linear-gradient(45deg, #ffffff, #f0fdf4); color: #14532d; padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+  <h2 style="color: #16a34a; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
     🏢 ELIGIBLE PROPERTY TYPES
   </h2>
   
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏠 RESIDENTIAL PROPERTIES</h3>
-      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏠 RESIDENTIAL PROPERTIES</h3>
+      <ul style="color: #374151; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
         <li>• Single Family Homes</li>
         <li>• Duplexes, Triplexes, Quadplexes</li>
         <li>• Townhomes and Condominiums</li>
@@ -1319,9 +1319,9 @@ export const loanPrograms: LoanProgram[] = [
       </ul>
     </div>
     
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏢 MULTIFAMILY & COMMERCIAL</h3>
-      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🏢 MULTIFAMILY & COMMERCIAL</h3>
+      <ul style="color: #374151; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
         <li>• Multifamily Residences (5+ units)</li>
         <li>• Mixed-use properties</li>
         <li>• Commercial renovation projects</li>
@@ -1331,50 +1331,50 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
-<div style="background: linear-gradient(135deg, #374151, #4b5563); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+<div style="background: linear-gradient(135deg, #f0fdf4, #4b5563); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
   <h2 style="color: white; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
     🔧 RENOVATION REQUIREMENTS
   </h2>
   
   <div style="display: grid; gap: 1.5rem;">
     <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         📋 Documentation Requirements
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         Detailed scope of work required for all projects • Licensed contractors required for major work • All renovations must comply with local building codes
       </p>
     </div>
     
     <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         🔍 Inspection Process
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         Progress inspections required before each draw • Maximum renovation period based on loan term • Final inspection required at project completion
       </p>
     </div>
     
     <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(10px);">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         📊 Budget & Planning
       </h3>
-      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #4b5563; font-size: 1rem; line-height: 1.6;">
         Budget contingency of up to 5% recommended • Changes to scope must be approved • Line-item cost breakdown required
       </p>
     </div>
   </div>
 </div>
 
-<div style="background: linear-gradient(45deg, #1f2937, #374151); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
-  <h2 style="color: #fbbf24; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
+<div style="background: linear-gradient(45deg, #ffffff, #f0fdf4); color: #14532d; padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+  <h2 style="color: #16a34a; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
     📄 DOCUMENT CHECKLIST
   </h2>
   
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">📋 PROPERTY DOCUMENTATION</h3>
-      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">📋 PROPERTY DOCUMENTATION</h3>
+      <ul style="color: #374151; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
         <li>• Purchase contract/agreement</li>
         <li>• Clear, color photos (interior & exterior)</li>
         <li>• Detailed scope of work with costs</li>
@@ -1383,9 +1383,9 @@ export const loanPrograms: LoanProgram[] = [
       </ul>
     </div>
     
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
-      <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🆔 PERSONAL & ENTITY DOCS</h3>
-      <ul style="color: #d1d5db; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a;">
+      <h3 style="color: #16a34a; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">🆔 PERSONAL & ENTITY DOCS</h3>
+      <ul style="color: #374151; list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
         <li>• Government-issued photo ID</li>
         <li>• Proof of funds for down payment</li>
         <li>• Entity formation documents</li>
@@ -1395,7 +1395,7 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
-<div style="background: linear-gradient(45deg, #fbbf24, #f59e0b); padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center; color: #1f2937;">
+<div style="background: linear-gradient(45deg, #16a34a, #15803d); padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center; color: #ffffff;">
   <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">
     🚀 READY TO TRANSFORM PROPERTIES?
   </h2>
@@ -1421,7 +1421,7 @@ export const loanPrograms: LoanProgram[] = [
 </div>
 
 <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
-  <p style="color: #d1d5db; font-size: 0.9rem; line-height: 1.6;">
+  <p style="color: #374151; font-size: 0.9rem; line-height: 1.6;">
     <strong>Rehabilitation Financing Specialists • Licensed in all 50 states • $2.5B+ in funded loans • Property transformation experts</strong>
   </p>
 </div>
@@ -2336,65 +2336,65 @@ Processing Time: 14-30 days`
 <div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: clamp(1rem, 4vw, 2rem); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
 <div style="text-align: center; margin-bottom: clamp(1.5rem, 5vw, 3rem); padding: clamp(1rem, 4vw, 2rem); background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
-  <h1 style="font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3); line-height: 1.2;">
+  <h1 style="font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #16a34a, #15803d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3); line-height: 1.2;">
     PRIVATE RESIDENTIAL MORTGAGE
   </h1>
-  <h2 style="font-size: clamp(1rem, 4vw, 1.5rem); font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.3;">
+  <h2 style="font-size: clamp(1rem, 4vw, 1.5rem); font-weight: 600; color: #16a34a; margin-bottom: 0.5rem; line-height: 1.3;">
     COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC
   </h2>
-  <p style="font-size: clamp(0.9rem, 3vw, 1.1rem); color: #e5e7eb; font-weight: 500; line-height: 1.4;">
+  <p style="font-size: clamp(0.9rem, 3vw, 1.1rem); color: #4b5563; font-weight: 500; line-height: 1.4;">
     Asset-Based Private Lender - Flexible Financing for Primary Residences & Investment Properties
   </p>
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem, 3vw, 1.5rem); margin-bottom: clamp(1.5rem, 5vw, 3rem);">
-  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #16a34a;">
     <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🏠 Our Financing Programs</h3>
-    <ul style="color: #a7f3d0; list-style: none; padding: 0;">
+    <ul style="color: #86efac; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">1.</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">1.</span>
         First Mortgage/Purchase
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">2.</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">2.</span>
         Rate and Term Refinance
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">3.</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">3.</span>
         Cash-Out Refinance
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">4.</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">4.</span>
         Bridge Loan
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">5.</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">5.</span>
         100% Financing Program
       </li>
     </ul>
   </div>
 
-  <div style="background: linear-gradient(135deg, #1f2937, #374151); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #16a34a;">
     <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🏢 Eligible Property Types</h3>
-    <ul style="color: #e5e7eb; list-style: none; padding: 0;">
+    <ul style="color: #4b5563; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Single-family homes & Condos
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Multi-family (up to 4 units)
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Townhouses & Modular Homes
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Vacation & Investment Properties
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Mixed-Use (with residential)
       </li>
     </ul>
@@ -2402,86 +2402,86 @@ Processing Time: 14-30 days`
 </div>
 
 <div style="margin-bottom: 3rem;">
-  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #16a34a; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
     OUR FINANCING PROGRAMS
   </h2>
 
   <div style="display: grid; gap: 2rem;">
     
     <!-- Program 1 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
         PROGRAM #1
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #16a34a; margin-bottom: 0.5rem; line-height: 1.2;">
           First Mortgage/Purchase
         </h3>
-        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
+        <p style="color: #374151; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
           Primary financing for new property acquisitions
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LOAN RANGE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$50K - $5M</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LOAN RANGE</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$50K - $5M</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">FIXED RATE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting 5.00%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">FIXED RATE</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Starting 5.00%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 90%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 90%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">15-40 Years</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">15-40 Years</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 PAYMENT OPTIONS:</div>
-          <div style="color: #a7f3d0;">Fully Amortizing • Interest-Only (1-10 years) • Interest-Only + Balloon • No Prepayment Penalty</div>
+          <div style="color: #86efac;">Fully Amortizing • Interest-Only (1-10 years) • Interest-Only + Balloon • No Prepayment Penalty</div>
         </div>
       </div>
     </div>
 
     <!-- Program 2 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
         PROGRAM #2
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #16a34a; margin-bottom: 0.5rem; line-height: 1.2;">
           Rate and Term Refinance
         </h3>
-        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
+        <p style="color: #374151; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
           Lower payments and secure better terms
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$50,000</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$50,000</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">FIXED RATE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting 5.27%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">FIXED RATE</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Starting 5.27%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">15-30 Years</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">15-30 Years</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">PREPAYMENT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">No Penalty</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">PREPAYMENT</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">No Penalty</div>
           </div>
         </div>
         
-        <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24; margin-bottom: 1rem;">
-          <div style="color: #fbbf24; font-weight: 700;">🎯 IDEAL FOR:</div>
-          <div style="color: #e5e7eb; font-size: 0.9rem;">
+        <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a; margin-bottom: 1rem;">
+          <div style="color: #16a34a; font-weight: 700;">🎯 IDEAL FOR:</div>
+          <div style="color: #4b5563; font-size: 0.9rem;">
             Reducing monthly payments • Securing better rates • Converting adjustable to fixed rate • Changing loan terms
           </div>
         </div>
@@ -2489,99 +2489,99 @@ Processing Time: 14-30 days`
     </div>
 
     <!-- Program 3 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
         PROGRAM #3
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #16a34a; margin-bottom: 0.5rem; line-height: 1.2;">
           Cash-Out Refinance
         </h3>
-        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
+        <p style="color: #374151; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
           Access your property's equity for any purpose
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MAX LTV</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 85%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MAX LTV</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 85%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">FIXED RATE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting 5.77%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">FIXED RATE</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Starting 5.77%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 30 Years</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 30 Years</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">SEASONING</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">None Required</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">SEASONING</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">None Required</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 FEATURES:</div>
-          <div style="color: #a7f3d0;">No restrictions on cash use • Variable rate: Prime + 2.25% • Interest-Only available 1-5 years</div>
+          <div style="color: #86efac;">No restrictions on cash use • Variable rate: Prime + 2.25% • Interest-Only available 1-5 years</div>
         </div>
       </div>
     </div>
 
     <!-- Program 4 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
         PROGRAM #4
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #16a34a; margin-bottom: 0.5rem; line-height: 1.2;">
           Bridge Loan Program
         </h3>
-        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
+        <p style="color: #374151; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
           Short-term financing for immediate opportunities
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">$100,000</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$100,000</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">9.5%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">9.5%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 75%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LTV RATIO</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 75%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">3-24 Months</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">3-24 Months</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 PAYMENT OPTIONS:</div>
-          <div style="color: #a7f3d0;">Deferred interest with balloon • Interest-only payments • Origination: 2% (50% financing available)</div>
+          <div style="color: #86efac;">Deferred interest with balloon • Interest-only payments • Origination: 2% (50% financing available)</div>
         </div>
       </div>
     </div>
 
     <!-- Program 5 -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
         PROGRAM #5
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #16a34a; margin-bottom: 0.5rem; line-height: 1.2;">
           100% Financing Program
         </h3>
-        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
+        <p style="color: #374151; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
           Zero down payment options for qualified investors
         </p>
         
-        <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24; margin-bottom: 1rem;">
-          <div style="color: #fbbf24; font-weight: 700;">🎯 QUALIFICATION REQUIREMENTS (Meet Any 2):</div>
-          <div style="color: #e5e7eb; font-size: 0.9rem; margin-top: 0.5rem;">
+        <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a; margin-bottom: 1rem;">
+          <div style="color: #16a34a; font-weight: 700;">🎯 QUALIFICATION REQUIREMENTS (Meet Any 2):</div>
+          <div style="color: #4b5563; font-size: 0.9rem; margin-top: 0.5rem;">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.5rem;">
               <div>• Minimum FICO: 680 credit score</div>
               <div>• 3+ transactions in last 5 years</div>
@@ -2595,7 +2595,7 @@ Processing Time: 14-30 days`
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 BENEFITS:</div>
-          <div style="color: #a7f3d0;">No down payment required • Industry-leading financing • Available for qualified investment properties</div>
+          <div style="color: #86efac;">No down payment required • Industry-leading financing • Available for qualified investment properties</div>
         </div>
       </div>
     </div>
@@ -2604,33 +2604,33 @@ Processing Time: 14-30 days`
 </div>
 
 <!-- Payment Structures Section -->
-<div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); margin-bottom: 2rem; border: 2px solid #fbbf24;">
-  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: 1.5rem; color: #fbbf24;">
+<div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); margin-bottom: 2rem; border: 2px solid #16a34a;">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: 1.5rem; color: #16a34a;">
     💎 PAYMENT STRUCTURE OPTIONS
   </h2>
   
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-      <h4 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Fully Amortizing</h4>
-      <ul style="color: #e5e7eb; list-style: none; padding: 0; font-size: 0.9rem;">
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #16a34a;">
+      <h4 style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">Fully Amortizing</h4>
+      <ul style="color: #4b5563; list-style: none; padding: 0; font-size: 0.9rem;">
         <li>✓ Principal and interest payments</li>
         <li>✓ Loan fully paid at maturity</li>
         <li>✓ Builds equity with each payment</li>
         <li>✓ Best for primary residences</li>
       </ul>
     </div>
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-      <h4 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Interest-Only Period</h4>
-      <ul style="color: #e5e7eb; list-style: none; padding: 0; font-size: 0.9rem;">
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #16a34a;">
+      <h4 style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">Interest-Only Period</h4>
+      <ul style="color: #4b5563; list-style: none; padding: 0; font-size: 0.9rem;">
         <li>✓ Interest-only for 1-10 years</li>
         <li>✓ Converts to fully amortizing</li>
         <li>✓ Lower initial payments</li>
         <li>✓ Good for property improvements</li>
       </ul>
     </div>
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-      <h4 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Interest-Only + Balloon</h4>
-      <ul style="color: #e5e7eb; list-style: none; padding: 0; font-size: 0.9rem;">
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #16a34a;">
+      <h4 style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">Interest-Only + Balloon</h4>
+      <ul style="color: #4b5563; list-style: none; padding: 0; font-size: 0.9rem;">
         <li>✓ Interest-only entire term</li>
         <li>✓ Principal due at maturity</li>
         <li>✓ Lowest monthly payments</li>
@@ -2641,11 +2641,11 @@ Processing Time: 14-30 days`
 </div>
 
 <!-- Required Documents -->
-<div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); margin-bottom: 2rem; border: 2px solid #fbbf24;">
-  <h2 style="font-size: clamp(1.25rem, 5vw, 1.5rem); font-weight: 800; text-align: center; margin-bottom: 1rem; color: #fbbf24;">
+<div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); margin-bottom: 2rem; border: 2px solid #16a34a;">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 1.5rem); font-weight: 800; text-align: center; margin-bottom: 1rem; color: #16a34a;">
     📋 REQUIRED DOCUMENTATION
   </h2>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.5rem; color: #e5e7eb;">
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.5rem; color: #4b5563;">
     <div>📄 Government-issued ID</div>
     <div>🏠 Property details (address, type, size)</div>
     <div>📝 Purchase agreement (for purchases)</div>
@@ -2657,31 +2657,31 @@ Processing Time: 14-30 days`
 </div>
 
 <!-- FAQ Section -->
-<div style="background: linear-gradient(135deg, #374151, #4b5563); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem);">
-  <h2 style="font-size: clamp(1.25rem, 5vw, 1.5rem); font-weight: 800; text-align: center; margin-bottom: 1.5rem; color: #fbbf24;">
+<div style="background: linear-gradient(135deg, #f0fdf4, #4b5563); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem);">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 1.5rem); font-weight: 800; text-align: center; margin-bottom: 1.5rem; color: #16a34a;">
     ❓ FREQUENTLY ASKED QUESTIONS
   </h2>
   
   <div style="display: grid; gap: 1rem;">
-    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-      <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Can I close if the property is tenant-occupied?</div>
-      <div style="color: #d1d5db; font-size: 0.9rem;">Yes, but occupancy arrangements may affect eligibility. We'll evaluate lease documentation and tenant payments.</div>
+    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #16a34a;">
+      <div style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">Can I close if the property is tenant-occupied?</div>
+      <div style="color: #374151; font-size: 0.9rem;">Yes, but occupancy arrangements may affect eligibility. We'll evaluate lease documentation and tenant payments.</div>
     </div>
-    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-      <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">How is the origination fee structured?</div>
-      <div style="color: #d1d5db; font-size: 0.9rem;">We provide up to 50% financing (interest charged) unless you prefer to pay at closing.</div>
+    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #16a34a;">
+      <div style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">How is the origination fee structured?</div>
+      <div style="color: #374151; font-size: 0.9rem;">We provide up to 50% financing (interest charged) unless you prefer to pay at closing.</div>
     </div>
-    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-      <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">What about properties under renovation?</div>
-      <div style="color: #d1d5db; font-size: 0.9rem;">We review condition and scope. Renovation properties may require completion reserves or inspections, with potentially lower initial LTV.</div>
+    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #16a34a;">
+      <div style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">What about properties under renovation?</div>
+      <div style="color: #374151; font-size: 0.9rem;">We review condition and scope. Renovation properties may require completion reserves or inspections, with potentially lower initial LTV.</div>
     </div>
-    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-      <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Can I get a loan on inherited property with multiple heirs?</div>
-      <div style="color: #d1d5db; font-size: 0.9rem;">Yes, all owners must join the application and sign at closing. Ongoing probate may require court clearance.</div>
+    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #16a34a;">
+      <div style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">Can I get a loan on inherited property with multiple heirs?</div>
+      <div style="color: #374151; font-size: 0.9rem;">Yes, all owners must join the application and sign at closing. Ongoing probate may require court clearance.</div>
     </div>
-    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-      <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">What if my property doesn't sell within the bridge loan term?</div>
-      <div style="color: #d1d5db; font-size: 0.9rem;">We work closely with you to assess exit strategies and may consider extensions based on circumstances and collateral value.</div>
+    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid #16a34a;">
+      <div style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">What if my property doesn't sell within the bridge loan term?</div>
+      <div style="color: #374151; font-size: 0.9rem;">We work closely with you to assess exit strategies and may consider extensions based on circumstances and collateral value.</div>
     </div>
   </div>
 </div>
@@ -2972,57 +2972,57 @@ Processing Time: 14-30 days`
 <div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: clamp(1rem, 4vw, 2rem); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
 <div style="text-align: center; margin-bottom: clamp(1.5rem, 5vw, 3rem); padding: clamp(1rem, 4vw, 2rem); background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
-  <h1 style="font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3); line-height: 1.2;">
+  <h1 style="font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #16a34a, #15803d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3); line-height: 1.2;">
     BUSINESS ACQUISITION FINANCING
   </h1>
-  <h2 style="font-size: clamp(1rem, 4vw, 1.5rem); font-weight: 600; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.3;">
+  <h2 style="font-size: clamp(1rem, 4vw, 1.5rem); font-weight: 600; color: #16a34a; margin-bottom: 0.5rem; line-height: 1.3;">
     COMMERCIAL CAPITAL & INVESTMENT FINANCE, INC
   </h2>
-  <p style="font-size: clamp(0.9rem, 3vw, 1.1rem); color: #e5e7eb; font-weight: 500; line-height: 1.4;">
+  <p style="font-size: clamp(0.9rem, 3vw, 1.1rem); color: #4b5563; font-weight: 500; line-height: 1.4;">
     Private Lending for Business Acquisitions, Buyouts & Partner Transitions
   </p>
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem, 3vw, 1.5rem); margin-bottom: clamp(1.5rem, 5vw, 3rem);">
-  <div style="background: linear-gradient(135deg, #374151, #4b5563); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(135deg, #f0fdf4, #4b5563); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #16a34a;">
     <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🚫 Traditional Bank Limitations</h3>
-    <ul style="color: #e5e7eb; list-style: none; padding: 0;">
+    <ul style="color: #4b5563; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Heavy reliance on personal credit scores
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Lengthy approval processes
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Rigid collateral requirements
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✗</span>
         Limited flexibility for buyouts
       </li>
     </ul>
   </div>
 
-  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(45deg, #059669, #10b981); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #16a34a;">
     <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🎯 Our Business-First Approach</h3>
-    <ul style="color: #a7f3d0; list-style: none; padding: 0;">
+    <ul style="color: #86efac; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Focus on business income strength
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Fast processing (2-4 weeks)
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         Tiered business-first collateral model
       </li>
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-        <span style="position: absolute; left: 0; color: #fbbf24;">✓</span>
+        <span style="position: absolute; left: 0; color: #16a34a;">✓</span>
         In-house Credit Protection Insurance
       </li>
     </ul>
@@ -3030,107 +3030,107 @@ Processing Time: 14-30 days`
 </div>
 
 <div style="margin-bottom: 3rem;">
-  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #16a34a; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
     FINANCING OPTIONS
   </h2>
 
   <div style="display: grid; gap: 2rem;">
     
     <!-- Program 1: Standard Acquisition Loan -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: clamp(10px, 4vw, 20px); background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">
         PROGRAM #1
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem; line-height: 1.2;">
+        <h3 style="font-size: clamp(1.25rem, 4.5vw, 1.8rem); font-weight: 800; color: #16a34a; margin-bottom: 0.5rem; line-height: 1.2;">
           Standard Acquisition Loan
         </h3>
-        <p style="color: #d1d5db; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
+        <p style="color: #374151; font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: clamp(1rem, 3vw, 1.5rem); font-style: italic; line-height: 1.4;">
           For purchasing or acquiring ownership in an existing business or franchise
         </p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Starting at 7.25%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Starting at 7.25%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">5-10 Years</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">TERM LENGTH</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">5-10 Years</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">LTV / LTC</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 85%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LTV / LTC</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 85%</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">ORIGINATION FEE</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">1.5%</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">ORIGINATION FEE</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">1.5%</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 KEY FEATURES:</div>
-          <div style="color: #a7f3d0;">Up to 50% financing on origination fee available • Fee can be rolled into loan or paid at closing • 1% prepayment penalty if paid within 2 years</div>
+          <div style="color: #86efac;">Up to 50% financing on origination fee available • Fee can be rolled into loan or paid at closing • 1% prepayment penalty if paid within 2 years</div>
         </div>
       </div>
     </div>
 
     <!-- Program 2: Collateral Structure -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         COLLATERAL
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Collateral Structure
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Business-first approach with secondary collateral only when needed
         </p>
         
-        <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 6px; border-left: 3px solid #fbbf24; margin-bottom: 1rem;">
-          <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">🏢 PRIMARY COLLATERAL:</div>
-          <div style="color: #e5e7eb; font-size: 0.95rem;">
+        <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 6px; border-left: 3px solid #16a34a; margin-bottom: 1rem;">
+          <div style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">🏢 PRIMARY COLLATERAL:</div>
+          <div style="color: #4b5563; font-size: 0.95rem;">
             Business assets including equipment, receivables, intellectual property (case-by-case), inventory, and business real estate
           </div>
         </div>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">MAX LTV</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 85%</div>
-            <div style="color: #a7f3d0; font-size: 0.85rem;">Of verified asset value</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MAX LTV</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 85%</div>
+            <div style="color: #86efac; font-size: 0.85rem;">Of verified asset value</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">SECONDARY COLLATERAL</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">SECONDARY COLLATERAL</div>
             <div style="color: white; font-size: 1.1rem; font-weight: 800;">Real Estate</div>
-            <div style="color: #a7f3d0; font-size: 0.85rem;">Only if business assets insufficient</div>
+            <div style="color: #86efac; font-size: 0.85rem;">Only if business assets insufficient</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">PERSONAL GUARANTEE</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">PERSONAL GUARANTEE</div>
             <div style="color: white; font-size: 1.1rem; font-weight: 800;">Required</div>
-            <div style="color: #a7f3d0; font-size: 0.85rem;">For 20%+ ownership holders</div>
+            <div style="color: #86efac; font-size: 0.85rem;">For 20%+ ownership holders</div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Program 3: Credit Protection Insurance -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         OPTIONAL
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Credit Protection Insurance (CPI)
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           In-house protection program for borrower security
         </p>
         
         <div style="background: rgba(16, 185, 129, 0.2); padding: 1.5rem; border-radius: 6px; border-left: 3px solid #10b981; margin-bottom: 1rem;">
-          <div style="color: #a7f3d0; font-weight: 700; margin-bottom: 0.5rem;">📋 INSURED EVENTS MAY INCLUDE:</div>
-          <ul style="color: #e5e7eb; padding-left: 1.5rem; margin: 0;">
+          <div style="color: #86efac; font-weight: 700; margin-bottom: 0.5rem;">📋 INSURED EVENTS MAY INCLUDE:</div>
+          <ul style="color: #4b5563; padding-left: 1.5rem; margin: 0;">
             <li style="margin-bottom: 0.3rem;">Unexpected death, disability, or severe illness of key owner/guarantor</li>
             <li style="margin-bottom: 0.3rem;">Significant business interruption due to natural disaster</li>
             <li style="margin-bottom: 0.3rem;">Other qualifying insured losses impairing loan repayment</li>
@@ -3138,41 +3138,41 @@ Processing Time: 14-30 days`
         </div>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">SAVINGS</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Up to 40% Lower</div>
-            <div style="color: #a7f3d0; font-size: 0.85rem;">Than third-party coverage</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">SAVINGS</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 40% Lower</div>
+            <div style="color: #86efac; font-size: 0.85rem;">Than third-party coverage</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">ENROLLMENT</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">Same-Day</div>
-            <div style="color: #a7f3d0; font-size: 0.85rem;">At loan closing</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">ENROLLMENT</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Same-Day</div>
+            <div style="color: #86efac; font-size: 0.85rem;">At loan closing</div>
           </div>
         </div>
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px;">
           <div style="color: white; font-weight: 700;">📧 CONTACT FOR QUOTE:</div>
-          <div style="color: #a7f3d0;">Insuranceunderwriter@ccif-inc.com</div>
+          <div style="color: #86efac;">Insuranceunderwriter@ccif-inc.com</div>
         </div>
       </div>
     </div>
 
     <!-- Program 4: Documentation & Underwriting -->
-    <div style="background: linear-gradient(135deg, #1f2937, #374151); border-radius: 12px; padding: 2rem; border: 2px solid #fbbf24; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #fbbf24; color: #1f2937; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
+    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
         UNDERWRITING
       </div>
       <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
           Documentation & Underwriting
         </h3>
-        <p style="color: #d1d5db; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
+        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
           Approval based on business ability to repay—not borrower credit score
         </p>
         
-        <div style="background: rgba(251, 191, 36, 0.1); padding: 1.5rem; border-radius: 6px; border-left: 3px solid #fbbf24; margin-bottom: 1rem;">
-          <div style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">📄 REQUIRED DOCUMENTATION:</div>
-          <ul style="color: #e5e7eb; padding-left: 1.5rem; margin: 0;">
+        <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 6px; border-left: 3px solid #16a34a; margin-bottom: 1rem;">
+          <div style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">📄 REQUIRED DOCUMENTATION:</div>
+          <ul style="color: #4b5563; padding-left: 1.5rem; margin: 0;">
             <li style="margin-bottom: 0.3rem;">2 years of business and/or personal tax returns</li>
             <li style="margin-bottom: 0.3rem;">Current Year-to-Date Profit & Loss and Balance Sheet</li>
             <li style="margin-bottom: 0.3rem;">Purchase agreement or letter of intent</li>
@@ -3182,13 +3182,13 @@ Processing Time: 14-30 days`
         </div>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">TARGET DSCR</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">≥ 1.25x</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">TARGET DSCR</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">≥ 1.25x</div>
           </div>
-          <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #fbbf24;">
-            <div style="color: #fbbf24; font-weight: 700; font-size: 0.9rem;">PROCESSING TIME</div>
-            <div style="color: white; font-size: 1.3rem; font-weight: 800;">2-4 Weeks</div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
+            <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">PROCESSING TIME</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">2-4 Weeks</div>
           </div>
         </div>
       </div>
@@ -3199,59 +3199,59 @@ Processing Time: 14-30 days`
 
 <!-- Borrower Advantages Section -->
 <div style="margin-bottom: 2rem;">
-  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #fbbf24; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 800; text-align: center; margin-bottom: clamp(1rem, 4vw, 2rem); color: #16a34a; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.2;">
     BORROWER ADVANTAGES
   </h2>
   
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
     <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; text-align: center;">
       <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💳</div>
-      <h3 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Credit-Flexible</h3>
-      <p style="color: #e5e7eb; font-size: 0.95rem;">Approval based on business strength, not credit history</p>
+      <h3 style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">Credit-Flexible</h3>
+      <p style="color: #4b5563; font-size: 0.95rem;">Approval based on business strength, not credit history</p>
     </div>
     <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; text-align: center;">
       <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⚡</div>
-      <h3 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Fast Processing</h3>
-      <p style="color: #e5e7eb; font-size: 0.95rem;">Funding in as little as 2-4 weeks</p>
+      <h3 style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">Fast Processing</h3>
+      <p style="color: #4b5563; font-size: 0.95rem;">Funding in as little as 2-4 weeks</p>
     </div>
     <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; text-align: center;">
       <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🏦</div>
-      <h3 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">Tiered Collateral</h3>
-      <p style="color: #e5e7eb; font-size: 0.95rem;">Business-first approach, with add-ons only as needed</p>
+      <h3 style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">Tiered Collateral</h3>
+      <p style="color: #4b5563; font-size: 0.95rem;">Business-first approach, with add-ons only as needed</p>
     </div>
     <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; text-align: center;">
       <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🛡️</div>
-      <h3 style="color: #fbbf24; font-weight: 700; margin-bottom: 0.5rem;">In-House Protection</h3>
-      <p style="color: #e5e7eb; font-size: 0.95rem;">Affordable Credit Protection Insurance for security</p>
+      <h3 style="color: #16a34a; font-weight: 700; margin-bottom: 0.5rem;">In-House Protection</h3>
+      <p style="color: #4b5563; font-size: 0.95rem;">Affordable Credit Protection Insurance for security</p>
     </div>
   </div>
 </div>
 
 <!-- Financing Options Summary -->
 <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
-  <h2 style="font-size: clamp(1.25rem, 5vw, 1.8rem); font-weight: 800; text-align: center; margin-bottom: 1.5rem; color: #fbbf24;">
+  <h2 style="font-size: clamp(1.25rem, 5vw, 1.8rem); font-weight: 800; text-align: center; margin-bottom: 1.5rem; color: #16a34a;">
     ALL FINANCING OPTIONS
   </h2>
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #fbbf24;">
-      <div style="color: #fbbf24; font-weight: 700;">Business Acquisition Loan</div>
-      <div style="color: #e5e7eb; font-size: 0.85rem;">Asset or Stock Purchase</div>
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #16a34a;">
+      <div style="color: #16a34a; font-weight: 700;">Business Acquisition Loan</div>
+      <div style="color: #4b5563; font-size: 0.85rem;">Asset or Stock Purchase</div>
     </div>
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #fbbf24;">
-      <div style="color: #fbbf24; font-weight: 700;">Management Buyout</div>
-      <div style="color: #e5e7eb; font-size: 0.85rem;">MBO Financing</div>
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #16a34a;">
+      <div style="color: #16a34a; font-weight: 700;">Management Buyout</div>
+      <div style="color: #4b5563; font-size: 0.85rem;">MBO Financing</div>
     </div>
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #fbbf24;">
-      <div style="color: #fbbf24; font-weight: 700;">Partner Buy-In/Buyout</div>
-      <div style="color: #e5e7eb; font-size: 0.85rem;">Partnership Transitions</div>
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #16a34a;">
+      <div style="color: #16a34a; font-weight: 700;">Partner Buy-In/Buyout</div>
+      <div style="color: #4b5563; font-size: 0.85rem;">Partnership Transitions</div>
     </div>
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #fbbf24;">
-      <div style="color: #fbbf24; font-weight: 700;">Seller Carry Blend</div>
-      <div style="color: #e5e7eb; font-size: 0.85rem;">Hybrid Financing</div>
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #16a34a;">
+      <div style="color: #16a34a; font-weight: 700;">Seller Carry Blend</div>
+      <div style="color: #4b5563; font-size: 0.85rem;">Hybrid Financing</div>
     </div>
-    <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #fbbf24;">
-      <div style="color: #fbbf24; font-weight: 700;">Bridge-to-Acquisition</div>
-      <div style="color: #e5e7eb; font-size: 0.85rem;">Short-Term Financing</div>
+    <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid #16a34a;">
+      <div style="color: #16a34a; font-weight: 700;">Bridge-to-Acquisition</div>
+      <div style="color: #4b5563; font-size: 0.85rem;">Short-Term Financing</div>
     </div>
   </div>
 </div>
