@@ -1359,7 +1359,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         📊 Budget & Planning
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         Budget contingency of up to 5% recommended • Changes to scope must be approved • Line-item cost breakdown required
       </p>
     </div>
