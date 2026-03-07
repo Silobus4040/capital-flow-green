@@ -96,6 +96,6 @@ export const getSecurityHeaders = () => ({
   'X-Frame-Options': 'DENY',
   'X-XSS-Protection': '1; mode=block',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https: data:; media-src 'self' blob: https://kkcdgwbavrpwwdwjifwe.supabase.co;",
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https: wss: data:; media-src 'self' blob: https://kkcdgwbavrpwwdwjifwe.supabase.co;",
   'Permissions-Policy': 'camera=(), geolocation=()'
 });

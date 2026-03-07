@@ -97,6 +97,23 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
 
   const handleVoiceSend = async (audioBlob: Blob, duration: number) => {
     if (!user) return;
+
+    // Optimistic update — show message immediately
+    const tempId = `temp-voice-${Date.now()}`;
+    const tempMsg: Message = {
+      id: tempId,
+      sender_id: user.id,
+      sender_role: 'borrower',
+      message_type: 'voice',
+      content: `Voice message (${duration}s)`,
+      audio_url: null,
+      transcript: null,
+      is_read: false,
+      created_at: new Date().toISOString(),
+      _optimistic: true,
+    };
+    setMessages(prev => [...prev, tempMsg]);
+
     const fileName = `voice-${Date.now()}.webm`;
     const filePath = `${applicationId}/${fileName}`;
     // Explicitly set contentType so Supabase storage serves the correct MIME type
@@ -106,10 +123,11 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
     });
     if (uploadError) {
       toast({ title: 'Error', description: 'Failed to upload voice recording', variant: 'destructive' });
+      setMessages(prev => prev.filter(m => m.id !== tempId));
       return;
     }
     // Store the raw file path, NOT the signed URL
-    await supabase.from('closing_messages').insert({
+    const { error: insertError } = await supabase.from('closing_messages').insert({
       application_id: applicationId,
       sender_id: user.id,
       sender_role: 'borrower',
@@ -117,6 +135,10 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
       audio_url: filePath,
       content: `Voice message (${duration}s)`,
     });
+    if (insertError) {
+      toast({ title: 'Error', description: 'Failed to send voice message', variant: 'destructive' });
+      setMessages(prev => prev.filter(m => m.id !== tempId));
+    }
   };
 
   const playAudio = async (msg: Message) => {

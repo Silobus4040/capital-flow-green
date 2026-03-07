@@ -135,7 +135,26 @@ export default function AdminMessaging() {
 
   const sendAsTTS = async () => {
     if (!newMessage.trim() || !user || !selectedAppId) return;
+    const ttsText = newMessage.trim();
     setTtsLoading(true);
+
+    // Optimistic update — show message immediately while TTS generates
+    const tempId = `temp-tts-${Date.now()}`;
+    const tempMsg: Message = {
+      id: tempId,
+      sender_id: user.id,
+      sender_role: 'admin',
+      message_type: 'voice',
+      content: 'Voice note from Account Executive',
+      audio_url: null,
+      transcript: ttsText,
+      is_read: false,
+      created_at: new Date().toISOString(),
+      _optimistic: true,
+    };
+    setMessages(prev => [...prev, tempMsg]);
+    setNewMessage('');
+
     try {
       // Use raw fetch with proper session auth for Edge Function
       const session = await supabase.auth.getSession();
@@ -150,7 +169,7 @@ export default function AdminMessaging() {
             'Authorization': `Bearer ${accessToken || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
             'apikey': import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
           },
-          body: JSON.stringify({ text: newMessage.trim(), voice: 'george', model: 'eleven_multilingual_v2' }),
+          body: JSON.stringify({ text: ttsText, voice: 'george', model: 'eleven_multilingual_v2' }),
         }
       );
 
@@ -193,13 +212,13 @@ export default function AdminMessaging() {
         sender_role: 'admin',
         message_type: 'voice',
         audio_url: filePath,
-        transcript: newMessage.trim(),
+        transcript: ttsText,
         content: 'Voice note from Account Executive',
       });
-      setNewMessage('');
       toast({ title: 'Voice note sent' });
     } catch (err: any) {
       console.error('TTS error:', err);
+      setMessages(prev => prev.filter(m => m.id !== tempId));
       toast({ title: 'TTS Error', description: err.message, variant: 'destructive' });
     }
     setTtsLoading(false);
