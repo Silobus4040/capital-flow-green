@@ -1088,9 +1088,9 @@ export const loanPrograms: LoanProgram[] = [
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(135deg, #374151, #4b5563); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
     <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🚫 Traditional Rehab Financing Challenges</h3>
-    <ul style="color: #fecaca; list-style: none; padding: 0;">
+    <ul style="color: #e5e7eb; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
         <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
         Limited renovation financing options
