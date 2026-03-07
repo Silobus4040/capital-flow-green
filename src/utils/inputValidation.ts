@@ -4,11 +4,11 @@ import DOMPurify from 'dompurify';
 // Input sanitization utility
 export const sanitizeInput = (input: string): string => {
   // First sanitize with DOMPurify
-  const cleaned = DOMPurify.sanitize(input, { 
-    ALLOWED_TAGS: [], 
-    ALLOWED_ATTR: [] 
+  const cleaned = DOMPurify.sanitize(input, {
+    ALLOWED_TAGS: [],
+    ALLOWED_ATTR: []
   });
-  
+
   // Additional sanitization for specific characters
   return cleaned
     .replace(/[<>\"'&]/g, (match) => {
@@ -70,8 +70,8 @@ interface RateLimitStore {
 const rateLimitStore: RateLimitStore = {};
 
 export const checkRateLimit = (
-  identifier: string, 
-  maxAttempts: number = 5, 
+  identifier: string,
+  maxAttempts: number = 5,
   windowMs: number = 15 * 60 * 1000 // 15 minutes
 ): boolean => {
   const now = Date.now();
@@ -96,6 +96,6 @@ export const getSecurityHeaders = () => ({
   'X-Frame-Options': 'DENY',
   'X-XSS-Protection': '1; mode=block',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:;",
-  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()'
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https: data:; media-src 'self' blob: https://kkcdgwbavrpwwdwjifwe.supabase.co;",
+  'Permissions-Policy': 'camera=(), geolocation=()'
 });
