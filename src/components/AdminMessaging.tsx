@@ -155,24 +155,28 @@ export default function AdminMessaging() {
       );
 
       if (!response.ok) {
-        const errText = await response.text();
-        throw new Error(`TTS failed (${response.status}): ${errText}`);
+        const errData = await response.json().catch(() => ({ error: `HTTP ${response.status}` }));
+        throw new Error(errData.error || `TTS failed (${response.status})`);
       }
 
-      const data = await response.json();
+      // Edge Function now returns raw MP3 bytes (Content-Type: audio/mpeg)
+      const contentType = response.headers.get('Content-Type') || '';
+      let audioBlob: Blob;
 
-      if (data?.error) {
-        throw new Error(data.error);
+      if (contentType.includes('audio/')) {
+        // Direct audio response (new format)
+        audioBlob = await response.blob();
+      } else {
+        // Fallback: JSON with base64 (legacy format)
+        const data = await response.json();
+        if (data?.error) throw new Error(data.error);
+        if (!data?.audioContent) throw new Error('No audio content returned');
+        const dataUrl = `data:audio/mpeg;base64,${data.audioContent}`;
+        const blobResp = await fetch(dataUrl);
+        audioBlob = await blobResp.blob();
       }
 
-      if (!data?.audioContent) {
-        throw new Error('No audio content returned from TTS');
-      }
-
-      // Convert base64 to blob using data URL method for reliability
-      const dataUrl = `data:audio/mpeg;base64,${data.audioContent}`;
-      const blobResponse = await fetch(dataUrl);
-      const audioBlob = await blobResponse.blob();
+      console.log('TTS audio blob:', { size: audioBlob.size, type: audioBlob.type });
 
       const fileName = `tts-${Date.now()}.mp3`;
       const filePath = `${selectedAppId}/${fileName}`;

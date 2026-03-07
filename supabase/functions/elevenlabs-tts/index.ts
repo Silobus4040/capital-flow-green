@@ -1,5 +1,4 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
-import { encode as base64Encode } from 'https://deno.land/std@0.168.0/encoding/base64.ts'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -88,31 +87,25 @@ serve(async (req) => {
       throw new Error(`ElevenLabs API error (${response.status}): ${errorText}`)
     }
 
-    const arrayBuffer = await response.arrayBuffer()
+    const audioBytes = await response.arrayBuffer()
 
-    if (arrayBuffer.byteLength === 0) {
+    if (audioBytes.byteLength === 0) {
       throw new Error('Received empty audio data from ElevenLabs')
     }
 
-    console.log("Audio size:", arrayBuffer.byteLength, "bytes")
+    console.log("Audio size:", audioBytes.byteLength, "bytes — returning raw MP3")
 
-    // Use Deno's proper base64 encoding (no stack overflow)
-    const base64Audio = base64Encode(arrayBuffer)
-
-    console.log("Successfully generated ElevenLabs audio")
-
-    return new Response(
-      JSON.stringify({
-        audioContent: base64Audio,
-        format: 'mp3',
-        size: arrayBuffer.byteLength,
-        voice,
-        model,
-      }),
-      {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      }
-    )
+    // Return raw MP3 bytes directly — no base64 encoding needed
+    // This eliminates the base64 encode/decode chain that was causing corruption
+    return new Response(audioBytes, {
+      headers: {
+        ...corsHeaders,
+        'Content-Type': 'audio/mpeg',
+        'Content-Length': audioBytes.byteLength.toString(),
+        'X-Audio-Voice': voice,
+        'X-Audio-Model': model,
+      },
+    })
   } catch (error: any) {
     console.error('Error in elevenlabs-tts function:', error)
 

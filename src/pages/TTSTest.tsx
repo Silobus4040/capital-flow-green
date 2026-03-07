@@ -49,50 +49,6 @@ export default function TTSTest() {
     };
   }, [audioUrl]);
 
-  // Reliable base64 to blob conversion using fetch API
-  const createAudioBlob = async (base64Data: string): Promise<Blob | null> => {
-    try {
-      console.log('Converting base64 to blob, length:', base64Data.length);
-
-      if (!base64Data || base64Data.length < 100) {
-        throw new Error('Base64 data is too short or empty');
-      }
-
-      // Use fetch API for reliable base64-to-blob conversion
-      // This handles padding and encoding issues that atob() can choke on
-      const dataUrl = `data:audio/mpeg;base64,${base64Data}`;
-      const response = await fetch(dataUrl);
-      const blob = await response.blob();
-
-      console.log('Created blob successfully:', { size: blob.size, type: blob.type });
-
-      if (blob.size < 100) {
-        throw new Error('Generated blob is too small, likely corrupted');
-      }
-
-      return blob;
-
-    } catch (error) {
-      console.error('Blob creation failed:', error);
-
-      // Fallback: manual atob conversion
-      try {
-        console.log('Trying fallback atob method...');
-        const binaryString = atob(base64Data);
-        const bytes = new Uint8Array(binaryString.length);
-        for (let i = 0; i < binaryString.length; i++) {
-          bytes[i] = binaryString.charCodeAt(i);
-        }
-        const blob = new Blob([bytes], { type: 'audio/mpeg' });
-        console.log('Fallback blob created:', { size: blob.size });
-        return blob;
-      } catch (fallbackError) {
-        console.error('Fallback blob creation also failed:', fallbackError);
-        return null;
-      }
-    }
-  };
-
   const generateSpeech = async () => {
     if (!text.trim()) {
       toast({
@@ -109,7 +65,7 @@ export default function TTSTest() {
     try {
       console.log('Requesting ElevenLabs TTS with voice:', selectedVoice);
 
-      // Use raw fetch to get binary audio directly from Edge Function
+      // Get session token for auth
       const session = await supabase.auth.getSession();
       const accessToken = session?.data?.session?.access_token;
 
@@ -131,36 +87,26 @@ export default function TTSTest() {
       );
 
       if (!response.ok) {
-        const errText = await response.text();
-        throw new Error(`TTS failed (${response.status}): ${errText}`);
+        // Error responses are JSON
+        const errData = await response.json().catch(() => ({ error: `HTTP ${response.status}` }));
+        throw new Error(errData.error || `TTS failed (${response.status})`);
       }
 
-      const data = await response.json();
+      // Edge Function now returns raw MP3 bytes directly
+      const contentType = response.headers.get('Content-Type') || '';
 
-      if (data?.error) {
-        throw new Error(data.error);
-      }
+      if (contentType.includes('audio/')) {
+        // Direct audio response (new format)
+        const generatedBlob = await response.blob();
 
-      if (data?.audioContent) {
-        console.log('Received audio data from API:', {
-          contentLength: data.audioContent.length,
-          format: data.format,
-          size: data.size
-        });
-
-        setDebugInfo(`Processing audio: ${data.format}, ${Math.round((data.size || 0) / 1024)}KB`);
-
-        // Create audio blob using the reliable method
-        const generatedBlob = await createAudioBlob(data.audioContent);
-
-        if (!generatedBlob) {
-          throw new Error('Failed to create audio blob from base64 data');
-        }
-
-        console.log('Audio blob created successfully:', {
+        console.log('Received raw audio blob:', {
           size: generatedBlob.size,
           type: generatedBlob.type
         });
+
+        if (generatedBlob.size < 100) {
+          throw new Error('Received audio is too small, likely empty');
+        }
 
         // Clean up previous URL
         if (audioUrl) {
@@ -177,9 +123,27 @@ export default function TTSTest() {
           title: 'Success',
           description: `Audio generated successfully! (${Math.round(generatedBlob.size / 1024)}KB)`
         });
-
       } else {
-        throw new Error('No audio content received from API');
+        // Fallback: JSON response with base64 (legacy format)
+        const data = await response.json();
+        if (data?.error) throw new Error(data.error);
+        if (!data?.audioContent) throw new Error('No audio content received');
+
+        const dataUrl = `data:audio/mpeg;base64,${data.audioContent}`;
+        const blobResp = await fetch(dataUrl);
+        const generatedBlob = await blobResp.blob();
+
+        if (audioUrl) URL.revokeObjectURL(audioUrl);
+
+        const blobUrl = URL.createObjectURL(generatedBlob);
+        setAudioUrl(blobUrl);
+        setAudioBlob(generatedBlob);
+        setDebugInfo(`Audio ready: ${Math.round(generatedBlob.size / 1024)}KB MP3 (legacy)`);
+
+        toast({
+          title: 'Success',
+          description: `Audio generated! (${Math.round(generatedBlob.size / 1024)}KB)`
+        });
       }
 
     } catch (error: any) {
