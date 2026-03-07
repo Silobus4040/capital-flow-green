@@ -137,30 +137,49 @@ export default function AdminMessaging() {
     if (!newMessage.trim() || !user || !selectedAppId) return;
     setTtsLoading(true);
     try {
-      // Use supabase.functions.invoke for proper session-based auth
-      const { data, error: fnError } = await supabase.functions.invoke('elevenlabs-tts', {
-        body: { text: newMessage.trim(), voice: 'george', model: 'eleven_multilingual_v2' },
-      });
+      // Use raw fetch with proper session auth for Edge Function
+      const session = await supabase.auth.getSession();
+      const accessToken = session?.data?.session?.access_token;
 
-      if (fnError) {
-        throw new Error(fnError.message || 'TTS function call failed');
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/elevenlabs-tts`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+            'apikey': import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+          },
+          body: JSON.stringify({ text: newMessage.trim(), voice: 'george', model: 'eleven_multilingual_v2' }),
+        }
+      );
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(`TTS failed (${response.status}): ${errText}`);
+      }
+
+      const data = await response.json();
+
+      if (data?.error) {
+        throw new Error(data.error);
       }
 
       if (!data?.audioContent) {
-        throw new Error(data?.error || 'No audio content returned from TTS');
+        throw new Error('No audio content returned from TTS');
       }
 
-      // Convert base64 to blob for upload
-      const binaryString = atob(data.audioContent);
-      const bytes = new Uint8Array(binaryString.length);
-      for (let i = 0; i < binaryString.length; i++) {
-        bytes[i] = binaryString.charCodeAt(i);
-      }
-      const audioBlob = new Blob([bytes], { type: 'audio/mpeg' });
+      // Convert base64 to blob using data URL method for reliability
+      const dataUrl = `data:audio/mpeg;base64,${data.audioContent}`;
+      const blobResponse = await fetch(dataUrl);
+      const audioBlob = await blobResponse.blob();
 
       const fileName = `tts-${Date.now()}.mp3`;
       const filePath = `${selectedAppId}/${fileName}`;
-      const { error: upErr } = await supabase.storage.from('closing-files').upload(filePath, audioBlob);
+      const { error: upErr } = await supabase.storage.from('closing-files').upload(filePath, audioBlob, {
+        contentType: 'audio/mpeg',
+        cacheControl: '3600',
+      });
       if (upErr) throw upErr;
 
       // Store raw file path, NOT signed URL
@@ -210,25 +229,30 @@ export default function AdminMessaging() {
       }
     }
 
+    console.log('Playing audio from URL:', url);
+
     if (audioRef.current) audioRef.current.pause();
-    const audio = new Audio();
-    audio.crossOrigin = 'anonymous';
-    audio.src = url;
+    const audio = new Audio(url);
     audioRef.current = audio;
     setPlayingId(msg.id);
     audio.onended = () => setPlayingId(null);
-    audio.onerror = (e) => {
-      console.error('Audio playback error:', e, 'URL:', url);
+    audio.onerror = () => {
+      const mediaError = audio.error;
+      console.error('Audio playback error:', {
+        code: mediaError?.code,
+        message: mediaError?.message,
+        url: url.substring(0, 100),
+      });
       setPlayingId(null);
-      toast({ title: 'Playback Error', description: 'Could not play audio file', variant: 'destructive' });
+      toast({ title: 'Playback Error', description: `Could not play audio: ${mediaError?.message || 'unknown error'}`, variant: 'destructive' });
     };
 
     try {
       await audio.play();
-    } catch (err) {
+    } catch (err: any) {
       console.error('audio.play() rejected:', err);
       setPlayingId(null);
-      toast({ title: 'Playback Error', description: 'Browser blocked audio playback. Try clicking again.', variant: 'destructive' });
+      toast({ title: 'Playback Error', description: err.message || 'Browser blocked audio playback', variant: 'destructive' });
     }
   };
 
@@ -291,8 +315,8 @@ export default function AdminMessaging() {
                     <div key={msg.id} className={`flex ${isAdmin ? 'justify-end' : 'justify-start'}`}>
                       <div className="max-w-[70%] space-y-1">
                         <div className={`rounded-2xl px-4 py-2.5 ${isAdmin
-                            ? 'bg-primary text-primary-foreground rounded-br-md'
-                            : 'bg-card border border-border rounded-bl-md'
+                          ? 'bg-primary text-primary-foreground rounded-br-md'
+                          : 'bg-card border border-border rounded-bl-md'
                           }`}>
                           {msg.content && <p className="text-sm leading-relaxed">{msg.content}</p>}
                           {msg.audio_url && (

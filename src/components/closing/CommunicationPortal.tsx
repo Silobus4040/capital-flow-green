@@ -99,7 +99,11 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
     if (!user) return;
     const fileName = `voice-${Date.now()}.webm`;
     const filePath = `${applicationId}/${fileName}`;
-    const { error: uploadError } = await supabase.storage.from('closing-files').upload(filePath, audioBlob);
+    // Explicitly set contentType so Supabase storage serves the correct MIME type
+    const { error: uploadError } = await supabase.storage.from('closing-files').upload(filePath, audioBlob, {
+      contentType: 'audio/webm',
+      cacheControl: '3600',
+    });
     if (uploadError) {
       toast({ title: 'Error', description: 'Failed to upload voice recording', variant: 'destructive' });
       return;
@@ -143,25 +147,30 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
       }
     }
 
+    console.log('Playing audio from URL:', url);
+
     if (audioRef.current) audioRef.current.pause();
-    const audio = new Audio();
-    audio.crossOrigin = 'anonymous';
-    audio.src = url;
+    const audio = new Audio(url);
     audioRef.current = audio;
     setPlayingId(msg.id);
     audio.onended = () => setPlayingId(null);
-    audio.onerror = (e) => {
-      console.error('Audio playback error:', e, 'URL:', url);
+    audio.onerror = () => {
+      const mediaError = audio.error;
+      console.error('Audio playback error:', {
+        code: mediaError?.code,
+        message: mediaError?.message,
+        url: url.substring(0, 100),
+      });
       setPlayingId(null);
-      toast({ title: 'Playback Error', description: 'Could not play audio file', variant: 'destructive' });
+      toast({ title: 'Playback Error', description: `Could not play audio: ${mediaError?.message || 'unknown error'}`, variant: 'destructive' });
     };
 
     try {
       await audio.play();
-    } catch (err) {
+    } catch (err: any) {
       console.error('audio.play() rejected:', err);
       setPlayingId(null);
-      toast({ title: 'Playback Error', description: 'Browser blocked audio playback. Try clicking again.', variant: 'destructive' });
+      toast({ title: 'Playback Error', description: err.message || 'Browser blocked audio playback', variant: 'destructive' });
     }
   };
 
@@ -199,8 +208,8 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
                 <div key={msg.id} className={`flex ${isOwn ? 'justify-end' : 'justify-start'}`}>
                   <div className="max-w-[70%] space-y-1">
                     <div className={`rounded-2xl px-4 py-2.5 ${isOwn
-                        ? 'bg-primary text-primary-foreground rounded-br-md'
-                        : 'bg-card border border-border rounded-bl-md'
+                      ? 'bg-primary text-primary-foreground rounded-br-md'
+                      : 'bg-card border border-border rounded-bl-md'
                       }`}>
                       {msg.content && <p className="text-sm leading-relaxed">{msg.content}</p>}
                       {msg.audio_url && (

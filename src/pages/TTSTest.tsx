@@ -33,9 +33,9 @@ export default function TTSTest() {
   const [audioLoading, setAudioLoading] = useState(false);
   const [debugInfo, setDebugInfo] = useState<string>('');
   const { toast } = useToast();
-  
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  
+
   // Cleanup function
   useEffect(() => {
     return () => {
@@ -49,42 +49,42 @@ export default function TTSTest() {
     };
   }, [audioUrl]);
 
-  // Simplified and reliable base64 to blob conversion
-  const createAudioBlob = (base64Data: string): Blob | null => {
+  // Reliable base64 to blob conversion using fetch API
+  const createAudioBlob = async (base64Data: string): Promise<Blob | null> => {
     try {
       console.log('Converting base64 to blob, length:', base64Data.length);
-      
-      // Simple base64 validation
+
       if (!base64Data || base64Data.length < 100) {
         throw new Error('Base64 data is too short or empty');
       }
-      
-      // Convert base64 to binary string
-      const binaryString = atob(base64Data);
-      
-      // Convert to Uint8Array
-      const bytes = new Uint8Array(binaryString.length);
-      for (let i = 0; i < binaryString.length; i++) {
-        bytes[i] = binaryString.charCodeAt(i);
-      }
-      
-      console.log('Successfully converted to binary, size:', bytes.length, 'bytes');
-      
-      // Create blob with proper MIME type
-      const blob = new Blob([bytes], { type: 'audio/mpeg' });
-      
+
+      // Use fetch API for reliable base64-to-blob conversion
+      // This handles padding and encoding issues that atob() can choke on
+      const dataUrl = `data:audio/mpeg;base64,${base64Data}`;
+      const response = await fetch(dataUrl);
+      const blob = await response.blob();
+
       console.log('Created blob successfully:', { size: blob.size, type: blob.type });
+
+      if (blob.size < 100) {
+        throw new Error('Generated blob is too small, likely corrupted');
+      }
+
       return blob;
-        
+
     } catch (error) {
       console.error('Blob creation failed:', error);
-      
-      // Fallback: try creating blob directly from base64
+
+      // Fallback: manual atob conversion
       try {
-        console.log('Trying fallback blob creation method...');
+        console.log('Trying fallback atob method...');
         const binaryString = atob(base64Data);
-        const blob = new Blob([binaryString], { type: 'audio/mpeg' });
-        console.log('Fallback blob created successfully:', { size: blob.size });
+        const bytes = new Uint8Array(binaryString.length);
+        for (let i = 0; i < binaryString.length; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+        }
+        const blob = new Blob([bytes], { type: 'audio/mpeg' });
+        console.log('Fallback blob created:', { size: blob.size });
         return blob;
       } catch (fallbackError) {
         console.error('Fallback blob creation also failed:', fallbackError);
@@ -105,19 +105,41 @@ export default function TTSTest() {
 
     setLoading(true);
     setDebugInfo('Generating audio...');
-    
+
     try {
       console.log('Requesting ElevenLabs TTS with voice:', selectedVoice);
-      
-      const { data, error } = await supabase.functions.invoke('elevenlabs-tts', {
-        body: {
-          text: text.trim(),
-          voice: selectedVoice,
-          model: 'eleven_multilingual_v2'
-        }
-      });
 
-      if (error) throw error;
+      // Use raw fetch to get binary audio directly from Edge Function
+      const session = await supabase.auth.getSession();
+      const accessToken = session?.data?.session?.access_token;
+
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/elevenlabs-tts`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+            'apikey': import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+          },
+          body: JSON.stringify({
+            text: text.trim(),
+            voice: selectedVoice,
+            model: 'eleven_multilingual_v2'
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(`TTS failed (${response.status}): ${errText}`);
+      }
+
+      const data = await response.json();
+
+      if (data?.error) {
+        throw new Error(data.error);
+      }
 
       if (data?.audioContent) {
         console.log('Received audio data from API:', {
@@ -125,43 +147,41 @@ export default function TTSTest() {
           format: data.format,
           size: data.size
         });
-        
+
         setDebugInfo(`Processing audio: ${data.format}, ${Math.round((data.size || 0) / 1024)}KB`);
-        
-        // Create audio blob
-        const audioBlob = createAudioBlob(data.audioContent);
-        
-        if (!audioBlob) {
-          throw new Error('Failed to create audio blob');
+
+        // Create audio blob using the reliable method
+        const generatedBlob = await createAudioBlob(data.audioContent);
+
+        if (!generatedBlob) {
+          throw new Error('Failed to create audio blob from base64 data');
         }
-        
+
         console.log('Audio blob created successfully:', {
-          size: audioBlob.size,
-          type: audioBlob.type
+          size: generatedBlob.size,
+          type: generatedBlob.type
         });
-        
+
         // Clean up previous URL
         if (audioUrl) {
           URL.revokeObjectURL(audioUrl);
         }
-        
-        // Create blob URL directly without pre-testing
-        const blobUrl = URL.createObjectURL(audioBlob);
-        
-        // Set audio immediately
+
+        const blobUrl = URL.createObjectURL(generatedBlob);
+
         setAudioUrl(blobUrl);
-        setAudioBlob(audioBlob);
-        setDebugInfo(`Audio ready: ${Math.round(audioBlob.size / 1024)}KB MP3`);
-        
+        setAudioBlob(generatedBlob);
+        setDebugInfo(`Audio ready: ${Math.round(generatedBlob.size / 1024)}KB MP3`);
+
         toast({
           title: 'Success',
-          description: `Audio generated successfully! (${Math.round(audioBlob.size / 1024)}KB)`
+          description: `Audio generated successfully! (${Math.round(generatedBlob.size / 1024)}KB)`
         });
-        
+
       } else {
         throw new Error('No audio content received from API');
       }
-      
+
     } catch (error: any) {
       console.error('TTS Error:', error);
       setDebugInfo(`Error: ${error.message}`);
@@ -224,18 +244,18 @@ export default function TTSTest() {
         error: (e: Event) => {
           const target = e.target as HTMLAudioElement;
           const error = target.error;
-          
+
           const errorMessages = {
             1: 'MEDIA_ERR_ABORTED - Playback aborted',
             2: 'MEDIA_ERR_NETWORK - Network error',
             3: 'MEDIA_ERR_DECODE - Decoding error',
             4: 'MEDIA_ERR_SRC_NOT_SUPPORTED - Format not supported'
           };
-          
-          const errorMsg = error ? 
-            errorMessages[error.code as keyof typeof errorMessages] || `Error code ${error.code}` : 
+
+          const errorMsg = error ?
+            errorMessages[error.code as keyof typeof errorMessages] || `Error code ${error.code}` :
             'Unknown error';
-            
+
           console.error('Audio playback error:', errorMsg, {
             code: error?.code,
             message: error?.message,
@@ -243,11 +263,11 @@ export default function TTSTest() {
             readyState: target.readyState,
             src: target.src.substring(0, 100) + '...'
           });
-          
+
           setIsPlaying(false);
           setAudioLoading(false);
           setDebugInfo(`Playback error: ${errorMsg}`);
-          
+
           toast({
             title: 'Playback Error',
             description: errorMsg,
@@ -263,7 +283,7 @@ export default function TTSTest() {
 
       // Set source and attempt to play
       audio.src = audioUrl;
-      
+
       try {
         await audio.play();
         console.log('Audio playback started successfully');
@@ -276,7 +296,7 @@ export default function TTSTest() {
       console.error('Error in playAudio:', error);
       setIsPlaying(false);
       setAudioLoading(false);
-      
+
       toast({
         title: 'Playback Error',
         description: error instanceof Error ? error.message : 'Failed to play audio',
@@ -312,7 +332,7 @@ export default function TTSTest() {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      
+
       toast({
         title: 'Success',
         description: 'Audio downloaded successfully',
@@ -409,8 +429,8 @@ export default function TTSTest() {
             )}
 
             {/* Generate Button */}
-            <Button 
-              onClick={generateSpeech} 
+            <Button
+              onClick={generateSpeech}
               disabled={loading || !text.trim()}
               size="lg"
               className="w-full"
@@ -437,8 +457,8 @@ export default function TTSTest() {
                     <p className="text-sm text-muted-foreground">Voice: {selectedVoice}</p>
                   </div>
                   <div className="flex space-x-2">
-                    <Button 
-                      onClick={playAudio} 
+                    <Button
+                      onClick={playAudio}
                       disabled={isPlaying || audioLoading}
                       variant="default"
                       size="sm"
@@ -450,7 +470,7 @@ export default function TTSTest() {
                       )}
                       {audioLoading ? 'Loading...' : 'Play'}
                     </Button>
-                    <Button 
+                    <Button
                       onClick={stopAudio}
                       disabled={!isPlaying}
                       variant="outline"
@@ -459,7 +479,7 @@ export default function TTSTest() {
                       <VolumeX className="h-4 w-4 mr-2" />
                       Stop
                     </Button>
-                    <Button 
+                    <Button
                       onClick={downloadAudio}
                       variant="outline"
                       size="sm"
@@ -469,13 +489,13 @@ export default function TTSTest() {
                     </Button>
                   </div>
                 </div>
-                
+
                 {/* Native HTML5 Audio Player for testing */}
                 <div className="space-y-2">
                   <p className="text-xs text-muted-foreground">HTML5 Audio Player (for testing):</p>
-                  <audio 
-                    controls 
-                    src={audioUrl} 
+                  <audio
+                    controls
+                    src={audioUrl}
                     className="w-full"
                     onError={(e) => {
                       const target = e.currentTarget;
