@@ -128,16 +128,14 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
     // Always generate a fresh signed URL from the raw path
     let url = storedPath;
     if (!storedPath.startsWith('http')) {
-      // It's a raw storage path
-      const { data } = await supabase.storage.from('closing-files').createSignedUrl(storedPath, 3600);
-      if (data?.signedUrl) {
-        url = data.signedUrl;
-      } else {
+      const { data, error } = await supabase.storage.from('closing-files').createSignedUrl(storedPath, 3600);
+      if (error || !data?.signedUrl) {
+        console.error('Signed URL error:', error);
         toast({ title: 'Playback Error', description: 'Could not generate audio URL', variant: 'destructive' });
         return;
       }
+      url = data.signedUrl;
     } else if (storedPath.includes('closing-files')) {
-      // Legacy: try to extract path from old signed URL
       const pathMatch = storedPath.match(/closing-files\/(.+?)(\?|$)/);
       if (pathMatch) {
         const { data } = await supabase.storage.from('closing-files').createSignedUrl(decodeURIComponent(pathMatch[1]), 3600);
@@ -146,15 +144,25 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
     }
 
     if (audioRef.current) audioRef.current.pause();
-    const audio = new Audio(url);
+    const audio = new Audio();
+    audio.crossOrigin = 'anonymous';
+    audio.src = url;
     audioRef.current = audio;
     setPlayingId(msg.id);
     audio.onended = () => setPlayingId(null);
-    audio.onerror = () => {
+    audio.onerror = (e) => {
+      console.error('Audio playback error:', e, 'URL:', url);
       setPlayingId(null);
-      toast({ title: 'Playback Error', description: 'Could not play audio', variant: 'destructive' });
+      toast({ title: 'Playback Error', description: 'Could not play audio file', variant: 'destructive' });
     };
-    audio.play();
+
+    try {
+      await audio.play();
+    } catch (err) {
+      console.error('audio.play() rejected:', err);
+      setPlayingId(null);
+      toast({ title: 'Playback Error', description: 'Browser blocked audio playback. Try clicking again.', variant: 'destructive' });
+    }
   };
 
   const formatTime = (dateStr: string) => {
@@ -190,11 +198,10 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
               return (
                 <div key={msg.id} className={`flex ${isOwn ? 'justify-end' : 'justify-start'}`}>
                   <div className="max-w-[70%] space-y-1">
-                    <div className={`rounded-2xl px-4 py-2.5 ${
-                      isOwn
+                    <div className={`rounded-2xl px-4 py-2.5 ${isOwn
                         ? 'bg-primary text-primary-foreground rounded-br-md'
                         : 'bg-card border border-border rounded-bl-md'
-                    }`}>
+                      }`}>
                       {msg.content && <p className="text-sm leading-relaxed">{msg.content}</p>}
                       {msg.audio_url && (
                         <button

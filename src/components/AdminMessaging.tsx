@@ -137,23 +137,18 @@ export default function AdminMessaging() {
     if (!newMessage.trim() || !user || !selectedAppId) return;
     setTtsLoading(true);
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/elevenlabs-tts`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-          },
-          body: JSON.stringify({ text: newMessage.trim(), voice: 'george', model: 'eleven_multilingual_v2' }),
-        }
-      );
-      if (!response.ok) {
-        const errData = await response.json().catch(() => ({}));
-        throw new Error(errData.error || `TTS failed (${response.status})`);
+      // Use supabase.functions.invoke for proper session-based auth
+      const { data, error: fnError } = await supabase.functions.invoke('elevenlabs-tts', {
+        body: { text: newMessage.trim(), voice: 'george', model: 'eleven_multilingual_v2' },
+      });
+
+      if (fnError) {
+        throw new Error(fnError.message || 'TTS function call failed');
       }
-      const data = await response.json();
+
+      if (!data?.audioContent) {
+        throw new Error(data?.error || 'No audio content returned from TTS');
+      }
 
       // Convert base64 to blob for upload
       const binaryString = atob(data.audioContent);
@@ -181,6 +176,7 @@ export default function AdminMessaging() {
       setNewMessage('');
       toast({ title: 'Voice note sent' });
     } catch (err: any) {
+      console.error('TTS error:', err);
       toast({ title: 'TTS Error', description: err.message, variant: 'destructive' });
     }
     setTtsLoading(false);
@@ -199,13 +195,13 @@ export default function AdminMessaging() {
     // Always generate a fresh signed URL
     let url = storedPath;
     if (!storedPath.startsWith('http')) {
-      const { data } = await supabase.storage.from('closing-files').createSignedUrl(storedPath, 3600);
-      if (data?.signedUrl) {
-        url = data.signedUrl;
-      } else {
+      const { data, error } = await supabase.storage.from('closing-files').createSignedUrl(storedPath, 3600);
+      if (error || !data?.signedUrl) {
+        console.error('Signed URL error:', error);
         toast({ title: 'Playback Error', description: 'Could not generate audio URL', variant: 'destructive' });
         return;
       }
+      url = data.signedUrl;
     } else if (storedPath.includes('closing-files')) {
       const pathMatch = storedPath.match(/closing-files\/(.+?)(\?|$)/);
       if (pathMatch) {
@@ -215,15 +211,25 @@ export default function AdminMessaging() {
     }
 
     if (audioRef.current) audioRef.current.pause();
-    const audio = new Audio(url);
+    const audio = new Audio();
+    audio.crossOrigin = 'anonymous';
+    audio.src = url;
     audioRef.current = audio;
     setPlayingId(msg.id);
     audio.onended = () => setPlayingId(null);
-    audio.onerror = () => {
+    audio.onerror = (e) => {
+      console.error('Audio playback error:', e, 'URL:', url);
       setPlayingId(null);
-      toast({ title: 'Playback Error', description: 'Could not play audio', variant: 'destructive' });
+      toast({ title: 'Playback Error', description: 'Could not play audio file', variant: 'destructive' });
     };
-    audio.play();
+
+    try {
+      await audio.play();
+    } catch (err) {
+      console.error('audio.play() rejected:', err);
+      setPlayingId(null);
+      toast({ title: 'Playback Error', description: 'Browser blocked audio playback. Try clicking again.', variant: 'destructive' });
+    }
   };
 
   const formatTime = (dateStr: string) => {
@@ -284,11 +290,10 @@ export default function AdminMessaging() {
                   return (
                     <div key={msg.id} className={`flex ${isAdmin ? 'justify-end' : 'justify-start'}`}>
                       <div className="max-w-[70%] space-y-1">
-                        <div className={`rounded-2xl px-4 py-2.5 ${
-                          isAdmin
+                        <div className={`rounded-2xl px-4 py-2.5 ${isAdmin
                             ? 'bg-primary text-primary-foreground rounded-br-md'
                             : 'bg-card border border-border rounded-bl-md'
-                        }`}>
+                          }`}>
                           {msg.content && <p className="text-sm leading-relaxed">{msg.content}</p>}
                           {msg.audio_url && (
                             <button
