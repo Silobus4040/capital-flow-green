@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Upload, X, FileText, Check, AlertCircle } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import ApplicantLayout from "@/components/ApplicantLayout";
+
 
 interface DocumentUpload {
   id: string;
