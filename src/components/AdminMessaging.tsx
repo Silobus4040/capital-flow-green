@@ -146,7 +146,7 @@ export default function AdminMessaging() {
       sender_id: user.id,
       sender_role: 'admin',
       message_type: 'voice',
-      content: 'Voice note from Account Executive',
+      content: null,
       audio_url: null,
       transcript: ttsText,
       is_read: false,
@@ -214,7 +214,7 @@ export default function AdminMessaging() {
         message_type: 'voice',
         audio_url: filePath,
         transcript: ttsText,
-        content: 'Voice note from Account Executive',
+        content: null,
       });
       toast({ title: 'Voice note sent' });
     } catch (err: any) {
@@ -372,8 +372,8 @@ export default function AdminMessaging() {
                                 {playingId === msg.id ? 'Playing...' : 'Play Audio'}
                               </button>
                             )}
-                            {isVoice && !msg.audio_url && msg.content && (
-                              <p className="text-sm leading-relaxed opacity-70">{msg.content}</p>
+                            {isVoice && !msg.audio_url && (
+                              <p className={`text-sm leading-relaxed ${isAdmin ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>Sending voice note…</p>
                             )}
                           </div>
                           <div className={`flex items-center gap-1 px-1 ${isAdmin ? 'justify-end' : 'justify-start'}`}>
