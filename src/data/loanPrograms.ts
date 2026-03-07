@@ -616,7 +616,7 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
-<div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+<div style="background: linear-gradient(135deg, #374151, #4b5563); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
   <h2 style="color: white; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
     ❓ FREQUENTLY ASKED QUESTIONS
   </h2>
