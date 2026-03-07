@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,7 +24,7 @@ All colors MUST be HSL.
     --popover-foreground: 265 4% 12.9%;
 
     /* Green primary scheme for CRE lending */
-    --primary: 142 71% 45%;
+    --primary: 144 61.165% 20.1961%;
     --primary-foreground: 0 0% 100%;
     --primary-dark: 142 84% 28%;
     --primary-light: 142 65% 55%;
@@ -119,8 +122,8 @@ All colors MUST be HSL.
     --popover: 266 4% 20.8%;
     --popover-foreground: 248 0.3% 98.4%;
 
-    --primary: 142 71% 45%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 256 1.3% 92.9%;
+    --primary-foreground: 266 4% 20.8%;
 
     --secondary: 260 4.1% 27.9%;
     --secondary-foreground: 248 0.3% 98.4%;
@@ -131,21 +134,21 @@ All colors MUST be HSL.
     --accent: 260 4.1% 27.9%;
     --accent-foreground: 248 0.3% 98.4%;
 
-    --destructive: 0 84% 50%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 22 19.1% 70.4%;
+    --destructive-foreground: 248 0.3% 98.4%;
 
     --border: 0 0% 100% / 10%;
     --input: 0 0% 100% / 15%;
-    --ring: 142 71% 45%;
+    --ring: 264 2.7% 55.1%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 248 0.3% 98.4%;
-    --sidebar-primary: 142 71% 45%;
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-primary: 264 24.3% 48.8%;
+    --sidebar-primary-foreground: 248 0.3% 98.4%;
     --sidebar-accent: 260 4.1% 27.9%;
     --sidebar-accent-foreground: 248 0.3% 98.4%;
     --sidebar-border: 0 0% 100% / 10%;
-    --sidebar-ring: 142 71% 45%;
-    --chart-1: 142 71% 45%;
+    --sidebar-ring: 264 2.7% 55.1%;
+    --chart-1: 264 24.3% 48.8%;
     --chart-2: 162 17% 69.6%;
     --chart-3: 70 18.8% 76.9%;
     --chart-4: 304 26.5% 62.7%;
