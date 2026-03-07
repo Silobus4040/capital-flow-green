@@ -1350,7 +1350,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         🔍 Inspection Process
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         Progress inspections required before each draw • Maximum renovation period based on loan term • Final inspection required at project completion
       </p>
     </div>
