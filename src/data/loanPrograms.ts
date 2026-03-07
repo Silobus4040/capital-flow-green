@@ -653,7 +653,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: How do your rates compare to banks?
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> Our rates are competitive with banks, but we approve deals banks reject. Speed, flexibility, and approval certainty often save you more money than a slightly lower rate elsewhere.
       </p>
     </div>
