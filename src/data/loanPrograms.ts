@@ -635,7 +635,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: Do you really offer 100% financing with no money down?
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> Yes! For qualified borrowers meeting our criteria, we provide true 100% financing. This includes purchase price plus reasonable closing costs.
       </p>
     </div>
