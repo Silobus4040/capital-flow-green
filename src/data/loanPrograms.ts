@@ -2984,9 +2984,9 @@ Processing Time: 14-30 days`
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem, 3vw, 1.5rem); margin-bottom: clamp(1.5rem, 5vw, 3rem);">
-  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(135deg, #374151, #4b5563); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
     <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🚫 Traditional Bank Limitations</h3>
-    <ul style="color: #fecaca; list-style: none; padding: 0;">
+    <ul style="color: #e5e7eb; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
         <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
         Heavy reliance on personal credit scores
