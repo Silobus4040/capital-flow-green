@@ -300,9 +300,9 @@ export const loanPrograms: LoanProgram[] = [
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem, 3vw, 1.5rem); margin-bottom: clamp(1.5rem, 5vw, 3rem);">
-  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(135deg, #374151, #4b5563); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
     <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🚫 Market Challenges We Eliminate</h3>
-    <ul style="color: #fecaca; list-style: none; padding: 0;">
+    <ul style="color: #e5e7eb; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
         <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
         Traditional bank rejections due to credit requirements
@@ -616,7 +616,7 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
-<div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+<div style="background: linear-gradient(135deg, #374151, #4b5563); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
   <h2 style="color: white; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
     ❓ FREQUENTLY ASKED QUESTIONS
   </h2>
@@ -626,7 +626,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: How fast can I actually get approved and funded?
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> Pre-approval in 48-72 hours, full approval in 15-30 days, funding immediately after closing. We've closed deals in as little as 10 days for urgent situations.
       </p>
     </div>
@@ -635,7 +635,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: Do you really offer 100% financing with no money down?
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> Yes! For qualified borrowers meeting our criteria, we provide true 100% financing. This includes purchase price plus reasonable closing costs.
       </p>
     </div>
@@ -644,7 +644,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: What if I have credit issues or past bankruptcies?
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> We focus on the asset, not just credit. Many of our successful borrowers had credit challenges. We evaluate the total picture - property strength, experience, and ability to service debt.
       </p>
     </div>
@@ -653,7 +653,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: How do your rates compare to banks?
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> Our rates are competitive with banks, but we approve deals banks reject. Speed, flexibility, and approval certainty often save you more money than a slightly lower rate elsewhere.
       </p>
     </div>
@@ -662,7 +662,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: Can I finance multiple properties at once?
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> Absolutely! We offer portfolio financing, blanket loans, and cross-collateralization. Many clients finance entire portfolios in single transactions.
       </p>
     </div>
@@ -671,7 +671,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         Q: What about environmental issues or special property types?
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         <strong>A:</strong> We're experts in complex deals. Environmental issues can often be resolved with remediation plans or insurance. We finance cannabis, car washes, gas stations, and other specialty properties others avoid.
       </p>
     </div>
@@ -732,9 +732,9 @@ export const loanPrograms: LoanProgram[] = [
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
+  <div style="background: linear-gradient(135deg, #374151, #4b5563); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
     <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🚫 Traditional Lending Obstacles We Eliminate</h3>
-    <ul style="color: #fecaca; list-style: none; padding: 0;">
+    <ul style="color: #e5e7eb; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
         <span style="position: absolute; left: 0; color: #3b82f6;">✗</span>
         Personal income verification requirements
@@ -1073,7 +1073,7 @@ export const loanPrograms: LoanProgram[] = [
     interestRate: "Starting at 6.49%",
     minimumLoanAmount: "$500,000.00",
     description: "Financing for property renovation and rehabilitation projects • Fix-and-flip • Fix-and-hold • 100% rehab financing available.",
-    terms: `<div style="background: linear-gradient(135deg, #7c2d12 0%, #ea580c 50%, #f97316 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    terms: `<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
 <div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 8px; backdrop-filter: blur(10px);">
   <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">
@@ -1088,9 +1088,9 @@ export const loanPrograms: LoanProgram[] = [
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(135deg, #374151, #4b5563); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #fbbf24;">
     <h3 style="color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">🚫 Traditional Rehab Financing Challenges</h3>
-    <ul style="color: #fecaca; list-style: none; padding: 0;">
+    <ul style="color: #e5e7eb; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
         <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
         Limited renovation financing options
@@ -1331,7 +1331,7 @@ export const loanPrograms: LoanProgram[] = [
   </div>
 </div>
 
-<div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+<div style="background: linear-gradient(135deg, #374151, #4b5563); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
   <h2 style="color: white; font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">
     🔧 RENOVATION REQUIREMENTS
   </h2>
@@ -1341,7 +1341,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         📋 Documentation Requirements
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         Detailed scope of work required for all projects • Licensed contractors required for major work • All renovations must comply with local building codes
       </p>
     </div>
@@ -1350,7 +1350,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         🔍 Inspection Process
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         Progress inspections required before each draw • Maximum renovation period based on loan term • Final inspection required at project completion
       </p>
     </div>
@@ -1359,7 +1359,7 @@ export const loanPrograms: LoanProgram[] = [
       <h3 style="color: #fbbf24; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">
         📊 Budget & Planning
       </h3>
-      <p style="color: #fecaca; font-size: 1rem; line-height: 1.6;">
+      <p style="color: #e5e7eb; font-size: 1rem; line-height: 1.6;">
         Budget contingency of up to 5% recommended • Changes to scope must be approved • Line-item cost breakdown required
       </p>
     </div>
@@ -2984,9 +2984,9 @@ Processing Time: 14-30 days`
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem, 3vw, 1.5rem); margin-bottom: clamp(1.5rem, 5vw, 3rem);">
-  <div style="background: linear-gradient(45deg, #dc2626, #ef4444); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
+  <div style="background: linear-gradient(135deg, #374151, #4b5563); padding: clamp(1rem, 3vw, 1.5rem); border-radius: 8px; border-left: 4px solid #fbbf24;">
     <h3 style="color: white; font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">🚫 Traditional Bank Limitations</h3>
-    <ul style="color: #fecaca; list-style: none; padding: 0;">
+    <ul style="color: #e5e7eb; list-style: none; padding: 0;">
       <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
         <span style="position: absolute; left: 0; color: #fbbf24;">✗</span>
         Heavy reliance on personal credit scores
