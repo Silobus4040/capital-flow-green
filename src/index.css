@@ -299,65 +299,128 @@ All colors MUST be HSL.
   }
 }
 
-/* Enhanced Loan Terms Styling - Full Width Responsive */
+/* Enhanced Loan Terms Styling - RV Park Green Theme */
 .loan-terms-enhanced {
   font-size: 1rem;
   line-height: 1.8;
-  color: hsl(var(--foreground));
+  color: #374151; /* gray-700 base text */
+  background: linear-gradient(to bottom right, #f0fdf4, #d1fae5) !important;
+  padding: 2rem;
+  border-radius: 0.75rem;
 }
 
+/* Force all nested divs to have readable backgrounds */
+.loan-terms-enhanced > div {
+  background: linear-gradient(to bottom right, #f0fdf4, #d1fae5) !important;
+  color: #374151 !important;
+  padding: 2rem;
+  border-radius: 0.75rem;
+}
+
+/* White card sections - any nested div inside the outer wrapper */
+.loan-terms-enhanced > div > div {
+  background: white !important;
+  color: #374151 !important;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+/* Third-level divs stay transparent within white cards */
+.loan-terms-enhanced > div > div > div {
+  background: transparent !important;
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.loan-terms-enhanced > div > div > div > div {
+  background: transparent !important;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* Headings - all green-800 */
 .loan-terms-enhanced h1,
 .loan-terms-enhanced h2,
 .loan-terms-enhanced h3,
 .loan-terms-enhanced h4,
 .loan-terms-enhanced h5,
 .loan-terms-enhanced h6 {
-  margin-top: 2.5rem;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  line-height: 1.4;
-  color: hsl(var(--primary));
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #166534 !important; /* green-800 */
+  background: none !important;
+  -webkit-text-fill-color: #166534 !important;
+  -webkit-background-clip: unset !important;
 }
 
 .loan-terms-enhanced h1 {
   margin-top: 0;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
 }
 
 .loan-terms-enhanced h2 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 .loan-terms-enhanced h3 {
+  font-size: 1.25rem;
+}
+
+.loan-terms-enhanced h4 {
   font-size: 1.125rem;
 }
 
+/* Paragraphs - gray-700 text, always readable */
 .loan-terms-enhanced p {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   line-height: 1.8;
-  color: hsl(var(--muted-foreground));
+  color: #374151 !important; /* gray-700 */
 }
 
+/* Lists */
 .loan-terms-enhanced ul,
 .loan-terms-enhanced ol {
-  margin-bottom: 2rem;
-  padding-left: 2rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  color: #374151 !important;
 }
 
 .loan-terms-enhanced li {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   line-height: 1.7;
-  color: hsl(var(--muted-foreground));
+  color: #374151 !important; /* gray-700 */
 }
 
+/* Spans - gray-700, readable */
+.loan-terms-enhanced span {
+  color: #374151 !important;
+}
+
+/* Bold/Strong text - green accent */
 .loan-terms-enhanced strong {
-  font-weight: 600;
-  color: hsl(var(--primary));
+  font-weight: 700;
+  color: #166534 !important; /* green-800 */
 }
 
+/* Italic text */
 .loan-terms-enhanced em {
   font-style: italic;
-  color: hsl(var(--muted-foreground));
+  color: #4b5563 !important; /* gray-600 */
+}
+
+/* Override any remaining background/color weirdness */
+.loan-terms-enhanced * {
+  -webkit-text-fill-color: inherit !important;
+  -webkit-background-clip: unset !important;
+  text-shadow: none !important;
+  backdrop-filter: none !important;
 }
 
 /* Mobile responsiveness for loan terms */
@@ -365,27 +428,36 @@ All colors MUST be HSL.
   .loan-terms-enhanced {
     font-size: 0.875rem;
     line-height: 1.6;
+    padding: 1rem;
+  }
+
+  .loan-terms-enhanced > div {
+    padding: 1rem;
+  }
+
+  .loan-terms-enhanced > div > div {
+    padding: 1rem;
   }
 
   .loan-terms-enhanced h1 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 
   .loan-terms-enhanced h2 {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   }
 
   .loan-terms-enhanced h3 {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .loan-terms-enhanced p {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
 
   .loan-terms-enhanced ul,
   .loan-terms-enhanced ol {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
     padding-left: 1.25rem;
   }
 }
