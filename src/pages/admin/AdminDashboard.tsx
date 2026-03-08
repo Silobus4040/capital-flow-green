@@ -265,9 +265,10 @@ export default function AdminDashboard() {
         </div>
 
         <Tabs defaultValue="applications" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="applications">Applications</TabsTrigger>
             <TabsTrigger value="referrals">Referrals</TabsTrigger>
+            <TabsTrigger value="documents" onClick={loadAdminDocuments}>Documents</TabsTrigger>
             <TabsTrigger value="messages" onClick={() => { }}>Messages</TabsTrigger>
             <TabsTrigger value="bidding">Bidding</TabsTrigger>
             <TabsTrigger value="activity" onClick={loadBorrowerActivity}>Activity</TabsTrigger>
