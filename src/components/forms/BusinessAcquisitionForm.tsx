@@ -142,6 +142,7 @@ export default function BusinessAcquisitionForm({ onSubmitSuccess }: BusinessAcq
 
       // Reset form on success
       setFormData({
+        entityName: "",
         loanType: "",
         targetBusinessName: "",
         targetBusinessType: "",
