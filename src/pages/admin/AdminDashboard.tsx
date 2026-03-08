@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
-import { Users, FileText, Settings, BarChart3, Handshake, Volume2, Check, X, Pencil, MessageSquare, Activity, TrendingUp } from 'lucide-react';
+import { Users, FileText, Settings, BarChart3, Handshake, Volume2, Check, X, Pencil, MessageSquare, Activity, TrendingUp, Download, FolderOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AdminMessaging from '@/components/AdminMessaging';
 import AdminBidManager from '@/components/admin/AdminBidManager';

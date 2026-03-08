@@ -1,20 +1,28 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Upload, X, FileText, Check, AlertCircle, Loader2 } from "lucide-react";
+import { Upload, X, FileText, Check, AlertCircle, Loader2, Download } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
-
 
 interface DocumentUpload {
   id: string;
   file: File | null;
   documentName: string;
   notes: string;
+}
+
+interface UploadedDoc {
+  id: string;
+  document_name: string;
+  file_name: string;
+  file_path: string;
+  file_size: number | null;
+  created_at: string;
 }
 
 export default function ApplicantDocuments() {
@@ -26,6 +34,31 @@ export default function ApplicantDocuments() {
   const [documents, setDocuments] = useState<DocumentUpload[]>([
     { id: "1", file: null, documentName: "", notes: "" },
   ]);
+  const [uploadedDocs, setUploadedDocs] = useState<UploadedDoc[]>([]);
+  const [loadingHistory, setLoadingHistory] = useState(true);
+
+  useEffect(() => {
+    if (user) loadUploadHistory();
+  }, [user]);
+
+  const loadUploadHistory = async () => {
+    setLoadingHistory(true);
+    const { data, error } = await supabase
+      .from('document_uploads')
+      .select('id, document_name, file_name, file_path, file_size, created_at')
+      .order('created_at', { ascending: false });
+    if (!error && data) setUploadedDocs(data as UploadedDoc[]);
+    setLoadingHistory(false);
+  };
+
+  const downloadFile = async (filePath: string, fileName: string) => {
+    const { data, error } = await supabase.storage.from('documents').createSignedUrl(filePath, 60);
+    if (error || !data?.signedUrl) {
+      toast({ title: "Error", description: "Could not generate download link.", variant: "destructive" });
+      return;
+    }
+    window.open(data.signedUrl, '_blank');
+  };
 
   const updateDocument = (id: string, field: keyof DocumentUpload, value: any) => {
     setDocuments(prev => prev.map(doc => doc.id === id ? { ...doc, [field]: value } : doc));
@@ -45,7 +78,6 @@ export default function ApplicantDocuments() {
       return;
     }
 
-    // Validate all documents
     const invalidDocs = documents.filter(doc => !doc.file || !doc.documentName.trim());
     if (invalidDocs.length > 0) {
       toast({ title: "Validation Error", description: "All document entries must have a name and a file.", variant: "destructive" });
@@ -75,26 +107,34 @@ export default function ApplicantDocuments() {
         if (error) {
           console.error("Upload error for", doc.documentName, error);
           toast({ title: "Upload Failed", description: `Failed to upload ${doc.documentName}: ${error.message}`, variant: "destructive" });
-          continue; // Try the next one
+          continue;
         }
+
+        // Track in database
+        await supabase.from('document_uploads').insert({
+          user_id: user.id,
+          file_name: doc.file.name,
+          document_name: doc.documentName.trim(),
+          file_path: fileName,
+          file_size: doc.file.size,
+          file_type: doc.file.type || null,
+          notes: doc.notes.trim() || null,
+        } as any);
 
         successCount++;
       }
 
       if (successCount === documents.length) {
         toast({ title: "Success", description: "All documents have been securely uploaded!" });
-        // Reset form
         setDocuments([{ id: "1", file: null, documentName: "", notes: "" }]);
-        // Reset file inputs
         Object.keys(fileInputRefs.current).forEach(key => {
-          if (fileInputRefs.current[key]) {
-            fileInputRefs.current[key]!.value = "";
-          }
+          if (fileInputRefs.current[key]) fileInputRefs.current[key]!.value = "";
         });
+        loadUploadHistory();
       } else if (successCount > 0) {
         toast({ title: "Partial Success", description: `Uploaded ${successCount} out of ${documents.length} documents.` });
+        loadUploadHistory();
       }
-
     } catch (error) {
       console.error("Unexpected error during multi-upload", error);
       toast({ title: "Error", description: "An unexpected error occurred during upload.", variant: "destructive" });
@@ -161,6 +201,35 @@ export default function ApplicantDocuments() {
               )}
             </Button>
           </div>
+
+          {/* Upload History */}
+          <Card className="mt-8">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2"><FileText className="h-5 w-5 text-primary" /><span>Previously Uploaded Documents</span></CardTitle>
+            </CardHeader>
+            <CardContent>
+              {loadingHistory ? (
+                <div className="text-center py-6 text-muted-foreground">Loading...</div>
+              ) : uploadedDocs.length === 0 ? (
+                <div className="text-center py-6 text-muted-foreground">No documents uploaded yet.</div>
+              ) : (
+                <div className="space-y-3">
+                  {uploadedDocs.map(doc => (
+                    <div key={doc.id} className="flex items-center justify-between p-3 border rounded-lg">
+                      <div>
+                        <p className="font-medium">{doc.document_name}</p>
+                        <p className="text-sm text-muted-foreground">{doc.file_name} {doc.file_size ? `• ${formatFileSize(doc.file_size)}` : ''}</p>
+                        <p className="text-xs text-muted-foreground">{new Date(doc.created_at).toLocaleString()}</p>
+                      </div>
+                      <Button variant="outline" size="sm" onClick={() => downloadFile(doc.file_path, doc.file_name)}>
+                        <Download className="h-4 w-4 mr-1" /> Download
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
 
         <div className="space-y-6">
