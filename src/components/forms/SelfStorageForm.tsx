@@ -127,6 +127,7 @@ export default function SelfStorageForm({ onSubmitSuccess }: SelfStorageFormProp
 
       // Reset form on success
       setFormData({
+        entityName: "",
         borrowerName: "",
         borrowerEmail: "",
         borrowerPhone: "",

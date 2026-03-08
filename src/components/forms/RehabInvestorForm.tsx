@@ -150,6 +150,7 @@ export default function RehabInvestorForm({ onSubmitSuccess }: RehabInvestorForm
 
       // Reset form on success
       setFormData({
+        entityName: "",
         borrowerName: "",
         borrowerEmail: "",
         borrowerPhone: "",
