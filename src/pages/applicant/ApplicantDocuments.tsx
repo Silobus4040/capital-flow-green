@@ -5,8 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Upload, X, FileText, Check, AlertCircle } from "lucide-react";
+import { Upload, X, FileText, Check, AlertCircle, Loader2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 
 
 interface DocumentUpload {
@@ -21,10 +22,9 @@ export default function ApplicantDocuments() {
   const { toast } = useToast();
   const fileInputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [documents, setDocuments] = useState<DocumentUpload[]>([
     { id: "1", file: null, documentName: "", notes: "" },
-    { id: "2", file: null, documentName: "", notes: "" },
-    { id: "3", file: null, documentName: "", notes: "" },
   ]);
 
   const updateDocument = (id: string, field: keyof DocumentUpload, value: any) => {
@@ -39,16 +39,68 @@ export default function ApplicantDocuments() {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   };
 
-  const handleSubmit = async (doc: DocumentUpload) => {
+  const handleSubmitAll = async () => {
     if (!user) {
       toast({ title: "Authentication Required", description: "Please log in to submit documents.", variant: "destructive" });
       return;
     }
-    if (!doc.documentName.trim() || !doc.file) {
-      toast({ title: "Validation Error", description: "Document name and file are required.", variant: "destructive" });
+
+    // Validate all documents
+    const invalidDocs = documents.filter(doc => !doc.file || !doc.documentName.trim());
+    if (invalidDocs.length > 0) {
+      toast({ title: "Validation Error", description: "All document entries must have a name and a file.", variant: "destructive" });
       return;
     }
-    toast({ title: "Document Upload", description: "Document upload feature coming soon. Your files will be securely stored." });
+
+    if (documents.length === 0) {
+      toast({ title: "Validation Error", description: "Please add at least one document.", variant: "destructive" });
+      return;
+    }
+
+    setIsSubmitting(true);
+    let successCount = 0;
+
+    try {
+      for (const doc of documents) {
+        if (!doc.file) continue;
+
+        const fileExt = doc.file.name.split('.').pop();
+        const safeDocName = doc.documentName.replace(/[^a-zA-Z0-9]/g, '_');
+        const fileName = `${user.id}/${Date.now()}_${safeDocName}.${fileExt}`;
+
+        const { error } = await supabase.storage
+          .from("documents")
+          .upload(fileName, doc.file);
+
+        if (error) {
+          console.error("Upload error for", doc.documentName, error);
+          toast({ title: "Upload Failed", description: `Failed to upload ${doc.documentName}: ${error.message}`, variant: "destructive" });
+          continue; // Try the next one
+        }
+
+        successCount++;
+      }
+
+      if (successCount === documents.length) {
+        toast({ title: "Success", description: "All documents have been securely uploaded!" });
+        // Reset form
+        setDocuments([{ id: "1", file: null, documentName: "", notes: "" }]);
+        // Reset file inputs
+        Object.keys(fileInputRefs.current).forEach(key => {
+          if (fileInputRefs.current[key]) {
+            fileInputRefs.current[key]!.value = "";
+          }
+        });
+      } else if (successCount > 0) {
+        toast({ title: "Partial Success", description: `Uploaded ${successCount} out of ${documents.length} documents.` });
+      }
+
+    } catch (error) {
+      console.error("Unexpected error during multi-upload", error);
+      toast({ title: "Error", description: "An unexpected error occurred during upload.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const addDocument = () => {
@@ -76,7 +128,7 @@ export default function ApplicantDocuments() {
                 {documents.length > 1 && (<Button variant="ghost" size="sm" onClick={() => removeDocument(doc.id)} className="text-destructive hover:text-destructive"><X className="h-4 w-4" /></Button>)}
               </CardHeader>
               <CardContent className="space-y-4">
-                <div><Label>Document Name *</Label><Input value={doc.documentName} onChange={(e) => updateDocument(doc.id, "documentName", e.target.value)} placeholder="e.g., Property Purchase Agreement" /></div>
+                <div><Label>Document Name *</Label><Input value={doc.documentName} onChange={(e) => updateDocument(doc.id, "documentName", e.target.value)} placeholder="Recorded Deed," /></div>
                 <div>
                   <Label>Select File *</Label>
                   <input type="file" ref={(el) => fileInputRefs.current[doc.id] = el} onChange={(e) => { const file = e.target.files?.[0]; if (file) updateDocument(doc.id, "file", file); }} className="hidden" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.txt" />
@@ -91,11 +143,24 @@ export default function ApplicantDocuments() {
                   )}
                 </div>
                 <div><Label>Notes (Optional)</Label><Textarea value={doc.notes} onChange={(e) => updateDocument(doc.id, "notes", e.target.value)} placeholder="Add any additional information..." rows={3} /></div>
-                <Button onClick={() => handleSubmit(doc)} className="w-full" disabled={!doc.file || !doc.documentName.trim()}><Check className="h-4 w-4 mr-2" />Submit Document</Button>
               </CardContent>
             </Card>
           ))}
           <Button onClick={addDocument} variant="outline" className="w-full"><FileText className="h-4 w-4 mr-2" />Add Another Document</Button>
+
+          <div className="pt-6">
+            <Button
+              onClick={handleSubmitAll}
+              className="w-full text-lg py-6"
+              disabled={isSubmitting || documents.some(d => !d.file || !d.documentName.trim())}
+            >
+              {isSubmitting ? (
+                <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Uploading Documents...</>
+              ) : (
+                <><Check className="mr-2 h-5 w-5" /> Submit All Documents</>
+              )}
+            </Button>
+          </div>
         </div>
 
         <div className="space-y-6">
