@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { CheckCircle, DollarSign, CreditCard, TrendingUp } from "lucide-react";
-import ccifLogo from "@/assets/ccif-logo.png";
 
 export default function HomePage() {
   return (
@@ -17,25 +16,6 @@ export default function HomePage() {
         />
         {/* Subtle dark vignette at bottom for smooth transition */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-        {/* Logo overlay — replaces the generated emblem on the marble wall */}
-        <div
-          className="absolute z-10"
-          style={{
-            top: '8%',
-            right: '30%',
-            transform: 'perspective(800px) rotateY(-12deg) rotateZ(-1deg)',
-          }}
-        >
-          <img
-            src={ccifLogo}
-            alt="CCIF Logo"
-            className="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28"
-            style={{
-              filter: 'drop-shadow(2px 3px 6px rgba(0,0,0,0.5))',
-              opacity: 0.92,
-            }}
-          />
-        </div>
       </section>
 
       {/* Headline & CTA Section */}

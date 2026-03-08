@@ -3,7 +3,15 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { DollarSign, Calendar, CheckCircle2, Clock } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { DollarSign, Calendar, CheckCircle2, Clock, Landmark } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 interface Repayment {
   id: string;
@@ -28,6 +36,7 @@ export default function LoanRepayment() {
   const [apps, setApps] = useState<App[]>([]);
   const [selectedAppId, setSelectedAppId] = useState('');
   const [loading, setLoading] = useState(true);
+  const [achDialogOpen, setAchDialogOpen] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
@@ -100,6 +109,36 @@ export default function LoanRepayment() {
         </Card>
       </div>
 
+      {/* Setup Automatic Debit ACH Button */}
+      <div>
+        <Button
+          onClick={() => setAchDialogOpen(true)}
+          variant="outline"
+          className="gap-2 border-primary text-primary hover:bg-primary/10"
+        >
+          <Landmark className="h-4 w-4" />
+          Setup Automatic Debit for Loan Repayment (ACH)
+        </Button>
+      </div>
+
+      {/* ACH Not Available Dialog */}
+      <Dialog open={achDialogOpen} onOpenChange={setAchDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Landmark className="h-5 w-5 text-muted-foreground" />
+              ACH Auto-Debit Setup
+            </DialogTitle>
+            <DialogDescription className="text-base pt-2">
+              Not available. No record of loan closed.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end">
+            <Button onClick={() => setAchDialogOpen(false)}>OK</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       {repayments.length === 0 ? (
         <Card><CardContent className="p-6 text-center text-muted-foreground font-medium">No repayment schedule available yet until Loan is closed.</CardContent></Card>
       ) : (
@@ -131,8 +170,8 @@ export default function LoanRepayment() {
                       <td className="py-3">
                         <Badge variant="outline" className={
                           r.status === 'paid' ? 'border-green-200 text-green-700 bg-green-50' :
-                          r.status === 'overdue' ? 'border-destructive text-destructive' :
-                          'border-amber-200 text-amber-700 bg-amber-50'
+                            r.status === 'overdue' ? 'border-destructive text-destructive' :
+                              'border-amber-200 text-amber-700 bg-amber-50'
                         }>
                           {r.status === 'paid' ? <CheckCircle2 className="h-3 w-3 mr-1" /> : <Clock className="h-3 w-3 mr-1" />}
                           {r.status}
