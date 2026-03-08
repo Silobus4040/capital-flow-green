@@ -17,13 +17,23 @@ export default function HomePage() {
         />
         {/* Subtle dark vignette at bottom for smooth transition */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-        {/* Logo overlay — positioned as wall signage */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+        {/* Logo overlay — replaces the generated emblem on the marble wall */}
+        <div
+          className="absolute z-10"
+          style={{
+            top: '8%',
+            right: '30%',
+            transform: 'perspective(800px) rotateY(-12deg) rotateZ(-1deg)',
+          }}
+        >
           <img
             src={ccifLogo}
             alt="CCIF Logo"
-            className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] rounded-full"
-            style={{ filter: "drop-shadow(0 6px 20px rgba(0,0,0,0.4))" }}
+            className="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28"
+            style={{
+              filter: 'drop-shadow(2px 3px 6px rgba(0,0,0,0.5))',
+              opacity: 0.92,
+            }}
           />
         </div>
       </section>
