@@ -35,7 +35,6 @@ export default function LoanProgramDetail() {
   const navigate = useNavigate();
   const location = useLocation();
   const isApplyRoute = location.pathname.endsWith('/apply');
-  const [showApplicationForm, setShowApplicationForm] = useState(isApplyRoute);
   const [submitted, setSubmitted] = useState(false);
 
   const program = loanPrograms.find(p => p.id === programId);
