@@ -2,20 +2,35 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { CheckCircle, DollarSign, CreditCard, TrendingUp } from "lucide-react";
+import ccifLogo from "@/assets/ccif-logo.png";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-16 sm:py-20 lg:py-28 px-4 text-white overflow-hidden">
-        {/* Hero Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/hero-lobby.png')" }}
+      {/* Hero Section — Clean lobby image with logo signage */}
+      <section className="relative w-full overflow-hidden" style={{ height: "clamp(400px, 60vh, 700px)" }}>
+        {/* Full-bleed lobby background */}
+        <img
+          src="/hero-lobby.png"
+          alt="Commercial Capital & Investment Finance Inc. — Corporate Lobby at 600 W Broadway, San Diego"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        {/* Dark Overlay for text readability */}
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="container mx-auto text-center relative z-10">
+        {/* Subtle dark vignette at bottom for smooth transition */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        {/* Logo overlay — positioned as wall signage */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+          <img
+            src={ccifLogo}
+            alt="CCIF Logo"
+            className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] rounded-full"
+            style={{ filter: "drop-shadow(0 6px 20px rgba(0,0,0,0.4))" }}
+          />
+        </div>
+      </section>
+
+      {/* Headline & CTA Section */}
+      <section className="py-10 sm:py-14 px-4 bg-gradient-to-br from-primary to-primary-dark text-primary-foreground">
+        <div className="container mx-auto text-center">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
             100% Commercial Real Estate Financing
           </h1>
@@ -25,25 +40,6 @@ export default function HomePage() {
           <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 max-w-4xl mx-auto opacity-80 leading-relaxed px-2">
             No credit requirements • 100% financing available • Fast approval process • Serving all 50 states
           </p>
-
-          {/* Key Value Propositions */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12 max-w-5xl mx-auto px-2">
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6">
-              <CreditCard className="h-6 w-6 sm:h-8 sm:w-8 mx-auto mb-3 sm:mb-4" />
-              <h3 className="text-base sm:text-lg font-semibold mb-2 leading-tight">No Credit Requirements</h3>
-              <p className="text-xs sm:text-sm opacity-90 leading-relaxed">Asset-based lending focused on property value and cash flow, not personal credit scores</p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6">
-              <DollarSign className="h-6 w-6 sm:h-8 sm:w-8 mx-auto mb-3 sm:mb-4" />
-              <h3 className="text-base sm:text-lg font-semibold mb-2 leading-tight">100% Financing Available</h3>
-              <p className="text-xs sm:text-sm opacity-90 leading-relaxed">Complete financing solutions for qualified commercial real estate projects nationwide</p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 sm:col-span-2 lg:col-span-1">
-              <TrendingUp className="h-6 w-6 sm:h-8 sm:w-8 mx-auto mb-3 sm:mb-4" />
-              <h3 className="text-base sm:text-lg font-semibold mb-2 leading-tight">Fast Approval Process</h3>
-              <p className="text-xs sm:text-sm opacity-90 leading-relaxed">Quick decisions and streamlined closing process</p>
-            </div>
-          </div>
 
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center max-w-2xl mx-auto px-2">
             <Button size="lg" variant="secondary" className="w-full sm:w-auto min-h-[48px] shadow-lg" asChild>
