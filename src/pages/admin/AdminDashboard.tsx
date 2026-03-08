@@ -38,6 +38,7 @@ interface BorrowerActivity {
   login_count: number;
   last_login: string | null;
   fingerprint_id: string | null;
+  ip_address: string | null;
 }
 
 export default function AdminDashboard() {
@@ -105,17 +106,18 @@ export default function AdminDashboard() {
 
       const { data: logins } = await supabase
         .from('borrower_logins' as any)
-        .select('user_id, fingerprint_id, logged_in_at');
+        .select('user_id, fingerprint_id, ip_address, logged_in_at');
 
-      const loginMap: Record<string, { count: number; last: string; fingerprint: string | null }> = {};
+      const loginMap: Record<string, { count: number; last: string; fingerprint: string | null; ip: string | null }> = {};
       (logins || []).forEach((l: any) => {
         if (!loginMap[l.user_id]) {
-          loginMap[l.user_id] = { count: 0, last: l.logged_in_at, fingerprint: l.fingerprint_id };
+          loginMap[l.user_id] = { count: 0, last: l.logged_in_at, fingerprint: l.fingerprint_id, ip: l.ip_address };
         }
         loginMap[l.user_id].count++;
         if (l.logged_in_at > loginMap[l.user_id].last) {
           loginMap[l.user_id].last = l.logged_in_at;
           loginMap[l.user_id].fingerprint = l.fingerprint_id;
+          loginMap[l.user_id].ip = l.ip_address;
         }
       });
 
@@ -126,6 +128,7 @@ export default function AdminDashboard() {
         login_count: loginMap[p.user_id]?.count || 0,
         last_login: loginMap[p.user_id]?.last || null,
         fingerprint_id: loginMap[p.user_id]?.fingerprint || null,
+        ip_address: loginMap[p.user_id]?.ip || null,
       }));
 
       activity.sort((a, b) => b.login_count - a.login_count);
@@ -216,7 +219,7 @@ export default function AdminDashboard() {
           <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="applications">Applications</TabsTrigger>
             <TabsTrigger value="referrals">Referrals</TabsTrigger>
-            <TabsTrigger value="messages" onClick={() => {}}>Messages</TabsTrigger>
+            <TabsTrigger value="messages" onClick={() => { }}>Messages</TabsTrigger>
             <TabsTrigger value="bidding">Bidding</TabsTrigger>
             <TabsTrigger value="activity" onClick={loadBorrowerActivity}>Activity</TabsTrigger>
             <TabsTrigger value="all">All</TabsTrigger>
@@ -371,6 +374,7 @@ export default function AdminDashboard() {
                           </div>
                           <p className="text-sm text-muted-foreground">{b.email}</p>
                           {b.fingerprint_id && <p className="text-xs text-muted-foreground font-mono">FP: {b.fingerprint_id.slice(0, 12)}...</p>}
+                          {b.ip_address && <p className="text-xs text-muted-foreground font-mono">IP: {b.ip_address}</p>}
                         </div>
                         <div className="text-right">
                           <p className="font-bold text-lg">{b.login_count}</p>
