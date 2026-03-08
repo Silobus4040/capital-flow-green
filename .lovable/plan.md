@@ -1,57 +1,60 @@
 
 
-## Problem
-Documents upload to storage successfully, but there's **no tracking table** and **no admin view**. Files go into the `documents` bucket under `{userId}/{timestamp}_{name}.ext` but nobody can see them — not you as admin, and not borrowers reviewing their history.
+## Telegram Notification Integration Plan
 
-## Plan
+Thank you for providing your Telegram credentials. Here is the plan to send all application notifications to your Telegram.
 
-### 1. Create `document_uploads` database table
-Track every uploaded document with borrower association:
+### What Will Be Built
 
-```sql
-CREATE TABLE public.document_uploads (
-  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid NOT NULL,
-  file_name text NOT NULL,
-  document_name text NOT NULL,
-  file_path text NOT NULL,
-  file_size bigint,
-  file_type text,
-  notes text,
-  created_at timestamptz NOT NULL DEFAULT now()
-);
+**1. New backend function: `send-telegram-notification`**
+- Accepts application data (type, name, email, phone, program, amount, etc.)
+- Formats a clean, readable Telegram message
+- Sends it to your Telegram chat via the Bot API
+- Non-blocking: if Telegram fails, the form submission still succeeds
 
-ALTER TABLE public.document_uploads ENABLE ROW LEVEL SECURITY;
+**2. Store your credentials as backend secrets**
+- `TELEGRAM_BOT_TOKEN` = `8613102452:AAGvnbVmXKCI1mSdpXMqh0ZTzDdPPLnBag4`
+- `TELEGRAM_CHAT_ID` = `8156908905`
 
--- Borrowers can insert their own docs
-CREATE POLICY "Users can upload own documents" ON public.document_uploads
-  FOR INSERT TO authenticated WITH CHECK (user_id = auth.uid());
+**3. Hook Telegram into all 3 submission flows**
 
--- Borrowers can view their own docs  
-CREATE POLICY "Users can view own documents" ON public.document_uploads
-  FOR SELECT TO authenticated USING (user_id = auth.uid());
+| Flow | File | Change |
+|------|------|--------|
+| Loan applications (public) | `usePublicApplications.ts` | Add `send-telegram-notification` call after DB insert |
+| Loan applications (auth) | `useProgramApplications.ts` | Add `send-telegram-notification` call after DB insert |
+| Referral signups | `ReferralProgram.tsx` | Add `send-telegram-notification` call after DB insert |
+| Contact form | `ContactUs.tsx` | Add `send-telegram-notification` call after DB insert |
 
--- Admins can view all
-CREATE POLICY "Admins can manage all documents" ON public.document_uploads
-  FOR ALL TO authenticated
-  USING (public.has_role(auth.uid(), 'admin'))
-  WITH CHECK (public.has_role(auth.uid(), 'admin'));
+**4. Telegram message format example**
+
+```text
+🆕 NEW LOAN APPLICATION
+
+📋 Program: Commercial Mortgage
+👤 Name: John Smith
+📧 Email: john@example.com
+📞 Phone: 619-555-1234
+💰 Amount: $1,000,000
+📍 Property: 123 Main St, San Diego, CA
+
+⏰ Submitted: 2/25/2026 2:30 PM ET
 ```
 
-### 2. Update `ApplicantDocuments.tsx`
-After each successful storage upload, insert a record into `document_uploads` with `user_id`, `document_name`, `file_path`, `file_size`, `file_type`, and `notes`.
+Different headers for each type: loan, referral, and contact.
 
-### 3. Add "Uploaded Documents" tab to Admin Dashboard
-New tab in the admin dashboard showing all uploaded documents with:
-- Borrower name/email (joined from profiles)
-- Document name, file name, upload date
-- Download link (signed URL from storage)
+### Steps
 
-### 4. Add document history to Borrower Portal
-Show borrowers their previously uploaded documents on the same `ApplicantDocuments` page below the upload form.
+1. Store `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as backend secrets (2 secret prompts)
+2. Create `supabase/functions/send-telegram-notification/index.ts` -- calls Telegram Bot API `sendMessage` endpoint
+3. Update `usePublicApplications.ts` -- add Telegram notification call (fire-and-forget)
+4. Update `useProgramApplications.ts` -- add Telegram notification call (fire-and-forget)
+5. Update `ContactUs.tsx` -- add Telegram notification call after successful DB insert
+6. Update `ReferralProgram.tsx` -- add Telegram notification call after successful DB insert
 
-### Files to modify
-- **New migration**: Create `document_uploads` table + RLS
-- **`src/pages/applicant/ApplicantDocuments.tsx`**: Insert tracking record on upload; show upload history
-- **`src/pages/admin/AdminDashboard.tsx`**: Add documents tab with borrower info
+### Technical Details
+
+- The edge function calls `https://api.telegram.org/bot{TOKEN}/sendMessage` with `parse_mode: "HTML"` for formatted messages
+- All Telegram calls are wrapped in try/catch so failures never block form submissions
+- The function accepts a generic payload with `applicationType`, `borrowerName`, `borrowerEmail`, `borrowerPhone`, `programName`, `requestedAmount`, and optional `extras` object for additional details
+- JWT verification disabled for this function since it's called from both authenticated and anonymous contexts
 
