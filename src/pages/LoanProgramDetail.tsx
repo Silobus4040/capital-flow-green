@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { loanPrograms } from "@/data/loanPrograms";
@@ -33,7 +33,9 @@ const programImages: Record<string, string> = {
 export default function LoanProgramDetail() {
   const { programId } = useParams<{ programId: string }>();
   const navigate = useNavigate();
-  const [showApplicationForm, setShowApplicationForm] = useState(false);
+  const location = useLocation();
+  const isApplyRoute = location.pathname.endsWith('/apply');
+  const [showApplicationForm, setShowApplicationForm] = useState(isApplyRoute);
   const [submitted, setSubmitted] = useState(false);
 
   const program = loanPrograms.find(p => p.id === programId);
