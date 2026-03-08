@@ -57,7 +57,6 @@ export default function LoanProgramDetail() {
   }
 
   const handleApplicationFormSuccess = () => {
-    setShowApplicationForm(false);
     setSubmitted(true);
   };
 
@@ -68,20 +67,16 @@ export default function LoanProgramDetail() {
     return (
       <div className="min-h-screen flex items-center justify-center p-4" style={{ background: 'linear-gradient(135deg, hsl(142 71% 35%), hsl(142 71% 25%))' }}>
         <div className="max-w-2xl w-full text-center space-y-8">
-
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-10 space-y-6 border border-white/20">
             <CheckCircle2 className="h-20 w-20 text-white mx-auto" />
-
             <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
               Thank you for choosing Commercial Capital & Investment Inc for your financing needs!
             </h1>
-
             <div className="space-y-4">
               <div className="flex items-start gap-3 text-white/90 text-lg text-left max-w-lg mx-auto">
                 <FileText className="h-6 w-6 mt-1 shrink-0" />
                 <p>We've received your loan request and will review it shortly.</p>
               </div>
-
               <div className="flex items-start gap-3 text-white/90 text-lg text-left max-w-lg mx-auto">
                 <Mail className="h-6 w-6 mt-1 shrink-0" />
                 <p>
@@ -91,7 +86,6 @@ export default function LoanProgramDetail() {
               </div>
             </div>
           </div>
-
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Button
               onClick={() => navigate("/loan-programs")}
@@ -104,7 +98,7 @@ export default function LoanProgramDetail() {
             <Button
               onClick={() => {
                 setSubmitted(false);
-                setShowApplicationForm(false);
+                navigate(`/loan-programs/${programId}/apply`);
               }}
               size="lg"
               variant="outline"
@@ -118,6 +112,38 @@ export default function LoanProgramDetail() {
     );
   }
 
+  // Standalone application form page
+  if (isApplyRoute) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
+        <div className="container mx-auto py-8 px-4 max-w-4xl">
+          <Button
+            variant="outline"
+            onClick={() => navigate(`/loan-programs/${programId}`)}
+            className="mb-6 hover:bg-primary/10"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Program Details
+          </Button>
+
+          <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-8">
+            Apply: {program.name}
+          </h1>
+
+          <Card className="shadow-2xl border-0 bg-card/80 backdrop-blur-sm">
+            <CardContent className="p-6 md:p-8">
+              <ProgramApplicationForm
+                program={program}
+                onSubmitSuccess={handleApplicationFormSuccess}
+              />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  // Program details + terms view (no form)
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
       <div className="loan-program-container container mx-auto">
@@ -184,30 +210,6 @@ export default function LoanProgramDetail() {
             terms={program.terms}
             className=""
           />
-        </div>
-      </div>
-
-      <div className="loan-program-container container mx-auto">
-        <div className="max-w-6xl mx-auto">
-          {showApplicationForm && (
-            <div className="mb-12">
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setShowApplicationForm(false);
-                  navigate(`/loan-programs/${programId}`);
-                }}
-                className="mb-4"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Program Details
-              </Button>
-              <ProgramApplicationForm
-                program={program}
-                onSubmitSuccess={handleApplicationFormSuccess}
-              />
-            </div>
-          )}
         </div>
       </div>
     </div>
