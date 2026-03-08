@@ -41,6 +41,20 @@ interface BorrowerActivity {
   ip_address: string | null;
 }
 
+interface AdminDocUpload {
+  id: string;
+  user_id: string;
+  document_name: string;
+  file_name: string;
+  file_path: string;
+  file_size: number | null;
+  file_type: string | null;
+  notes: string | null;
+  created_at: string;
+  borrower_name?: string;
+  borrower_email?: string;
+}
+
 export default function AdminDashboard() {
   const [clients, setClients] = useState<Client[]>([]);
   const [expandedApplications, setExpandedApplications] = useState<Set<string>>(new Set());
