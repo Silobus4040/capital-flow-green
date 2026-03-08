@@ -63,6 +63,8 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [borrowerActivity, setBorrowerActivity] = useState<BorrowerActivity[]>([]);
   const [activityLoading, setActivityLoading] = useState(false);
+  const [adminDocs, setAdminDocs] = useState<AdminDocUpload[]>([]);
+  const [docsLoading, setDocsLoading] = useState(false);
   const { signOut } = useAuth();
   const { toast } = useToast();
 
