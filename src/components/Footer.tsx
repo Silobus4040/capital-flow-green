@@ -37,13 +37,6 @@ export default function Footer() {
               <Link to="/referral-program" className="hover:text-primary-light transition-colors">
                 Referral Program
               </Link>
-              <Link 
-                to="/admin-portal-login" 
-                className="hover:text-primary-light transition-colors opacity-30 hover:opacity-100"
-                title="Admin Portal"
-              >
-                Admin
-              </Link>
             </nav>
           </div>
 
@@ -71,48 +64,48 @@ export default function Footer() {
                 <span>admin@ccif-inc.com</span>
               </div>
             </div>
-            
+
             {/* Social Media Icons */}
             <div className="flex space-x-4 pt-2">
-              <a 
-                href="https://www.facebook.com/share/17FknQvsu7/?mibextid=LQQJ4d" 
-                target="_blank" 
+              <a
+                href="https://www.facebook.com/share/17FknQvsu7/?mibextid=LQQJ4d"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-primary-foreground/10 rounded-full hover:bg-primary-foreground/20 transition-colors"
                 aria-label="Follow us on Facebook"
               >
                 <Facebook className="h-4 w-4" />
               </a>
-              <a 
-                href="https://instagram.com/commercialcapitalfinance" 
-                target="_blank" 
+              <a
+                href="https://instagram.com/commercialcapitalfinance"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-primary-foreground/10 rounded-full hover:bg-primary-foreground/20 transition-colors"
                 aria-label="Follow us on Instagram"
               >
                 <Instagram className="h-4 w-4" />
               </a>
-              <a 
-                href="https://linkedin.com/company/commercial-capital-finance" 
-                target="_blank" 
+              <a
+                href="https://linkedin.com/company/commercial-capital-finance"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-primary-foreground/10 rounded-full hover:bg-primary-foreground/20 transition-colors"
                 aria-label="Connect with us on LinkedIn"
               >
                 <Linkedin className="h-4 w-4" />
               </a>
-              <a 
-                href="https://t.me/commercialcapitalfinance" 
-                target="_blank" 
+              <a
+                href="https://t.me/commercialcapitalfinance"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-primary-foreground/10 rounded-full hover:bg-primary-foreground/20 transition-colors"
                 aria-label="Join our Telegram channel"
               >
                 <Send className="h-4 w-4" />
               </a>
-              <a 
-                href="https://x.com/CCIF_INC?t=ZmHYoDv78lkKUfjkih8zTQ&s=09" 
-                target="_blank" 
+              <a
+                href="https://x.com/CCIF_INC?t=ZmHYoDv78lkKUfjkih8zTQ&s=09"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-primary-foreground/10 rounded-full hover:bg-primary-foreground/20 transition-colors"
                 aria-label="Follow us on X"

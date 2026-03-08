@@ -18,6 +18,8 @@ import DocumentSubmission from "./pages/DocumentSubmission";
 import ReferralProgram from "./pages/ReferralProgram";
 import AboutUs from "./pages/AboutUs";
 import DrawRequest from "./pages/DrawRequest";
+import DealAnalyzer from "./pages/tools/DealAnalyzer";
+import ProgramMatchmaker from "./pages/tools/ProgramMatchmaker";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
@@ -39,6 +41,7 @@ import AdminPortalLogin from "./pages/admin/AdminPortalLogin";
 import AdminTestLogin from "./pages/admin/AdminTestLogin";
 import LoanOfficerLogin from "./pages/admin/LoanOfficerLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import TermSheetGenerator from "./pages/admin/TermSheetGenerator";
 import LoanOfficerDashboard from "./pages/admin/LoanOfficerDashboard";
 import TTSTest from "./pages/TTSTest";
 
@@ -46,90 +49,97 @@ const queryClient = new QueryClient();
 
 const AppRoutes = () => {
   useAdminShortcut();
-  
+
   return (
     <Routes>
-            {/* Public Website Routes */}
-            <Route path="/" element={<Layout><HomePage /></Layout>} />
-            <Route path="/loan-programs" element={<Layout><LoanPrograms /></Layout>} />
-            <Route path="/loan-programs/:programId" element={<Layout><LoanProgramDetail /></Layout>} />
-            <Route path="/investors-portal" element={<Layout><InvestorsPortal /></Layout>} />
-            <Route path="/referral-program" element={<Layout><ReferralProgram /></Layout>} />
-            <Route path="/about-us" element={<Layout><AboutUs /></Layout>} />
-            <Route path="/contact-us" element={<Layout><ContactUs /></Layout>} />
-            <Route path="/draw-request" element={<Layout><DrawRequest /></Layout>} />
-            <Route path="/document-submission" element={<Layout><DocumentSubmission /></Layout>} />
-            <Route path="/privacy" element={<Layout><PrivacyPolicy /></Layout>} />
-            <Route path="/terms" element={<Layout><TermsOfService /></Layout>} />
-            
-            {/* Applicant Portal Auth Routes */}
-            <Route path="/applicant-signup" element={<ApplicantSignup />} />
-            <Route path="/applicant-login" element={<ApplicantLogin />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            
-            {/* Protected Applicant Portal Routes */}
-            <Route path="/applicant-dashboard" element={
-              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
-                <ApplicantLayout><ApplicantDashboard /></ApplicantLayout>
-              </ProtectedRoute>
-            } />
-            <Route path="/applicant-messages" element={
-              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
-                <ApplicantLayout><ApplicantMessages /></ApplicantLayout>
-              </ProtectedRoute>
-            } />
-            <Route path="/applicant-documents" element={
-              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
-                <ApplicantLayout><ApplicantDocuments /></ApplicantLayout>
-              </ProtectedRoute>
-            } />
-            <Route path="/applicant-applications" element={
-              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
-                <ApplicantLayout><ApplicantApplications /></ApplicantLayout>
-              </ProtectedRoute>
-            } />
-            <Route path="/applicant-profile" element={
-              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
-                <ApplicantLayout><div className="p-6"><h1>Profile - Coming Soon</h1></div></ApplicantLayout>
-              </ProtectedRoute>
-            } />
-            <Route path="/applicant-closing" element={
-              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
-                <ApplicantLayout><ClosingDashboard /></ApplicantLayout>
-              </ProtectedRoute>
-            } />
-            <Route path="/applicant-draw-schedule" element={
-              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
-                <ApplicantLayout><DrawSchedule /></ApplicantLayout>
-              </ProtectedRoute>
-            } />
-            <Route path="/applicant-repayment" element={
-              <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
-                <ApplicantLayout><LoanRepayment /></ApplicantLayout>
-              </ProtectedRoute>
-            } />
-            {/* Hidden Admin Portal Routes */}
-            <Route path="/admin-portal-login" element={<AdminPortalLogin />} />
-            <Route path="/admin-test-login" element={<AdminTestLogin />} />
-            <Route path="/loan-officer-login" element={<LoanOfficerLogin />} />
-            <Route path="/admin-dashboard" element={
-              <ProtectedRoute allowedRoles={['admin']} redirectTo="/admin-portal-login">
-                <AdminDashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/loan-officer-dashboard" element={
-              <ProtectedRoute allowedRoles={['loan_officer', 'admin']} redirectTo="/loan-officer-login">
-                <LoanOfficerDashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/tts-test" element={
-              <ProtectedRoute allowedRoles={['admin', 'loan_officer']} redirectTo="/admin-portal-login">
-                <TTSTest />
-              </ProtectedRoute>
-            } />
-            
-            <Route path="*" element={<Layout><NotFound /></Layout>} />
-          </Routes>
+      {/* Public Website Routes */}
+      <Route path="/" element={<Layout><HomePage /></Layout>} />
+      <Route path="/loan-programs" element={<Layout><LoanPrograms /></Layout>} />
+      <Route path="/loan-programs/:programId" element={<Layout><LoanProgramDetail /></Layout>} />
+      <Route path="/investors-portal" element={<Layout><InvestorsPortal /></Layout>} />
+      <Route path="/referral-program" element={<Layout><ReferralProgram /></Layout>} />
+      <Route path="/about-us" element={<Layout><AboutUs /></Layout>} />
+      <Route path="/contact-us" element={<Layout><ContactUs /></Layout>} />
+      <Route path="/deal-analyzer" element={<Layout><DealAnalyzer /></Layout>} />
+      <Route path="/loan-matchmaker" element={<Layout><ProgramMatchmaker /></Layout>} />
+      <Route path="/draw-request" element={<Layout><DrawRequest /></Layout>} />
+      <Route path="/document-submission" element={<Layout><DocumentSubmission /></Layout>} />
+      <Route path="/privacy" element={<Layout><PrivacyPolicy /></Layout>} />
+      <Route path="/terms" element={<Layout><TermsOfService /></Layout>} />
+
+      {/* Applicant Portal Auth Routes */}
+      <Route path="/applicant-signup" element={<ApplicantSignup />} />
+      <Route path="/applicant-login" element={<ApplicantLogin />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+
+      {/* Protected Applicant Portal Routes */}
+      <Route path="/applicant-dashboard" element={
+        <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+          <ApplicantLayout><ApplicantDashboard /></ApplicantLayout>
+        </ProtectedRoute>
+      } />
+      <Route path="/applicant-messages" element={
+        <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+          <ApplicantLayout><ApplicantMessages /></ApplicantLayout>
+        </ProtectedRoute>
+      } />
+      <Route path="/applicant-documents" element={
+        <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+          <ApplicantLayout><ApplicantDocuments /></ApplicantLayout>
+        </ProtectedRoute>
+      } />
+      <Route path="/applicant-applications" element={
+        <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+          <ApplicantLayout><ApplicantApplications /></ApplicantLayout>
+        </ProtectedRoute>
+      } />
+      <Route path="/applicant-profile" element={
+        <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+          <ApplicantLayout><div className="p-6"><h1>Profile - Coming Soon</h1></div></ApplicantLayout>
+        </ProtectedRoute>
+      } />
+      <Route path="/applicant-closing" element={
+        <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+          <ApplicantLayout><ClosingDashboard /></ApplicantLayout>
+        </ProtectedRoute>
+      } />
+      <Route path="/applicant-draw-schedule" element={
+        <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+          <ApplicantLayout><DrawSchedule /></ApplicantLayout>
+        </ProtectedRoute>
+      } />
+      <Route path="/applicant-repayment" element={
+        <ProtectedRoute allowedRoles={['borrower', 'loan_officer', 'admin']}>
+          <ApplicantLayout><LoanRepayment /></ApplicantLayout>
+        </ProtectedRoute>
+      } />
+      {/* Hidden Admin Portal Routes */}
+      <Route path="/admin-portal-login" element={<AdminPortalLogin />} />
+      <Route path="/admin-test-login" element={<AdminTestLogin />} />
+      <Route path="/loan-officer-login" element={<LoanOfficerLogin />} />
+      <Route path="/admin-dashboard" element={
+        <ProtectedRoute allowedRoles={['admin']} redirectTo="/admin-portal-login">
+          <AdminDashboard />
+        </ProtectedRoute>
+      } />
+      <Route path="/admin/term-sheet-generator" element={
+        <ProtectedRoute allowedRoles={['admin', 'loan_officer']} redirectTo="/admin-portal-login">
+          <TermSheetGenerator />
+        </ProtectedRoute>
+      } />
+      <Route path="/loan-officer-dashboard" element={
+        <ProtectedRoute allowedRoles={['loan_officer', 'admin']} redirectTo="/loan-officer-login">
+          <LoanOfficerDashboard />
+        </ProtectedRoute>
+      } />
+      <Route path="/tts-test" element={
+        <ProtectedRoute allowedRoles={['admin', 'loan_officer']} redirectTo="/admin-portal-login">
+          <TTSTest />
+        </ProtectedRoute>
+      } />
+
+      <Route path="*" element={<Layout><NotFound /></Layout>} />
+    </Routes>
   );
 };
 
@@ -140,13 +150,13 @@ const App = () => {
       <SecurityProvider>
         <AuthProvider>
           <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <AppRoutes />
-          </BrowserRouter>
-        </TooltipProvider>
-      </AuthProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <AppRoutes />
+            </BrowserRouter>
+          </TooltipProvider>
+        </AuthProvider>
       </SecurityProvider>
     </QueryClientProvider>
   );
