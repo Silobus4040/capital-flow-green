@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
-import { Users, FileText, Settings, BarChart3, Handshake, Volume2, Check, X, Pencil, MessageSquare, Activity, TrendingUp } from 'lucide-react';
+import { Users, FileText, Settings, BarChart3, Handshake, Volume2, Check, X, Pencil, MessageSquare, Activity, TrendingUp, Download, FolderOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AdminMessaging from '@/components/AdminMessaging';
 import AdminBidManager from '@/components/admin/AdminBidManager';
@@ -41,6 +41,20 @@ interface BorrowerActivity {
   ip_address: string | null;
 }
 
+interface AdminDocUpload {
+  id: string;
+  user_id: string;
+  document_name: string;
+  file_name: string;
+  file_path: string;
+  file_size: number | null;
+  file_type: string | null;
+  notes: string | null;
+  created_at: string;
+  borrower_name?: string;
+  borrower_email?: string;
+}
+
 export default function AdminDashboard() {
   const [clients, setClients] = useState<Client[]>([]);
   const [expandedApplications, setExpandedApplications] = useState<Set<string>>(new Set());
@@ -49,6 +63,8 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [borrowerActivity, setBorrowerActivity] = useState<BorrowerActivity[]>([]);
   const [activityLoading, setActivityLoading] = useState(false);
+  const [adminDocs, setAdminDocs] = useState<AdminDocUpload[]>([]);
+  const [docsLoading, setDocsLoading] = useState(false);
   const { signOut } = useAuth();
   const { toast } = useToast();
 
@@ -139,6 +155,38 @@ export default function AdminDashboard() {
     setActivityLoading(false);
   };
 
+  const loadAdminDocuments = async () => {
+    setDocsLoading(true);
+    try {
+      const { data: docs } = await supabase
+        .from('document_uploads')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      const { data: profiles } = await supabase
+        .from('profiles')
+        .select('user_id, email, full_name');
+
+      const profileMap: Record<string, { email: string; full_name: string | null }> = {};
+      (profiles || []).forEach((p: any) => { profileMap[p.user_id] = { email: p.email, full_name: p.full_name }; });
+
+      setAdminDocs((docs || []).map((d: any) => ({
+        ...d,
+        borrower_name: profileMap[d.user_id]?.full_name || 'Unknown',
+        borrower_email: profileMap[d.user_id]?.email || 'Unknown',
+      })));
+    } catch (err) {
+      console.error('Error loading documents:', err);
+    }
+    setDocsLoading(false);
+  };
+
+  const downloadDocFile = async (filePath: string) => {
+    const { data, error } = await supabase.storage.from('documents').createSignedUrl(filePath, 60);
+    if (data?.signedUrl) window.open(data.signedUrl, '_blank');
+    else toast({ title: 'Error', description: 'Could not generate download link.', variant: 'destructive' });
+  };
+
   const toggleApplicationDetails = (applicationId: string) => {
     const newExpanded = new Set(expandedApplications);
     if (newExpanded.has(applicationId)) newExpanded.delete(applicationId);
@@ -217,9 +265,10 @@ export default function AdminDashboard() {
         </div>
 
         <Tabs defaultValue="applications" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="applications">Applications</TabsTrigger>
             <TabsTrigger value="referrals">Referrals</TabsTrigger>
+            <TabsTrigger value="documents" onClick={loadAdminDocuments}>Documents</TabsTrigger>
             <TabsTrigger value="messages" onClick={() => { }}>Messages</TabsTrigger>
             <TabsTrigger value="bidding">Bidding</TabsTrigger>
             <TabsTrigger value="activity" onClick={loadBorrowerActivity}>Activity</TabsTrigger>
@@ -317,6 +366,39 @@ export default function AdminDashboard() {
                           </div>
                         </div>
                         {referral.property_address && <p className="text-sm text-muted-foreground mt-2">{referral.property_address}</p>}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="documents" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center"><FolderOpen className="h-5 w-5 mr-2" />Uploaded Documents</CardTitle>
+                <CardDescription>All borrower document uploads with download links</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {docsLoading ? (
+                  <div className="text-center py-8 text-muted-foreground">Loading documents...</div>
+                ) : adminDocs.length === 0 ? (
+                  <div className="text-center py-8 text-muted-foreground"><FolderOpen className="h-12 w-12 mx-auto mb-4 opacity-50" /><p>No documents uploaded yet.</p></div>
+                ) : (
+                  <div className="space-y-3">
+                    {adminDocs.map(doc => (
+                      <div key={doc.id} className="border rounded-lg p-4 flex items-center justify-between">
+                        <div>
+                          <p className="font-medium">{doc.document_name}</p>
+                          <p className="text-sm text-muted-foreground">{doc.borrower_name} • {doc.borrower_email}</p>
+                          <p className="text-xs text-muted-foreground">{doc.file_name} {doc.file_size ? `• ${(doc.file_size / 1024).toFixed(1)} KB` : ''}</p>
+                          {doc.notes && <p className="text-xs text-muted-foreground mt-1">Notes: {doc.notes}</p>}
+                          <p className="text-xs text-muted-foreground">{new Date(doc.created_at).toLocaleString()}</p>
+                        </div>
+                        <Button variant="outline" size="sm" onClick={() => downloadDocFile(doc.file_path)}>
+                          <Download className="h-4 w-4 mr-1" /> Download
+                        </Button>
                       </div>
                     ))}
                   </div>
