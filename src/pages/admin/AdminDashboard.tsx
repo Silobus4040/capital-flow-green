@@ -407,6 +407,7 @@ export default function AdminDashboard() {
             </Card>
           </TabsContent>
 
+          <TabsContent value="messages" className="space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center"><MessageSquare className="h-5 w-5 mr-2" />Borrower Messaging</CardTitle>
