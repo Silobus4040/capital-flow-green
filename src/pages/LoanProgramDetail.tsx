@@ -190,31 +190,14 @@ export default function LoanProgramDetail() {
 
       <div className="loan-program-container container mx-auto">
         <div className="max-w-6xl mx-auto">
-          {!showApplicationForm ? (
-            <Card className="loan-program-card shadow-2xl border-0 bg-card/80 backdrop-blur-sm">
-              <CardContent className="p-8">
-                <div className="text-center">
-                  <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-2xl">
-                    <h2 className="loan-program-header text-foreground mb-4">Ready to Apply?</h2>
-                    <p className="loan-program-body text-muted-foreground mb-6 max-w-2xl mx-auto">
-                      Start your application process today and take advantage of our competitive rates and flexible terms.
-                    </p>
-                    <Button
-                      onClick={() => setShowApplicationForm(true)}
-                      size="lg"
-                      className="loan-program-button text-lg px-8 py-3 hover:scale-105 transition-transform"
-                    >
-                      Apply Now
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ) : (
+          {showApplicationForm && (
             <div className="mb-12">
               <Button
                 variant="outline"
-                onClick={() => setShowApplicationForm(false)}
+                onClick={() => {
+                  setShowApplicationForm(false);
+                  navigate(`/loan-programs/${programId}`);
+                }}
                 className="mb-4"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
