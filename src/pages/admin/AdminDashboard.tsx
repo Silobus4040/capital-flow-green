@@ -155,6 +155,38 @@ export default function AdminDashboard() {
     setActivityLoading(false);
   };
 
+  const loadAdminDocuments = async () => {
+    setDocsLoading(true);
+    try {
+      const { data: docs } = await supabase
+        .from('document_uploads')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      const { data: profiles } = await supabase
+        .from('profiles')
+        .select('user_id, email, full_name');
+
+      const profileMap: Record<string, { email: string; full_name: string | null }> = {};
+      (profiles || []).forEach((p: any) => { profileMap[p.user_id] = { email: p.email, full_name: p.full_name }; });
+
+      setAdminDocs((docs || []).map((d: any) => ({
+        ...d,
+        borrower_name: profileMap[d.user_id]?.full_name || 'Unknown',
+        borrower_email: profileMap[d.user_id]?.email || 'Unknown',
+      })));
+    } catch (err) {
+      console.error('Error loading documents:', err);
+    }
+    setDocsLoading(false);
+  };
+
+  const downloadDocFile = async (filePath: string) => {
+    const { data, error } = await supabase.storage.from('documents').createSignedUrl(filePath, 60);
+    if (data?.signedUrl) window.open(data.signedUrl, '_blank');
+    else toast({ title: 'Error', description: 'Could not generate download link.', variant: 'destructive' });
+  };
+
   const toggleApplicationDetails = (applicationId: string) => {
     const newExpanded = new Set(expandedApplications);
     if (newExpanded.has(applicationId)) newExpanded.delete(applicationId);
