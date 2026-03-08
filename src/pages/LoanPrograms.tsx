@@ -75,7 +75,7 @@ export default function LoanPrograms() {
                   </Button>
                   <Button
                     className="loan-program-button w-full h-12"
-                    onClick={() => navigate(`/loan-programs/${program.id}`)}
+                    onClick={() => navigate(`/loan-programs/${program.id}/apply`)}
                   >
                     Apply Now
                   </Button>
