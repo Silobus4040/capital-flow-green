@@ -9,7 +9,6 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/components/ui/use-toast';
 import { Eye, EyeOff, AlertCircle, Info, Mail, Lock, KeyRound, CheckCircle2, BarChart3, FileText, MessageSquare, CreditCard, Archive, ArrowRight, XCircle } from 'lucide-react';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
-import ccifLogo from '@/assets/ccif-logo-enhanced.png';
 import heroImage from '@/assets/loan-management-hero.jpg';
 
 type SignupStep = 'credentials' | 'otp' | 'loan-id' | 'success';
@@ -272,9 +271,6 @@ export default function ApplicantSignup() {
     return (
       <div className="min-h-screen bg-green-50 flex flex-col items-center justify-center p-4">
         <div className="w-full max-w-md">
-          <div className="flex justify-center mb-6">
-            <img src={ccifLogo} alt="CCIF Logo" className="h-10 lg:h-14 w-auto" />
-          </div>
 
           <div className="bg-background rounded-2xl shadow-lg p-6 lg:p-8 text-center">
             <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
@@ -319,7 +315,6 @@ export default function ApplicantSignup() {
         />
         <div className="relative z-10 flex flex-col justify-between h-full w-full p-4 lg:p-12 text-primary-foreground">
           <div>
-            <img src={ccifLogo} alt="CCIF Logo" className="h-8 lg:h-12 w-auto mb-2 lg:mb-6 brightness-0 invert" />
             <h1 className="text-xl lg:text-4xl font-bold mb-1 lg:mb-3 font-serif">
               Your Loan. Your Dashboard.
             </h1>

@@ -92,6 +92,19 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
     if (error) {
       toast({ title: 'Error', description: 'Failed to send message', variant: 'destructive' });
       setMessages(prev => prev.filter(m => m.id !== tempMsg.id));
+    } else {
+      // Send Telegram notification for borrower message (fire-and-forget)
+      supabase.functions.invoke('send-telegram-notification', {
+        body: {
+          applicationType: 'borrower_message',
+          borrowerName: user.email,
+          borrowerEmail: user.email,
+          extras: {
+            'Message': text,
+            'Application ID': applicationId,
+          },
+        },
+      }).catch(err => console.error('⚠️ Telegram notification failed:', err));
     }
     setSending(false);
   };

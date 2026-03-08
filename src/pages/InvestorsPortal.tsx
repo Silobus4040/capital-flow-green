@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Eye, EyeOff, Lock, Mail, TrendingUp, Shield, BarChart3, Users, Briefcase, PiggyBank } from "lucide-react";
-import ccifLogo from "@/assets/ccif-logo-enhanced.png";
 import heroImage from "@/assets/investors-meeting.jpg";
 
 const FEATURES = [
@@ -42,7 +41,6 @@ export default function InvestorsPortal() {
         />
         <div className="relative z-10 flex flex-col justify-between h-full w-full p-4 lg:p-12 text-primary-foreground">
           <div>
-            <img src={ccifLogo} alt="CCIF Logo" className="h-8 lg:h-12 w-auto mb-2 lg:mb-6 brightness-0 invert" />
             <h1 className="text-xl lg:text-4xl font-bold mb-1 lg:mb-3 font-serif">
               Investors Portal
             </h1>

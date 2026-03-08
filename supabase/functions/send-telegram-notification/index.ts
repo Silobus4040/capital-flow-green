@@ -151,6 +151,8 @@ serve(async (req) => {
     let header = '🆕 NEW LOAN APPLICATION';
     if (applicationType === 'contact') header = '📩 NEW CONTACT INQUIRY';
     if (applicationType === 'referral') header = '🤝 NEW REFERRAL SIGNUP';
+    if (applicationType === 'document_upload') header = '📄 NEW DOCUMENT UPLOADED';
+    if (applicationType === 'borrower_message') header = '💬 NEW BORROWER MESSAGE';
 
     const now = new Date().toLocaleString('en-US', {
       timeZone: 'America/New_York',

@@ -96,10 +96,25 @@ export default function DocumentSubmission() {
       }
 
       if (successCount === uploadStates.length) {
-        toast({ title: "Success", description: "All documents have been securely uploaded!" });
+        toast({ title: "Success", description: "All documents have been securely uploaded!", variant: "success" as any });
+
+        // Send Telegram notification (fire-and-forget)
+        supabase.functions.invoke('send-telegram-notification', {
+          body: {
+            applicationType: 'document_upload',
+            borrowerName: email,
+            borrowerEmail: email,
+            extras: {
+              'Documents Uploaded': successCount.toString(),
+              'Document Names': uploadStates.map(d => d.documentName).join(', '),
+              'Source': 'Public Document Submission Portal',
+            },
+          },
+        }).catch(err => console.error('⚠️ Telegram notification failed:', err));
+
         setUploadStates([{ id: "1", file: null, documentName: "", notes: "" }]);
       } else if (successCount > 0) {
-        toast({ title: "Partial Success", description: `Uploaded ${successCount} out of ${uploadStates.length} documents.` });
+        toast({ title: "Partial Success", description: `Uploaded ${successCount} out of ${uploadStates.length} documents.`, variant: "success" as any });
       }
 
     } catch (error) {

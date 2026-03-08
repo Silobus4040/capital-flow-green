@@ -15,7 +15,7 @@ import constructionSiteImage from "@/assets/construction-site.jpg";
 import selfStorageImage from "@/assets/self-storage-facility.jpg";
 import seniorLivingImage from "@/assets/senior-living-facility.jpg";
 import residentialInvestmentImage from "@/assets/residential-investment.jpg";
-import ccifLogo from "@/assets/ccif-logo-enhanced.png";
+
 
 const programImages: Record<string, string> = {
   "rv-park-financing": rvParkImage,
@@ -43,7 +43,7 @@ export default function LoanProgramDetail() {
       <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
         <div className="loan-program-container container mx-auto text-center">
           <h1 className="loan-program-subheader text-foreground mb-4">Program Not Found</h1>
-          <Button 
+          <Button
             onClick={() => navigate("/loan-programs")}
             className="loan-program-button"
           >
@@ -67,7 +67,6 @@ export default function LoanProgramDetail() {
     return (
       <div className="min-h-screen flex items-center justify-center p-4" style={{ background: 'linear-gradient(135deg, hsl(142 71% 35%), hsl(142 71% 25%))' }}>
         <div className="max-w-2xl w-full text-center space-y-8">
-          <img src={ccifLogo} alt="CCIF Logo" className="h-20 mx-auto mb-4" />
 
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-10 space-y-6 border border-white/20">
             <CheckCircle2 className="h-20 w-20 text-white mx-auto" />
@@ -121,8 +120,8 @@ export default function LoanProgramDetail() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
       <div className="loan-program-container container mx-auto">
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           onClick={() => navigate('/loan-programs')}
           className="loan-program-button mb-6 hover:bg-primary/10"
         >
@@ -138,7 +137,7 @@ export default function LoanProgramDetail() {
                   <h1 className="loan-program-header bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-6">
                     {program.name}
                   </h1>
-                  
+
                   <div className="space-y-6 mb-8">
                     <div className="bg-primary/5 p-6 rounded-xl">
                       <h2 className="loan-program-subheader text-primary mb-4">Key Information</h2>
@@ -153,18 +152,18 @@ export default function LoanProgramDetail() {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div>
                       <h3 className="loan-program-subheader text-foreground mb-3">Program Description</h3>
                       <p className="loan-program-body text-muted-foreground">{program.description}</p>
                     </div>
                   </div>
                 </div>
-                
+
                 <div>
                   {selectedImage && (
-                    <img 
-                      src={selectedImage} 
+                    <img
+                      src={selectedImage}
                       alt={program.name}
                       className="w-full h-80 object-cover rounded-xl shadow-lg mb-6"
                     />
@@ -180,7 +179,7 @@ export default function LoanProgramDetail() {
       <div className="w-full py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full">
           <h3 className="loan-program-subheader text-foreground mb-8 text-center">Terms & Conditions</h3>
-          <LoanProgramTerms 
+          <LoanProgramTerms
             terms={program.terms}
             className=""
           />
@@ -198,7 +197,7 @@ export default function LoanProgramDetail() {
                     <p className="loan-program-body text-muted-foreground mb-6 max-w-2xl mx-auto">
                       Start your application process today and take advantage of our competitive rates and flexible terms.
                     </p>
-                    <Button 
+                    <Button
                       onClick={() => setShowApplicationForm(true)}
                       size="lg"
                       className="loan-program-button text-lg px-8 py-3 hover:scale-105 transition-transform"
@@ -211,16 +210,16 @@ export default function LoanProgramDetail() {
             </Card>
           ) : (
             <div className="mb-12">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={() => setShowApplicationForm(false)}
                 className="mb-4"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Program Details
               </Button>
-              <ProgramApplicationForm 
-                program={program} 
+              <ProgramApplicationForm
+                program={program}
                 onSubmitSuccess={handleApplicationFormSuccess}
               />
             </div>

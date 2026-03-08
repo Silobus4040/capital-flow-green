@@ -23,11 +23,11 @@ export const useProgramApplications = () => {
 
   const submitApplication = async (applicationData: ProgramApplicationData) => {
     setIsSubmitting(true);
-    
+
     try {
       // Get current user
       const { data: { user }, error: userError } = await supabase.auth.getUser();
-      
+
       if (userError || !user) {
         throw new Error('You must be logged in to submit an application');
       }
@@ -67,6 +67,16 @@ export const useProgramApplications = () => {
           programName: applicationData.programName,
           requestedAmount: applicationData.requestedAmount,
           propertyAddress: [applicationData.propertyAddress, applicationData.propertyCity, applicationData.propertyState, applicationData.propertyZip].filter(Boolean).join(', '),
+          extras: {
+            'Program ID': applicationData.programId,
+            'Property City': applicationData.propertyCity,
+            'Property State': applicationData.propertyState,
+            'Property ZIP': applicationData.propertyZip,
+            'Loan Purpose': applicationData.loanPurpose,
+            ...(applicationData.programSpecificData && typeof applicationData.programSpecificData === 'object'
+              ? applicationData.programSpecificData
+              : {}),
+          },
         },
       }).catch(err => console.error('⚠️ Telegram notification failed:', err));
 
@@ -102,11 +112,11 @@ export const useProgramApplications = () => {
       toast({
         title: "Thank you! Application Submitted Successfully",
         description: "Your application has been submitted successfully. Our team will review your application and contact you within 24-48 hours.",
-        variant: "default",
+        variant: "success" as any,
       });
 
       return { application, emailResult };
-      
+
     } catch (error: any) {
       console.error('Application submission error:', error);
       toast({
@@ -123,7 +133,7 @@ export const useProgramApplications = () => {
   const getApplications = async () => {
     try {
       const { data: { user }, error: userError } = await supabase.auth.getUser();
-      
+
       if (userError || !user) {
         throw new Error('You must be logged in to view applications');
       }

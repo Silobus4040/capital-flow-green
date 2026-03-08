@@ -7,7 +7,6 @@ import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/components/ui/use-toast';
 import { Eye, EyeOff, AlertCircle, Mail, Lock, BarChart3, FileText, MessageSquare, CreditCard, CheckCircle2, Archive } from 'lucide-react';
-import ccifLogo from '@/assets/ccif-logo-enhanced.png';
 import heroImage from '@/assets/loan-management-hero.jpg';
 
 const FEATURES = [
@@ -60,7 +59,6 @@ export default function ApplicantLogin() {
         />
         <div className="relative z-10 flex flex-col justify-between h-full w-full p-4 lg:p-12 text-primary-foreground">
           <div>
-            <img src={ccifLogo} alt="CCIF Logo" className="h-8 lg:h-12 w-auto mb-2 lg:mb-6 brightness-0 invert" />
             <h1 className="text-xl lg:text-4xl font-bold mb-1 lg:mb-3 font-serif">
               Welcome Back
             </h1>
