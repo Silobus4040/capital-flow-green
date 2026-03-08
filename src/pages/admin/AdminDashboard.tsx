@@ -374,7 +374,39 @@ export default function AdminDashboard() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="messages" className="space-y-6">
+          <TabsContent value="documents" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center"><FolderOpen className="h-5 w-5 mr-2" />Uploaded Documents</CardTitle>
+                <CardDescription>All borrower document uploads with download links</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {docsLoading ? (
+                  <div className="text-center py-8 text-muted-foreground">Loading documents...</div>
+                ) : adminDocs.length === 0 ? (
+                  <div className="text-center py-8 text-muted-foreground"><FolderOpen className="h-12 w-12 mx-auto mb-4 opacity-50" /><p>No documents uploaded yet.</p></div>
+                ) : (
+                  <div className="space-y-3">
+                    {adminDocs.map(doc => (
+                      <div key={doc.id} className="border rounded-lg p-4 flex items-center justify-between">
+                        <div>
+                          <p className="font-medium">{doc.document_name}</p>
+                          <p className="text-sm text-muted-foreground">{doc.borrower_name} • {doc.borrower_email}</p>
+                          <p className="text-xs text-muted-foreground">{doc.file_name} {doc.file_size ? `• ${(doc.file_size / 1024).toFixed(1)} KB` : ''}</p>
+                          {doc.notes && <p className="text-xs text-muted-foreground mt-1">Notes: {doc.notes}</p>}
+                          <p className="text-xs text-muted-foreground">{new Date(doc.created_at).toLocaleString()}</p>
+                        </div>
+                        <Button variant="outline" size="sm" onClick={() => downloadDocFile(doc.file_path)}>
+                          <Download className="h-4 w-4 mr-1" /> Download
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center"><MessageSquare className="h-5 w-5 mr-2" />Borrower Messaging</CardTitle>
