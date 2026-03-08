@@ -95,7 +95,7 @@ export default function EnhancedBusinessLoanForm({ onSubmitSuccess }: EnhancedBu
       const applicationData = {
         programId: 'enhanced-business-loan',
         programName: 'Enhanced Business Loan',
-        borrowerName: formData.businessName?.trim() || formData.contactName,
+        borrowerName: formData.contactName,
         borrowerEmail: formData.contactEmail,
         borrowerPhone: formData.contactPhone,
         propertyAddress: formData.businessAddress,

@@ -27,7 +27,7 @@ interface ProgramApplicationFormProps {
 
 export default function ProgramApplicationForm({ program, onSubmitSuccess }: ProgramApplicationFormProps) {
   const { user } = useAuth();
-  
+
   // Enhanced forms for specific programs
   if (program.id === 'business-loan' || program.name.toLowerCase().includes('business loan')) {
     return <EnhancedBusinessLoanForm onSubmitSuccess={onSubmitSuccess} />;
@@ -65,8 +65,7 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
   const { submitPublicApplication, isSubmitting, isAuthenticated } = usePublicApplications();
   const [formData, setFormData] = useState({
     entityName: "",
-    firstName: "",
-    lastName: "",
+    borrowerName: "",
     borrowerEmail: "",
     borrowerPhone: "",
     propertyAddress: "",
@@ -79,7 +78,7 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if ((!formData.entityName && (!formData.firstName || !formData.lastName)) || !formData.borrowerEmail || !formData.borrowerPhone) {
+    if (!formData.borrowerName || !formData.borrowerEmail || !formData.borrowerPhone) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
@@ -92,7 +91,7 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
       const applicationData: ProgramApplicationData = {
         programId: program.id,
         programName: program.name,
-        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
+        borrowerName: formData.entityName?.trim() || formData.borrowerName,
         borrowerEmail: formData.borrowerEmail,
         borrowerPhone: formData.borrowerPhone,
         propertyAddress: formData.propertyAddress,
@@ -114,7 +113,7 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
 
   const getLoanTypeOptions = () => {
     // Define loan type options based on program
-    const programSpecificOptions: { [key: string]: Array<{value: string, label: string}> } = {
+    const programSpecificOptions: { [key: string]: Array<{ value: string, label: string }> } = {
       'commercial-mortgage': [
         { value: 'first-mortgage', label: 'First Mortgage' },
         { value: 'second-mortgage', label: 'Second Mortgage' },
@@ -218,22 +217,12 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="firstName">First Name {!formData.entityName ? '*' : ''}</Label>
+          <Label htmlFor="borrowerName">Full Name *</Label>
           <Input
-            id="firstName"
-            value={formData.firstName}
-            onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
-            required={!formData.entityName}
-            className="min-h-[44px]"
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="lastName">Last Name {!formData.entityName ? '*' : ''}</Label>
-          <Input
-            id="lastName"
-            value={formData.lastName}
-            onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-            required={!formData.entityName}
+            id="borrowerName"
+            value={formData.borrowerName}
+            onChange={(e) => setFormData(prev => ({ ...prev, borrowerName: e.target.value }))}
+            required
             className="min-h-[44px]"
           />
         </div>
@@ -291,7 +280,7 @@ export default function ProgramApplicationForm({ program, onSubmitSuccess }: Pro
 
       {/* Conditional Fields Based on Loan Type */}
       {formData.loanType && (
-        <ConditionalFormFields 
+        <ConditionalFormFields
           loanType={formData.loanType}
           formData={formData}
           updateFormData={updateFormData}

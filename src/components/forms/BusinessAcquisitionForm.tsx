@@ -24,8 +24,7 @@ interface BusinessAcquisitionFormData {
   
   // Contact Information
   entityName: string;
-  firstName: string;
-  lastName: string;
+  borrowerName: string;
   borrowerEmail: string;
   borrowerPhone: string;
   borrowerTitle: string;
@@ -81,8 +80,7 @@ export default function BusinessAcquisitionForm({ onSubmitSuccess }: BusinessAcq
     targetBusinessZip: "",
     acquisitionType: "",
     entityName: "",
-    firstName: "",
-    lastName: "",
+    borrowerName: "",
     borrowerEmail: "",
     borrowerPhone: "",
     borrowerTitle: "",
@@ -115,7 +113,7 @@ export default function BusinessAcquisitionForm({ onSubmitSuccess }: BusinessAcq
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if ((!formData.entityName && (!formData.firstName || !formData.lastName)) || !formData.borrowerEmail || !formData.borrowerPhone || !formData.loanAmount || !formData.loanType) {
+    if (!formData.borrowerName || !formData.borrowerEmail || !formData.borrowerPhone || !formData.loanAmount || !formData.loanType) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
@@ -128,7 +126,7 @@ export default function BusinessAcquisitionForm({ onSubmitSuccess }: BusinessAcq
       const applicationData = {
         programId: 'business-acquisition',
         programName: 'Business Acquisition Financing',
-        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
+        borrowerName: (formData as any).entityName?.trim() || formData.borrowerName,
         borrowerEmail: formData.borrowerEmail,
         borrowerPhone: formData.borrowerPhone,
         propertyAddress: formData.targetBusinessAddress,
@@ -152,9 +150,7 @@ export default function BusinessAcquisitionForm({ onSubmitSuccess }: BusinessAcq
         targetBusinessState: "",
         targetBusinessZip: "",
         acquisitionType: "",
-        entityName: "",
-        firstName: "",
-        lastName: "",
+        borrowerName: "",
         borrowerEmail: "",
         borrowerPhone: "",
         borrowerTitle: "",
@@ -224,27 +220,18 @@ export default function BusinessAcquisitionForm({ onSubmitSuccess }: BusinessAcq
                 <Label htmlFor="entityName">Company/Entity Name</Label>
                 <Input
                   id="entityName"
-                  value={formData.entityName}
+                  value={(formData as any).entityName}
                   onChange={(e) => updateFormData('entityName', e.target.value)}
                   placeholder="If borrowing as a company/entity"
                 />
               </div>
               <div>
-                <Label htmlFor="firstName">First Name {!formData.entityName ? '*' : ''}</Label>
+                <Label htmlFor="borrowerName">Full Name *</Label>
                 <Input
-                  id="firstName"
-                  value={formData.firstName}
-                  onChange={(e) => updateFormData('firstName', e.target.value)}
-                  required={!formData.entityName}
-                />
-              </div>
-              <div>
-                <Label htmlFor="lastName">Last Name {!formData.entityName ? '*' : ''}</Label>
-                <Input
-                  id="lastName"
-                  value={formData.lastName}
-                  onChange={(e) => updateFormData('lastName', e.target.value)}
-                  required={!formData.entityName}
+                  id="borrowerName"
+                  value={formData.borrowerName}
+                  onChange={(e) => updateFormData('borrowerName', e.target.value)}
+                  required
                 />
               </div>
               <div>

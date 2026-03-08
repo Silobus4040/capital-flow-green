@@ -87,7 +87,7 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if ((!formData.entityName?.trim() && (!formData.firstName?.trim() || !formData.lastName?.trim())) || !formData.email || !formData.phone) {
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
@@ -100,7 +100,7 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
       const applicationData = {
         programId: 'commercial-mortgage',
         programName: 'Commercial Mortgage',
-        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
+        borrowerName: `${formData.firstName} ${formData.lastName}`,
         borrowerEmail: formData.email,
         borrowerPhone: formData.phone,
         propertyAddress: formData.propertyAddress,
@@ -166,34 +166,22 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
           <div className="space-y-4">
             <h3 className="text-lg font-semibold border-b pb-2">Borrower Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="md:col-span-2">
-                <Label htmlFor="entityName">Company/Entity Name</Label>
-                <Input
-                  id="entityName"
-                  value={formData.entityName}
-                  onChange={(e) => updateFormData('entityName', e.target.value)}
-                  placeholder="Primary borrower name (company or entity)"
-                />
-                <p className="text-xs text-muted-foreground mt-1">
-                  If provided, this will be used as the primary borrower name
-                </p>
-              </div>
               <div>
-                <Label htmlFor="firstName">First Name {!formData.entityName?.trim() ? '*' : ''}</Label>
+                <Label htmlFor="firstName">First Name *</Label>
                 <Input
                   id="firstName"
                   value={formData.firstName}
                   onChange={(e) => updateFormData('firstName', e.target.value)}
-                  required={!formData.entityName?.trim()}
+                  required
                 />
               </div>
               <div>
-                <Label htmlFor="lastName">Last Name {!formData.entityName?.trim() ? '*' : ''}</Label>
+                <Label htmlFor="lastName">Last Name *</Label>
                 <Input
                   id="lastName"
                   value={formData.lastName}
                   onChange={(e) => updateFormData('lastName', e.target.value)}
-                  required={!formData.entityName?.trim()}
+                  required
                 />
               </div>
               <div>
@@ -214,6 +202,14 @@ export default function CommercialMortgageForm({ onSubmitSuccess }: CommercialMo
                   value={formData.phone}
                   onChange={(e) => updateFormData('phone', e.target.value)}
                   required
+                />
+              </div>
+              <div>
+                <Label htmlFor="entityName">Company/Entity Name</Label>
+                <Input
+                  id="entityName"
+                  value={formData.entityName}
+                  onChange={(e) => updateFormData('entityName', e.target.value)}
                 />
               </div>
               <div>

@@ -12,8 +12,7 @@ import ConditionalFormFields from "./ConditionalFormFields";
 interface SelfStorageFormData {
   // Basic Information
   entityName: string;
-  firstName: string;
-  lastName: string;
+  borrowerName: string;
   borrowerEmail: string;
   borrowerPhone: string;
   
@@ -64,8 +63,7 @@ export default function SelfStorageForm({ onSubmitSuccess }: SelfStorageFormProp
   const { submitPublicApplication, isSubmitting } = usePublicApplications();
   const [formData, setFormData] = useState<SelfStorageFormData>({
     entityName: "",
-    firstName: "",
-    lastName: "",
+    borrowerName: "",
     borrowerEmail: "",
     borrowerPhone: "",
     facilityName: "",
@@ -100,7 +98,7 @@ export default function SelfStorageForm({ onSubmitSuccess }: SelfStorageFormProp
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if ((!formData.entityName && (!formData.firstName || !formData.lastName)) || !formData.borrowerEmail || !formData.loanType || !formData.requestedAmount) {
+    if (!formData.borrowerName || !formData.borrowerEmail || !formData.loanType || !formData.requestedAmount) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
@@ -113,7 +111,7 @@ export default function SelfStorageForm({ onSubmitSuccess }: SelfStorageFormProp
       const applicationData = {
         programId: 'self-storage-financing',
         programName: 'Self Storage Financing',
-        borrowerName: formData.entityName?.trim() || `${formData.firstName} ${formData.lastName}`.trim(),
+        borrowerName: (formData as any).entityName?.trim() || formData.borrowerName,
         borrowerEmail: formData.borrowerEmail,
         borrowerPhone: formData.borrowerPhone,
         propertyAddress: formData.facilityAddress,
@@ -129,9 +127,7 @@ export default function SelfStorageForm({ onSubmitSuccess }: SelfStorageFormProp
 
       // Reset form on success
       setFormData({
-        entityName: "",
-        firstName: "",
-        lastName: "",
+        borrowerName: "",
         borrowerEmail: "",
         borrowerPhone: "",
         facilityName: "",
@@ -212,27 +208,18 @@ export default function SelfStorageForm({ onSubmitSuccess }: SelfStorageFormProp
                 <Label htmlFor="entityName">Company/Entity Name</Label>
                 <Input
                   id="entityName"
-                  value={formData.entityName}
+                  value={(formData as any).entityName}
                   onChange={(e) => updateFormData('entityName', e.target.value)}
                   placeholder="If borrowing as a company/entity"
                 />
               </div>
               <div>
-                <Label htmlFor="firstName">First Name {!formData.entityName ? '*' : ''}</Label>
+                <Label htmlFor="borrowerName">Full Name *</Label>
                 <Input
-                  id="firstName"
-                  value={formData.firstName}
-                  onChange={(e) => updateFormData('firstName', e.target.value)}
-                  required={!formData.entityName}
-                />
-              </div>
-              <div>
-                <Label htmlFor="lastName">Last Name {!formData.entityName ? '*' : ''}</Label>
-                <Input
-                  id="lastName"
-                  value={formData.lastName}
-                  onChange={(e) => updateFormData('lastName', e.target.value)}
-                  required={!formData.entityName}
+                  id="borrowerName"
+                  value={formData.borrowerName}
+                  onChange={(e) => updateFormData('borrowerName', e.target.value)}
+                  required
                 />
               </div>
               <div>
