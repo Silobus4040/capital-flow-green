@@ -200,6 +200,7 @@ export default function AdminDashboard() {
               </div>
             </div>
             <div className="flex items-center space-x-4">
+              <Link to="/admin/term-sheet-generator"><Button variant="default" size="sm" className="bg-primary text-white hover:bg-primary-dark"><FileText className="h-4 w-4 mr-2" />Term Sheet Generator</Button></Link>
               <Link to="/tts-test"><Button variant="outline" size="sm"><Volume2 className="h-4 w-4 mr-2" />Test TTS</Button></Link>
               <Button variant="outline" onClick={signOut}>Logout</Button>
             </div>

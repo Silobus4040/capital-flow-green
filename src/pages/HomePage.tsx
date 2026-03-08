@@ -18,7 +18,7 @@ export default function HomePage() {
           <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 max-w-4xl mx-auto opacity-80 leading-relaxed px-2">
             No credit requirements • 100% financing available • Fast approval process • Serving all 50 states
           </p>
-          
+
           {/* Key Value Propositions */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12 max-w-5xl mx-auto px-2">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6">
@@ -38,12 +38,15 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto px-2">
-            <Button size="lg" variant="secondary" className="w-full sm:w-auto min-h-[48px]" asChild>
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center max-w-2xl mx-auto px-2">
+            <Button size="lg" variant="secondary" className="w-full sm:w-auto min-h-[48px] shadow-lg" asChild>
               <Link to="/loan-programs">View Loan Programs</Link>
             </Button>
+            <Button size="lg" className="bg-white text-primary hover:bg-green-50 w-full sm:w-auto min-h-[48px] shadow-lg font-bold" asChild>
+              <Link to="/loan-matchmaker">Find Your Perfect Loan</Link>
+            </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary w-full sm:w-auto min-h-[48px]" asChild>
-              <Link to="/contact-us">Get Started Today</Link>
+              <Link to="/deal-analyzer">Analyze a Deal</Link>
             </Button>
           </div>
         </div>
@@ -110,15 +113,18 @@ export default function HomePage() {
           <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
             Contact our experienced lending team today to discuss your commercial real estate financing needs.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto px-2">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center max-w-2xl mx-auto px-2">
             <Button size="lg" className="w-full sm:w-auto min-h-[48px]" asChild>
-              <Link to="/contact-us">Contact Us</Link>
+              <Link to="/loan-matchmaker">Try the Loan Matchmaker</Link>
+            </Button>
+            <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-[48px] border-primary text-primary hover:bg-primary/10" asChild>
+              <Link to="/deal-analyzer">Analyze a Deal</Link>
             </Button>
             <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-[48px]" asChild>
-              <Link to="/loan-programs">Browse Loan Programs</Link>
+              <Link to="/contact-us">Contact Us</Link>
             </Button>
           </div>
-          
+
         </div>
       </section>
     </div>
