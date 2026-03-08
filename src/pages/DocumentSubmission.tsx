@@ -5,9 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Upload, X, FileText, Edit } from "lucide-react";
+import { Upload, X, FileText, Edit, Loader2, Check } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
-interface DocumentRequest {
+interface DocumentAction {
   id: string;
   label: string;
   isEditing: boolean;
@@ -22,93 +23,91 @@ interface DocumentUpload {
 
 export default function DocumentSubmission() {
   const [email, setEmail] = useState("");
-  const [uploads] = useState<DocumentUpload[]>([
-    { id: "1", file: null, documentName: "", notes: "" },
-    { id: "2", file: null, documentName: "", notes: "" },
-    { id: "3", file: null, documentName: "", notes: "" },
-    { id: "4", file: null, documentName: "", notes: "" },
-    { id: "5", file: null, documentName: "", notes: "" },
-    { id: "6", file: null, documentName: "", notes: "" },
-    { id: "7", file: null, documentName: "", notes: "" },
-  ]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const acceptedFileTypes = ".pdf,.docx,.xlsx,.jpg,.png";
   const maxFileSize = 25 * 1024 * 1024; // 25MB per file
 
-  const [uploadStates, setUploadStates] = useState<DocumentUpload[]>(uploads);
+  const [uploadStates, setUploadStates] = useState<DocumentUpload[]>([
+    { id: "1", file: null, documentName: "", notes: "" },
+  ]);
 
   const updateUpload = (id: string, field: keyof DocumentUpload, value: any) => {
-    setUploadStates(prevUploads => 
-      prevUploads.map(upload => 
+    setUploadStates(prevUploads =>
+      prevUploads.map(upload =>
         upload.id === id ? { ...upload, [field]: value } : upload
       )
     );
   };
 
-  const handleSubmit = (uploadId: string) => {
-    const upload = uploadStates.find(u => u.id === uploadId);
-    if (!upload) return;
+  const addDocument = () => {
+    const newId = (uploadStates.length + 1).toString();
+    setUploadStates(prev => [...prev, { id: newId, file: null, documentName: "", notes: "" }]);
+  };
 
+  const removeDocument = (id: string) => {
+    if (uploadStates.length > 1) {
+      setUploadStates(prev => prev.filter(upload => upload.id !== id));
+    }
+  };
+
+  const handleSubmitAll = async () => {
     if (!email) {
-      toast({
-        title: "Email Required",
-        description: "Please enter your email address before submitting.",
-        variant: "destructive",
-      });
+      toast({ title: "Email Required", description: "Please enter your email address before submitting.", variant: "destructive" });
       return;
     }
 
-    if (!upload.documentName.trim()) {
-      toast({
-        title: "Document Name Required",
-        description: "Please enter a document name before submitting.",
-        variant: "destructive",
-      });
+    const invalidDocs = uploadStates.filter(doc => !doc.file || !doc.documentName.trim());
+    if (invalidDocs.length > 0) {
+      toast({ title: "Validation Error", description: "All document entries must have a name and a file.", variant: "destructive" });
       return;
     }
 
-    if (!upload.file) {
-      toast({
-        title: "File Required",
-        description: "Please select a file before submitting.",
-        variant: "destructive",
-      });
+    if (uploadStates.some(doc => doc.file && doc.file.size > maxFileSize)) {
+      toast({ title: "File Too Large", description: "Please ensure all files are smaller than 25MB.", variant: "destructive" });
       return;
     }
 
-    if (upload.file.size > maxFileSize) {
-      toast({
-        title: "File Too Large",
-        description: "Please select a file smaller than 25MB.",
-        variant: "destructive",
-      });
-      return;
+    setIsSubmitting(true);
+    let successCount = 0;
+
+    try {
+      for (const doc of uploadStates) {
+        if (!doc.file) continue;
+
+        const fileExt = doc.file.name.split('.').pop();
+        const safeDocName = doc.documentName.replace(/[^a-zA-Z0-9]/g, '_');
+        // Using email as a folder since this is the public submission
+        const safeEmail = email.replace(/[^a-zA-Z0-9]/g, '_');
+        const fileName = `public_submissions/${safeEmail}/${Date.now()}_${safeDocName}.${fileExt}`;
+
+        const { error } = await supabase.storage
+          .from("documents")
+          .upload(fileName, doc.file);
+
+        if (error) {
+          console.error("Upload error for", doc.documentName, error);
+          toast({ title: "Upload Failed", description: `Failed to upload ${doc.documentName}: ${error.message}`, variant: "destructive" });
+          continue;
+        }
+
+        successCount++;
+      }
+
+      if (successCount === uploadStates.length) {
+        toast({ title: "Success", description: "All documents have been securely uploaded!" });
+        setUploadStates([{ id: "1", file: null, documentName: "", notes: "" }]);
+      } else if (successCount > 0) {
+        toast({ title: "Partial Success", description: `Uploaded ${successCount} out of ${uploadStates.length} documents.` });
+      }
+
+    } catch (error) {
+      console.error("Unexpected error during multi-upload", error);
+      toast({ title: "Error", description: "An unexpected error occurred during upload.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
     }
-
-    // Handle file upload
-    console.log("Document Submission:", {
-      email,
-      documentName: upload.documentName,
-      fileName: upload.file.name,
-      fileSize: upload.file.size,
-      notes: upload.notes,
-      timestamp: new Date().toISOString()
-    });
-
-    toast({
-      title: "Document Received",
-      description: "Thank you.",
-    });
-
-    // Clear the uploaded document
-    setUploadStates(prevUploads => 
-      prevUploads.map(u => 
-        u.id === uploadId 
-          ? { ...u, file: null, documentName: "", notes: "" }
-          : u
-      )
-    );
   };
 
   const formatFileSize = (bytes: number) => {
@@ -125,7 +124,7 @@ export default function DocumentSubmission() {
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Document Submission Portal</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Upload your documents below. Name each file exactly as instructed (for example, Appraisal Report, Purchase Agreement). 
+            Upload your documents below. Name each file exactly as instructed (for example, Appraisal Report, Purchase Agreement).
             The Document Name field is mandatory for every upload.
           </p>
         </div>
@@ -173,22 +172,27 @@ export default function DocumentSubmission() {
               <p className="text-sm text-muted-foreground mb-4">
                 Accepted formats: PDF, DOCX, XLSX, JPG, PNG. Maximum file size: 25MB per document.
               </p>
-              
+
               <div className="space-y-6">
                 {uploadStates.map((upload, index) => (
                   <Card key={upload.id} className="p-4">
                     <div className="space-y-4">
-                      <div>
-                        <Label className="text-sm font-semibold">Document Upload {index + 1}</Label>
+                      <div className="flex items-center justify-between border-b pb-2 mb-2">
+                        <Label className="text-lg font-bold">Document {index + 1}</Label>
+                        {uploadStates.length > 1 && (
+                          <Button variant="ghost" size="sm" onClick={() => removeDocument(upload.id)} className="text-destructive h-8 w-8 p-0">
+                            <X className="h-4 w-4" />
+                          </Button>
+                        )}
                       </div>
-                      
+
                       <div>
                         <Label htmlFor={`doc-name-${upload.id}`}>Document Name *</Label>
                         <Input
                           id={`doc-name-${upload.id}`}
                           value={upload.documentName}
                           onChange={(e) => updateUpload(upload.id, 'documentName', e.target.value)}
-                          placeholder="e.g., Appraisal Report, Purchase Agreement"
+                          placeholder="Recorded Deed,"
                           className="mt-1"
                           required
                         />
@@ -205,12 +209,13 @@ export default function DocumentSubmission() {
                           required
                         />
                         {upload.file && (
-                          <div className="flex items-center space-x-2 mt-2">
+                          <div className="flex items-center space-x-2 mt-2 bg-accent/50 p-2 rounded">
                             <FileText className="h-4 w-4 text-primary" />
-                            <span className="text-sm">{upload.file.name}</span>
+                            <span className="text-sm font-medium">{upload.file.name}</span>
                             <span className="text-xs text-muted-foreground">
                               ({formatFileSize(upload.file.size)})
                             </span>
+                            <Button variant="ghost" size="sm" onClick={() => updateUpload(upload.id, "file", null)} className="ml-auto h-6 w-6 p-0 text-destructive"><X className="h-4 w-4" /></Button>
                           </div>
                         )}
                       </div>
@@ -226,16 +231,27 @@ export default function DocumentSubmission() {
                           rows={2}
                         />
                       </div>
-
-                      <Button 
-                        onClick={() => handleSubmit(upload.id)} 
-                        className="w-full"
-                      >
-                        Submit Document
-                      </Button>
                     </div>
                   </Card>
                 ))}
+              </div>
+
+              <div className="mt-4">
+                <Button onClick={addDocument} variant="outline" className="w-full border-dashed"><FileText className="h-4 w-4 mr-2" />Add Another Document</Button>
+              </div>
+
+              <div className="mt-8 pt-6 border-t">
+                <Button
+                  onClick={handleSubmitAll}
+                  className="w-full text-lg py-6"
+                  disabled={isSubmitting || !email || uploadStates.some(d => !d.file || !d.documentName.trim())}
+                >
+                  {isSubmitting ? (
+                    <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Uploading Documents...</>
+                  ) : (
+                    <><Check className="mr-2 h-5 w-5" /> Submit All Documents</>
+                  )}
+                </Button>
               </div>
             </div>
           </CardContent>
