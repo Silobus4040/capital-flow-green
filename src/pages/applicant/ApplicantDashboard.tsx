@@ -61,7 +61,7 @@ export default function ApplicantDashboard() {
       approved: { label: 'Approved', variant: 'default' },
       declined: { label: 'Declined', variant: 'destructive' },
     };
-    return statusMap[status] || { label: 'Under Review', variant: 'secondary' };
+    return statusMap[status] || { label: status.charAt(0).toUpperCase() + status.slice(1), variant: 'outline' };
   };
 
   const getDayProgress = (createdAt: string) => {

@@ -39,36 +39,31 @@ const handler = async (req: Request): Promise<Response> => {
     const resend = new Resend(resendApiKey);
     const { borrowerEmail, borrowerName, investorLabel, bidAmount, programName } = await req.json();
 
-    if (!borrowerEmail || !bidAmount) {
-      return new Response(JSON.stringify({ error: "borrowerEmail and bidAmount are required" }), {
+    if (!borrowerEmail) {
+      return new Response(JSON.stringify({ error: "borrowerEmail is required" }), {
         status: 400,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
-    const formattedAmount = new Intl.NumberFormat('en-US', {
-      style: 'currency', currency: 'USD', maximumFractionDigits: 0,
-    }).format(Number(bidAmount));
-
-    console.log(`📝 Sending bid notification to ${borrowerEmail}: ${investorLabel} bid ${formattedAmount}`);
+    console.log(`📝 Sending bid notification to ${borrowerEmail}: ${investorLabel} placed a bid`);
 
     await sendWithRetry(resend, {
       from: "CCIF Notifications <notifications@ccif-inc.com>",
       to: [borrowerEmail],
-      subject: `💰 New Investor Bid Received - ${formattedAmount}`,
+      subject: `🎉 New Investor Bid Received on Your Loan Application`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f7fafc;">
           <div style="background: linear-gradient(135deg, #1a6b3c 0%, #2d8a56 100%); color: white; padding: 30px; text-align: center;">
-            <h1 style="margin: 0; font-size: 24px;">New Investor Bid</h1>
+            <h1 style="margin: 0; font-size: 24px;">New Investor Bid Received!</h1>
             <p style="margin: 8px 0 0; opacity: 0.9; font-size: 14px;">Commercial Capital & Investment Finance</p>
           </div>
           <div style="padding: 30px;">
             <p style="font-size: 16px; color: #2d3748;">Dear ${borrowerName || 'Borrower'},</p>
-            <p style="font-size: 16px; color: #2d3748;">Great news! An investor has made a bid on your loan application.</p>
+            <p style="font-size: 16px; color: #2d3748;">Great news! An investor has placed a bid on your loan application.</p>
             <div style="background: white; border: 2px solid #1a6b3c; border-radius: 12px; padding: 24px; margin: 20px 0; text-align: center;">
-              <p style="font-size: 14px; color: #718096; margin: 0 0 8px;">Bid Amount</p>
-              <p style="font-size: 36px; font-weight: bold; color: #1a6b3c; margin: 0;">${formattedAmount}</p>
-              <p style="font-size: 14px; color: #718096; margin: 8px 0 0;">from ${investorLabel || 'Anonymous Investor'}</p>
+              <p style="font-size: 18px; font-weight: bold; color: #1a6b3c; margin: 0;">A New Bid Has Been Placed</p>
+              <p style="font-size: 14px; color: #718096; margin: 8px 0 0;">by ${investorLabel || 'An Investor'}</p>
             </div>
             ${programName ? `<p style="font-size: 14px; color: #718096;"><strong>Program:</strong> ${programName}</p>` : ''}
             <p style="font-size: 14px; color: #4a5568;">Log in to your borrower portal to view all bids and track your funding progress in real-time.</p>

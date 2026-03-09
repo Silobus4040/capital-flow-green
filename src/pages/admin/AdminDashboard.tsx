@@ -305,12 +305,14 @@ export default function AdminDashboard() {
                               </Badge>
                             )}
                           </div>
-                          <select
-                            className="border rounded px-2 py-1 text-xs bg-background"
-                            value={client.status}
+                          <input
+                            type="text"
+                            className="border rounded px-2 py-1 text-xs bg-background w-28"
+                            defaultValue={client.status}
                             onClick={(e) => e.stopPropagation()}
-                            onChange={async (e) => {
-                              const newStatus = e.target.value;
+                            onBlur={async (e) => {
+                              const newStatus = e.target.value.trim();
+                              if (!newStatus || newStatus === client.status) return;
                               const { error } = await supabase
                                 .from('loan_program_applications')
                                 .update({ status: newStatus } as any)
@@ -322,25 +324,24 @@ export default function AdminDashboard() {
                                 toast({ title: 'Status Updated', description: `Set to "${newStatus}"` });
                               }
                             }}
-                          >
-                            <option value="pending">Under Review</option>
-                            <option value="approved">Approved</option>
-                            <option value="closing">Closing</option>
-                            <option value="funded">Funded</option>
-                            <option value="declined">Declined</option>
-                          </select>
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') (e.target as HTMLInputElement).blur();
+                            }}
+                          />
                           <p className="text-xs text-muted-foreground">{new Date(client.created_at).toLocaleDateString()}</p>
                         </div>
                       </div>
-                      {expandedApplications.has(client.id) && (
-                        <div className="border-t p-4 bg-muted/30">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                            {client.property_address && <p><span className="font-medium">Property:</span> {client.property_address}{client.property_city && `, ${client.property_city}`}{client.property_state && `, ${client.property_state}`}</p>}
-                            {client.loan_purpose && <p><span className="font-medium">Purpose:</span> {client.loan_purpose}</p>}
+                      {
+                        expandedApplications.has(client.id) && (
+                          <div className="border-t p-4 bg-muted/30">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                              {client.property_address && <p><span className="font-medium">Property:</span> {client.property_address}{client.property_city && `, ${client.property_city}`}{client.property_state && `, ${client.property_state}`}</p>}
+                              {client.loan_purpose && <p><span className="font-medium">Purpose:</span> {client.loan_purpose}</p>}
+                            </div>
+                            {client.program_specific_data && renderProgramSpecificData(client.program_specific_data)}
                           </div>
-                          {client.program_specific_data && renderProgramSpecificData(client.program_specific_data)}
-                        </div>
-                      )}
+                        )
+                      }
                     </div>
                   ))}
                 </div>
@@ -500,6 +501,6 @@ export default function AdminDashboard() {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
+    </div >
   );
 }
