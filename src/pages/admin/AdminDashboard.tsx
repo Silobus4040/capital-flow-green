@@ -60,6 +60,8 @@ export default function AdminDashboard() {
   const [expandedApplications, setExpandedApplications] = useState<Set<string>>(new Set());
   const [editingLoanId, setEditingLoanId] = useState<string | null>(null);
   const [loanIdValue, setLoanIdValue] = useState('');
+  const [editingAmountId, setEditingAmountId] = useState<string | null>(null);
+  const [amountValue, setAmountValue] = useState('');
   const [loading, setLoading] = useState(true);
   const [borrowerActivity, setBorrowerActivity] = useState<BorrowerActivity[]>([]);
   const [activityLoading, setActivityLoading] = useState(false);
@@ -289,7 +291,40 @@ export default function AdminDashboard() {
                           <p className="font-medium text-lg">{client.borrower_name}</p>
                           <p className="text-sm text-muted-foreground">{client.borrower_email} • {client.borrower_phone}</p>
                           <p className="text-xs text-primary font-medium">Program: {client.program_name}</p>
-                          {client.requested_amount && <p className="text-sm font-semibold">Amount: ${client.requested_amount.toLocaleString()}</p>}
+                          {client.requested_amount && (
+                            editingAmountId === client.id ? (
+                              <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
+                                <span className="text-sm font-semibold">$</span>
+                                <Input
+                                  type="number"
+                                  value={amountValue}
+                                  onChange={(e) => setAmountValue(e.target.value)}
+                                  className="h-7 w-36 text-xs"
+                                  autoFocus
+                                />
+                                <Button size="icon" variant="ghost" className="h-7 w-7" onClick={async () => {
+                                  const newAmount = Number(amountValue);
+                                  if (!newAmount || newAmount <= 0) return;
+                                  const { error } = await supabase
+                                    .from('loan_program_applications')
+                                    .update({ requested_amount: newAmount } as any)
+                                    .eq('id', client.id);
+                                  if (error) {
+                                    toast({ title: 'Error', description: error.message, variant: 'destructive' });
+                                  } else {
+                                    setClients(prev => prev.map(c => c.id === client.id ? { ...c, requested_amount: newAmount } : c));
+                                    toast({ title: 'Amount Updated', description: `Set to $${newAmount.toLocaleString()}` });
+                                  }
+                                  setEditingAmountId(null);
+                                }}><Check className="h-3.5 w-3.5 text-green-600" /></Button>
+                                <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => setEditingAmountId(null)}><X className="h-3.5 w-3.5 text-destructive" /></Button>
+                              </div>
+                            ) : (
+                              <p className="text-sm font-semibold cursor-pointer hover:text-primary" onClick={(e) => { e.stopPropagation(); setEditingAmountId(client.id); setAmountValue(String(client.requested_amount)); }}>
+                                Amount: ${client.requested_amount.toLocaleString()} <Pencil className="inline h-3 w-3 ml-1 text-muted-foreground" />
+                              </p>
+                            )
+                          )}
                         </div>
                         <div className="flex items-center space-x-3">
                           <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
