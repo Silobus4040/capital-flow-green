@@ -3,11 +3,12 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import NewsTicker from './NewsTicker';
-import { 
-  MessageSquare, 
-  LayoutDashboard, 
-  FileText, 
-  User, 
+import NotificationBell from './NotificationBell';
+import {
+  MessageSquare,
+  LayoutDashboard,
+  FileText,
+  User,
   LogOut,
   Building2,
   Gavel,
@@ -66,15 +67,18 @@ export default function ApplicantLayout({ children }: ApplicantLayoutProps) {
                 </p>
               </div>
             </div>
-            <Button 
-              onClick={handleSignOut}
-              variant="ghost" 
-              size="sm"
-              className="text-primary-foreground hover:bg-primary-foreground/10"
-            >
-              <LogOut className="h-4 w-4 mr-2" />
-              Sign Out
-            </Button>
+            <div className="flex items-center gap-3">
+              <NotificationBell />
+              <Button
+                onClick={handleSignOut}
+                variant="ghost"
+                size="sm"
+                className="text-primary-foreground hover:bg-primary-foreground/10"
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                Sign Out
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -90,11 +94,10 @@ export default function ApplicantLayout({ children }: ApplicantLayoutProps) {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`flex items-center space-x-3 px-3 py-2 rounded-md transition-colors ${
-                      isActive
+                    className={`flex items-center space-x-3 px-3 py-2 rounded-md transition-colors ${isActive
                         ? 'bg-primary text-primary-foreground'
                         : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
-                    }`}
+                      }`}
                   >
                     <item.icon className="h-5 w-5" />
                     <span>{item.label}</span>
