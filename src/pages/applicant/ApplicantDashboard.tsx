@@ -89,8 +89,7 @@ export default function ApplicantDashboard() {
   return (
     <div className="p-6 space-y-6">
       <div className="bg-gradient-to-r from-primary to-primary/80 rounded-lg p-6 text-primary-foreground">
-        <h1 className="text-3xl font-bold mb-2">Welcome back, {profile?.full_name || 'Loan Applicant'}!</h1>
-        <p className="text-primary-foreground/80">Track your loan progress and manage your applications.</p>
+        <h1 className="text-3xl font-bold mb-0">Welcome, {profile?.full_name || 'Loan Applicant'}!</h1>
       </div>
 
       {applications.length === 0 ? (
@@ -154,23 +153,7 @@ export default function ApplicantDashboard() {
                     </div>
                   </div>
 
-                  {/* Day progress */}
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-3">
-                      <Calendar className="h-4 w-4 text-muted-foreground shrink-0" />
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-1">
-                          <p className="text-xs text-muted-foreground">
-                            Submitted {new Date(app.created_at).toLocaleDateString()}
-                          </p>
-                          <p className="text-xs font-semibold text-primary">
-                            Day {progress.days} of 14
-                          </p>
-                        </div>
-                        <Progress value={progress.percent} className="h-2" />
-                      </div>
-                    </div>
-                  </div>
+                  {/* Day progress removed */}
 
                   {/* Live Bids for all applications with a requested amount */}
                   {app.requested_amount && (

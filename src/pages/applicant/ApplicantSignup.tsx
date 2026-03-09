@@ -276,12 +276,9 @@ export default function ApplicantSignup() {
             <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
               <CheckCircle2 className="h-7 w-7 text-green-600" />
             </div>
-            <h2 className="text-xl lg:text-2xl font-bold text-foreground font-serif mb-1">
+            <h2 className="text-xl lg:text-2xl font-bold text-foreground font-serif mb-6">
               Account Linked Successfully!
             </h2>
-            <p className="text-muted-foreground text-sm mb-6">
-              Your loan application has been linked. Our team will review and contact you within 24–48 hours.
-            </p>
 
             <div className="bg-muted/50 rounded-xl p-4 text-left space-y-3 mb-6">
               <DetailRow label="Borrower" value={loanDetails.borrower_name} />
@@ -290,7 +287,7 @@ export default function ApplicantSignup() {
               <DetailRow label="Program Type" value={loanDetails.program_name} />
               <DetailRow
                 label="Submission Date"
-                value={`${new Date(loanDetails.created_at).toLocaleDateString()} — Day ${days} of 14`}
+                value={new Date(loanDetails.created_at).toLocaleDateString()}
               />
             </div>
 

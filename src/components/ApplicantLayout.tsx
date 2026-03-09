@@ -62,9 +62,6 @@ export default function ApplicantLayout({ children }: ApplicantLayoutProps) {
               <Building2 className="h-8 w-8" />
               <div>
                 <h1 className="text-xl font-bold">Borrower Portal</h1>
-                <p className="text-sm opacity-90">
-                  Welcome, {profile?.full_name || profile?.email}
-                </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -95,8 +92,8 @@ export default function ApplicantLayout({ children }: ApplicantLayoutProps) {
                     key={item.path}
                     to={item.path}
                     className={`flex items-center space-x-3 px-3 py-2 rounded-md transition-colors ${isActive
-                        ? 'bg-primary text-primary-foreground'
-                        : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
                       }`}
                   >
                     <item.icon className="h-5 w-5" />
