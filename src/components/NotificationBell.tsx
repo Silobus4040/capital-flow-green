@@ -129,11 +129,13 @@ export default function NotificationBell() {
                                     description: `${bid.investor_label} placed a bid of ${formatCurrency(currentAmount)}`,
                                 });
                             } else if (prevAmount !== undefined && prevAmount !== currentAmount && currentAmount > 0) {
-                                // Updated bid
+                                // Updated bid (if it was 0, it's their first real bid)
+                                const wasZero = prevAmount === 0;
+                                const actionText = wasZero ? 'placed a bid of' : 'updated their bid to';
                                 addNotification({
                                     type: 'bid',
-                                    title: '💰 Bid Updated',
-                                    description: `${bid.investor_label} updated their bid to ${formatCurrency(currentAmount)}`,
+                                    title: wasZero ? '🎉 New Investor Bid!' : '💰 Bid Updated',
+                                    description: `${bid.investor_label} ${actionText} ${formatCurrency(currentAmount)}`,
                                 });
                             }
 
@@ -291,8 +293,8 @@ export default function NotificationBell() {
                                         }`}
                                 >
                                     <div className={`mt-0.5 rounded-full p-1.5 ${notif.type === 'bid'
-                                            ? 'bg-green-100 text-green-600'
-                                            : 'bg-blue-100 text-blue-600'
+                                        ? 'bg-green-100 text-green-600'
+                                        : 'bg-blue-100 text-blue-600'
                                         }`}>
                                         {notif.type === 'bid'
                                             ? <TrendingUp className="h-3.5 w-3.5" />

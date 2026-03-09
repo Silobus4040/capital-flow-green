@@ -57,11 +57,13 @@ export default function LiveBiddingFeed({ applicationId, requestedAmount }: Live
             });
             setNotification({ label: bid.investor_label, amount: Number(bid.bid_amount) });
           } else if (Number(old.bid_amount) !== Number(bid.bid_amount) && Number(bid.bid_amount) > 0) {
-            // Bid amount changed
+            // Bid amount changed. If it was 0, it's their first real bid
             freshIds.add(bid.id);
+            const wasZero = Number(old.bid_amount) === 0;
+            const actionText = wasZero ? 'placed a bid of' : 'updated their bid to';
             toast({
-              title: '💰 Bid Updated!',
-              description: `${bid.investor_label} updated their bid to ${formatCurrency(Number(bid.bid_amount))}`,
+              title: wasZero ? '🎉 New Investor Bid!' : '💰 Bid Updated!',
+              description: `${bid.investor_label} ${actionText} ${formatCurrency(Number(bid.bid_amount))}`,
             });
             setNotification({ label: bid.investor_label, amount: Number(bid.bid_amount) });
           }
