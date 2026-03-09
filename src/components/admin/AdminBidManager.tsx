@@ -20,6 +20,7 @@ interface Bid {
 interface App {
   id: string;
   borrower_name: string;
+  borrower_email: string;
   program_name: string;
   requested_amount: number | null;
 }
@@ -42,7 +43,7 @@ export default function AdminBidManager() {
     const load = async () => {
       const { data } = await supabase
         .from('loan_program_applications')
-        .select('id, borrower_name, program_name, requested_amount')
+        .select('id, borrower_name, borrower_email, program_name, requested_amount')
         .order('created_at', { ascending: false });
       if (data && data.length > 0) {
         setApps(data as App[]);
@@ -112,10 +113,21 @@ export default function AdminBidManager() {
 
   const saveAll = async () => {
     setSaving(true);
+    // Track which bids had amount changes for notifications
+    const bidAmountChanges: { label: string; amount: number }[] = [];
     for (const [bidId, changes] of Object.entries(editedBids)) {
       const updateData: any = {};
       if (changes.investor_label !== undefined) updateData.investor_label = changes.investor_label;
-      if (changes.bid_amount !== undefined) updateData.bid_amount = Number(changes.bid_amount);
+      if (changes.bid_amount !== undefined) {
+        updateData.bid_amount = Number(changes.bid_amount);
+        const origBid = bids.find(b => b.id === bidId);
+        if (origBid && Number(changes.bid_amount) > 0 && Number(changes.bid_amount) !== origBid.bid_amount) {
+          bidAmountChanges.push({
+            label: changes.investor_label ?? origBid.investor_label,
+            amount: Number(changes.bid_amount),
+          });
+        }
+      }
       if (changes.status !== undefined) updateData.status = changes.status;
       if (Object.keys(updateData).length > 0) {
         await supabase.from('closing_bids').update(updateData).eq('id', bidId);
@@ -133,6 +145,21 @@ export default function AdminBidManager() {
     setInvestorStats(stats);
     toast({ title: 'Bids saved' });
     setSaving(false);
+
+    // Send email notifications for bid amount changes (fire-and-forget)
+    if (bidAmountChanges.length > 0 && selectedApp?.borrower_email) {
+      for (const change of bidAmountChanges) {
+        supabase.functions.invoke('send-bid-notification', {
+          body: {
+            borrowerEmail: selectedApp.borrower_email,
+            borrowerName: selectedApp.borrower_name,
+            investorLabel: change.label,
+            bidAmount: change.amount,
+            programName: selectedApp.program_name,
+          },
+        }).catch(err => console.error('⚠️ Bid notification failed:', err));
+      }
+    }
   };
 
   const deleteBid = async (bidId: string) => {

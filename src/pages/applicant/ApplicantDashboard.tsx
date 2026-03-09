@@ -172,8 +172,8 @@ export default function ApplicantDashboard() {
                     </div>
                   </div>
 
-                  {/* Live Bids for closing/funded applications */}
-                  {(app.status === 'closing' || app.status === 'funded') && app.requested_amount && (
+                  {/* Live Bids for all applications with a requested amount */}
+                  {app.requested_amount && (
                     <div className="pt-2">
                       <div className="flex items-center gap-2 mb-2">
                         <TrendingUp className="h-4 w-4 text-primary" />

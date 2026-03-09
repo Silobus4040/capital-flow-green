@@ -50,6 +50,7 @@ interface Message {
 interface AppWithMessages {
   application_id: string;
   borrower_name: string;
+  borrower_email: string;
   program_name: string;
   message_count: number;
 }
@@ -95,7 +96,7 @@ export default function AdminMessaging() {
   const loadAppsWithMessages = async () => {
     const { data: apps } = await supabase
       .from('loan_program_applications')
-      .select('id, borrower_name, program_name')
+      .select('id, borrower_name, borrower_email, program_name')
       .order('created_at', { ascending: false });
 
     if (!apps) { setLoading(false); return; }
@@ -112,6 +113,7 @@ export default function AdminMessaging() {
     const list: AppWithMessages[] = apps.map(a => ({
       application_id: a.id,
       borrower_name: a.borrower_name,
+      borrower_email: a.borrower_email || '',
       program_name: a.program_name,
       message_count: countMap[a.id] || 0,
     }));
@@ -175,6 +177,19 @@ export default function AdminMessaging() {
     if (error) {
       toast({ title: 'Error', description: error.message, variant: 'destructive' });
       setMessages(prev => prev.filter(m => m.id !== tempMsg.id));
+    } else {
+      // Send email notification to borrower (fire-and-forget)
+      const selectedApp = appsList.find(a => a.application_id === selectedAppId);
+      if (selectedApp?.borrower_email) {
+        supabase.functions.invoke('send-message-notification', {
+          body: {
+            borrowerEmail: selectedApp.borrower_email,
+            borrowerName: selectedApp.borrower_name,
+            messagePreview: text,
+            messageType: 'text',
+          },
+        }).catch(err => console.error('⚠️ Message notification failed:', err));
+      }
     }
     setSending(false);
   };
@@ -316,6 +331,19 @@ export default function AdminMessaging() {
       discardPreview();
       setNewMessage('');
       toast({ title: 'Voice note sent' });
+
+      // Send email notification to borrower (fire-and-forget)
+      const selectedApp = appsList.find(a => a.application_id === selectedAppId);
+      if (selectedApp?.borrower_email) {
+        supabase.functions.invoke('send-message-notification', {
+          body: {
+            borrowerEmail: selectedApp.borrower_email,
+            borrowerName: selectedApp.borrower_name,
+            messagePreview: ttsPreviewText,
+            messageType: 'voice',
+          },
+        }).catch(err => console.error('⚠️ Message notification failed:', err));
+      }
     } catch (err: any) {
       console.error('TTS send error:', err);
       setMessages(prev => prev.filter(m => m.id !== tempId));
