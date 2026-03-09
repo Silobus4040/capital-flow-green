@@ -1,12 +1,38 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Send, Play, Pause, Loader2, MessageSquare, Mic, Check, CheckCheck, Search } from 'lucide-react';
+import { Slider } from '@/components/ui/slider';
+import { Send, Play, Pause, Loader2, MessageSquare, Mic, Check, CheckCheck, Search, Settings2, ChevronDown, ChevronUp, RotateCcw, Trash2, Volume2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+
+const VOICE_OPTIONS = [
+  { value: 'george', label: 'George (Deep, Authoritative)' },
+  { value: 'brian', label: 'Brian (Professional, Warm)' },
+  { value: 'daniel', label: 'Daniel (Clear, Confident)' },
+  { value: 'chris', label: 'Chris (Friendly, Conversational)' },
+  { value: 'will', label: 'Will (Calm, Measured)' },
+  { value: 'liam', label: 'Liam (Young, Energetic)' },
+  { value: 'sarah', label: 'Sarah (Professional, Female)' },
+  { value: 'laura', label: 'Laura (Warm, Friendly Female)' },
+  { value: 'jessica', label: 'Jessica (Conversational Female)' },
+  { value: 'lily', label: 'Lily (Soft, Gentle Female)' },
+  { value: 'alice', label: 'Alice (Clear, Neutral Female)' },
+];
+
+function loadTTSSettings() {
+  try {
+    const saved = localStorage.getItem('ccif_tts_settings');
+    if (saved) return JSON.parse(saved);
+  } catch { }
+  return { voice: 'george', stability: 0.35, style: 0.45, speed: 1.0 };
+}
+function saveTTSSettings(s: any) {
+  localStorage.setItem('ccif_tts_settings', JSON.stringify(s));
+}
 
 interface Message {
   id: string;
@@ -42,6 +68,25 @@ export default function AdminMessaging() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState('');
+
+  // TTS Controls
+  const [ttsSettings, setTtsSettings] = useState(loadTTSSettings);
+  const [showTTSPanel, setShowTTSPanel] = useState(false);
+
+  // TTS Preview
+  const [ttsPreviewBlob, setTtsPreviewBlob] = useState<Blob | null>(null);
+  const [ttsPreviewUrl, setTtsPreviewUrl] = useState<string | null>(null);
+  const [ttsPreviewText, setTtsPreviewText] = useState('');
+  const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
+  const previewAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  const updateTTSSetting = useCallback((key: string, value: number | string) => {
+    setTtsSettings((prev: any) => {
+      const next = { ...prev, [key]: value };
+      saveTTSSettings(next);
+      return next;
+    });
+  }, []);
 
   useEffect(() => {
     loadAppsWithMessages();
@@ -134,30 +179,13 @@ export default function AdminMessaging() {
     setSending(false);
   };
 
-  const sendAsTTS = async () => {
+  // Generate TTS preview (does NOT send yet)
+  const generateTTSPreview = async () => {
     if (!newMessage.trim() || !user || !selectedAppId) return;
     const ttsText = newMessage.trim();
     setTtsLoading(true);
 
-    // Optimistic update — show message immediately while TTS generates
-    const tempId = `temp-tts-${Date.now()}`;
-    const tempMsg: Message = {
-      id: tempId,
-      sender_id: user.id,
-      sender_role: 'admin',
-      message_type: 'voice',
-      content: null,
-      audio_url: null,
-      transcript: ttsText,
-      is_read: false,
-      created_at: new Date().toISOString(),
-      _optimistic: true,
-    };
-    setMessages(prev => [...prev, tempMsg]);
-    setNewMessage('');
-
     try {
-      // Use raw fetch with proper session auth for Edge Function
       const session = await supabase.auth.getSession();
       const accessToken = session?.data?.session?.access_token;
 
@@ -170,7 +198,18 @@ export default function AdminMessaging() {
             'Authorization': `Bearer ${accessToken || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
             'apikey': import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
           },
-          body: JSON.stringify({ text: ttsText, voice: 'george', model: 'eleven_multilingual_v2' }),
+          body: JSON.stringify({
+            text: ttsText,
+            voice: ttsSettings.voice,
+            model: 'eleven_multilingual_v2',
+            voice_settings: {
+              stability: ttsSettings.stability,
+              similarity_boost: 0.80,
+              style: ttsSettings.style,
+              use_speaker_boost: true,
+            },
+            speed: ttsSettings.speed,
+          }),
         }
       );
 
@@ -179,15 +218,11 @@ export default function AdminMessaging() {
         throw new Error(errData.error || `TTS failed (${response.status})`);
       }
 
-      // Edge Function now returns raw MP3 bytes (Content-Type: audio/mpeg)
       const contentType = response.headers.get('Content-Type') || '';
       let audioBlob: Blob;
-
       if (contentType.includes('audio/')) {
-        // Direct audio response (new format)
         audioBlob = await response.blob();
       } else {
-        // Fallback: JSON with base64 (legacy format)
         const data = await response.json();
         if (data?.error) throw new Error(data.error);
         if (!data?.audioContent) throw new Error('No audio content returned');
@@ -196,33 +231,97 @@ export default function AdminMessaging() {
         audioBlob = await blobResp.blob();
       }
 
-      console.log('TTS audio blob:', { size: audioBlob.size, type: audioBlob.type });
+      // Revoke previous preview URL if any
+      if (ttsPreviewUrl) URL.revokeObjectURL(ttsPreviewUrl);
 
+      const url = URL.createObjectURL(audioBlob);
+      setTtsPreviewBlob(audioBlob);
+      setTtsPreviewUrl(url);
+      setTtsPreviewText(ttsText);
+      toast({ title: 'Preview ready', description: 'Listen to the preview before sending.' });
+    } catch (err: any) {
+      console.error('TTS preview error:', err);
+      toast({ title: 'TTS Error', description: err.message, variant: 'destructive' });
+    }
+    setTtsLoading(false);
+  };
+
+  // Play/pause the TTS preview
+  const togglePreviewPlayback = () => {
+    if (!ttsPreviewUrl) return;
+    if (isPreviewPlaying && previewAudioRef.current) {
+      previewAudioRef.current.pause();
+      setIsPreviewPlaying(false);
+    } else {
+      if (previewAudioRef.current) previewAudioRef.current.pause();
+      const audio = new Audio(ttsPreviewUrl);
+      previewAudioRef.current = audio;
+      audio.onended = () => setIsPreviewPlaying(false);
+      audio.onerror = () => { setIsPreviewPlaying(false); toast({ title: 'Playback error', variant: 'destructive' }); };
+      audio.play();
+      setIsPreviewPlaying(true);
+    }
+  };
+
+  // Discard the TTS preview
+  const discardPreview = () => {
+    if (previewAudioRef.current) previewAudioRef.current.pause();
+    if (ttsPreviewUrl) URL.revokeObjectURL(ttsPreviewUrl);
+    setTtsPreviewBlob(null);
+    setTtsPreviewUrl(null);
+    setTtsPreviewText('');
+    setIsPreviewPlaying(false);
+  };
+
+  // Send the approved TTS preview to the borrower
+  const sendTTSPreview = async () => {
+    if (!ttsPreviewBlob || !user || !selectedAppId) return;
+    setSending(true);
+
+    // Optimistic update
+    const tempId = `temp-tts-${Date.now()}`;
+    const tempMsg: Message = {
+      id: tempId,
+      sender_id: user.id,
+      sender_role: 'admin',
+      message_type: 'voice',
+      content: null,
+      audio_url: null,
+      transcript: ttsPreviewText,
+      is_read: false,
+      created_at: new Date().toISOString(),
+      _optimistic: true,
+    };
+    setMessages(prev => [...prev, tempMsg]);
+
+    try {
       const fileName = `tts-${Date.now()}.mp3`;
       const filePath = `${selectedAppId}/${fileName}`;
-      const { error: upErr } = await supabase.storage.from('closing-files').upload(filePath, audioBlob, {
+      const { error: upErr } = await supabase.storage.from('closing-files').upload(filePath, ttsPreviewBlob, {
         contentType: 'audio/mpeg',
         cacheControl: '3600',
       });
       if (upErr) throw upErr;
 
-      // Store raw file path, NOT signed URL
       await supabase.from('closing_messages').insert({
         application_id: selectedAppId,
         sender_id: user.id,
         sender_role: 'admin',
         message_type: 'voice',
         audio_url: filePath,
-        transcript: ttsText,
+        transcript: ttsPreviewText,
         content: null,
       });
+
+      discardPreview();
+      setNewMessage('');
       toast({ title: 'Voice note sent' });
     } catch (err: any) {
-      console.error('TTS error:', err);
+      console.error('TTS send error:', err);
       setMessages(prev => prev.filter(m => m.id !== tempId));
-      toast({ title: 'TTS Error', description: err.message, variant: 'destructive' });
+      toast({ title: 'Send Error', description: err.message, variant: 'destructive' });
     }
-    setTtsLoading(false);
+    setSending(false);
   };
 
   const playAudio = async (msg: Message) => {
@@ -392,6 +491,118 @@ export default function AdminMessaging() {
               <div ref={bottomRef} />
             </CardContent>
             <div className="p-3 border-t bg-card space-y-2">
+              {/* TTS Preview Card */}
+              {ttsPreviewUrl && (
+                <div className="bg-primary/5 border border-primary/20 rounded-xl p-3 space-y-2">
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Volume2 className="h-3.5 w-3.5" />
+                    <span className="font-medium">Voice Preview</span>
+                    <span className="text-[10px] opacity-60">— "{ttsPreviewText.slice(0, 50)}{ttsPreviewText.length > 50 ? '…' : ''}"</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button size="sm" variant="outline" className="gap-1.5 rounded-lg" onClick={togglePreviewPlayback}>
+                      {isPreviewPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
+                      {isPreviewPlaying ? 'Pause' : 'Play'}
+                    </Button>
+                    <Button size="sm" variant="outline" className="gap-1.5 rounded-lg" onClick={generateTTSPreview} disabled={ttsLoading}>
+                      {ttsLoading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <RotateCcw className="h-3.5 w-3.5" />}
+                      Regenerate
+                    </Button>
+                    <Button size="sm" className="gap-1.5 rounded-lg bg-green-600 hover:bg-green-700 text-white" onClick={sendTTSPreview} disabled={sending}>
+                      {sending ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
+                      Send
+                    </Button>
+                    <Button size="sm" variant="ghost" className="gap-1.5 rounded-lg text-destructive hover:text-destructive" onClick={discardPreview}>
+                      <Trash2 className="h-3.5 w-3.5" />
+                      Discard
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {/* TTS Settings Panel (collapsible) */}
+              <button
+                onClick={() => setShowTTSPanel(!showTTSPanel)}
+                className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors w-full"
+              >
+                <Settings2 className="h-3.5 w-3.5" />
+                <span>Voice Settings</span>
+                {showTTSPanel ? <ChevronUp className="h-3 w-3 ml-auto" /> : <ChevronDown className="h-3 w-3 ml-auto" />}
+              </button>
+
+              {showTTSPanel && (
+                <div className="bg-muted/30 rounded-xl p-3 space-y-3 border border-border/50">
+                  {/* Voice Selector */}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Voice</label>
+                    <select
+                      value={ttsSettings.voice}
+                      onChange={(e) => updateTTSSetting('voice', e.target.value)}
+                      className="w-full text-xs border rounded-lg p-2 bg-background"
+                    >
+                      {VOICE_OPTIONS.map(v => (
+                        <option key={v.value} value={v.value}>{v.label}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Stability Slider */}
+                  <div className="space-y-1">
+                    <div className="flex justify-between">
+                      <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Stability (Consistency)</label>
+                      <span className="text-[10px] text-muted-foreground">{ttsSettings.stability.toFixed(2)}</span>
+                    </div>
+                    <Slider
+                      value={[ttsSettings.stability]}
+                      min={0} max={1} step={0.05}
+                      onValueChange={([v]) => updateTTSSetting('stability', v)}
+                      className="w-full"
+                    />
+                    <div className="flex justify-between text-[9px] text-muted-foreground/60">
+                      <span>More Emotional</span>
+                      <span>More Stable</span>
+                    </div>
+                  </div>
+
+                  {/* Style Slider */}
+                  <div className="space-y-1">
+                    <div className="flex justify-between">
+                      <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Style (Expressiveness)</label>
+                      <span className="text-[10px] text-muted-foreground">{ttsSettings.style.toFixed(2)}</span>
+                    </div>
+                    <Slider
+                      value={[ttsSettings.style]}
+                      min={0} max={1} step={0.05}
+                      onValueChange={([v]) => updateTTSSetting('style', v)}
+                      className="w-full"
+                    />
+                    <div className="flex justify-between text-[9px] text-muted-foreground/60">
+                      <span>Neutral</span>
+                      <span>Dramatic</span>
+                    </div>
+                  </div>
+
+                  {/* Speed Slider */}
+                  <div className="space-y-1">
+                    <div className="flex justify-between">
+                      <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Speed</label>
+                      <span className="text-[10px] text-muted-foreground">{ttsSettings.speed.toFixed(2)}x</span>
+                    </div>
+                    <Slider
+                      value={[ttsSettings.speed]}
+                      min={0.5} max={2.0} step={0.05}
+                      onValueChange={([v]) => updateTTSSetting('speed', v)}
+                      className="w-full"
+                    />
+                    <div className="flex justify-between text-[9px] text-muted-foreground/60">
+                      <span>Slow</span>
+                      <span>Fast</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Message Input + Send Buttons */}
               <div className="flex gap-2 items-end">
                 <Textarea
                   value={newMessage}
@@ -408,11 +619,11 @@ export default function AdminMessaging() {
                 variant="outline"
                 size="sm"
                 className="w-full gap-2 rounded-xl"
-                onClick={sendAsTTS}
+                onClick={generateTTSPreview}
                 disabled={ttsLoading || !newMessage.trim()}
               >
                 {ttsLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Mic className="h-4 w-4" />}
-                Send as Voice Note (TTS)
+                {ttsLoading ? 'Generating Preview...' : 'Generate Voice Preview (TTS)'}
               </Button>
             </div>
           </>

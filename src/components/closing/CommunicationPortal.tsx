@@ -218,100 +218,180 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
     return d.toLocaleDateString([], { month: 'short', day: 'numeric' }) + ' ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
+  const formatDateSeparator = (dateStr: string) => {
+    const d = new Date(dateStr);
+    const now = new Date();
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate() - 1);
+    if (d.toDateString() === now.toDateString()) return 'Today';
+    if (d.toDateString() === yesterday.toDateString()) return 'Yesterday';
+    return d.toLocaleDateString([], { month: 'short', day: 'numeric', year: d.getFullYear() !== now.getFullYear() ? 'numeric' : undefined });
+  };
+
+  // Admin identity config (easily changeable later)
+  const ADMIN_NAME = 'CCIF Account Manager';
+  const ADMIN_AVATAR = '/ccif-logo.png';
+
   if (loading) return <div className="p-6 text-center text-muted-foreground">Loading messages...</div>;
 
+  // Group messages by date for separators
+  const filteredMessages = messages.filter(msg => {
+    if (!searchQuery.trim()) return true;
+    const q = searchQuery.toLowerCase();
+    return (
+      (msg.content || '').toLowerCase().includes(q) ||
+      (msg.transcript || '').toLowerCase().includes(q)
+    );
+  });
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
+      {/* Messenger-style Chat Container */}
+      <div className="flex flex-col rounded-2xl border border-border bg-card overflow-hidden shadow-sm" style={{ height: '560px' }}>
+        {/* Chat Header — Facebook Messenger style */}
+        <div className="px-4 py-3 border-b bg-card flex items-center gap-3">
+          <div className="relative">
+            <img src={ADMIN_AVATAR} alt={ADMIN_NAME} className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" />
+            <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-card" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="font-semibold text-sm truncate">{ADMIN_NAME}</p>
+            <p className="text-[11px] text-green-600 font-medium">Active now</p>
+          </div>
+          {/* Search */}
+          <div className="relative w-40">
+            <Search className="absolute left-2.5 top-2 h-3.5 w-3.5 text-muted-foreground" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              placeholder="Search..."
+              className="w-full pl-8 pr-3 py-1.5 text-xs rounded-full border border-border bg-muted/30 focus:outline-none focus:ring-1 focus:ring-primary/30"
+            />
+          </div>
+        </div>
+
+        {/* Messages Area */}
+        <div className="flex-1 overflow-y-auto px-4 py-3" style={{ background: 'linear-gradient(to bottom, hsl(var(--muted)/0.15), hsl(var(--muted)/0.05))' }}>
+          {filteredMessages.length === 0 && (
+            <div className="text-center py-12">
+              <img src={ADMIN_AVATAR} alt="" className="w-16 h-16 rounded-full mx-auto mb-3 border-2 border-muted shadow" />
+              <p className="font-semibold text-sm">{ADMIN_NAME}</p>
+              <p className="text-xs text-muted-foreground mt-1">Start a conversation with your account manager</p>
+            </div>
+          )}
+          <div className="space-y-1">
+            {filteredMessages.map((msg, idx) => {
+              const isOwn = msg.sender_id === user?.id;
+              const isVoice = msg.message_type === 'voice';
+              const prevMsg = idx > 0 ? filteredMessages[idx - 1] : null;
+              const nextMsg = idx < filteredMessages.length - 1 ? filteredMessages[idx + 1] : null;
+
+              // Date separator
+              const msgDate = new Date(msg.created_at).toDateString();
+              const prevDate = prevMsg ? new Date(prevMsg.created_at).toDateString() : null;
+              const showDateSep = !prevMsg || msgDate !== prevDate;
+
+              // Group logic: is this the first/last in a consecutive group from the same sender?
+              const isFirstInGroup = !prevMsg || prevMsg.sender_id !== msg.sender_id || showDateSep;
+              const isLastInGroup = !nextMsg || nextMsg.sender_id !== msg.sender_id || new Date(nextMsg.created_at).toDateString() !== msgDate;
+
+              return (
+                <div key={msg.id}>
+                  {/* Date Separator */}
+                  {showDateSep && (
+                    <div className="flex items-center justify-center my-3">
+                      <span className="px-3 py-0.5 text-[10px] font-medium text-muted-foreground bg-muted/60 rounded-full">{formatDateSeparator(msg.created_at)}</span>
+                    </div>
+                  )}
+
+                  {/* Message Row */}
+                  <div className={`flex ${isOwn ? 'justify-end' : 'justify-start'} ${isFirstInGroup ? 'mt-3' : 'mt-0.5'}`}>
+                    {/* Admin Avatar (only for admin messages, only first in group) */}
+                    {!isOwn && (
+                      <div className="w-8 mr-2 flex-shrink-0">
+                        {isFirstInGroup ? (
+                          <img src={ADMIN_AVATAR} alt="" className="w-7 h-7 rounded-full object-cover mt-1" />
+                        ) : <div className="w-7" />}
+                      </div>
+                    )}
+
+                    <div className={`max-w-[65%] ${isOwn ? '' : ''}`}>
+                      {/* Admin name above first message in group */}
+                      {!isOwn && isFirstInGroup && (
+                        <p className="text-[10px] text-muted-foreground font-medium mb-0.5 ml-1">{ADMIN_NAME}</p>
+                      )}
+
+                      {/* Bubble */}
+                      <div className={`px-3 py-2 ${isOwn
+                        ? `bg-[#0084ff] text-white ${isFirstInGroup ? 'rounded-t-2xl' : 'rounded-t-lg'} ${isLastInGroup ? 'rounded-b-2xl rounded-br-md' : 'rounded-b-lg'} rounded-l-2xl`
+                        : `bg-[#f0f0f0] text-gray-900 ${isFirstInGroup ? 'rounded-t-2xl' : 'rounded-t-lg'} ${isLastInGroup ? 'rounded-b-2xl rounded-bl-md' : 'rounded-b-lg'} rounded-r-2xl`
+                        }`}>
+                        {!isVoice && msg.content && <p className="text-[13px] leading-relaxed">{msg.content}</p>}
+                        {msg.audio_url && (
+                          <button
+                            onClick={() => playAudio(msg)}
+                            className={`flex items-center gap-2 text-[13px] ${isOwn ? 'text-white/80 hover:text-white' : 'text-blue-600 hover:text-blue-700'}`}
+                          >
+                            {playingId === msg.id ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+                            {playingId === msg.id ? 'Playing...' : '▶ Play Audio'}
+                          </button>
+                        )}
+                        {isVoice && msg.transcript && (
+                          <p className={`text-[11px] mt-1 ${isOwn ? 'text-white/50' : 'text-gray-400'} italic`}>"{msg.transcript}"</p>
+                        )}
+                        {isVoice && !msg.audio_url && (
+                          <p className={`text-[13px] ${isOwn ? 'text-white/60' : 'text-gray-400'}`}>Sending voice note…</p>
+                        )}
+                      </div>
+
+                      {/* Timestamp + read receipts — only on last in group */}
+                      {isLastInGroup && (
+                        <div className={`flex items-center gap-1 mt-0.5 px-1 ${isOwn ? 'justify-end' : 'justify-start'}`}>
+                          <span className="text-[10px] text-muted-foreground">{formatTime(msg.created_at)}</span>
+                          {isOwn && (
+                            msg._optimistic
+                              ? <Check className="h-3 w-3 text-muted-foreground/50" />
+                              : <CheckCheck className={`h-3 w-3 ${msg.is_read ? 'text-[#0084ff]' : 'text-muted-foreground/50'}`} />
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div ref={bottomRef} />
+        </div>
+
+        {/* Messenger-style Input Bar */}
+        <div className="px-3 py-2 border-t bg-card">
+          <div className="flex gap-2 items-end">
+            <Textarea
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              placeholder="Aa"
+              className="min-h-[38px] max-h-[80px] resize-none rounded-full border-border bg-muted/30 px-4 text-sm"
+              onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendTextMessage(); } }}
+            />
+            <Button onClick={sendTextMessage} disabled={sending || !newMessage.trim()} size="icon" className="rounded-full h-9 w-9 shrink-0 bg-[#0084ff] hover:bg-[#0073e6]">
+              {sending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+            </Button>
+          </div>
+          <div className="mt-1.5">
+            <VoiceRecorder onSend={handleVoiceSend} />
+          </div>
+        </div>
+      </div>
+
+      {/* Liability Notice — moved below chat */}
       <Alert className="border-amber-200 bg-amber-50">
         <Shield className="h-4 w-4 text-amber-600" />
         <AlertDescription className="text-amber-800 text-xs">
           CCIF assumes 100% liability for all communication data — fully retained for loan life + 180 days post-repayment.
         </AlertDescription>
       </Alert>
-
-      <Card className="flex flex-col" style={{ height: '500px' }}>
-        <CardHeader className="pb-2 border-b space-y-2">
-          <CardTitle className="text-base">Secure Messages</CardTitle>
-          <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
-              placeholder="Search messages..."
-              className="w-full pl-8 pr-3 py-2 text-xs rounded-lg border border-border bg-muted/30 focus:outline-none focus:ring-1 focus:ring-primary/30"
-            />
-          </div>
-        </CardHeader>
-        <CardContent className="flex-1 overflow-y-auto p-4 bg-muted/20">
-          {messages.length === 0 && (
-            <p className="text-center text-muted-foreground text-sm py-8">No messages yet. Start a conversation below.</p>
-          )}
-          <div className="space-y-3">
-            {messages
-              .filter(msg => {
-                if (!searchQuery.trim()) return true;
-                const q = searchQuery.toLowerCase();
-                return (
-                  (msg.content || '').toLowerCase().includes(q) ||
-                  (msg.transcript || '').toLowerCase().includes(q)
-                );
-              })
-              .map((msg) => {
-                const isOwn = msg.sender_id === user?.id;
-                const isVoice = msg.message_type === 'voice';
-                return (
-                  <div key={msg.id} className={`flex ${isOwn ? 'justify-end' : 'justify-start'}`}>
-                    <div className="max-w-[70%] space-y-1">
-                      <div className={`rounded-2xl px-4 py-2.5 ${isOwn
-                        ? 'bg-primary text-primary-foreground rounded-br-md'
-                        : 'bg-card border border-border rounded-bl-md'
-                        }`}>
-                        {!isVoice && msg.content && <p className="text-sm leading-relaxed">{msg.content}</p>}
-                        {msg.audio_url && (
-                          <button
-                            onClick={() => playAudio(msg)}
-                            className={`flex items-center gap-2 text-sm ${isOwn ? 'text-primary-foreground/80 hover:text-primary-foreground' : 'text-primary hover:text-primary/80'}`}
-                          >
-                            {playingId === msg.id ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-                            {playingId === msg.id ? 'Playing...' : 'Play Audio'}
-                          </button>
-                        )}
-                        {isVoice && !msg.audio_url && (
-                          <p className={`text-sm leading-relaxed ${isOwn ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>Sending voice note…</p>
-                        )}
-                      </div>
-                      <div className={`flex items-center gap-1 px-1 ${isOwn ? 'justify-end' : 'justify-start'}`}>
-                        <span className="text-[10px] text-muted-foreground">{formatTime(msg.created_at)}</span>
-                        {isOwn && (
-                          msg._optimistic
-                            ? <Check className="h-3 w-3 text-muted-foreground/50" />
-                            : <CheckCheck className={`h-3 w-3 ${msg.is_read ? 'text-primary' : 'text-muted-foreground/50'}`} />
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
-          <div ref={bottomRef} />
-        </CardContent>
-        <div className="p-3 border-t bg-card space-y-2">
-          <div className="flex gap-2 items-end">
-            <Textarea
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Type a message..."
-              className="min-h-[40px] max-h-[80px] resize-none rounded-2xl border-border"
-              onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendTextMessage(); } }}
-            />
-            <Button onClick={sendTextMessage} disabled={sending || !newMessage.trim()} size="icon" className="rounded-full h-10 w-10 shrink-0">
-              {sending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-            </Button>
-          </div>
-          <VoiceRecorder onSend={handleVoiceSend} />
-        </div>
-      </Card>
     </div>
   );
 }

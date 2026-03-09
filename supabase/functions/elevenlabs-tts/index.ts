@@ -32,7 +32,18 @@ serve(async (req) => {
   }
 
   try {
-    const { text, voice = 'george', model = 'eleven_multilingual_v2' } = await req.json()
+    const body = await req.json()
+    const { text, voice = 'george', model = 'eleven_multilingual_v2' } = body
+
+    // Accept optional client-supplied voice_settings for emotion control
+    const clientSettings = body.voice_settings || {}
+    const voiceSettings = {
+      stability: clientSettings.stability ?? 0.35,
+      similarity_boost: clientSettings.similarity_boost ?? 0.80,
+      style: clientSettings.style ?? 0.45,
+      use_speaker_boost: clientSettings.use_speaker_boost ?? true,
+    }
+    const speed = body.speed ?? 1.0
 
     if (!text || typeof text !== 'string') {
       throw new Error('Valid text is required')
@@ -48,6 +59,8 @@ serve(async (req) => {
       length: sanitizedText.length,
       voice,
       model,
+      voiceSettings,
+      speed,
     })
 
     const ELEVENLABS_API_KEY = Deno.env.get('ELEVENLABS_API_KEY')
@@ -71,12 +84,8 @@ serve(async (req) => {
         body: JSON.stringify({
           text: sanitizedText,
           model_id: model,
-          voice_settings: {
-            stability: 0.5,
-            similarity_boost: 0.75,
-            style: 0.0,
-            use_speaker_boost: true,
-          },
+          voice_settings: voiceSettings,
+          ...(speed !== 1.0 ? { speed } : {}),
         }),
       }
     )
