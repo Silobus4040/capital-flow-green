@@ -32,30 +32,23 @@ export const useProgramApplications = () => {
         throw new Error('You must be logged in to submit an application');
       }
 
-      // Insert application into database
-      const { data: application, error: dbError } = await supabase
-        .from('loan_program_applications')
-        .insert({
-          user_id: user.id,
-          program_id: applicationData.programId,
-          program_name: applicationData.programName,
-          borrower_name: applicationData.borrowerName,
-          borrower_email: applicationData.borrowerEmail,
-          borrower_phone: applicationData.borrowerPhone,
-          property_address: applicationData.propertyAddress,
-          property_city: applicationData.propertyCity,
-          property_state: applicationData.propertyState,
-          property_zip: applicationData.propertyZip,
-          requested_amount: applicationData.requestedAmount,
-          loan_purpose: applicationData.loanPurpose,
-          program_specific_data: applicationData.programSpecificData || {},
-        })
-        .select()
-        .single();
+      // Insert application into database via Edge Function to bypass RLS
+      const { data: edgeResponse, error: fnError } = await supabase.functions.invoke<{
+        success: boolean;
+        data?: any;
+        error?: string;
+      }>('submit-application', {
+        body: {
+          userId: user.id,
+          applicationData,
+        },
+      });
 
-      if (dbError) {
-        throw new Error(`Database error: ${dbError.message}`);
+      if (fnError || !edgeResponse?.success || !edgeResponse?.data) {
+        throw new Error(`Submission error: ${fnError?.message || edgeResponse?.error || 'Unknown error'}`);
       }
+
+      const application = edgeResponse.data;
 
       // Send Telegram notification (fire-and-forget)
       supabase.functions.invoke('send-telegram-notification', {

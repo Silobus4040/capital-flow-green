@@ -82,29 +82,22 @@ export const usePublicApplications = () => {
     setIsSubmitting(true);
 
     try {
-      const { data: insertedApplication, error: dbError } = await supabase
-        .from('loan_program_applications')
-        .insert({
-          user_id: user?.id || null,
-          program_id: applicationData.programId,
-          program_name: applicationData.programName,
-          borrower_name: applicationData.borrowerName,
-          borrower_email: applicationData.borrowerEmail,
-          borrower_phone: applicationData.borrowerPhone,
-          property_address: applicationData.propertyAddress,
-          property_city: applicationData.propertyCity,
-          property_state: applicationData.propertyState,
-          property_zip: applicationData.propertyZip,
-          requested_amount: applicationData.requestedAmount,
-          loan_purpose: applicationData.loanPurpose,
-          program_specific_data: applicationData.programSpecificData || {},
-        })
-        .select('id, loan_id')
-        .single();
+      const { data: edgeResponse, error: fnError } = await supabase.functions.invoke<{
+        success: boolean;
+        data?: any;
+        error?: string;
+      }>('submit-application', {
+        body: {
+          userId: user?.id || null,
+          applicationData,
+        },
+      });
 
-      if (dbError) {
-        throw new Error(`Database error: ${dbError.message}`);
+      if (fnError || !edgeResponse?.success || !edgeResponse?.data) {
+        throw new Error(`Submission error: ${fnError?.message || edgeResponse?.error || 'Unknown error'}`);
       }
+
+      const insertedApplication = edgeResponse.data;
 
       const propertyAddress = [
         applicationData.propertyAddress,
@@ -137,8 +130,8 @@ export const usePublicApplications = () => {
       if (telegramError || !telegramResult?.success) {
         throw new Error(
           telegramError?.message ||
-            telegramResult?.error ||
-            'Application saved, but Telegram delivery failed. Please submit again so our team is notified.'
+          telegramResult?.error ||
+          'Application saved, but Telegram delivery failed. Please submit again so our team is notified.'
         );
       }
 
