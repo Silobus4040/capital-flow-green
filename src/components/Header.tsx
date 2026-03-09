@@ -68,12 +68,6 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            <Link
-              to="/applicant-login"
-              className="px-3 xl:px-4 py-2 rounded-md text-xs xl:text-sm font-medium bg-accent text-accent-foreground hover:bg-primary hover:text-primary-foreground transition-colors ml-2 whitespace-nowrap"
-            >
-              Borrower Portal
-            </Link>
           </nav>
 
           {/* Mobile menu button */}
@@ -106,13 +100,6 @@ export default function Header() {
                   {item.name}
                 </Link>
               ))}
-              <Link
-                to="/applicant-login"
-                className="block px-4 py-3 rounded-md text-base font-medium bg-accent text-accent-foreground hover:bg-primary hover:text-primary-foreground transition-colors min-h-[44px] flex items-center"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Borrower Portal
-              </Link>
             </div>
           </div>
         )}
