@@ -146,19 +146,35 @@ export default function AdminBidManager() {
     toast({ title: 'Bids saved' });
     setSaving(false);
 
-    // Send email notifications for bid amount changes (fire-and-forget)
+    // Send email notifications for bid amount changes
     if (bidAmountChanges.length > 0 && selectedApp?.borrower_email) {
+      console.log(`📧 Sending ${bidAmountChanges.length} bid notification(s) to ${selectedApp.borrower_email}`);
       for (const change of bidAmountChanges) {
-        supabase.functions.invoke('send-bid-notification', {
-          body: {
-            borrowerEmail: selectedApp.borrower_email,
-            borrowerName: selectedApp.borrower_name,
-            investorLabel: change.label,
-            bidAmount: change.amount,
-            programName: selectedApp.program_name,
-          },
-        }).catch(err => console.error('⚠️ Bid notification failed:', err));
+        try {
+          const { data: fnData, error: fnError } = await supabase.functions.invoke('send-bid-notification', {
+            body: {
+              borrowerEmail: selectedApp.borrower_email,
+              borrowerName: selectedApp.borrower_name,
+              investorLabel: change.label,
+              bidAmount: change.amount,
+              programName: selectedApp.program_name,
+            },
+          });
+          if (fnError) {
+            console.error('⚠️ Bid notification error:', fnError);
+            toast({ title: '⚠️ Email notification failed', description: fnError.message || 'Edge Function error', variant: 'destructive' });
+          } else {
+            console.log('✅ Bid notification sent:', fnData);
+            toast({ title: '📧 Email sent', description: `Bid notification sent to ${selectedApp.borrower_email}` });
+          }
+        } catch (err: any) {
+          console.error('⚠️ Bid notification exception:', err);
+          toast({ title: '⚠️ Email notification failed', description: err?.message || 'Unknown error', variant: 'destructive' });
+        }
       }
+    } else if (bidAmountChanges.length > 0) {
+      console.warn('⚠️ No borrower email found for bid notification');
+      toast({ title: '⚠️ No email sent', description: 'Borrower email not found for this application', variant: 'destructive' });
     }
   };
 
