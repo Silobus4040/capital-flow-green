@@ -70,7 +70,7 @@ export default function LoanOfficerDashboard() {
                 <div key={app.id} className="flex items-center justify-between p-4 border rounded-lg">
                   <div><p className="font-medium">{app.borrower_name}</p><p className="text-sm text-muted-foreground">{app.borrower_email}</p><p className="text-xs text-blue-600">{app.program_name}</p></div>
                   <div className="flex items-center space-x-2">
-                    <Badge variant={app.status === 'approved' ? 'default' : app.status === 'pending' ? 'secondary' : 'destructive'}>{app.status}</Badge>
+                    <Badge variant={app.status === 'approved' ? 'default' : (app.status === 'pending' || app.status === 'bidding') ? 'secondary' : 'destructive'}>{app.status === 'pending' ? 'Under Review' : app.status === 'bidding' ? 'Bidding' : app.status}</Badge>
                     <p className="text-xs text-muted-foreground">{new Date(app.created_at).toLocaleDateString()}</p>
                   </div>
                 </div>

@@ -56,6 +56,7 @@ export default function ApplicantDashboard() {
     const statusMap: Record<string, { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }> = {
       submitted: { label: 'Under Review', variant: 'secondary' },
       under_review: { label: 'Under Review', variant: 'secondary' },
+      bidding: { label: 'Bidding', variant: 'secondary' },
       pending: { label: 'Under Review', variant: 'secondary' },
       approved: { label: 'Approved', variant: 'default' },
       declined: { label: 'Declined', variant: 'destructive' },
