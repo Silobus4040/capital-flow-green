@@ -366,23 +366,42 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
         </div>
 
         {/* Messenger-style Input Bar */}
-        <div className="px-3 py-2 border-t bg-card">
-          <div className="flex gap-2 items-end">
-            <Textarea
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Aa"
-              className="min-h-[38px] max-h-[80px] resize-none rounded-full border-border bg-muted/30 px-4 text-sm"
-              onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendTextMessage(); } }}
-            />
-            <Button onClick={sendTextMessage} disabled={sending || !newMessage.trim()} size="icon" className="rounded-full h-9 w-9 shrink-0 bg-[#0084ff] hover:bg-[#0073e6]">
-              {sending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-            </Button>
-          </div>
-          <div className="mt-1.5">
-            <VoiceRecorder onSend={handleVoiceSend} />
-          </div>
-        </div>
+        {(() => {
+          const adminHasMessaged = messages.some(m => m.sender_role === 'admin' && !m._optimistic);
+          if (!adminHasMessaged) {
+            return (
+              <div className="px-3 py-4 border-t bg-card">
+                <div className="flex items-center gap-3 justify-center text-center">
+                  <div className="bg-muted/50 rounded-full p-2">
+                    <Shield className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    Your CCIF account manager will reach out to you shortly. You'll be able to reply once they send the first message.
+                  </p>
+                </div>
+              </div>
+            );
+          }
+          return (
+            <div className="px-3 py-2 border-t bg-card">
+              <div className="flex gap-2 items-end">
+                <Textarea
+                  value={newMessage}
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  placeholder="Aa"
+                  className="min-h-[38px] max-h-[80px] resize-none rounded-full border-border bg-muted/30 px-4 text-sm"
+                  onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendTextMessage(); } }}
+                />
+                <Button onClick={sendTextMessage} disabled={sending || !newMessage.trim()} size="icon" className="rounded-full h-9 w-9 shrink-0 bg-[#0084ff] hover:bg-[#0073e6]">
+                  {sending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                </Button>
+              </div>
+              <div className="mt-1.5">
+                <VoiceRecorder onSend={handleVoiceSend} />
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       {/* Liability Notice — moved below chat */}
