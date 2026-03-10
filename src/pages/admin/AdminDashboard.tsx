@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
-import { Users, FileText, Settings, BarChart3, Handshake, Volume2, Check, X, Pencil, MessageSquare, Activity, TrendingUp, Download, FolderOpen } from 'lucide-react';
+import { Users, FileText, Settings, BarChart3, Handshake, Volume2, Check, X, Pencil, MessageSquare, Activity, TrendingUp, Download, FolderOpen, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AdminMessaging from '@/components/AdminMessaging';
 import AdminBidManager from '@/components/admin/AdminBidManager';
@@ -183,10 +183,39 @@ export default function AdminDashboard() {
     setDocsLoading(false);
   };
 
-  const downloadDocFile = async (filePath: string) => {
-    const { data, error } = await supabase.storage.from('documents').createSignedUrl(filePath, 60);
-    if (data?.signedUrl) window.open(data.signedUrl, '_blank');
-    else toast({ title: 'Error', description: 'Could not generate download link.', variant: 'destructive' });
+  const handleDocAction = async (filePath: string, fileName: string, action: 'view' | 'download') => {
+    // Open window immediately to bypass popup blocker when viewing
+    let viewWindow: Window | null = null;
+    if (action === 'view') {
+      viewWindow = window.open('', '_blank');
+      if (viewWindow) viewWindow.document.write('Loading document...');
+    }
+
+    try {
+      // Fetch blob instead of navigating to storage URL (bypasses Adblock/Tracking Prevention)
+      const { data, error } = await supabase.storage.from('documents').download(filePath);
+      if (error || !data) throw error;
+
+      const blobUrl = URL.createObjectURL(data);
+
+      if (action === 'view' && viewWindow) {
+        viewWindow.location.href = blobUrl;
+      } else if (action === 'download') {
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+
+      // Clean up memory
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+    } catch (err) {
+      console.error('Error fetching document:', err);
+      if (viewWindow) viewWindow.close();
+      toast({ title: 'Error', description: 'Could not access the document.', variant: 'destructive' });
+    }
   };
 
   const toggleApplicationDetails = (applicationId: string) => {
@@ -432,9 +461,14 @@ export default function AdminDashboard() {
                           {doc.notes && <p className="text-xs text-muted-foreground mt-1">Notes: {doc.notes}</p>}
                           <p className="text-xs text-muted-foreground">{new Date(doc.created_at).toLocaleString()}</p>
                         </div>
-                        <Button variant="outline" size="sm" onClick={() => downloadDocFile(doc.file_path)}>
-                          <Download className="h-4 w-4 mr-1" /> Download
-                        </Button>
+                        <div className="flex flex-col sm:flex-row gap-2 mt-3 sm:mt-0">
+                          <Button variant="outline" size="sm" onClick={() => handleDocAction(doc.file_path, doc.file_name, 'view')}>
+                            <Eye className="h-4 w-4 mr-1" /> View
+                          </Button>
+                          <Button variant="outline" size="sm" onClick={() => handleDocAction(doc.file_path, doc.file_name, 'download')}>
+                            <Download className="h-4 w-4 mr-1" /> Download
+                          </Button>
+                        </div>
                       </div>
                     ))}
                   </div>
