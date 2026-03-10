@@ -6,44 +6,63 @@ import { CheckCircle, DollarSign, CreditCard, TrendingUp } from "lucide-react";
 export default function HomePage() {
   return (
     <div>
-      {/* Hero Section — lobby image with overlaid text at top and CTA buttons at bottom */}
-      <section className="relative w-full overflow-hidden h-[clamp(400px,60vh,700px)] md:h-auto bg-gray-900">
-        {/* Full-bleed lobby background up to max width */}
-        <div className="mx-auto max-w-4xl relative w-full h-full">
-          <img
-            src="/hero-lobby.png"
-            alt="Commercial Capital & Investment Finance Inc. — Corporate Lobby at 600 W Broadway, San Diego"
-            className="w-full object-cover object-center absolute inset-0 h-full md:relative md:object-contain md:h-auto"
-          />
+      {/* Hero Section — Split layout on desktop, Overlaid on mobile */}
+      <section className="w-full bg-slate-900 border-b border-white/10">
+        <div className="mx-auto max-w-[1400px] md:grid md:grid-cols-2 lg:grid-cols-[1.2fr_1fr] md:items-stretch">
 
-          {/* Top tagline text */}
-          <div className="absolute top-0 left-0 right-0 z-10 pt-4 sm:pt-6 px-4">
-            <div className="flex flex-wrap sm:flex-nowrap justify-center sm:gap-x-4 gap-x-2 gap-y-1 text-white text-[10px] sm:text-sm md:text-base font-medium drop-shadow-lg whitespace-nowrap">
-              <span>Asset-Based Lending</span>
-              <span>•</span>
-              <span>100% Financing Available</span>
-              <span>•</span>
-              <span>Serving All 50 States</span>
-            </div>
+          {/* Left Side: Image Container */}
+          <div className="relative w-full h-[clamp(400px,60vh,700px)] md:h-auto md:min-h-[500px] lg:min-h-[650px] overflow-hidden">
+            <img
+              src="/hero-lobby.png"
+              alt="Commercial Capital & Investment Finance Inc. — Corporate Lobby at 600 W Broadway, San Diego"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+            />
+            {/* Dark gradient overlays ONLY on mobile for text readability */}
+            <div className="md:hidden absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent z-0" />
+            <div className="md:hidden absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-0" />
           </div>
 
-          {/* Dark gradient overlays for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          {/* Right Side: Content Container */}
+          <div className="absolute inset-0 md:relative z-10 flex flex-col justify-between md:justify-center px-4 py-8 sm:p-6 md:p-10 lg:p-14 md:bg-[#0a1510] border-l border-white/5">
 
-          {/* Bottom CTA buttons */}
-          <div className="absolute bottom-0 left-0 right-0 z-10 pb-4 sm:pb-6 px-4">
-            <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3 justify-center max-w-2xl mx-auto">
-              <Button size="lg" className="min-h-[44px] px-5 shadow-[0_0_16px_rgba(34,197,94,0.4)] font-bold text-white bg-gradient-to-b from-green-400 via-green-600 to-green-700 hover:from-green-500 hover:via-green-700 hover:to-green-800 border border-green-400/30 rounded-lg w-full sm:w-auto" asChild>
-                <Link to="/loan-programs">View Loan Programs</Link>
-              </Button>
-              <Button size="lg" className="min-h-[44px] px-5 shadow-[0_0_16px_rgba(34,197,94,0.4)] font-bold text-white bg-gradient-to-b from-green-400 via-green-600 to-green-700 hover:from-green-500 hover:via-green-700 hover:to-green-800 border border-green-400/30 rounded-lg w-full sm:w-auto" asChild>
-                <Link to="/loan-matchmaker">Find Your Perfect Loan</Link>
-              </Button>
-              <Button size="lg" className="min-h-[44px] px-5 shadow-[0_0_16px_rgba(34,197,94,0.4)] font-bold text-white bg-gradient-to-b from-green-400 via-green-600 to-green-700 hover:from-green-500 hover:via-green-700 hover:to-green-800 border border-green-400/30 rounded-lg w-full sm:w-auto" asChild>
-                <Link to="/deal-analyzer">Analyze a Deal</Link>
-              </Button>
+            {/* Top/Header: Tagline */}
+            <div className="mb-auto md:mb-12 pt-2 md:pt-0">
+              <div className="flex flex-wrap sm:flex-nowrap md:flex-wrap lg:flex-nowrap justify-center md:justify-start gap-x-2 lg:gap-x-4 gap-y-2 text-white text-[10px] sm:text-sm md:text-sm lg:text-base font-medium drop-shadow-md whitespace-nowrap md:whitespace-normal">
+                <span className="text-primary md:text-white">Asset-Based Lending</span>
+                <span className="hidden md:inline text-primary">•</span>
+                <span className="hidden sm:inline md:hidden">•</span>
+                <span className="text-primary md:text-white">100% Financing</span>
+                <span className="hidden md:inline text-primary">•</span>
+                <span className="hidden sm:inline md:hidden">•</span>
+                <span className="text-primary md:text-white">All 50 States</span>
+              </div>
+              <h1 className="hidden md:block text-3xl lg:text-5xl font-bold text-white mt-6 leading-tight">
+                Commercial Capital <br /><span className="text-primary">&</span> Investment Finance
+              </h1>
+              <p className="hidden md:block text-gray-400 mt-4 text-sm lg:text-base max-w-md leading-relaxed">
+                Empowering developers and real estate investors with flexible, asset-based financing solutions nationwide. No credit requirements, just deals that make sense.
+              </p>
             </div>
+
+            {/* Bottom/Footer: CTA Buttons stacked line by line on desktop */}
+            <div className="mt-auto w-full max-w-xs sm:max-w-md md:max-w-sm mx-auto md:mx-0">
+              <div className="flex flex-col sm:flex-row md:flex-col gap-3 sm:gap-4 md:gap-4">
+                <Button size="lg" className="w-full min-h-[48px] md:min-h-[56px] md:text-lg shadow-[0_0_15px_rgba(34,197,94,0.3)] font-bold text-white bg-gradient-to-r md:bg-gradient-to-br from-green-500 md:from-green-600 to-green-700 hover:from-green-400 hover:to-green-600 border-0 rounded-lg group" asChild>
+                  <Link to="/loan-matchmaker" className="flex justify-between items-center px-6">
+                    Find Your Perfect Loan <span className="hidden md:inline font-normal">→</span>
+                  </Link>
+                </Button>
+
+                <Button size="lg" className="w-full min-h-[44px] md:min-h-[52px] font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg" asChild>
+                  <Link to="/deal-analyzer">Analyze a Deal</Link>
+                </Button>
+
+                <Button size="lg" className="w-full min-h-[44px] md:min-h-[52px] font-bold text-white bg-transparent hover:bg-white/5 border border-white/10 md:border-transparent md:hover:border-white/20 rounded-lg" asChild>
+                  <Link to="/loan-programs">View All Loan Programs</Link>
+                </Button>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
