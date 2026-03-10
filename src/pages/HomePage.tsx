@@ -9,7 +9,7 @@ export default function HomePage() {
       {/* Hero Section — lobby image with overlaid text at top and CTA buttons at bottom */}
       <section className="relative w-full overflow-hidden h-[clamp(400px,60vh,700px)] md:h-auto bg-gray-900">
         {/* Full-bleed lobby background up to max width */}
-        <div className="mx-auto max-w-7xl relative w-full h-full">
+        <div className="mx-auto max-w-4xl relative w-full h-full">
           <img
             src="/hero-lobby.png"
             alt="Commercial Capital & Investment Finance Inc. — Corporate Lobby at 600 W Broadway, San Diego"
