@@ -7,12 +7,12 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section — Clean lobby image with logo signage */}
-      <section className="relative w-full overflow-hidden" style={{ height: "clamp(400px, 60vh, 700px)" }}>
+      <section className="relative w-full overflow-hidden hero-section">
         {/* Full-bleed lobby background */}
         <img
           src="/hero-lobby.png"
           alt="Commercial Capital & Investment Finance Inc. — Corporate Lobby at 600 W Broadway, San Diego"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-center hero-img"
         />
         {/* Subtle dark vignette at bottom for smooth transition */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
