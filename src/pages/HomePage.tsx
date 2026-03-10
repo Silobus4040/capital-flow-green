@@ -7,12 +7,12 @@ export default function HomePage() {
   return (
     <div>
       {/* Hero Section — lobby image with overlaid text at top and CTA buttons at bottom */}
-      <section className="relative w-full overflow-hidden hero-section">
+      <section className="relative w-full overflow-hidden h-[clamp(400px,60vh,700px)] md:h-auto">
         {/* Full-bleed lobby background */}
         <img
           src="/hero-lobby.png"
           alt="Commercial Capital & Investment Finance Inc. — Corporate Lobby at 600 W Broadway, San Diego"
-          className="absolute inset-0 w-full h-full object-cover object-center hero-img"
+          className="w-full object-cover object-center absolute inset-0 h-full md:relative md:object-contain md:h-auto"
         />
 
         {/* Top tagline text */}

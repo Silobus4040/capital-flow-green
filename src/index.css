@@ -482,23 +482,3 @@ All colors MUST be HSL.
 .animate-marquee {
   animation: marquee 20s linear infinite;
 }
-
-/* Hero section — mobile keeps original sizing */
-.hero-section {
-  height: clamp(500px, 75vh, 850px);
-}
-
-.hero-img {
-  object-position: center center;
-}
-
-/* Desktop */
-@media (min-width: 768px) {
-  .hero-section {
-    height: clamp(450px, 65vh, 750px);
-  }
-
-  .hero-img {
-    object-position: center 30%;
-  }
-}
