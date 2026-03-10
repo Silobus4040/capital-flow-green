@@ -485,17 +485,17 @@ All colors MUST be HSL.
 
 /* Hero section — mobile keeps original sizing */
 .hero-section {
-  height: clamp(400px, 60vh, 700px);
+  height: clamp(500px, 75vh, 850px);
 }
 
 .hero-img {
   object-position: center center;
 }
 
-/* Desktop: reduce hero size so wall signage isn't too zoomed */
+/* Desktop */
 @media (min-width: 768px) {
   .hero-section {
-    height: clamp(340px, 48vh, 560px);
+    height: clamp(450px, 65vh, 750px);
   }
 
   .hero-img {
