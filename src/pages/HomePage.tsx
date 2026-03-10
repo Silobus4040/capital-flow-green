@@ -23,10 +23,10 @@ export default function HomePage() {
           </div>
 
           {/* Right Side: Content Container */}
-          <div className="absolute inset-0 md:relative z-10 flex flex-col justify-between md:justify-center px-4 py-8 sm:p-6 md:p-10 lg:p-14 md:bg-[#0a1510] border-l border-white/5">
+          <div className="absolute inset-0 md:relative z-10 flex flex-col justify-between md:justify-center px-4 pt-10 pb-8 sm:pt-14 sm:pb-10 md:p-10 lg:p-14 md:bg-[#0a1510] border-l border-white/5">
 
             {/* Top/Header: Tagline */}
-            <div className="mb-auto md:mb-12 pt-2 md:pt-0">
+            <div className="mb-auto md:mb-12">
               <div className="flex flex-wrap sm:flex-nowrap md:flex-wrap lg:flex-nowrap justify-center md:justify-start gap-x-2 lg:gap-x-4 gap-y-2 text-white text-[10px] sm:text-sm md:text-sm lg:text-base font-medium drop-shadow-md whitespace-nowrap md:whitespace-normal">
                 <span className="text-primary md:text-white">Asset-Based Lending</span>
                 <span className="hidden md:inline text-primary">•</span>
@@ -46,8 +46,8 @@ export default function HomePage() {
 
             {/* Bottom/Footer: CTA Buttons stacked line by line on desktop */}
             <div className="mt-auto w-full max-w-xs sm:max-w-md md:max-w-sm mx-auto md:mx-0">
-              <div className="flex flex-col sm:flex-row md:flex-col gap-3 sm:gap-4 md:gap-4">
-                <Button size="lg" className="w-full min-h-[48px] md:min-h-[56px] md:text-lg shadow-[0_0_15px_rgba(34,197,94,0.3)] font-bold text-white bg-gradient-to-r md:bg-gradient-to-br from-green-500 md:from-green-600 to-green-700 hover:from-green-400 hover:to-green-600 border-0 rounded-lg group" asChild>
+              <div className="flex flex-col sm:flex-row md:flex-col gap-2.5 sm:gap-3 md:gap-4">
+                <Button size="lg" className="w-full min-h-[44px] md:min-h-[56px] md:text-lg shadow-[0_0_15px_rgba(34,197,94,0.3)] font-bold text-white bg-gradient-to-r md:bg-gradient-to-br from-green-500 md:from-green-600 to-green-700 hover:from-green-400 hover:to-green-600 border-0 rounded-lg group" asChild>
                   <Link to="/loan-matchmaker" className="flex justify-between items-center px-6">
                     Find Your Perfect Loan <span className="hidden md:inline font-normal">→</span>
                   </Link>
