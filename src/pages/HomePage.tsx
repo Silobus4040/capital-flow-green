@@ -31,7 +31,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
         {/* Bottom CTA buttons */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 pb-8 sm:pb-12 px-4">
+        <div className="absolute bottom-0 left-0 right-0 z-10 pb-4 sm:pb-6 px-4">
           <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3 justify-center max-w-2xl mx-auto">
             <Button size="lg" className="min-h-[44px] px-5 shadow-[0_0_16px_rgba(34,197,94,0.4)] font-bold text-white bg-gradient-to-b from-green-400 via-green-600 to-green-700 hover:from-green-500 hover:via-green-700 hover:to-green-800 border border-green-400/30 rounded-lg w-full sm:w-auto" asChild>
               <Link to="/loan-programs">View Loan Programs</Link>
