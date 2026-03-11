@@ -45,20 +45,20 @@ export default function HomePage() {
             </div>
 
             {/* Bottom/Footer: CTA Buttons stacked line by line on desktop */}
-            <div className="mt-auto w-full max-w-xs sm:max-w-md md:max-w-sm mx-auto md:mx-0">
-              <div className="flex flex-col sm:flex-row md:flex-col gap-2.5 sm:gap-3 md:gap-4">
-                <Button size="lg" className="w-full min-h-[44px] md:min-h-[56px] md:text-lg shadow-[0_0_15px_rgba(34,197,94,0.3)] font-bold text-white bg-gradient-to-r md:bg-gradient-to-br from-green-500 md:from-green-600 to-green-700 hover:from-green-400 hover:to-green-600 border-0 rounded-lg group" asChild>
+            <div className="mt-auto w-full md:max-w-sm ml-auto md:mx-0 flex flex-col items-end md:items-start">
+              <div className="flex flex-col gap-2.5 sm:gap-3 md:gap-4 items-end md:items-stretch w-full">
+                <Button size="lg" className="w-fit md:w-full min-h-[44px] md:min-h-[56px] md:text-lg shadow-md font-bold text-white bg-primary hover:bg-primary-dark border-0 rounded-lg group" asChild>
                   <Link to="/loan-matchmaker" className="flex justify-between items-center px-6">
-                    Find Your Perfect Loan <span className="hidden md:inline font-normal">→</span>
+                    Find Your Perfect Loan <span className="hidden md:inline font-normal ml-2">→</span>
                   </Link>
                 </Button>
 
-                <Button size="lg" className="w-full min-h-[44px] md:min-h-[52px] font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg" asChild>
-                  <Link to="/deal-analyzer">Analyze a Deal</Link>
+                <Button size="lg" className="w-fit md:w-full min-h-[44px] md:min-h-[52px] font-bold text-white shadow-md bg-primary hover:bg-primary-dark border-0 rounded-lg" asChild>
+                  <Link to="/deal-analyzer" className="px-6">Analyze a Deal</Link>
                 </Button>
 
-                <Button size="lg" className="w-full min-h-[44px] md:min-h-[52px] font-bold text-white bg-transparent hover:bg-white/5 border border-white/10 md:border-transparent md:hover:border-white/20 rounded-lg" asChild>
-                  <Link to="/loan-programs">View All Loan Programs</Link>
+                <Button size="lg" className="w-fit md:w-full min-h-[44px] md:min-h-[52px] font-bold text-white shadow-md bg-primary hover:bg-primary-dark border-0 rounded-lg" asChild>
+                  <Link to="/loan-programs" className="px-6">View All Loan Programs</Link>
                 </Button>
               </div>
             </div>
