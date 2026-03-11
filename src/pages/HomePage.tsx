@@ -7,11 +7,11 @@ export default function HomePage() {
   return (
     <div>
       {/* Hero Section — Split layout on desktop, Overlaid on mobile */}
-      <section className="w-full bg-slate-900 border-b border-white/10">
-        <div className="mx-auto max-w-[1400px] md:grid md:grid-cols-2 lg:grid-cols-[1.2fr_1fr] md:items-stretch">
+      <section className="relative w-full bg-slate-900 border-b border-white/10 min-h-[600px] md:min-h-0">
+        <div className="mx-auto max-w-[1400px] md:grid md:grid-cols-2 lg:grid-cols-[1.2fr_1fr] md:items-stretch h-full">
 
           {/* Left Side: Image Container */}
-          <div className="relative w-full h-[clamp(400px,60vh,700px)] md:h-auto md:min-h-[500px] lg:min-h-[650px] overflow-hidden">
+          <div className="absolute inset-0 md:relative w-full h-full md:min-h-[500px] lg:min-h-[650px] overflow-hidden">
             <img
               src="/hero-lobby.png"
               alt="Commercial Capital & Investment Finance Inc. — Corporate Lobby at 600 W Broadway, San Diego"
@@ -23,7 +23,7 @@ export default function HomePage() {
           </div>
 
           {/* Right Side: Content Container */}
-          <div className="absolute inset-0 md:relative z-10 flex flex-col justify-between md:justify-center px-4 pt-10 pb-8 sm:pt-14 sm:pb-10 md:p-10 lg:p-14 md:bg-[#0a1510] border-l border-white/5">
+          <div className="relative z-10 flex flex-col justify-between md:justify-center px-4 pt-10 pb-8 sm:pt-14 sm:pb-10 md:p-10 lg:p-14 md:bg-[#0a1510] border-l border-white/5 min-h-[600px] md:min-h-0">
 
             {/* Top/Header: Tagline */}
             <div className="mb-auto md:mb-12">
