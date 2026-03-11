@@ -481,5 +481,19 @@ All colors MUST be HSL.
 
 .animate-marquee {
   animation: marquee 20s linear infinite;
-}@ k e y f r a m e s   f l u i d - g l o w   {   0 % ,   1 0 0 %   {   b o x - s h a d o w :   0   5 p x   2 0 p x   r g b a ( 1 5 , 1 1 8 , 7 4 , 0 . 4 ) ;   t r a n s f o r m :   t r a n s l a t e Y ( 0 )   s c a l e ( 1 ) ;   b a c k g r o u n d - p o s i t i o n :   0 %   5 0 % ;   o p a c i t y :   0 . 9 5 ;   }   5 0 %   {   b o x - s h a d o w :   0   1 5 p x   4 0 p x   r g b a ( 3 4 , 1 9 7 , 9 4 , 0 . 8 ) ;   t r a n s f o r m :   t r a n s l a t e Y ( - 3 p x )   s c a l e ( 1 . 0 2 ) ;   b a c k g r o u n d - p o s i t i o n :   1 0 0 %   5 0 % ;   o p a c i t y :   1 ;   }   }  
- 
+}
+
+@keyframes fluid-glow {
+  0%, 100% {
+    box-shadow: 0 5px 20px rgba(15,118,74,0.4);
+    transform: translateY(0) scale(1);
+    background-position: 0% 50%;
+    opacity: 0.95;
+  }
+  50% {
+    box-shadow: 0 15px 40px rgba(34,197,94,0.8);
+    transform: translateY(-3px) scale(1.02);
+    background-position: 100% 50%;
+    opacity: 1;
+  }
+}
