@@ -23,18 +23,18 @@ export default function HomePage() {
           </div>
 
           {/* Right Side: Content Container */}
-          <div className="relative z-10 flex flex-col justify-between md:justify-center px-4 pt-10 pb-8 sm:pt-14 sm:pb-10 md:p-10 lg:p-14 md:bg-[#0a1510] border-l border-white/5 min-h-[600px] md:min-h-0">
+          <div className="relative z-10 flex flex-col justify-between md:justify-center px-4 pt-10 pb-2 sm:pt-14 sm:pb-4 md:p-10 lg:p-14 md:bg-[#0a1510] border-l border-white/5 min-h-[600px] md:min-h-0">
 
             {/* Top/Header: Tagline */}
             <div className="mb-auto md:mb-12">
-              <div className="flex flex-wrap sm:flex-nowrap md:flex-wrap lg:flex-nowrap justify-center md:justify-start gap-x-2 lg:gap-x-4 gap-y-2 text-xs sm:text-base font-bold drop-shadow-lg whitespace-nowrap md:whitespace-normal">
-                <span className="bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 bg-clip-text text-transparent md:text-white md:bg-none tracking-wide">Asset-Based Lending</span>
+              <div className="flex flex-wrap sm:flex-nowrap md:flex-wrap lg:flex-nowrap justify-center md:justify-start gap-x-2 lg:gap-x-4 gap-y-2 text-xs sm:text-[15px] font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] whitespace-nowrap md:whitespace-normal uppercase tracking-wider">
+                <span className="bg-gradient-to-r from-[#FDE047] via-[#D4AF37] to-[#B45309] bg-clip-text text-transparent md:text-white md:bg-none">Asset-Based Lending</span>
                 <span className="hidden md:inline text-primary">•</span>
-                <span className="hidden sm:inline md:hidden text-amber-400">•</span>
-                <span className="bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 bg-clip-text text-transparent md:text-white md:bg-none tracking-wide">100% Financing</span>
+                <span className="hidden sm:inline md:hidden text-[#D4AF37]">•</span>
+                <span className="bg-gradient-to-r from-[#FDE047] via-[#D4AF37] to-[#B45309] bg-clip-text text-transparent md:text-white md:bg-none">100% Financing</span>
                 <span className="hidden md:inline text-primary">•</span>
-                <span className="hidden sm:inline md:hidden text-amber-400">•</span>
-                <span className="bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 bg-clip-text text-transparent md:text-white md:bg-none tracking-wide">All 50 States</span>
+                <span className="hidden sm:inline md:hidden text-[#D4AF37]">•</span>
+                <span className="bg-gradient-to-r from-[#FDE047] via-[#D4AF37] to-[#B45309] bg-clip-text text-transparent md:text-white md:bg-none">All 50 States</span>
               </div>
               <h1 className="hidden md:block text-3xl lg:text-5xl font-bold text-white mt-6 leading-tight">
                 Commercial Capital <br /><span className="text-primary">&</span> Investment Finance
@@ -47,18 +47,18 @@ export default function HomePage() {
             {/* Bottom/Footer: CTA Buttons stacked line by line on desktop */}
             <div className="mt-auto w-full md:max-w-sm ml-auto md:mx-0 flex flex-col items-end md:items-start">
               <div className="flex flex-col gap-3 sm:gap-4 items-end md:items-stretch w-full overflow-visible py-2">
-                <Button size="lg" className="w-[260px] sm:w-[280px] md:w-full min-h-[48px] md:min-h-[56px] md:text-lg shadow-[0_0_15px_rgba(34,197,94,0.4)] hover:shadow-[0_0_25px_rgba(34,197,94,0.7)] transition-all duration-300 hover:-translate-y-1 font-bold text-white bg-primary hover:bg-primary border-0 rounded-lg group" asChild>
-                  <Link to="/loan-matchmaker" className="flex justify-between items-center px-6">
-                    Find Your Perfect Loan <span className="hidden md:inline font-normal ml-2 transition-transform group-hover:translate-x-1">→</span>
+                <Button size="lg" className="w-[260px] sm:w-[280px] md:w-full min-h-[48px] md:min-h-[56px] text-base md:text-lg shadow-[0_8px_30px_rgba(15,118,74,0.5)] hover:shadow-[0_15px_40px_rgba(15,118,74,0.8)] transition-all duration-500 hover:-translate-y-1 font-bold text-white bg-gradient-to-r from-primary via-emerald-600 to-primary bg-[length:200%_auto] hover:bg-right border border-white/10 rounded-full group overflow-hidden relative" asChild>
+                  <Link to="/loan-matchmaker" className="flex justify-between items-center px-6 z-10">
+                    Find Your Perfect Loan <span className="hidden md:inline font-normal ml-2 transition-transform duration-300 group-hover:translate-x-2">→</span>
                   </Link>
                 </Button>
 
-                <Button size="lg" className="w-[260px] sm:w-[280px] md:w-full min-h-[46px] md:min-h-[52px] font-bold text-white shadow-[0_0_15px_rgba(34,197,94,0.4)] hover:shadow-[0_0_25px_rgba(34,197,94,0.7)] transition-all duration-300 hover:-translate-y-1 bg-primary hover:bg-primary border-0 rounded-lg" asChild>
-                  <Link to="/deal-analyzer" className="px-6">Analyze a Deal</Link>
+                <Button size="lg" className="w-[260px] sm:w-[280px] md:w-full min-h-[46px] md:min-h-[52px] text-[15px] md:text-base font-bold text-white shadow-[0_6px_20px_rgba(15,118,74,0.4)] hover:shadow-[0_10px_30px_rgba(15,118,74,0.7)] transition-all duration-500 hover:-translate-y-1 bg-gradient-to-r from-primary via-emerald-600 to-primary bg-[length:200%_auto] hover:bg-right border border-white/10 rounded-full group" asChild>
+                  <Link to="/deal-analyzer" className="px-6 relative z-10 w-full text-center md:text-left">Analyze a Deal</Link>
                 </Button>
 
-                <Button size="lg" className="w-[260px] sm:w-[280px] md:w-full min-h-[46px] md:min-h-[52px] font-bold text-white shadow-[0_0_15px_rgba(34,197,94,0.4)] hover:shadow-[0_0_25px_rgba(34,197,94,0.7)] transition-all duration-300 hover:-translate-y-1 bg-primary hover:bg-primary border-0 rounded-lg" asChild>
-                  <Link to="/loan-programs" className="px-6">View All Loan Programs</Link>
+                <Button size="lg" className="w-[260px] sm:w-[280px] md:w-full min-h-[46px] md:min-h-[52px] text-[15px] md:text-base font-bold text-white shadow-[0_6px_20px_rgba(15,118,74,0.4)] hover:shadow-[0_10px_30px_rgba(15,118,74,0.7)] transition-all duration-500 hover:-translate-y-1 bg-gradient-to-r from-primary via-emerald-600 to-primary bg-[length:200%_auto] hover:bg-right border border-white/10 rounded-full group" asChild>
+                  <Link to="/loan-programs" className="px-6 relative z-10 w-full text-center md:text-left">View All Loan Programs</Link>
                 </Button>
               </div>
             </div>
