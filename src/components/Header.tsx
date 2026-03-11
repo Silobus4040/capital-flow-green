@@ -72,13 +72,22 @@ export default function Header() {
 
           {/* Mobile menu button */}
           <Button
-            variant="ghost"
-            size="sm"
-            className="lg:hidden flex-shrink-0 p-2"
+            variant="outline"
+            className="lg:hidden flex-shrink-0 flex items-center gap-2 px-3 py-5 bg-primary/5 border-primary/20 text-primary font-bold hover:bg-primary/10 transition-colors shadow-sm"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle navigation menu"
           >
-            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {isMenuOpen ? (
+              <>
+                <X className="h-5 w-5" />
+                <span className="tracking-wide text-[15px]">CLOSE</span>
+              </>
+            ) : (
+              <>
+                <Menu className="h-5 w-5" />
+                <span className="tracking-wide text-[15px]">MENU</span>
+              </>
+            )}
           </Button>
         </div>
 
