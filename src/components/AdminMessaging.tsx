@@ -260,8 +260,10 @@ export default function AdminMessaging() {
 
       const url = URL.createObjectURL(audioBlob);
       setTtsPreviewBlob(audioBlob);
+      setOriginalTtsBlob(audioBlob);
       setTtsPreviewUrl(url);
       setTtsPreviewText(ttsText);
+      setIsAmbientMixed(false);
       toast({ title: 'Preview ready', description: 'Listen to the preview before sending.' });
     } catch (err: any) {
       console.error('TTS preview error:', err);
