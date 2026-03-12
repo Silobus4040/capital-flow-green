@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
+import { useAmbientNoise } from '@/hooks/useAmbientNoise';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -56,6 +57,7 @@ interface AppWithMessages {
 }
 
 export default function AdminMessaging() {
+  const { startAmbience, stopAmbience } = useAmbientNoise(0.08);
   const { user } = useAuth();
   const { toast } = useToast();
   const [appsList, setAppsList] = useState<AppWithMessages[]>([]);
@@ -261,18 +263,20 @@ export default function AdminMessaging() {
     setTtsLoading(false);
   };
 
-  // Play/pause the TTS preview
+  // Play/pause the TTS preview with ambient background noise
   const togglePreviewPlayback = () => {
     if (!ttsPreviewUrl) return;
     if (isPreviewPlaying && previewAudioRef.current) {
       previewAudioRef.current.pause();
+      stopAmbience();
       setIsPreviewPlaying(false);
     } else {
       if (previewAudioRef.current) previewAudioRef.current.pause();
       const audio = new Audio(ttsPreviewUrl);
       previewAudioRef.current = audio;
-      audio.onended = () => setIsPreviewPlaying(false);
-      audio.onerror = () => { setIsPreviewPlaying(false); toast({ title: 'Playback error', variant: 'destructive' }); };
+      audio.onended = () => { setIsPreviewPlaying(false); stopAmbience(); };
+      audio.onerror = () => { setIsPreviewPlaying(false); stopAmbience(); toast({ title: 'Playback error', variant: 'destructive' }); };
+      startAmbience();
       audio.play();
       setIsPreviewPlaying(true);
     }
@@ -355,6 +359,7 @@ export default function AdminMessaging() {
   const playAudio = async (msg: Message) => {
     if (playingId === msg.id) {
       audioRef.current?.pause();
+      stopAmbience();
       setPlayingId(null);
       return;
     }
@@ -386,7 +391,7 @@ export default function AdminMessaging() {
     const audio = new Audio(url);
     audioRef.current = audio;
     setPlayingId(msg.id);
-    audio.onended = () => setPlayingId(null);
+    audio.onended = () => { setPlayingId(null); stopAmbience(); };
     audio.onerror = () => {
       const mediaError = audio.error;
       console.error('Audio playback error:', {
@@ -395,14 +400,17 @@ export default function AdminMessaging() {
         url: url.substring(0, 100),
       });
       setPlayingId(null);
+      stopAmbience();
       toast({ title: 'Playback Error', description: `Could not play audio: ${mediaError?.message || 'unknown error'}`, variant: 'destructive' });
     };
 
     try {
+      startAmbience();
       await audio.play();
     } catch (err: any) {
       console.error('audio.play() rejected:', err);
       setPlayingId(null);
+      stopAmbience();
       toast({ title: 'Playback Error', description: err.message || 'Browser blocked audio playback', variant: 'destructive' });
     }
   };

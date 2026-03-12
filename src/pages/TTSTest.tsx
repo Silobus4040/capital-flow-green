@@ -2,8 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
+import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
+import { useAmbientNoise } from '@/hooks/useAmbientNoise';
 import { Volume2, VolumeX, Loader2, AlertTriangle, Download, ArrowLeft } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Link } from 'react-router-dom';
@@ -32,7 +34,10 @@ export default function TTSTest() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioLoading, setAudioLoading] = useState(false);
   const [debugInfo, setDebugInfo] = useState<string>('');
+  const [ambientEnabled, setAmbientEnabled] = useState(true);
+  const [ambientVolume, setAmbientVolume] = useState(0.08);
   const { toast } = useToast();
+  const { startAmbience, stopAmbience } = useAmbientNoise(ambientVolume);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -46,6 +51,7 @@ export default function TTSTest() {
         audioRef.current.pause();
         audioRef.current = null;
       }
+      stopAmbience();
     };
   }, [audioUrl]);
 
@@ -196,14 +202,17 @@ export default function TTSTest() {
           console.log('Audio: Playing');
           setIsPlaying(true);
           setAudioLoading(false);
+          if (ambientEnabled) startAmbience();
         },
         pause: () => {
           console.log('Audio: Paused');
           setIsPlaying(false);
+          stopAmbience();
         },
         ended: () => {
           console.log('Audio: Ended');
           setIsPlaying(false);
+          stopAmbience();
         },
         error: (e: Event) => {
           const target = e.target as HTMLAudioElement;
@@ -230,6 +239,7 @@ export default function TTSTest() {
 
           setIsPlaying(false);
           setAudioLoading(false);
+          stopAmbience();
           setDebugInfo(`Playback error: ${errorMsg}`);
 
           toast({
@@ -275,6 +285,7 @@ export default function TTSTest() {
       audioRef.current.currentTime = 0;
     }
     setIsPlaying(false);
+    stopAmbience();
   };
 
   const downloadAudio = () => {
@@ -414,8 +425,8 @@ export default function TTSTest() {
 
             {/* Audio Controls */}
             {audioUrl && (
-              <div className="p-4 bg-slate-50 rounded-lg border">
-                <div className="flex items-center justify-between mb-4">
+              <div className="p-4 bg-slate-50 rounded-lg border space-y-4">
+                <div className="flex items-center justify-between">
                   <div>
                     <h3 className="font-medium">Generated Audio</h3>
                     <p className="text-sm text-muted-foreground">Voice: {selectedVoice}</p>
@@ -452,6 +463,47 @@ export default function TTSTest() {
                       Download
                     </Button>
                   </div>
+                </div>
+
+                {/* Ambient Background Noise Controls */}
+                <div className="p-3 bg-purple-50 rounded-lg border border-purple-200 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <label className="text-sm font-medium text-purple-900 flex items-center gap-2">
+                      🎧 Ambient Background Noise
+                    </label>
+                    <label className="flex items-center gap-2 text-xs text-purple-700 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={ambientEnabled}
+                        onChange={(e) => setAmbientEnabled(e.target.checked)}
+                        className="rounded border-purple-300"
+                      />
+                      Enabled
+                    </label>
+                  </div>
+                  {ambientEnabled && (
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs text-purple-700">
+                        <span>Volume</span>
+                        <span>{Math.round(ambientVolume * 100)}%</span>
+                      </div>
+                      <Slider
+                        value={[ambientVolume]}
+                        min={0.01}
+                        max={0.20}
+                        step={0.01}
+                        onValueChange={([v]) => setAmbientVolume(v)}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between text-[9px] text-purple-500">
+                        <span>Subtle</span>
+                        <span>Noticeable</span>
+                      </div>
+                    </div>
+                  )}
+                  <p className="text-[10px] text-purple-600">
+                    Adds gentle room-tone / office ambience under TTS playback for a natural phone-call feel.
+                  </p>
                 </div>
 
                 {/* Native HTML5 Audio Player for testing */}
