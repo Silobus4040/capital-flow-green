@@ -45,8 +45,8 @@ const handler = async (req: Request): Promise<Response> => {
 
         const isVoice = messageType === 'voice';
         const preview = isVoice
-            ? '🎧 You received a new voice note from your account manager.'
-            : (messagePreview || 'You have a new message from your account manager.').slice(0, 200);
+            ? '🎧 You received a new voice note from your account manager. Log in to your portal to listen to it.'
+            : '💬 You have a new secure message from your account manager. Log in to your portal to read it.';
 
         console.log(`📝 Sending message notification to ${borrowerEmail}`);
 
@@ -57,6 +57,7 @@ const handler = async (req: Request): Promise<Response> => {
             html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f7fafc;">
           <div style="background: linear-gradient(135deg, #1a6b3c 0%, #2d8a56 100%); color: white; padding: 30px; text-align: center;">
+            <img src="https://ccif-inc.com/ccif-logo.png" alt="CCIF Logo" style="height: 40px; margin-bottom: 15px; display: inline-block;" />
             <h1 style="margin: 0; font-size: 24px;">${isVoice ? 'New Voice Note' : 'New Message'}</h1>
             <p style="margin: 8px 0 0; opacity: 0.9; font-size: 14px;">CCIF Account Manager</p>
           </div>
