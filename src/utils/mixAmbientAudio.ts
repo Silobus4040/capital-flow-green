@@ -295,12 +295,19 @@ export async function mixAmbientIntoAudio(
   let fileLoaded = false;
   
   if (customAudioBlob) {
-    const fallbackCtx = new AudioContext();
-    const arrayBuf = await customAudioBlob.arrayBuffer();
-    bgBuffer = await fallbackCtx.decodeAudioData(arrayBuf);
-    await fallbackCtx.close();
-    if (bgBuffer) {
-      fileLoaded = true;
+    try {
+      const fallbackCtx = new AudioContext({ sampleRate });
+      const arrayBuf = await customAudioBlob.arrayBuffer();
+      bgBuffer = await fallbackCtx.decodeAudioData(arrayBuf);
+      await fallbackCtx.close();
+      if (bgBuffer) {
+        fileLoaded = true;
+      }
+    } catch (err: any) {
+      console.error("Failed to decode uploaded audio", err);
+      // Type casting customAudioBlob to allow checking name, since it could technically be a File or a raw Blob
+      const fileName = (customAudioBlob as File).name || 'Unknown file';
+      throw new Error(`Failed to decode uploaded audio (${fileName}): ${err.message || 'Format unsupported'}`);
     }
   } else {
     const preset = AMBIENT_PRESETS.find(p => p.id === presetId);

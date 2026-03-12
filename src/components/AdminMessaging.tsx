@@ -624,9 +624,9 @@ export default function AdminMessaging() {
                       <span className="text-[10px] text-muted-foreground w-10">Volume</span>
                       <Slider
                         value={[ambientVolume]}
-                        min={0.01}
-                        max={0.20}
-                        step={0.01}
+                        min={0.0}
+                        max={1.0}
+                        step={0.05}
                         onValueChange={([v]) => setAmbientVolume(v)}
                         className="flex-1"
                         disabled={isMixing}
