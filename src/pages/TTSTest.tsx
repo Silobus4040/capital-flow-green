@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Textarea } from '@/components/ui/textarea';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
 import { useToast } from '@/hooks/use-toast';
 import { useAmbientNoise } from '@/hooks/useAmbientNoise';
 import { mixAmbientIntoAudio, AMBIENT_PRESETS, CUSTOM_PRESET_ID } from '@/utils/mixAmbientAudio';
@@ -42,6 +43,14 @@ export default function TTSTest() {
   const [isAmbientMixed, setIsAmbientMixed] = useState(false);
   const [selectedPreset, setSelectedPreset] = useState('talking-cafe');
   const [customAudioFile, setCustomAudioFile] = useState<File | null>(null);
+  
+  const [ttsSettings, setTtsSettings] = useState({
+    stability: 0.35,
+    similarity_boost: 0.80,
+    style: 0.45,
+    speed: 1.0
+  });
+
   const { toast } = useToast();
   const { startAmbience, stopAmbience } = useAmbientNoise(ambientVolume);
 
@@ -94,7 +103,14 @@ export default function TTSTest() {
           body: JSON.stringify({
             text: text.trim(),
             voice: selectedVoice,
-            model: 'eleven_multilingual_v2'
+            model: 'eleven_multilingual_v2',
+            voice_settings: {
+              stability: ttsSettings.stability,
+              similarity_boost: ttsSettings.similarity_boost,
+              style: ttsSettings.style,
+              use_speaker_boost: true,
+            },
+            speed: ttsSettings.speed,
           }),
         }
       );
@@ -418,6 +434,69 @@ export default function TTSTest() {
                   ))}
                 </SelectContent>
               </Select>
+            </div>
+
+            {/* Voice Settings Sliders */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-purple-50 rounded-lg border border-purple-100">
+              {/* Stability */}
+              <div className="space-y-2">
+                <div className="flex justify-between items-center text-sm">
+                  <span className="font-medium text-purple-900">Stability</span>
+                  <span className="text-purple-600">{Math.round(ttsSettings.stability * 100)}%</span>
+                </div>
+                <Slider
+                  value={[ttsSettings.stability]}
+                  min={0} max={1} step={0.01}
+                  onValueChange={([v]) => setTtsSettings(prev => ({ ...prev, stability: v }))}
+                  className="w-full"
+                />
+                <p className="text-[10px] text-muted-foreground">Higher = more monotonic, Lower = more emotion</p>
+              </div>
+
+              {/* Similarity Boost */}
+              <div className="space-y-2">
+                <div className="flex justify-between items-center text-sm">
+                  <span className="font-medium text-purple-900">Similarity</span>
+                  <span className="text-purple-600">{Math.round(ttsSettings.similarity_boost * 100)}%</span>
+                </div>
+                <Slider
+                  value={[ttsSettings.similarity_boost]}
+                  min={0} max={1} step={0.01}
+                  onValueChange={([v]) => setTtsSettings(prev => ({ ...prev, similarity_boost: v }))}
+                  className="w-full"
+                />
+                <p className="text-[10px] text-muted-foreground">Closer to original voice clone characteristics</p>
+              </div>
+
+              {/* Style Exaggeration */}
+              <div className="space-y-2">
+                <div className="flex justify-between items-center text-sm">
+                  <span className="font-medium text-purple-900">Style Exaggeration</span>
+                  <span className="text-purple-600">{Math.round(ttsSettings.style * 100)}%</span>
+                </div>
+                <Slider
+                  value={[ttsSettings.style]}
+                  min={0} max={1} step={0.01}
+                  onValueChange={([v]) => setTtsSettings(prev => ({ ...prev, style: v }))}
+                  className="w-full"
+                />
+                <p className="text-[10px] text-muted-foreground">High = dramatic, Low = natural</p>
+              </div>
+
+              {/* Speed */}
+              <div className="space-y-2">
+                <div className="flex justify-between items-center text-sm">
+                  <span className="font-medium text-purple-900">Speed</span>
+                  <span className="text-purple-600">{ttsSettings.speed}x</span>
+                </div>
+                <Slider
+                  value={[ttsSettings.speed]}
+                  min={0.5} max={2.0} step={0.05}
+                  onValueChange={([v]) => setTtsSettings(prev => ({ ...prev, speed: v }))}
+                  className="w-full"
+                />
+                <p className="text-[10px] text-muted-foreground">Playback rate for the generated audio</p>
+              </div>
             </div>
 
             {/* Debug Information */}
