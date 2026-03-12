@@ -290,54 +290,66 @@ export async function mixAmbientIntoAudio(
   const length = ttsBuffer.length;
   const numChannels = ttsBuffer.numberOfChannels;
 
-  // 2. Offline context
-  const offline = new OfflineAudioContext(numChannels, length, sampleRate);
-
-  // 3. TTS Source
-  const ttsSource = offline.createBufferSource();
-  ttsSource.buffer = ttsBuffer;
-  ttsSource.connect(offline.destination);
-  ttsSource.start(0);
-
-  // 4. Try File-based Audio First (or Custom Upload)
+  // 2. Decode Background Audio First (to determine true length)
+  let bgBuffer: AudioBuffer | null = null;
   let fileLoaded = false;
   
   if (customAudioBlob) {
     const fallbackCtx = new AudioContext();
     const arrayBuf = await customAudioBlob.arrayBuffer();
-    const fileBuffer = await fallbackCtx.decodeAudioData(arrayBuf);
+    bgBuffer = await fallbackCtx.decodeAudioData(arrayBuf);
     await fallbackCtx.close();
-    if (fileBuffer) {
-      // User explicitly requested uploaded custom audio NOT to loop
-      buildFileLooper(offline, fileBuffer, length, ambientVolume, false);
+    if (bgBuffer) {
       fileLoaded = true;
     }
   } else {
     const preset = AMBIENT_PRESETS.find(p => p.id === presetId);
     if (preset && preset.fileUrl) {
       const fallbackCtx = new AudioContext();
-      const fileBuffer = await fetchAndDecodeAudio(preset.fileUrl, fallbackCtx);
+      bgBuffer = await fetchAndDecodeAudio(preset.fileUrl, fallbackCtx);
       await fallbackCtx.close();
-      if (fileBuffer) {
-        buildFileLooper(offline, fileBuffer, length, ambientVolume);
+      if (bgBuffer) {
         fileLoaded = true;
       }
     }
   }
 
-  // 5. Fallback if no file URL or fetch failed
-  if (!fileLoaded) {
-    if (presetId.startsWith('talking-')) buildCrowd(offline, length, sampleRate, ambientVolume);
-    else if (presetId.startsWith('tv-')) buildTv(offline, length, sampleRate, ambientVolume);
-    else if (presetId === 'phone-line') buildPhoneLine(offline, length, sampleRate, ambientVolume);
-    else if (presetId === 'rain') buildRain(offline, length, sampleRate, ambientVolume);
-    else buildOffice(offline, length, sampleRate, ambientVolume);
+  // 3. Determine Final Length (longest of the two)
+  // If the user uploads a 1-minute audio and a 10-second TTS, the final file will be 1 minute long.
+  // We apply Math.max to ensure the offline context is large enough.
+  const ttsLength = ttsBuffer.length;
+  const bgLength = bgBuffer ? bgBuffer.length : 0;
+  
+  // Only override length if it's a CUSTOM upload (presets should trim to TTS size so it doesn't drag on forever)
+  const isCustom = !!customAudioBlob;
+  const renderLength = isCustom ? Math.max(ttsLength, bgLength) : ttsLength;
+
+  // 4. Offline context setup
+  const offline = new OfflineAudioContext(numChannels, renderLength, sampleRate);
+
+  // 5. TTS Source
+  const ttsSource = offline.createBufferSource();
+  ttsSource.buffer = ttsBuffer;
+  ttsSource.connect(offline.destination);
+  ttsSource.start(0);
+
+  // 6. Background Audio Source
+  if (fileLoaded && bgBuffer) {
+    // If custom, don't loop it
+    buildFileLooper(offline, bgBuffer, renderLength, ambientVolume, !isCustom);
+  } else if (!fileLoaded) {
+    // Fallback procedural
+    if (presetId.startsWith('talking-')) buildCrowd(offline, renderLength, sampleRate, ambientVolume);
+    else if (presetId.startsWith('tv-')) buildTv(offline, renderLength, sampleRate, ambientVolume);
+    else if (presetId === 'phone-line') buildPhoneLine(offline, renderLength, sampleRate, ambientVolume);
+    else if (presetId === 'rain') buildRain(offline, renderLength, sampleRate, ambientVolume);
+    else buildOffice(offline, renderLength, sampleRate, ambientVolume);
   }
 
-  // 6. Render
+  // 7. Render
   const renderedBuffer = await offline.startRendering();
 
-  // 7. Encode
+  // 8. Encode
   return encodeWav(renderedBuffer);
 }
 

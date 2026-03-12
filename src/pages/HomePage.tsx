@@ -11,19 +11,19 @@ export default function HomePage() {
         <div className="mx-auto max-w-[1400px] md:grid md:grid-cols-2 lg:grid-cols-[1.2fr_1fr] md:items-stretch h-full">
 
           {/* Left Side: Image Container */}
-          <div className="absolute inset-0 md:relative w-full h-full md:min-h-[500px] lg:min-h-[650px] overflow-hidden">
+          <div className="absolute inset-0 md:relative w-full h-full md:min-h-[500px] lg:min-h-[650px] overflow-hidden bg-slate-900">
             <img
               src="/hero-lobby.png"
               alt="Commercial Capital & Investment Finance Inc. — Corporate Lobby at 600 W Broadway, San Diego"
-              className="absolute inset-0 w-full h-full object-cover object-center"
+              className="absolute inset-0 w-full h-full object-contain md:object-cover object-top md:object-center"
             />
             {/* Dark gradient overlays ONLY on mobile for text readability */}
-            <div className="md:hidden absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent z-0" />
-            <div className="md:hidden absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-0" />
+            <div className="md:hidden absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-0" />
+            <div className="md:hidden absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-0" />
           </div>
 
           {/* Right Side: Content Container */}
-          <div className="relative z-10 flex flex-col justify-between px-4 pt-8 pb-10 sm:pt-10 sm:pb-12 md:justify-center md:p-10 lg:p-14 md:bg-[#0a1510] border-l border-white/5 min-h-[600px] md:min-h-0 h-full">
+          <div className="relative z-10 flex flex-col justify-between px-4 pt-6 pb-10 sm:pt-8 sm:pb-12 md:justify-center md:p-10 lg:p-14 md:bg-[#0a1510] border-l border-white/5 min-h-[600px] md:min-h-0 h-full">
 
             {/* Top/Header: Tagline */}
             <div className="mb-auto">
@@ -44,21 +44,17 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Bottom/Footer: CTA Buttons stacked line by line on desktop */}
-            <div className="mt-auto md:max-w-sm ml-auto md:mx-0 flex flex-col items-end md:items-start pt-32 md:pt-0">
-              <div className="flex flex-col gap-3 sm:gap-4 items-end md:items-stretch overflow-visible">
+            {/* Bottom/Footer: CTA Buttons */}
+            <div className="mt-auto md:max-w-sm ml-auto md:mx-0 flex flex-col items-end md:items-start pt-48 md:pt-0">
+              <div className="flex flex-col gap-4 sm:gap-5 items-end md:items-stretch overflow-visible">
                 <Button size="lg" className="w-[280px] md:w-full min-h-[48px] md:min-h-[56px] text-base md:text-lg animate-[fluid-glow_5s_ease-in-out_infinite] font-bold text-white bg-gradient-to-r from-emerald-600 via-primary to-emerald-600 bg-[length:200%_auto] hover:bg-right border border-white/20 rounded-full group overflow-hidden relative" asChild>
                   <Link to="/loan-matchmaker" className="flex justify-between items-center px-6 z-10 w-full">
                     Find Your Perfect Loan <span className="hidden md:inline font-normal ml-2 transition-transform duration-300 group-hover:translate-x-2">→</span>
                   </Link>
                 </Button>
 
-                <Button size="lg" className="w-[280px] md:w-full min-h-[48px] md:min-h-[56px] text-base md:text-lg animate-[fluid-glow_5s_ease-in-out_infinite_1.5s] font-bold text-white bg-gradient-to-r from-emerald-600 via-primary to-emerald-600 bg-[length:200%_auto] hover:bg-right border border-white/20 rounded-full group overflow-hidden relative" asChild>
+                <Button size="lg" className="w-[280px] md:w-full min-h-[48px] md:min-h-[56px] text-base md:text-lg animate-[fluid-glow_5s_ease-in-out_infinite_2.5s] font-bold text-white bg-gradient-to-r from-emerald-600 via-primary to-emerald-600 bg-[length:200%_auto] hover:bg-right border border-white/20 rounded-full group overflow-hidden relative" asChild>
                   <Link to="/deal-analyzer" className="px-6 relative z-10 w-full text-center md:text-left">Analyze a Deal</Link>
-                </Button>
-
-                <Button size="lg" className="w-[280px] md:w-full min-h-[48px] md:min-h-[56px] text-base md:text-lg animate-[fluid-glow_5s_ease-in-out_infinite_3s] font-bold text-white bg-gradient-to-r from-emerald-600 via-primary to-emerald-600 bg-[length:200%_auto] hover:bg-right border border-white/20 rounded-full group overflow-hidden relative" asChild>
-                  <Link to="/loan-programs" className="px-6 relative z-10 w-full text-center md:text-left">View All Loan Programs</Link>
                 </Button>
               </div>
             </div>
