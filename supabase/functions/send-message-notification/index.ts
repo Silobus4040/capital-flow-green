@@ -57,7 +57,7 @@ const handler = async (req: Request): Promise<Response> => {
             html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f7fafc;">
           <div style="background: linear-gradient(135deg, #1a6b3c 0%, #2d8a56 100%); color: white; padding: 30px; text-align: center;">
-            <img src="https://ccif-inc.com/ccif-logo.png" alt="CCIF Logo" style="height: 40px; margin-bottom: 15px; display: inline-block;" />
+            <img src="https://capital-flow-green.lovable.app/lovable-uploads/7a51105a-a80d-4bc0-8f7b-c8e5b6b783c3.png" alt="CCIF Logo" style="height: 40px; margin-bottom: 15px; display: inline-block;" />
             <h1 style="margin: 0; font-size: 24px;">${isVoice ? 'New Voice Note' : 'New Message'}</h1>
             <p style="margin: 8px 0 0; opacity: 0.9; font-size: 14px;">CCIF Account Manager</p>
           </div>
