@@ -33,7 +33,7 @@ serve(async (req) => {
 
   try {
     const body = await req.json()
-    const { text, voice = 'george', model = 'eleven_multilingual_v2' } = body
+    const { text, voice = 'george', model = 'eleven_v3' } = body
 
     // Accept optional client-supplied voice_settings for emotion control
     const clientSettings = body.voice_settings || {}
