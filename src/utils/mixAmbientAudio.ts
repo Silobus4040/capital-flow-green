@@ -1,8 +1,9 @@
 /**
- * mixAmbientAudio — Bakes procedural ambient noise into a TTS audio blob
+ * mixAmbientAudio — Bakes background audio into a TTS audio blob
  * using OfflineAudioContext so the *recipient* hears the background.
  *
- * Supports 7 selectable presets, all synthesized (no audio files).
+ * Supports fetching actual MP3s from /ambient/ with graceful fallbacks
+ * to procedurally generated DSP noise.
  */
 
 // ── Preset definitions ──────────────────────────────────────────────────────
@@ -11,17 +12,37 @@ export interface AmbientPreset {
   id: string;
   label: string;
   description: string;
+  fileUrl?: string; // If provided, it will try to fetch and loop this audio file
 }
 
 export const AMBIENT_PRESETS: AmbientPreset[] = [
-  { id: 'office',           label: 'Office',            description: 'Warm brown noise + low hum — quiet office room tone' },
-  { id: 'cafe',             label: 'Café',              description: 'Pink noise with mid-frequency warmth — busy coffee shop' },
-  { id: 'phone-line',       label: 'Phone Line',        description: 'Narrow-band hiss — telephone line static' },
-  { id: 'rain',             label: 'Rain',              description: 'Filtered white noise + low rumble — light rain' },
-  { id: 'crowd-murmur',     label: 'Crowd Murmur',      description: 'Layered modulated noise — inaudible human voices' },
-  { id: 'air-conditioning', label: 'Air Conditioning',   description: 'Deep low-frequency drone — HVAC hum' },
-  { id: 'city-street',      label: 'City Street',       description: 'Broadband noise with random swells — outdoor urban' },
+  // Talking / Human Sounds
+  { id: 'talking-cafe', label: 'Talking: Cafe', description: 'Busy coffee shop chatter', fileUrl: '/ambient/talking-cafe.mp3' },
+  { id: 'talking-boardroom', label: 'Talking: Boardroom', description: 'Subdued meeting room voices', fileUrl: '/ambient/talking-boardroom.mp3' },
+  { id: 'talking-restaurant', label: 'Talking: Restaurant', description: 'Clinking glasses and distant talking', fileUrl: '/ambient/talking-restaurant.mp3' },
+  { id: 'talking-street', label: 'Talking: Street', description: 'Outdoor city chatter and walking', fileUrl: '/ambient/talking-street.mp3' },
+  { id: 'talking-party', label: 'Talking: Party', description: 'Upbeat crowd murmur and laughter', fileUrl: '/ambient/talking-party.mp3' },
+  { id: 'talking-lobby', label: 'Talking: Lobby', description: 'Echoey hall with passing conversations', fileUrl: '/ambient/talking-lobby.mp3' },
+  { id: 'talking-office', label: 'Talking: Busy Office', description: 'Coworkers talking with background typing', fileUrl: '/ambient/talking-office.mp3' },
+
+  // TV / News Sounds
+  { id: 'tv-news', label: 'TV: News Broadcast', description: 'Distant news anchor reporting', fileUrl: '/ambient/tv-news.mp3' },
+  { id: 'tv-sports', label: 'TV: Sports Game', description: 'Cheering crowd and announcer in background', fileUrl: '/ambient/tv-sports.mp3' },
+  { id: 'tv-commercials', label: 'TV: Commercials', description: 'Upbeat distant television ads', fileUrl: '/ambient/tv-commercials.mp3' },
+  { id: 'tv-talkshow', label: 'TV: Morning Talk Show', description: 'Light conversation and studio laughs', fileUrl: '/ambient/tv-talkshow.mp3' },
+
+  // Procedural Basics
+  { id: 'office-hum', label: 'Quiet Room Tone', description: 'Silent room with low HVAC hum' },
+  { id: 'phone-line', label: 'Phone Line Hiss', description: 'Telephone static' },
+  { id: 'rain', label: 'Rain', description: 'Light rain outside' },
 ];
+
+export const CUSTOM_PRESET_ID = 'custom-upload';
+AMBIENT_PRESETS.push({
+  id: CUSTOM_PRESET_ID,
+  label: '📂 Upload Custom Audio...',
+  description: 'Select an MP3 or WAV file',
+});
 
 // ── WAV encoder ─────────────────────────────────────────────────────────────
 
@@ -29,7 +50,6 @@ function encodeWav(buffer: AudioBuffer): Blob {
   const numChannels = buffer.numberOfChannels;
   const sampleRate = buffer.sampleRate;
   const bitsPerSample = 16;
-
   const length = buffer.length * numChannels;
   const samples = new Int16Array(length);
 
@@ -47,9 +67,7 @@ function encodeWav(buffer: AudioBuffer): Blob {
   const view = new DataView(arrayBuffer);
 
   const writeString = (offset: number, str: string) => {
-    for (let i = 0; i < str.length; i++) {
-      view.setUint8(offset + i, str.charCodeAt(i));
-    }
+    for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
   };
 
   writeString(0, 'RIFF');
@@ -74,9 +92,34 @@ function encodeWav(buffer: AudioBuffer): Blob {
   return new Blob([arrayBuffer], { type: 'audio/wav' });
 }
 
-// ── Noise generators ────────────────────────────────────────────────────────
+// ── File fetching & looping ─────────────────────────────────────────────────
 
-/** Brown noise — random-walk integration of white noise */
+async function fetchAndDecodeAudio(url: string, ctx: BaseAudioContext): Promise<AudioBuffer | null> {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) return null;
+    const arrayBuffer = await response.arrayBuffer();
+    return await ctx.decodeAudioData(arrayBuffer);
+  } catch (err) {
+    console.warn(`Failed to load ambient audio file ${url}, falling back to synth.`, err);
+    return null;
+  }
+}
+
+function buildFileLooper(ctx: OfflineAudioContext, buffer: AudioBuffer, length: number, volume: number) {
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  src.loop = true;
+
+  const gain = ctx.createGain();
+  gain.gain.value = volume;
+
+  src.connect(gain).connect(ctx.destination);
+  src.start(0);
+}
+
+// ── Procedural fallbacks & generators ───────────────────────────────────────
+
 function generateBrownNoise(length: number): Float32Array {
   const data = new Float32Array(length);
   let last = 0;
@@ -88,176 +131,38 @@ function generateBrownNoise(length: number): Float32Array {
   return data;
 }
 
-/** White noise — flat spectrum */
 function generateWhiteNoise(length: number): Float32Array {
   const data = new Float32Array(length);
-  for (let i = 0; i < length; i++) {
-    data[i] = Math.random() * 2 - 1;
-  }
+  for (let i = 0; i < length; i++) data[i] = Math.random() * 2 - 1;
   return data;
 }
 
-/** Pink noise — 1/f spectrum via Voss-McCartney algorithm */
 function generatePinkNoise(length: number): Float32Array {
   const data = new Float32Array(length);
-  const numRows = 16;
-  const rows = new Float32Array(numRows);
-  let runningTotal = 0;
-  const max = numRows;
-
+  let b0=0, b1=0, b2=0, b3=0, b4=0, b5=0, b6=0;
   for (let i = 0; i < length; i++) {
     const white = Math.random() * 2 - 1;
-    // Determine which rows to update based on trailing zeros
-    let changed = i;
-    for (let j = 0; j < numRows && changed > 0; j++) {
-      if (changed & 1) {
-        runningTotal -= rows[j];
-        rows[j] = Math.random() * 2 - 1;
-        runningTotal += rows[j];
-      }
-      changed >>= 1;
-    }
-    data[i] = (runningTotal + white) / (max + 1);
+    b0 = 0.99886 * b0 + white * 0.0555179;
+    b1 = 0.99332 * b1 + white * 0.0750759;
+    b2 = 0.96900 * b2 + white * 0.1538520;
+    b3 = 0.86650 * b3 + white * 0.3104856;
+    b4 = 0.55000 * b4 + white * 0.5329522;
+    b5 = -0.7616 * b5 - white * 0.0168980;
+    data[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+    data[i] *= 0.11; // normalise
+    b6 = white * 0.115926;
   }
   return data;
 }
 
-// ── Preset-specific graph builders ──────────────────────────────────────────
+type GraphBuilder = (ctx: OfflineAudioContext, length: number, sampleRate: number, volume: number) => void;
 
-type GraphBuilder = (
-  ctx: OfflineAudioContext,
-  length: number,
-  sampleRate: number,
-  volume: number,
-) => void;
-
-/**
- * 1. Office — brown noise through a 600 Hz LPF
- */
-const buildOffice: GraphBuilder = (ctx, length, sampleRate, volume) => {
-  const buf = ctx.createBuffer(1, length, sampleRate);
-  buf.getChannelData(0).set(generateBrownNoise(length));
-
-  const src = ctx.createBufferSource();
-  src.buffer = buf;
-
-  const lpf = ctx.createBiquadFilter();
-  lpf.type = 'lowpass';
-  lpf.frequency.value = 600;
-  lpf.Q.value = 0.7;
-
-  const gain = ctx.createGain();
-  gain.gain.value = volume;
-
-  src.connect(lpf).connect(gain).connect(ctx.destination);
-  src.start(0);
-};
-
-/**
- * 2. Café — pink noise with a bandpass peak around 800 Hz
- */
-const buildCafe: GraphBuilder = (ctx, length, sampleRate, volume) => {
-  const buf = ctx.createBuffer(1, length, sampleRate);
-  buf.getChannelData(0).set(generatePinkNoise(length));
-
-  const src = ctx.createBufferSource();
-  src.buffer = buf;
-
-  const bp = ctx.createBiquadFilter();
-  bp.type = 'bandpass';
-  bp.frequency.value = 800;
-  bp.Q.value = 0.5;
-
-  const lpf = ctx.createBiquadFilter();
-  lpf.type = 'lowpass';
-  lpf.frequency.value = 2500;
-  lpf.Q.value = 0.7;
-
-  const gain = ctx.createGain();
-  gain.gain.value = volume * 1.4;
-
-  src.connect(bp).connect(lpf).connect(gain).connect(ctx.destination);
-  src.start(0);
-};
-
-/**
- * 3. Phone Line — narrow-band white noise (300–3400 Hz) simulating POTS hiss
- */
-const buildPhoneLine: GraphBuilder = (ctx, length, sampleRate, volume) => {
-  const buf = ctx.createBuffer(1, length, sampleRate);
-  buf.getChannelData(0).set(generateWhiteNoise(length));
-
-  const src = ctx.createBufferSource();
-  src.buffer = buf;
-
-  const hpf = ctx.createBiquadFilter();
-  hpf.type = 'highpass';
-  hpf.frequency.value = 300;
-  hpf.Q.value = 0.7;
-
-  const lpf = ctx.createBiquadFilter();
-  lpf.type = 'lowpass';
-  lpf.frequency.value = 3400;
-  lpf.Q.value = 0.7;
-
-  const gain = ctx.createGain();
-  gain.gain.value = volume * 0.5;
-
-  src.connect(hpf).connect(lpf).connect(gain).connect(ctx.destination);
-  src.start(0);
-};
-
-/**
- * 4. Rain — filtered white noise + deep low rumble layer
- */
-const buildRain: GraphBuilder = (ctx, length, sampleRate, volume) => {
-  // High layer: white noise through LPF for "shhh" of rain
-  const whiteBuf = ctx.createBuffer(1, length, sampleRate);
-  whiteBuf.getChannelData(0).set(generateWhiteNoise(length));
-
-  const whiteSrc = ctx.createBufferSource();
-  whiteSrc.buffer = whiteBuf;
-
-  const lpf = ctx.createBiquadFilter();
-  lpf.type = 'lowpass';
-  lpf.frequency.value = 4000;
-  lpf.Q.value = 0.4;
-
-  const whiteGain = ctx.createGain();
-  whiteGain.gain.value = volume * 0.7;
-
-  whiteSrc.connect(lpf).connect(whiteGain).connect(ctx.destination);
-  whiteSrc.start(0);
-
-  // Low layer: brown noise for distant thunder/rumble
-  const brownBuf = ctx.createBuffer(1, length, sampleRate);
-  brownBuf.getChannelData(0).set(generateBrownNoise(length));
-
-  const brownSrc = ctx.createBufferSource();
-  brownSrc.buffer = brownBuf;
-
-  const deepLpf = ctx.createBiquadFilter();
-  deepLpf.type = 'lowpass';
-  deepLpf.frequency.value = 200;
-  deepLpf.Q.value = 0.5;
-
-  const brownGain = ctx.createGain();
-  brownGain.gain.value = volume * 1.2;
-
-  brownSrc.connect(deepLpf).connect(brownGain).connect(ctx.destination);
-  brownSrc.start(0);
-};
-
-/**
- * 5. Crowd Murmur — multiple filtered noise bands with slow amplitude
- *    modulation to simulate indistinct human voices
- */
-const buildCrowdMurmur: GraphBuilder = (ctx, length, sampleRate, volume) => {
-  // Voice-frequency bands: ~200-600 Hz, ~600-1200 Hz, ~1200-2400 Hz
+// Fallback: Crowd Murmur (People talking)
+const buildCrowd: GraphBuilder = (ctx, length, sampleRate, volume) => {
   const bands = [
-    { low: 200, high: 600,  modFreq: 0.8,  vol: 1.0 },
-    { low: 600, high: 1200, modFreq: 1.3,  vol: 0.8 },
-    { low: 1200, high: 2400, modFreq: 0.5, vol: 0.5 },
+    { low: 150, high: 500, modFreq: 1.2, vol: 1.0 },
+    { low: 500, high: 1000, modFreq: 2.1, vol: 0.7 },
+    { low: 1000, high: 2200, modFreq: 0.8, vol: 0.5 },
   ];
 
   for (const band of bands) {
@@ -267,174 +172,172 @@ const buildCrowdMurmur: GraphBuilder = (ctx, length, sampleRate, volume) => {
     const src = ctx.createBufferSource();
     src.buffer = buf;
 
-    const hpf = ctx.createBiquadFilter();
-    hpf.type = 'highpass';
-    hpf.frequency.value = band.low;
-    hpf.Q.value = 0.5;
+    const bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.frequency.value = (band.low + band.high) / 2;
+    bp.Q.value = 1.0;
 
-    const lpf = ctx.createBiquadFilter();
-    lpf.type = 'lowpass';
-    lpf.frequency.value = band.high;
-    lpf.Q.value = 0.5;
-
-    // Slow amplitude modulation to mimic speech rhythm
     const modGain = ctx.createGain();
-    modGain.gain.value = volume * band.vol * 0.7;
+    modGain.gain.value = volume * band.vol * 0.6;
 
     const lfo = ctx.createOscillator();
     lfo.type = 'sine';
     lfo.frequency.value = band.modFreq;
-
     const lfoGain = ctx.createGain();
-    lfoGain.gain.value = volume * band.vol * 0.35;
-
-    lfo.connect(lfoGain);
-    lfoGain.connect(modGain.gain);
+    lfoGain.gain.value = volume * band.vol * 0.4;
+    lfo.connect(lfoGain).connect(modGain.gain);
     lfo.start(0);
 
-    src.connect(hpf).connect(lpf).connect(modGain).connect(ctx.destination);
+    src.connect(bp).connect(modGain).connect(ctx.destination);
     src.start(0);
   }
 };
 
-/**
- * 6. Air Conditioning — very deep brown noise, heavily low-passed
- */
-const buildAirConditioning: GraphBuilder = (ctx, length, sampleRate, volume) => {
+// Fallback: TV Sound (Rapidly modulated bandpass noise)
+const buildTv: GraphBuilder = (ctx, length, sampleRate, volume) => {
   const buf = ctx.createBuffer(1, length, sampleRate);
-  buf.getChannelData(0).set(generateBrownNoise(length));
+  buf.getChannelData(0).set(generateWhiteNoise(length));
 
   const src = ctx.createBufferSource();
   src.buffer = buf;
 
+  const bp = ctx.createBiquadFilter();
+  bp.type = 'bandpass';
+  bp.frequency.value = 1200;
+  bp.Q.value = 0.5;
+
+  const modGain = ctx.createGain();
+  modGain.gain.value = volume * 0.5;
+
+  // LFO simulating rapid anchor speech syllables
+  const lfo = ctx.createOscillator();
+  lfo.type = 'square';
+  lfo.frequency.value = 4.5;
+  const lfoGain = ctx.createGain();
+  lfoGain.gain.value = volume * 0.4;
+  lfo.connect(lfoGain).connect(modGain.gain);
+  lfo.start(0);
+
+  // Distant lowpass
   const lpf = ctx.createBiquadFilter();
   lpf.type = 'lowpass';
-  lpf.frequency.value = 250;
-  lpf.Q.value = 0.5;
+  lpf.frequency.value = 2500;
 
-  // Second LPF for extra smoothness
-  const lpf2 = ctx.createBiquadFilter();
-  lpf2.type = 'lowpass';
-  lpf2.frequency.value = 350;
-  lpf2.Q.value = 0.4;
-
-  const gain = ctx.createGain();
-  gain.gain.value = volume * 2.0; // boost since heavy filtering reduces level
-
-  src.connect(lpf).connect(lpf2).connect(gain).connect(ctx.destination);
+  src.connect(bp).connect(modGain).connect(lpf).connect(ctx.destination);
   src.start(0);
 };
 
-/**
- * 7. City Street — broadband noise with random amplitude swells
- */
-const buildCityStreet: GraphBuilder = (ctx, length, sampleRate, volume) => {
-  // Broadband layer
-  const whiteBuf = ctx.createBuffer(1, length, sampleRate);
-  const whiteData = whiteBuf.getChannelData(0);
-  const raw = generateWhiteNoise(length);
-
-  // Apply slow random amplitude envelope for "traffic swells"
-  const envelopeLen = Math.floor(sampleRate * 0.5); // 0.5s blocks
-  let envVal = 0.5;
-  for (let i = 0; i < length; i++) {
-    if (i % envelopeLen === 0) {
-      envVal = 0.3 + Math.random() * 0.7; // random between 0.3 and 1.0
-    }
-    whiteData[i] = raw[i] * envVal;
-  }
-
+// Original Basics
+const buildOffice: GraphBuilder = (ctx, length, sampleRate, volume) => {
+  const buf = ctx.createBuffer(1, length, sampleRate);
+  buf.getChannelData(0).set(generateBrownNoise(length));
   const src = ctx.createBufferSource();
-  src.buffer = whiteBuf;
-
+  src.buffer = buf;
   const lpf = ctx.createBiquadFilter();
   lpf.type = 'lowpass';
-  lpf.frequency.value = 3000;
-  lpf.Q.value = 0.3;
-
-  const hpf = ctx.createBiquadFilter();
-  hpf.type = 'highpass';
-  hpf.frequency.value = 80;
-  hpf.Q.value = 0.3;
-
+  lpf.frequency.value = 600;
+  lpf.Q.value = 0.7;
   const gain = ctx.createGain();
-  gain.gain.value = volume * 0.9;
+  gain.gain.value = volume;
+  src.connect(lpf).connect(gain).connect(ctx.destination);
+  src.start(0);
+};
 
+const buildPhoneLine: GraphBuilder = (ctx, length, sampleRate, volume) => {
+  const buf = ctx.createBuffer(1, length, sampleRate);
+  buf.getChannelData(0).set(generateWhiteNoise(length));
+  const src = ctx.createBufferSource();
+  src.buffer = buf;
+  const hpf = ctx.createBiquadFilter();
+  hpf.type = 'highpass'; hpf.frequency.value = 300;
+  const lpf = ctx.createBiquadFilter();
+  lpf.type = 'lowpass'; lpf.frequency.value = 3400;
+  const gain = ctx.createGain();
+  gain.gain.value = volume * 0.4;
   src.connect(hpf).connect(lpf).connect(gain).connect(ctx.destination);
   src.start(0);
-
-  // Low rumble sub-layer
-  const brownBuf = ctx.createBuffer(1, length, sampleRate);
-  brownBuf.getChannelData(0).set(generateBrownNoise(length));
-
-  const brownSrc = ctx.createBufferSource();
-  brownSrc.buffer = brownBuf;
-
-  const deepLpf = ctx.createBiquadFilter();
-  deepLpf.type = 'lowpass';
-  deepLpf.frequency.value = 150;
-  deepLpf.Q.value = 0.5;
-
-  const brownGain = ctx.createGain();
-  brownGain.gain.value = volume * 0.8;
-
-  brownSrc.connect(deepLpf).connect(brownGain).connect(ctx.destination);
-  brownSrc.start(0);
 };
 
-// ── Preset lookup ───────────────────────────────────────────────────────────
-
-const BUILDERS: Record<string, GraphBuilder> = {
-  'office':           buildOffice,
-  'cafe':             buildCafe,
-  'phone-line':       buildPhoneLine,
-  'rain':             buildRain,
-  'crowd-murmur':     buildCrowdMurmur,
-  'air-conditioning': buildAirConditioning,
-  'city-street':      buildCityStreet,
+const buildRain: GraphBuilder = (ctx, length, sampleRate, volume) => {
+  const wBuf = ctx.createBuffer(1, length, sampleRate);
+  wBuf.getChannelData(0).set(generateWhiteNoise(length));
+  const wSrc = ctx.createBufferSource(); wSrc.buffer = wBuf;
+  const lpf = ctx.createBiquadFilter(); lpf.type = 'lowpass'; lpf.frequency.value = 3000;
+  const wGain = ctx.createGain(); wGain.gain.value = volume * 0.6;
+  wSrc.connect(lpf).connect(wGain).connect(ctx.destination);
+  wSrc.start(0);
 };
 
 // ── Main mixer ──────────────────────────────────────────────────────────────
 
-/**
- * Mix procedural ambient noise into an audio blob offline.
- *
- * @param audioBlob     The TTS audio (MP3 or WAV)
- * @param preset        Which ambient preset to use (default 'office')
- * @param ambientVolume How loud the ambient layer is (0–1, default 0.08)
- * @returns             A new WAV Blob with ambient noise baked in
- */
 export async function mixAmbientIntoAudio(
   audioBlob: Blob,
-  preset = 'office',
+  presetId = 'office-hum',
   ambientVolume = 0.08,
+  customAudioBlob?: Blob | null
 ): Promise<Blob> {
-  // 1. Decode the TTS audio
+  // 1. Decode TTS
   const arrayBuf = await audioBlob.arrayBuffer();
-  const tempCtx = new AudioContext();
-  const ttsBuffer = await tempCtx.decodeAudioData(arrayBuf);
-  await tempCtx.close();
+  // Using offline context for fast decoding instead of web audio ctx to ensure consistency
+  const tempCtx = new offlineAudioContextConstructor(2, 44100, 44100); 
+  // Wait, offline audio ctx constructor doesn't work like this universally across browsers. 
+  // It's safer to use AudioContext for decodeAudioData
+  const actx = new AudioContext();
+  const ttsBuffer = await actx.decodeAudioData(arrayBuf);
+  await actx.close();
 
   const sampleRate = ttsBuffer.sampleRate;
   const length = ttsBuffer.length;
   const numChannels = ttsBuffer.numberOfChannels;
 
-  // 2. Create offline context
+  // 2. Offline context
   const offline = new OfflineAudioContext(numChannels, length, sampleRate);
 
-  // 3. TTS source (full volume)
+  // 3. TTS Source
   const ttsSource = offline.createBufferSource();
   ttsSource.buffer = ttsBuffer;
   ttsSource.connect(offline.destination);
   ttsSource.start(0);
 
-  // 4. Build the selected ambient preset
-  const builder = BUILDERS[preset] || buildOffice;
-  builder(offline, length, sampleRate, ambientVolume);
+  // 4. Try File-based Audio First (or Custom Upload)
+  let fileLoaded = false;
+  
+  if (customAudioBlob) {
+    const fallbackCtx = new AudioContext();
+    const arrayBuf = await customAudioBlob.arrayBuffer();
+    const fileBuffer = await fallbackCtx.decodeAudioData(arrayBuf);
+    await fallbackCtx.close();
+    if (fileBuffer) {
+      buildFileLooper(offline, fileBuffer, length, ambientVolume);
+      fileLoaded = true;
+    }
+  } else {
+    const preset = AMBIENT_PRESETS.find(p => p.id === presetId);
+    if (preset && preset.fileUrl) {
+      const fallbackCtx = new AudioContext();
+      const fileBuffer = await fetchAndDecodeAudio(preset.fileUrl, fallbackCtx);
+      await fallbackCtx.close();
+      if (fileBuffer) {
+        buildFileLooper(offline, fileBuffer, length, ambientVolume);
+        fileLoaded = true;
+      }
+    }
+  }
 
-  // 5. Render offline
+  // 5. Fallback if no file URL or fetch failed
+  if (!fileLoaded) {
+    if (presetId.startsWith('talking-')) buildCrowd(offline, length, sampleRate, ambientVolume);
+    else if (presetId.startsWith('tv-')) buildTv(offline, length, sampleRate, ambientVolume);
+    else if (presetId === 'phone-line') buildPhoneLine(offline, length, sampleRate, ambientVolume);
+    else if (presetId === 'rain') buildRain(offline, length, sampleRate, ambientVolume);
+    else buildOffice(offline, length, sampleRate, ambientVolume);
+  }
+
+  // 6. Render
   const renderedBuffer = await offline.startRendering();
 
-  // 6. Encode to WAV
+  // 7. Encode
   return encodeWav(renderedBuffer);
 }
+
+const offlineAudioContextConstructor = window.OfflineAudioContext || (window as any).webkitOfflineAudioContext;

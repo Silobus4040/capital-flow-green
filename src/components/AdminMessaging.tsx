@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useAmbientNoise } from '@/hooks/useAmbientNoise';
-import { mixAmbientIntoAudio, AMBIENT_PRESETS } from '@/utils/mixAmbientAudio';
+import { mixAmbientIntoAudio, AMBIENT_PRESETS, CUSTOM_PRESET_ID } from '@/utils/mixAmbientAudio';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -79,12 +79,15 @@ export default function AdminMessaging() {
 
   // TTS Preview
   const [ttsPreviewBlob, setTtsPreviewBlob] = useState<Blob | null>(null);
+  const [originalTtsBlob, setOriginalTtsBlob] = useState<Blob | null>(null);
   const [ttsPreviewUrl, setTtsPreviewUrl] = useState<string | null>(null);
   const [ttsPreviewText, setTtsPreviewText] = useState('');
   const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
   const [isMixing, setIsMixing] = useState(false);
   const [isAmbientMixed, setIsAmbientMixed] = useState(false);
-  const [selectedPreset, setSelectedPreset] = useState('office');
+  const [selectedPreset, setSelectedPreset] = useState('talking-cafe');
+  const [ambientVolume, setAmbientVolume] = useState(0.08);
+  const [customAudioFile, setCustomAudioFile] = useState<File | null>(null);
   const previewAudioRef = useRef<HTMLAudioElement | null>(null);
 
   const updateTTSSetting = useCallback((key: string, value: number | string) => {
@@ -286,12 +289,12 @@ export default function AdminMessaging() {
     }
   };
 
-  // Mix ambient noise into the TTS preview blob
+  // Mix or Remix ambient noise into the TTS preview blob
   const mixAmbientHandler = async () => {
-    if (!ttsPreviewBlob) return;
+    if (!originalTtsBlob) return;
     setIsMixing(true);
     try {
-      const mixedBlob = await mixAmbientIntoAudio(ttsPreviewBlob, selectedPreset, 0.08);
+      const mixedBlob = await mixAmbientIntoAudio(originalTtsBlob, selectedPreset, ambientVolume, customAudioFile);
       if (ttsPreviewUrl) URL.revokeObjectURL(ttsPreviewUrl);
       const url = URL.createObjectURL(mixedBlob);
       setTtsPreviewBlob(mixedBlob);
@@ -310,6 +313,7 @@ export default function AdminMessaging() {
     if (previewAudioRef.current) previewAudioRef.current.pause();
     if (ttsPreviewUrl) URL.revokeObjectURL(ttsPreviewUrl);
     setTtsPreviewBlob(null);
+    setOriginalTtsBlob(null);
     setTtsPreviewUrl(null);
     setTtsPreviewText('');
     setIsPreviewPlaying(false);
@@ -570,13 +574,13 @@ export default function AdminMessaging() {
                     </Button>
                     <Button
                       size="sm"
-                      variant={isAmbientMixed ? 'default' : 'outline'}
-                      className={`gap-1.5 rounded-lg ${isAmbientMixed ? 'bg-purple-600 hover:bg-purple-700 text-white' : ''}`}
+                      variant={isAmbientMixed ? 'secondary' : 'outline'}
+                      className={`gap-1.5 rounded-lg ${isAmbientMixed ? 'bg-purple-100 text-purple-700 hover:bg-purple-200 border-purple-300' : ''}`}
                       onClick={mixAmbientHandler}
-                      disabled={isMixing || isAmbientMixed}
+                      disabled={isMixing || (selectedPreset === CUSTOM_PRESET_ID && !customAudioFile)}
                     >
                       {isMixing ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Headphones className="h-3.5 w-3.5" />}
-                      {isAmbientMixed ? '✓ Ambient Mixed' : isMixing ? 'Mixing...' : 'Mix Ambient'}
+                      {isAmbientMixed ? 'Remix Ambient' : 'Mix Ambient'}
                     </Button>
                     <Button size="sm" className="gap-1.5 rounded-lg bg-green-600 hover:bg-green-700 text-white" onClick={sendTTSPreview} disabled={sending}>
                       {sending ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
@@ -587,14 +591,15 @@ export default function AdminMessaging() {
                       Discard
                     </Button>
                   </div>
-                  {/* Ambient Preset Selector */}
-                  {!isAmbientMixed && (
+                  
+                  {/* Ambient Presets & Volume */}
+                  <div className="bg-white/50 rounded-lg p-2 border space-y-2 mt-2">
                     <div className="flex items-center gap-2">
                       <Headphones className="h-3 w-3 text-muted-foreground flex-shrink-0" />
                       <select
                         value={selectedPreset}
                         onChange={(e) => setSelectedPreset(e.target.value)}
-                        className="flex-1 text-xs border rounded-lg p-1.5 bg-background"
+                        className="flex-1 text-xs border rounded-md p-1.5 bg-background shadow-sm"
                         disabled={isMixing}
                       >
                         {AMBIENT_PRESETS.map(p => (
@@ -602,13 +607,37 @@ export default function AdminMessaging() {
                         ))}
                       </select>
                     </div>
-                  )}
-                  {isAmbientMixed && (
-                    <p className="text-[10px] text-purple-600 flex items-center gap-1">
-                      <Headphones className="h-3 w-3" />
-                      Mixed with: {AMBIENT_PRESETS.find(p => p.id === selectedPreset)?.label}
-                    </p>
-                  )}
+                    {selectedPreset === CUSTOM_PRESET_ID && (
+                      <div className="pl-5 pr-2 pt-1 pb-1">
+                        <input
+                          type="file"
+                          accept="audio/mp3,audio/wav,audio/mpeg,audio/ogg"
+                          onChange={(e) => setCustomAudioFile(e.target.files?.[0] || null)}
+                          className="w-full text-[10px] text-muted-foreground file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100"
+                          disabled={isMixing}
+                        />
+                      </div>
+                    )}
+                    <div className="flex items-center gap-2 pl-5">
+                      <span className="text-[10px] text-muted-foreground w-10">Volume</span>
+                      <Slider
+                        value={[ambientVolume]}
+                        min={0.01}
+                        max={0.20}
+                        step={0.01}
+                        onValueChange={([v]) => setAmbientVolume(v)}
+                        className="flex-1"
+                        disabled={isMixing}
+                      />
+                      <span className="text-[10px] text-muted-foreground w-6 text-right">{Math.round(ambientVolume * 100)}%</span>
+                    </div>
+                    {isAmbientMixed && (
+                      <p className="text-[10px] text-purple-600 flex items-center gap-1 pl-5 pt-1">
+                        <Check className="h-3 w-3" />
+                        Audio mixed successfully. Change settings and "Remix" to try again.
+                      </p>
+                    )}
+                  </div>
                 </div>
               )}
 

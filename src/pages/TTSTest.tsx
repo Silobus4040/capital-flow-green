@@ -6,7 +6,7 @@ import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { useAmbientNoise } from '@/hooks/useAmbientNoise';
-import { mixAmbientIntoAudio, AMBIENT_PRESETS } from '@/utils/mixAmbientAudio';
+import { mixAmbientIntoAudio, AMBIENT_PRESETS, CUSTOM_PRESET_ID } from '@/utils/mixAmbientAudio';
 import { Volume2, VolumeX, Loader2, AlertTriangle, Download, ArrowLeft, Headphones } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Link } from 'react-router-dom';
@@ -32,6 +32,7 @@ export default function TTSTest() {
   const [loading, setLoading] = useState(false);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+  const [originalAudioBlob, setOriginalAudioBlob] = useState<Blob | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioLoading, setAudioLoading] = useState(false);
   const [debugInfo, setDebugInfo] = useState<string>('');
@@ -39,7 +40,8 @@ export default function TTSTest() {
   const [ambientVolume, setAmbientVolume] = useState(0.08);
   const [isMixing, setIsMixing] = useState(false);
   const [isAmbientMixed, setIsAmbientMixed] = useState(false);
-  const [selectedPreset, setSelectedPreset] = useState('office');
+  const [selectedPreset, setSelectedPreset] = useState('talking-cafe');
+  const [customAudioFile, setCustomAudioFile] = useState<File | null>(null);
   const { toast } = useToast();
   const { startAmbience, stopAmbience } = useAmbientNoise(ambientVolume);
 
@@ -149,6 +151,8 @@ export default function TTSTest() {
         const blobUrl = URL.createObjectURL(generatedBlob);
         setAudioUrl(blobUrl);
         setAudioBlob(generatedBlob);
+        setOriginalAudioBlob(generatedBlob);
+        setIsAmbientMixed(false);
         setDebugInfo(`Audio ready: ${Math.round(generatedBlob.size / 1024)}KB MP3 (legacy)`);
 
         toast({
@@ -293,12 +297,12 @@ export default function TTSTest() {
     stopAmbience();
   };
 
-  // Mix ambient noise into the audio blob permanently
+  // Mix or remix ambient noise into the audio blob permanently
   const mixAmbientHandler = async () => {
-    if (!audioBlob) return;
+    if (!originalAudioBlob) return;
     setIsMixing(true);
     try {
-      const mixedBlob = await mixAmbientIntoAudio(audioBlob, selectedPreset, ambientVolume);
+      const mixedBlob = await mixAmbientIntoAudio(originalAudioBlob, selectedPreset, ambientVolume, customAudioFile);
       if (audioUrl) URL.revokeObjectURL(audioUrl);
       const blobUrl = URL.createObjectURL(mixedBlob);
       setAudioBlob(mixedBlob);
@@ -489,17 +493,17 @@ export default function TTSTest() {
                     </Button>
                     <Button
                       onClick={mixAmbientHandler}
-                      disabled={isMixing || isAmbientMixed}
-                      variant={isAmbientMixed ? 'default' : 'outline'}
+                      disabled={isMixing || (selectedPreset === CUSTOM_PRESET_ID && !customAudioFile)}
+                      variant={isAmbientMixed ? 'secondary' : 'outline'}
                       size="sm"
-                      className={isAmbientMixed ? 'bg-purple-600 hover:bg-purple-700 text-white' : ''}
+                      className={isAmbientMixed ? 'bg-purple-100 text-purple-700 hover:bg-purple-200 border-purple-300' : ''}
                     >
                       {isMixing ? (
                         <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                       ) : (
                         <Headphones className="h-4 w-4 mr-2" />
                       )}
-                      {isAmbientMixed ? '✓ Ambient Mixed' : isMixing ? 'Mixing...' : 'Mix Ambient'}
+                      {isAmbientMixed ? 'Remix Ambient' : 'Mix Ambient'}
                     </Button>
                   </div>
                 </div>
@@ -535,6 +539,20 @@ export default function TTSTest() {
                           ))}
                         </select>
                       </div>
+
+                      {/* Custom Upload Input */}
+                      {selectedPreset === CUSTOM_PRESET_ID && (
+                        <div className="pt-1 pb-2">
+                          <input
+                            type="file"
+                            accept="audio/mp3,audio/wav,audio/mpeg,audio/ogg"
+                            onChange={(e) => { setCustomAudioFile(e.target.files?.[0] || null); setIsAmbientMixed(false); }}
+                            className="w-full text-[10px] text-muted-foreground file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-purple-100 file:text-purple-700 hover:file:bg-purple-200"
+                            disabled={isMixing}
+                          />
+                        </div>
+                      )}
+
                       {/* Volume Slider */}
                       <div className="space-y-1">
                         <div className="flex justify-between text-xs text-purple-700">
