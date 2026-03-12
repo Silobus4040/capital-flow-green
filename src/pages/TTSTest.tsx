@@ -4,7 +4,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Textarea } from '@/components/ui/textarea';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Slider } from '@/components/ui/slider';
 import { useToast } from '@/hooks/use-toast';
 import { useAmbientNoise } from '@/hooks/useAmbientNoise';
 import { mixAmbientIntoAudio, AMBIENT_PRESETS, CUSTOM_PRESET_ID } from '@/utils/mixAmbientAudio';
