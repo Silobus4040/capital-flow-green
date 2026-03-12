@@ -321,15 +321,13 @@ export async function mixAmbientIntoAudio(
     }
   }
 
-  // 3. Determine Final Length (longest of the two)
-  // If the user uploads a 1-minute audio and a 10-second TTS, the final file will be 1 minute long.
-  // We apply Math.max to ensure the offline context is large enough.
+  // 3. Determine Final Length (strictly match TTS length)
+  // Even if the user uploads a 1-minute audio and a 10-second TTS, the final file will be 10 seconds long,
+  // terminating the background audio exactly when the speech ends.
   const ttsLength = ttsBuffer.length;
-  const bgLength = bgBuffer ? bgBuffer.length : 0;
   
-  // Only override length if it's a CUSTOM upload (presets should trim to TTS size so it doesn't drag on forever)
   const isCustom = !!customAudioBlob;
-  const renderLength = isCustom ? Math.max(ttsLength, bgLength) : ttsLength;
+  const renderLength = ttsLength;
 
   // 4. Offline context setup
   const offline = new OfflineAudioContext(numChannels, renderLength, sampleRate);
