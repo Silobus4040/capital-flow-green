@@ -46,7 +46,7 @@ const handler = async (req: Request): Promise<Response> => {
         const isVoice = messageType === 'voice';
         const preview = isVoice
             ? '🎧 You received a new voice note from your account manager. Log in to your portal to listen to it.'
-            : '💬 You have a new secure message from your account manager. Log in to your portal to read it.';
+            : '💬 You have a new message from your account manager. Log in to your portal to view it.';
 
         console.log(`📝 Sending message notification to ${borrowerEmail}`);
 
@@ -58,8 +58,8 @@ const handler = async (req: Request): Promise<Response> => {
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f7fafc;">
           <div style="background: linear-gradient(135deg, #1a6b3c 0%, #2d8a56 100%); color: white; padding: 30px; text-align: center;">
             <img src="https://capital-flow-green.lovable.app/lovable-uploads/7a51105a-a80d-4bc0-8f7b-c8e5b6b783c3.png" alt="CCIF Logo" style="height: 40px; margin-bottom: 15px; display: inline-block;" />
-            <h1 style="margin: 0; font-size: 24px;">${isVoice ? 'New Voice Note' : 'New Message'}</h1>
-            <p style="margin: 8px 0 0; opacity: 0.9; font-size: 14px;">CCIF Account Manager</p>
+            <h1 style="margin: 0; font-size: 24px; color: #ffffff;">${isVoice ? 'New Voice Note' : 'New Message'}</h1>
+            <p style="margin: 8px 0 0; color: #e0e0e0; font-size: 14px;">CCIF Account Manager</p>
           </div>
           <div style="padding: 30px;">
             <p style="font-size: 16px; color: #2d3748;">Dear ${borrowerName || 'Borrower'},</p>
