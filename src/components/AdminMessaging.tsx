@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useAmbientNoise } from '@/hooks/useAmbientNoise';
-import { mixAmbientIntoAudio } from '@/utils/mixAmbientAudio';
+import { mixAmbientIntoAudio, AMBIENT_PRESETS } from '@/utils/mixAmbientAudio';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -84,6 +84,7 @@ export default function AdminMessaging() {
   const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
   const [isMixing, setIsMixing] = useState(false);
   const [isAmbientMixed, setIsAmbientMixed] = useState(false);
+  const [selectedPreset, setSelectedPreset] = useState('office');
   const previewAudioRef = useRef<HTMLAudioElement | null>(null);
 
   const updateTTSSetting = useCallback((key: string, value: number | string) => {
@@ -290,7 +291,7 @@ export default function AdminMessaging() {
     if (!ttsPreviewBlob) return;
     setIsMixing(true);
     try {
-      const mixedBlob = await mixAmbientIntoAudio(ttsPreviewBlob, 0.08);
+      const mixedBlob = await mixAmbientIntoAudio(ttsPreviewBlob, selectedPreset, 0.08);
       if (ttsPreviewUrl) URL.revokeObjectURL(ttsPreviewUrl);
       const url = URL.createObjectURL(mixedBlob);
       setTtsPreviewBlob(mixedBlob);
@@ -329,7 +330,7 @@ export default function AdminMessaging() {
       message_type: 'voice',
       content: null,
       audio_url: null,
-      transcript: ttsPreviewText,
+      transcript: null,
       is_read: false,
       created_at: new Date().toISOString(),
       _optimistic: true,
@@ -351,7 +352,7 @@ export default function AdminMessaging() {
         sender_role: 'admin',
         message_type: 'voice',
         audio_url: filePath,
-        transcript: ttsPreviewText,
+        transcript: null,
         content: null,
       });
 
@@ -558,7 +559,7 @@ export default function AdminMessaging() {
                     <span className="font-medium">Voice Preview</span>
                     <span className="text-[10px] opacity-60">— "{ttsPreviewText.slice(0, 50)}{ttsPreviewText.length > 50 ? '…' : ''}"</span>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     <Button size="sm" variant="outline" className="gap-1.5 rounded-lg" onClick={togglePreviewPlayback}>
                       {isPreviewPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
                       {isPreviewPlaying ? 'Pause' : 'Play'}
@@ -586,6 +587,28 @@ export default function AdminMessaging() {
                       Discard
                     </Button>
                   </div>
+                  {/* Ambient Preset Selector */}
+                  {!isAmbientMixed && (
+                    <div className="flex items-center gap-2">
+                      <Headphones className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                      <select
+                        value={selectedPreset}
+                        onChange={(e) => setSelectedPreset(e.target.value)}
+                        className="flex-1 text-xs border rounded-lg p-1.5 bg-background"
+                        disabled={isMixing}
+                      >
+                        {AMBIENT_PRESETS.map(p => (
+                          <option key={p.id} value={p.id}>{p.label} — {p.description}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+                  {isAmbientMixed && (
+                    <p className="text-[10px] text-purple-600 flex items-center gap-1">
+                      <Headphones className="h-3 w-3" />
+                      Mixed with: {AMBIENT_PRESETS.find(p => p.id === selectedPreset)?.label}
+                    </p>
+                  )}
                 </div>
               )}
 

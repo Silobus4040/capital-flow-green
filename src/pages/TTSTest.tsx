@@ -6,7 +6,7 @@ import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { useAmbientNoise } from '@/hooks/useAmbientNoise';
-import { mixAmbientIntoAudio } from '@/utils/mixAmbientAudio';
+import { mixAmbientIntoAudio, AMBIENT_PRESETS } from '@/utils/mixAmbientAudio';
 import { Volume2, VolumeX, Loader2, AlertTriangle, Download, ArrowLeft, Headphones } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Link } from 'react-router-dom';
@@ -39,6 +39,7 @@ export default function TTSTest() {
   const [ambientVolume, setAmbientVolume] = useState(0.08);
   const [isMixing, setIsMixing] = useState(false);
   const [isAmbientMixed, setIsAmbientMixed] = useState(false);
+  const [selectedPreset, setSelectedPreset] = useState('office');
   const { toast } = useToast();
   const { startAmbience, stopAmbience } = useAmbientNoise(ambientVolume);
 
@@ -297,7 +298,7 @@ export default function TTSTest() {
     if (!audioBlob) return;
     setIsMixing(true);
     try {
-      const mixedBlob = await mixAmbientIntoAudio(audioBlob, ambientVolume);
+      const mixedBlob = await mixAmbientIntoAudio(audioBlob, selectedPreset, ambientVolume);
       if (audioUrl) URL.revokeObjectURL(audioUrl);
       const blobUrl = URL.createObjectURL(mixedBlob);
       setAudioBlob(mixedBlob);
@@ -520,27 +521,49 @@ export default function TTSTest() {
                     </label>
                   </div>
                   {ambientEnabled && (
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-xs text-purple-700">
-                        <span>Volume</span>
-                        <span>{Math.round(ambientVolume * 100)}%</span>
+                    <div className="space-y-3">
+                      {/* Preset Selector */}
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-purple-700">Background Type</label>
+                        <select
+                          value={selectedPreset}
+                          onChange={(e) => { setSelectedPreset(e.target.value); setIsAmbientMixed(false); }}
+                          className="w-full text-xs border border-purple-200 rounded-lg p-2 bg-white"
+                        >
+                          {AMBIENT_PRESETS.map(p => (
+                            <option key={p.id} value={p.id}>{p.label} — {p.description}</option>
+                          ))}
+                        </select>
                       </div>
-                      <Slider
-                        value={[ambientVolume]}
-                        min={0.01}
-                        max={0.20}
-                        step={0.01}
-                        onValueChange={([v]) => setAmbientVolume(v)}
-                        className="w-full"
-                      />
-                      <div className="flex justify-between text-[9px] text-purple-500">
-                        <span>Subtle</span>
-                        <span>Noticeable</span>
+                      {/* Volume Slider */}
+                      <div className="space-y-1">
+                        <div className="flex justify-between text-xs text-purple-700">
+                          <span>Volume</span>
+                          <span>{Math.round(ambientVolume * 100)}%</span>
+                        </div>
+                        <Slider
+                          value={[ambientVolume]}
+                          min={0.01}
+                          max={0.20}
+                          step={0.01}
+                          onValueChange={([v]) => setAmbientVolume(v)}
+                          className="w-full"
+                        />
+                        <div className="flex justify-between text-[9px] text-purple-500">
+                          <span>Subtle</span>
+                          <span>Noticeable</span>
+                        </div>
                       </div>
                     </div>
                   )}
+                  {isAmbientMixed && (
+                    <p className="text-[10px] text-purple-600 flex items-center gap-1 font-medium">
+                      <Headphones className="h-3 w-3" />
+                      ✓ Mixed with: {AMBIENT_PRESETS.find(p => p.id === selectedPreset)?.label}
+                    </p>
+                  )}
                   <p className="text-[10px] text-purple-600">
-                    Adds gentle room-tone / office ambience under TTS playback for a natural phone-call feel.
+                    Adds background ambience under TTS playback. Use "Mix Ambient" to bake it into the file.
                   </p>
                 </div>
 

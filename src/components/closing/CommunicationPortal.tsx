@@ -337,9 +337,7 @@ export default function CommunicationPortal({ applicationId }: CommunicationPort
                             {playingId === msg.id ? 'Playing...' : '▶ Play Audio'}
                           </button>
                         )}
-                        {isVoice && msg.transcript && (
-                          <p className={`text-[11px] mt-1 ${isOwn ? 'text-white/50' : 'text-gray-400'} italic`}>"{msg.transcript}"</p>
-                        )}
+
                         {isVoice && !msg.audio_url && (
                           <p className={`text-[13px] ${isOwn ? 'text-white/60' : 'text-gray-400'}`}>Sending voice note…</p>
                         )}
