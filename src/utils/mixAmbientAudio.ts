@@ -106,10 +106,10 @@ async function fetchAndDecodeAudio(url: string, ctx: BaseAudioContext): Promise<
   }
 }
 
-function buildFileLooper(ctx: OfflineAudioContext, buffer: AudioBuffer, length: number, volume: number) {
+function buildFileLooper(ctx: OfflineAudioContext, buffer: AudioBuffer, length: number, volume: number, loop = true) {
   const src = ctx.createBufferSource();
   src.buffer = buffer;
-  src.loop = true;
+  src.loop = loop;
 
   const gain = ctx.createGain();
   gain.gain.value = volume;
@@ -308,7 +308,8 @@ export async function mixAmbientIntoAudio(
     const fileBuffer = await fallbackCtx.decodeAudioData(arrayBuf);
     await fallbackCtx.close();
     if (fileBuffer) {
-      buildFileLooper(offline, fileBuffer, length, ambientVolume);
+      // User explicitly requested uploaded custom audio NOT to loop
+      buildFileLooper(offline, fileBuffer, length, ambientVolume, false);
       fileLoaded = true;
     }
   } else {
