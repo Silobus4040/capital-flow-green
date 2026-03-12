@@ -6,7 +6,8 @@ import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { useAmbientNoise } from '@/hooks/useAmbientNoise';
-import { Volume2, VolumeX, Loader2, AlertTriangle, Download, ArrowLeft } from 'lucide-react';
+import { mixAmbientIntoAudio } from '@/utils/mixAmbientAudio';
+import { Volume2, VolumeX, Loader2, AlertTriangle, Download, ArrowLeft, Headphones } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Link } from 'react-router-dom';
 
@@ -36,6 +37,8 @@ export default function TTSTest() {
   const [debugInfo, setDebugInfo] = useState<string>('');
   const [ambientEnabled, setAmbientEnabled] = useState(true);
   const [ambientVolume, setAmbientVolume] = useState(0.08);
+  const [isMixing, setIsMixing] = useState(false);
+  const [isAmbientMixed, setIsAmbientMixed] = useState(false);
   const { toast } = useToast();
   const { startAmbience, stopAmbience } = useAmbientNoise(ambientVolume);
 
@@ -67,6 +70,7 @@ export default function TTSTest() {
 
     setLoading(true);
     setDebugInfo('Generating audio...');
+    setIsAmbientMixed(false);
 
     try {
       console.log('Requesting ElevenLabs TTS with voice:', selectedVoice);
@@ -288,6 +292,26 @@ export default function TTSTest() {
     stopAmbience();
   };
 
+  // Mix ambient noise into the audio blob permanently
+  const mixAmbientHandler = async () => {
+    if (!audioBlob) return;
+    setIsMixing(true);
+    try {
+      const mixedBlob = await mixAmbientIntoAudio(audioBlob, ambientVolume);
+      if (audioUrl) URL.revokeObjectURL(audioUrl);
+      const blobUrl = URL.createObjectURL(mixedBlob);
+      setAudioBlob(mixedBlob);
+      setAudioUrl(blobUrl);
+      setIsAmbientMixed(true);
+      setDebugInfo(`Ambient mixed! File: ${Math.round(mixedBlob.size / 1024)}KB WAV`);
+      toast({ title: 'Ambient mixed', description: 'Background noise is now baked into the audio.' });
+    } catch (err: any) {
+      console.error('Mix ambient error:', err);
+      toast({ title: 'Mix Error', description: err.message, variant: 'destructive' });
+    }
+    setIsMixing(false);
+  };
+
   const downloadAudio = () => {
     if (!audioBlob) {
       toast({
@@ -461,6 +485,20 @@ export default function TTSTest() {
                     >
                       <Download className="h-4 w-4 mr-2" />
                       Download
+                    </Button>
+                    <Button
+                      onClick={mixAmbientHandler}
+                      disabled={isMixing || isAmbientMixed}
+                      variant={isAmbientMixed ? 'default' : 'outline'}
+                      size="sm"
+                      className={isAmbientMixed ? 'bg-purple-600 hover:bg-purple-700 text-white' : ''}
+                    >
+                      {isMixing ? (
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      ) : (
+                        <Headphones className="h-4 w-4 mr-2" />
+                      )}
+                      {isAmbientMixed ? '✓ Ambient Mixed' : isMixing ? 'Mixing...' : 'Mix Ambient'}
                     </Button>
                   </div>
                 </div>

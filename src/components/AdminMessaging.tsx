@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useAmbientNoise } from '@/hooks/useAmbientNoise';
+import { mixAmbientIntoAudio } from '@/utils/mixAmbientAudio';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
-import { Send, Play, Pause, Loader2, MessageSquare, Mic, Check, CheckCheck, Search, Settings2, ChevronDown, ChevronUp, RotateCcw, Trash2, Volume2 } from 'lucide-react';
+import { Send, Play, Pause, Loader2, MessageSquare, Mic, Check, CheckCheck, Search, Settings2, ChevronDown, ChevronUp, RotateCcw, Trash2, Volume2, Headphones } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 const VOICE_OPTIONS = [
@@ -81,6 +82,8 @@ export default function AdminMessaging() {
   const [ttsPreviewUrl, setTtsPreviewUrl] = useState<string | null>(null);
   const [ttsPreviewText, setTtsPreviewText] = useState('');
   const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
+  const [isMixing, setIsMixing] = useState(false);
+  const [isAmbientMixed, setIsAmbientMixed] = useState(false);
   const previewAudioRef = useRef<HTMLAudioElement | null>(null);
 
   const updateTTSSetting = useCallback((key: string, value: number | string) => {
@@ -282,6 +285,25 @@ export default function AdminMessaging() {
     }
   };
 
+  // Mix ambient noise into the TTS preview blob
+  const mixAmbientHandler = async () => {
+    if (!ttsPreviewBlob) return;
+    setIsMixing(true);
+    try {
+      const mixedBlob = await mixAmbientIntoAudio(ttsPreviewBlob, 0.08);
+      if (ttsPreviewUrl) URL.revokeObjectURL(ttsPreviewUrl);
+      const url = URL.createObjectURL(mixedBlob);
+      setTtsPreviewBlob(mixedBlob);
+      setTtsPreviewUrl(url);
+      setIsAmbientMixed(true);
+      toast({ title: 'Ambient mixed', description: 'Background noise is now baked into the audio.' });
+    } catch (err: any) {
+      console.error('Mix ambient error:', err);
+      toast({ title: 'Mix Error', description: err.message, variant: 'destructive' });
+    }
+    setIsMixing(false);
+  };
+
   // Discard the TTS preview
   const discardPreview = () => {
     if (previewAudioRef.current) previewAudioRef.current.pause();
@@ -290,6 +312,7 @@ export default function AdminMessaging() {
     setTtsPreviewUrl(null);
     setTtsPreviewText('');
     setIsPreviewPlaying(false);
+    setIsAmbientMixed(false);
   };
 
   // Send the approved TTS preview to the borrower
@@ -540,9 +563,19 @@ export default function AdminMessaging() {
                       {isPreviewPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
                       {isPreviewPlaying ? 'Pause' : 'Play'}
                     </Button>
-                    <Button size="sm" variant="outline" className="gap-1.5 rounded-lg" onClick={generateTTSPreview} disabled={ttsLoading}>
+                    <Button size="sm" variant="outline" className="gap-1.5 rounded-lg" onClick={() => { generateTTSPreview(); setIsAmbientMixed(false); }} disabled={ttsLoading}>
                       {ttsLoading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <RotateCcw className="h-3.5 w-3.5" />}
                       Regenerate
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={isAmbientMixed ? 'default' : 'outline'}
+                      className={`gap-1.5 rounded-lg ${isAmbientMixed ? 'bg-purple-600 hover:bg-purple-700 text-white' : ''}`}
+                      onClick={mixAmbientHandler}
+                      disabled={isMixing || isAmbientMixed}
+                    >
+                      {isMixing ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Headphones className="h-3.5 w-3.5" />}
+                      {isAmbientMixed ? '✓ Ambient Mixed' : isMixing ? 'Mixing...' : 'Mix Ambient'}
                     </Button>
                     <Button size="sm" className="gap-1.5 rounded-lg bg-green-600 hover:bg-green-700 text-white" onClick={sendTTSPreview} disabled={sending}>
                       {sending ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
