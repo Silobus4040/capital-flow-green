@@ -46,7 +46,7 @@ const handler = async (req: Request): Promise<Response> => {
         const isVoice = messageType === 'voice';
         const preview = isVoice
             ? '🎧 You received a new voice note from your account manager. Log in to your portal to listen to it.'
-            : '💬 You have a new secure message from your account manager. Log in to your portal to read it.';
+            : '💬 You have a new message from your account manager. Log in to your portal to view it.';
 
         console.log(`📝 Sending message notification to ${borrowerEmail}`);
 
