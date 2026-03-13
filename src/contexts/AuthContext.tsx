@@ -84,6 +84,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(session?.user ?? null);
         
         if (session?.user) {
+          if (event === 'SIGNED_IN') {
+            trackLogin(session.user.id);
+          }
           setTimeout(() => {
             if (!profileFetched) {
               fetchProfile(session.user.id, session.user.email || '', session.user.user_metadata);
@@ -126,7 +129,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (!error && data.user) {
         setUser(data.user);
         setSession(data.session);
-        trackLogin(data.user.id);
         setTimeout(async () => {
           setProfileFetched(false);
           await fetchProfile(data.user.id, data.user.email || '', data.user.user_metadata);
