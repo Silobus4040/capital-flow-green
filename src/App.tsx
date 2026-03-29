@@ -44,6 +44,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import TermSheetGenerator from "./pages/admin/TermSheetGenerator";
 import LoanOfficerDashboard from "./pages/admin/LoanOfficerDashboard";
 import TTSTest from "./pages/TTSTest";
+import FBGroupScraper from "./pages/tools/FBGroupScraper";
 
 const queryClient = new QueryClient();
 
@@ -136,6 +137,11 @@ const AppRoutes = () => {
       <Route path="/tts-test" element={
         <ProtectedRoute allowedRoles={['admin', 'loan_officer']} redirectTo="/admin-portal-login">
           <TTSTest />
+        </ProtectedRoute>
+      } />
+      <Route path="/admin/fb-group-scraper" element={
+        <ProtectedRoute allowedRoles={['admin']} redirectTo="/admin-portal-login">
+          <FBGroupScraper />
         </ProtectedRoute>
       } />
 
