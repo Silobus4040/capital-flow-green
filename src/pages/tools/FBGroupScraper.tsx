@@ -100,7 +100,7 @@ export default function FBGroupScraper() {
 
   const pollApifyRun = async (runId: string, stepLabel: string): Promise<any[]> => {
     let attempts = 0;
-    while (attempts < 80) { // 80 * 5s = ~6 minutes max timeout
+    while (attempts < 200) { // 200 * 5s = ~16 minutes max timeout
       await delay(5000);
       attempts++;
       setScrapeStatus(`${stepLabel} (Waiting for Apify... ${attempts * 5}s elapsed)`);
@@ -118,7 +118,7 @@ export default function FBGroupScraper() {
         throw new Error(`Apify run failed with status: ${data.status}`);
       }
     }
-    throw new Error("Local polling timed out after 6 minutes.");
+    throw new Error("Local polling timed out after 16 minutes.");
   };
 
   const handleStartScrape = async () => {
@@ -190,8 +190,7 @@ export default function FBGroupScraper() {
         }
       }
 
-      // ── STAGE 3: Scrape Comments ───────────────────────────────────────
-      // Extract valid URLs
+      // ── STAGE 3: Scrape Comments (batched by URL to avoid Apify run timeouts) ────
       const getCommentCount = (p: any): number => {
         const val = p.commentsCount ?? p.comments_count ?? p.commentCount ?? p.comments;
         if (typeof val === "number") return val;
@@ -199,59 +198,82 @@ export default function FBGroupScraper() {
         if (Array.isArray(val)) return val.length;
         return 0;
       };
-      
-      const postUrls = postsData.filter((p: any) => getCommentCount(p) > 0).map((p: any) => p.url || p.postUrl).filter(Boolean);
-      
-      if (postUrls.length > 0) {
-        setScrapeStatus("Stage 3/4: Starting Apify Comment Scraper...");
-        const startCommentsRes = await supabase.functions.invoke("fb-group-scrape", {
-          body: {
-            action: "start_comment_scrape",
-            payload: {
-              postUrls,
-              targetComments: parseInt(targetComments) || -1,
-              orderingMode,
-              includeReplies: includeReplies === "true",
-              includeReactions: includeReactions === "true",
-            }
-          },
-        });
 
-        if (startCommentsRes.error) throw startCommentsRes.error;
-        if (startCommentsRes.data?.error) throw new Error(startCommentsRes.data.error);
-        if (startCommentsRes.data.runId) {
-           const commentsRunId = startCommentsRes.data.runId;
-           const commentsData = await pollApifyRun(commentsRunId, "Stage 3/4: Scraping Comments");
-           setRawComments(commentsData || []);
+      // Sort by comment count descending so we prioritise the most active posts
+      const allPostUrls = postsData
+        .filter((p: any) => getCommentCount(p) > 0)
+        .sort((a: any, b: any) => getCommentCount(b) - getCommentCount(a))
+        .map((p: any) => p.url || p.postUrl)
+        .filter(Boolean);
 
-           if (commentsData && commentsData.length > 0) {
-              // ── STAGE 4: Classify Comments ────────────────────────────────
-              setScrapeStatus(`Stage 4/4: AI Classifying ${commentsData.length} comments...`);
-              const C_CHUNK = 200;
-              for (let i = 0; i < commentsData.length; i += C_CHUNK) {
-                const commentChunk = commentsData.slice(i, i + C_CHUNK);
-                setScrapeStatus(`Stage 4/4: AI Classifying comments ${i + 1} to ${Math.min(i + C_CHUNK, commentsData.length)}...`);
-                // Send up chunk of comments to Edge Function. Note we send context for resolving parent URLs, keeping it intact
-                const classifyCommentsRes = await supabase.functions.invoke("fb-group-scrape", {
-                  body: {
-                    action: "classify_commenters",
-                    groupUrl: groupUrl.trim(),
-                    payload: { comments: commentChunk, postsContext: postsData }
-                  },
-                });
+      // Batch into groups of 10 URLs — each Apify run will be fast and predictable
+      const URL_BATCH_SIZE = 10;
+      const urlBatches: string[][] = [];
+      for (let i = 0; i < allPostUrls.length; i += URL_BATCH_SIZE) {
+        urlBatches.push(allPostUrls.slice(i, i + URL_BATCH_SIZE));
+      }
 
-                if (classifyCommentsRes.error) throw classifyCommentsRes.error;
-                if (classifyCommentsRes.data?.error) throw new Error(classifyCommentsRes.data.error);
-                
-                if (classifyCommentsRes.data.leads) {
-                  currentLeads = [...currentLeads, ...classifyCommentsRes.data.leads];
-                  setLeads((prev) => {
-                    const ids = new Set(prev.map((l) => l.id));
-                    return [...classifyCommentsRes.data.leads.filter((l: any) => !ids.has(l.id)), ...prev];
-                  });
-                }
+      let allCommentsData: any[] = [];
+
+      if (urlBatches.length > 0) {
+        for (let batchIdx = 0; batchIdx < urlBatches.length; batchIdx++) {
+          const urlBatch = urlBatches[batchIdx];
+          setScrapeStatus(`Stage 3/4: Scraping comments — batch ${batchIdx + 1}/${urlBatches.length} (${urlBatch.length} posts)...`);
+
+          const startCommentsRes = await supabase.functions.invoke("fb-group-scrape", {
+            body: {
+              action: "start_comment_scrape",
+              payload: {
+                postUrls: urlBatch,
+                targetComments: parseInt(targetComments) || -1,
+                orderingMode,
+                includeReplies: includeReplies === "true",
               }
-           }
+            },
+          });
+
+          if (startCommentsRes.error) throw startCommentsRes.error;
+          if (startCommentsRes.data?.error) throw new Error(startCommentsRes.data.error);
+
+          if (startCommentsRes.data?.runId) {
+            const batchCommentsData = await pollApifyRun(
+              startCommentsRes.data.runId,
+              `Stage 3/4: Comments batch ${batchIdx + 1}/${urlBatches.length}`
+            );
+            if (batchCommentsData?.length > 0) {
+              allCommentsData = [...allCommentsData, ...batchCommentsData];
+              setRawComments([...allCommentsData]);
+              setScrapeStatus(`Stage 3/4: Batch ${batchIdx + 1}/${urlBatches.length} done — ${allCommentsData.length} comments collected so far.`);
+            }
+          }
+        }
+
+        // ── STAGE 4: Classify all collected comments ────────────────────────
+        if (allCommentsData.length > 0) {
+          setScrapeStatus(`Stage 4/4: AI Classifying ${allCommentsData.length} comments...`);
+          const C_CHUNK = 200;
+          for (let i = 0; i < allCommentsData.length; i += C_CHUNK) {
+            const commentChunk = allCommentsData.slice(i, i + C_CHUNK);
+            setScrapeStatus(`Stage 4/4: AI Classifying comments ${i + 1}–${Math.min(i + C_CHUNK, allCommentsData.length)} of ${allCommentsData.length}...`);
+            const classifyCommentsRes = await supabase.functions.invoke("fb-group-scrape", {
+              body: {
+                action: "classify_commenters",
+                groupUrl: groupUrl.trim(),
+                payload: { comments: commentChunk, postsContext: postsData }
+              },
+            });
+
+            if (classifyCommentsRes.error) throw classifyCommentsRes.error;
+            if (classifyCommentsRes.data?.error) throw new Error(classifyCommentsRes.data.error);
+
+            if (classifyCommentsRes.data.leads) {
+              currentLeads = [...currentLeads, ...classifyCommentsRes.data.leads];
+              setLeads((prev) => {
+                const ids = new Set(prev.map((l) => l.id));
+                return [...classifyCommentsRes.data.leads.filter((l: any) => !ids.has(l.id)), ...prev];
+              });
+            }
+          }
         }
       }
 
