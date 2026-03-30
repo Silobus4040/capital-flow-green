@@ -200,11 +200,13 @@ export default function FBGroupScraper() {
       };
 
       // Sort by comment count descending so we prioritise the most active posts
+      // and cap it to the top 50 posts to prevent excessive runtime and costs.
       const allPostUrls = postsData
         .filter((p: any) => getCommentCount(p) > 0)
         .sort((a: any, b: any) => getCommentCount(b) - getCommentCount(a))
         .map((p: any) => p.url || p.postUrl)
-        .filter(Boolean);
+        .filter(Boolean)
+        .slice(0, 50);
 
       // Batch into groups of 10 URLs — each Apify run will be fast and predictable
       const URL_BATCH_SIZE = 10;
