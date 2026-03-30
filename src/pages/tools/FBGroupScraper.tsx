@@ -100,7 +100,7 @@ export default function FBGroupScraper() {
 
   const pollApifyRun = async (runId: string, stepLabel: string): Promise<any[]> => {
     let attempts = 0;
-    while (attempts < 200) { // 200 * 5s = ~16 minutes max timeout
+    while (attempts < 600) { // 600 * 5s = ~50 minutes max timeout
       await delay(5000);
       attempts++;
       setScrapeStatus(`${stepLabel} (Waiting for Apify... ${attempts * 5}s elapsed)`);
@@ -118,7 +118,7 @@ export default function FBGroupScraper() {
         throw new Error(`Apify run failed with status: ${data.status}`);
       }
     }
-    throw new Error("Local polling timed out after 16 minutes.");
+    throw new Error("Local polling timed out after 50 minutes.");
   };
 
   const handleStartScrape = async () => {
@@ -200,16 +200,15 @@ export default function FBGroupScraper() {
       };
 
       // Sort by comment count descending so we prioritise the most active posts
-      // and cap it to the top 50 posts to prevent excessive runtime and costs.
       const allPostUrls = postsData
         .filter((p: any) => getCommentCount(p) > 0)
         .sort((a: any, b: any) => getCommentCount(b) - getCommentCount(a))
         .map((p: any) => p.url || p.postUrl)
-        .filter(Boolean)
-        .slice(0, 50);
+        .filter(Boolean);
 
-      // Batch into groups of 10 URLs — each Apify run will be fast and predictable
-      const URL_BATCH_SIZE = 10;
+      // Batch into groups of 50 URLs — Apify charges per result, not run.
+      // 50 per batch is a sweet spot for the UI to show progress without overwhelming the actor.
+      const URL_BATCH_SIZE = 50;
       const urlBatches: string[][] = [];
       for (let i = 0; i < allPostUrls.length; i += URL_BATCH_SIZE) {
         urlBatches.push(allPostUrls.slice(i, i + URL_BATCH_SIZE));
