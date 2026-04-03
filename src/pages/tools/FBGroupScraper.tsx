@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,7 +16,7 @@ import {
 import {
   Search, Facebook, Download, Loader2, Play, Users,
   Mail, Flame, UserCheck, AlertCircle, ExternalLink,
-  RefreshCw, AlertTriangle, Trash2,
+  RefreshCw,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -72,16 +72,6 @@ export default function FBGroupScraper() {
   const [rawPosts, setRawPosts] = useState<any[]>([]);
   const [rawComments, setRawComments] = useState<any[]>([]);
   const [isViewingPosts, setIsViewingPosts] = useState(false);
-  const [totalDuplicatesSkipped, setTotalDuplicatesSkipped] = useState(0);
-  const [isCleaningDuplicates, setIsCleaningDuplicates] = useState(false);
-
-  // Detect if loaded leads list already has duplicate profile_urls
-  const hasDuplicatesInList = useMemo(() => {
-    const urls = leads
-      .filter((l) => l.profile_url && l.profile_url.trim() !== "")
-      .map((l) => l.profile_url as string);
-    return new Set(urls).size < urls.length;
-  }, [leads]);
 
   // ── Fetch existing leads from Supabase ──────────────────────────────────
   const fetchLeads = useCallback(async () => {
@@ -104,23 +94,6 @@ export default function FBGroupScraper() {
   useEffect(() => {
     fetchLeads();
   }, [fetchLeads]);
-
-  const handleCleanDuplicates = async () => {
-    setIsCleaningDuplicates(true);
-    try {
-      const { data, error } = await supabase.functions.invoke("fb-group-scrape", {
-        body: { action: "clean_duplicates" },
-      });
-      if (error) throw error;
-      if (data?.error) throw new Error(data.error);
-      toast.success(`✅ Removed ${data.deletedCount} duplicate lead(s) from the database!`);
-      await fetchLeads();
-    } catch (err: any) {
-      toast.error(err.message || "Failed to clean duplicates");
-    } finally {
-      setIsCleaningDuplicates(false);
-    }
-  };
 
   // ── Start Scrape (Frontend Orchestrated) ──────────────────────────────
   const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -158,9 +131,7 @@ export default function FBGroupScraper() {
     setLastStats(null);
     setRawPosts([]);
     setRawComments([]);
-    setTotalDuplicatesSkipped(0);
     let currentLeads: typeof leads = [];
-    let skippedTotal = 0;
 
     try {
       // ── STAGE 1: Scrape Posts ──────────────────────────────────────────
@@ -216,9 +187,6 @@ export default function FBGroupScraper() {
             const ids = new Set(prev.map((l) => l.id));
             return [...classifyPostsRes.data.leads.filter((l: any) => !ids.has(l.id)), ...prev];
           });
-        }
-        if ((classifyPostsRes.data.duplicatesSkipped ?? 0) > 0) {
-          skippedTotal += classifyPostsRes.data.duplicatesSkipped;
         }
       }
 
@@ -306,9 +274,6 @@ export default function FBGroupScraper() {
                 return [...classifyCommentsRes.data.leads.filter((l: any) => !ids.has(l.id)), ...prev];
               });
             }
-            if ((classifyCommentsRes.data.duplicatesSkipped ?? 0) > 0) {
-              skippedTotal += classifyCommentsRes.data.duplicatesSkipped;
-            }
           }
         }
       }
@@ -316,10 +281,6 @@ export default function FBGroupScraper() {
       // ── DONE ──────────────────────────────────────────────────────────
       setScrapeStatus("Scrape entirely complete!");
       toast.success(`Pipeline finished! Extracted ${currentLeads.length} new leads.`);
-      if (skippedTotal > 0) {
-        setTotalDuplicatesSkipped(skippedTotal);
-        toast.warning(`🚫 ${skippedTotal} duplicate lead(s) skipped — already in your database.`);
-      }
       
       setLastStats({
         postsScraped: postsData.length,
@@ -682,14 +643,13 @@ export default function FBGroupScraper() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-3"
+            className="grid grid-cols-2 md:grid-cols-4 gap-3"
           >
             {[
               { label: "Posts Scraped", value: lastStats.postsScraped, color: "text-[#1877F2]", onClick: () => setIsViewingPosts(true) },
               { label: "Comments Scraped", value: lastStats.commentsScraped, color: "text-purple-400" },
               { label: "Qualified Leads", value: lastStats.qualifiedLeads, color: "text-[#42B72A]" },
               { label: "With Email", value: lastStats.withEmail, color: "text-amber-400" },
-              { label: "Dupes Skipped", value: totalDuplicatesSkipped, color: "text-orange-500" },
             ].map((stat) => (
               <Card 
                 key={stat.label} 
@@ -705,36 +665,6 @@ export default function FBGroupScraper() {
                 </CardContent>
               </Card>
             ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Duplicate Warning Banner */}
-      <AnimatePresence>
-        {hasDuplicatesInList && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-xl border border-amber-500/30 bg-amber-500/10"
-          >
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm font-semibold text-amber-300">Duplicate leads detected in your database</p>
-                <p className="text-xs text-amber-400/80 mt-0.5">Some people appear more than once. Clean to keep only the earliest entry per person.</p>
-              </div>
-            </div>
-            <Button
-              onClick={handleCleanDuplicates}
-              disabled={isCleaningDuplicates}
-              size="sm"
-              className="bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:bg-amber-500/30 shrink-0 w-full sm:w-auto"
-              variant="outline"
-            >
-              {isCleaningDuplicates ? <Loader2 className="w-4 h-4 animate-spin mr-1" /> : <Trash2 className="w-4 h-4 mr-1" />}
-              {isCleaningDuplicates ? "Cleaning..." : "Clean Duplicates"}
-            </Button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -771,17 +701,6 @@ export default function FBGroupScraper() {
               <div className="flex gap-2 w-full sm:w-auto">
                 <Button onClick={fetchLeads} variant="outline" size="sm">
                   <RefreshCw className="w-4 h-4" />
-                </Button>
-                <Button
-                  onClick={handleCleanDuplicates}
-                  disabled={isCleaningDuplicates}
-                  variant="outline"
-                  size="sm"
-                  className="text-amber-400 border-amber-500/30 hover:bg-amber-500/10"
-                  title="Remove duplicate leads from the database"
-                >
-                  {isCleaningDuplicates ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
-                  <span className="ml-1 hidden sm:inline">Clean Dupes</span>
                 </Button>
                 <Button onClick={handleDownloadCSV} variant="outline" size="sm">
                   <Download className="w-4 h-4 mr-1" />
