@@ -812,7 +812,7 @@ export const loanPrograms: LoanProgram[] = [
           </div>
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">LOAN-TO-VALUE</div>
-            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 75%</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">Up to 80%</div>
           </div>
         </div>
         
@@ -893,45 +893,6 @@ export const loanPrograms: LoanProgram[] = [
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
           <div style="color: white; font-weight: 700;">💡 PAYMENT OPTIONS:</div>
           <div style="color: #86efac;">Fixed payments • Interest-only periods • Balloon structures • Full amortization</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 100% Financing -->
-    <div style="background: linear-gradient(135deg, #ffffff, #f0fdf4); color: #14532d; border-radius: 12px; padding: 2rem; border: 2px solid #16a34a; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -10px; left: 20px; background: #16a34a; color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;">
-        100% FINANCING
-      </div>
-      <div style="margin-top: 1rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">
-          Zero Down Payment Program
-        </h3>
-        <p style="color: #374151; font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
-          Qualified Investors Can Finance 100% of Purchase
-        </p>
-        
-        <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
-          <h4 style="color: #16a34a; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
-            Qualify by Meeting Any 2 of These Criteria:
-          </h4>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-            <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
-              <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">💳 CREDIT SCORE</div>
-              <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">680+ FICO</div>
-            </div>
-            <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
-              <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">📊 PROPERTY DSCR</div>
-              <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">1.35x or Higher</div>
-            </div>
-            <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
-              <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">💰 NET WORTH</div>
-              <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">1.5x Loan Amount</div>
-            </div>
-            <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
-              <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">💵 LIQUIDITY</div>
-              <div style="color: #166534; font-size: 1.1rem; font-weight: 600;">6 Months Reserves</div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
