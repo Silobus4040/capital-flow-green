@@ -12,7 +12,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "rv-park-financing",
     name: "RV Park Financing",
     interestRate: "Starting at 5.75%",
-    minimumLoanAmount: "$500,000.00",
+    minimumLoanAmount: "$200,000.00",
     description: "Specialized financing for RV parks and campground facilities with flexible terms designed for seasonal cash flow patterns.",
     terms: `<div class="space-y-8 bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl">
   <div class="text-center">
@@ -52,7 +52,7 @@ export const loanPrograms: LoanProgram[] = [
       <div class="space-y-3">
         <div class="flex justify-between border-b pb-2">
           <span class="font-semibold text-gray-700">Loan Amount:</span>
-          <span class="text-green-700 font-bold">Minimum $500,000</span>
+          <span class="text-green-700 font-bold">Minimum $200,000</span>
         </div>
         <div class="flex justify-between border-b pb-2">
           <span class="font-semibold text-gray-700">Interest Rate:</span>
@@ -87,7 +87,7 @@ export const loanPrograms: LoanProgram[] = [
       <div class="space-y-3">
         <div class="flex justify-between border-b pb-2">
           <span class="font-semibold text-gray-700">Loan Amount:</span>
-          <span class="text-green-700 font-bold">Minimum $500,000</span>
+          <span class="text-green-700 font-bold">Minimum $200,000</span>
         </div>
         <div class="flex justify-between border-b pb-2">
           <span class="font-semibold text-gray-700">Interest Rate:</span>
@@ -121,7 +121,7 @@ export const loanPrograms: LoanProgram[] = [
       <div class="space-y-3">
         <div class="flex justify-between border-b pb-2">
           <span class="font-semibold text-gray-700">Loan Amount:</span>
-          <span class="text-green-700 font-bold">Minimum $500,000</span>
+          <span class="text-green-700 font-bold">Minimum $200,000</span>
         </div>
         <div class="flex justify-between border-b pb-2">
           <span class="font-semibold text-gray-700">Interest Rate:</span>
@@ -155,7 +155,7 @@ export const loanPrograms: LoanProgram[] = [
       <div class="space-y-3">
         <div class="flex justify-between border-b pb-2">
           <span class="font-semibold text-gray-700">Loan Amount:</span>
-          <span class="text-green-700 font-bold">Minimum $500,000</span>
+          <span class="text-green-700 font-bold">Minimum $200,000</span>
         </div>
         <div class="flex justify-between border-b pb-2">
           <span class="font-semibold text-gray-700">Interest Rate:</span>
@@ -283,7 +283,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "commercial-mortgage",
     name: "Commercial Mortgage",
     interestRate: "Starting at 5.31%",
-    minimumLoanAmount: "$500,000.00",
+    minimumLoanAmount: "$200,000.00",
     description: "100% financing available • No credit requirements • Fast approval for qualified commercial properties nationwide.",
     terms: `<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: clamp(1rem, 4vw, 2rem); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
@@ -368,7 +368,7 @@ export const loanPrograms: LoanProgram[] = [
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: clamp(1rem, 3vw, 1.5rem);">
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$200,000</div>
           </div>
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
@@ -407,7 +407,7 @@ export const loanPrograms: LoanProgram[] = [
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$200,000</div>
           </div>
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
@@ -446,7 +446,7 @@ export const loanPrograms: LoanProgram[] = [
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$200,000</div>
           </div>
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
@@ -485,7 +485,7 @@ export const loanPrograms: LoanProgram[] = [
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$200,000</div>
           </div>
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
@@ -524,7 +524,7 @@ export const loanPrograms: LoanProgram[] = [
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$200,000</div>
           </div>
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATE</div>
@@ -715,7 +715,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "commercial-dscr-loan",
     name: "Commercial DSCR Loan",
     interestRate: "Starting at 6.57%",
-    minimumLoanAmount: "$500,000.00",
+    minimumLoanAmount: "$200,000.00",
     description: "Cash flow-based financing without personal income verification • Portfolio loans available • Fast closings for income-producing properties.",
     terms: `<div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%); color: #14532d; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
@@ -800,7 +800,7 @@ export const loanPrograms: LoanProgram[] = [
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$200,000</div>
           </div>
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
@@ -1071,7 +1071,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "rehab-loan",
     name: "Rehab Loan",
     interestRate: "Starting at 6.49%",
-    minimumLoanAmount: "$500,000.00",
+    minimumLoanAmount: "$200,000.00",
     description: "Financing for property renovation and rehabilitation projects • Fix-and-flip • Fix-and-hold • 100% rehab financing available.",
     terms: `<div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: 2rem; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
@@ -1156,7 +1156,7 @@ export const loanPrograms: LoanProgram[] = [
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$200,000</div>
           </div>
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
@@ -1195,7 +1195,7 @@ export const loanPrograms: LoanProgram[] = [
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$200,000</div>
           </div>
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">INTEREST RATES</div>
@@ -1234,7 +1234,7 @@ export const loanPrograms: LoanProgram[] = [
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">MINIMUM LOAN AMOUNT</div>
-            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$500,000</div>
+            <div style="color: #166534; font-size: 1.3rem; font-weight: 800;">$200,000</div>
           </div>
           <div style="background: rgba(22, 163, 74, 0.1); padding: 1rem; border-radius: 6px; border-left: 3px solid #16a34a;">
             <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">FOCUS</div>
@@ -1730,7 +1730,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "self-storage-financing",
     name: "Self Storage Facility Financing",
     interestRate: "5.43% - 6.25%",
-    minimumLoanAmount: "$500,000.00",
+    minimumLoanAmount: "$200,000.00",
     description: "Specialized financial solutions exclusively focused on the self-storage industry with asset-based lending approach.",
     terms: `<div class="space-y-8 bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl">
   <div class="text-center">
@@ -2004,7 +2004,7 @@ export const loanPrograms: LoanProgram[] = [
     id: "senior-living-financing",
     name: "Senior Living & Care Facility Financing",
     interestRate: "5.31% - 9.50%",
-    minimumLoanAmount: "$500,000.00",
+    minimumLoanAmount: "$200,000.00",
     description: "All-inclusive financing program for assisted living, memory care, residential care, and related senior housing facilities.",
     terms: `<div class="space-y-8 bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl">
   <div class="text-center">
@@ -2298,13 +2298,13 @@ export const loanPrograms: LoanProgram[] = [
     id: "business-loan",
     name: "Business Loan",
     interestRate: "9% - 18%",
-    minimumLoanAmount: "$500,000.00",
+    minimumLoanAmount: "$200,000.00",
     description: "Flexible business financing for working capital, equipment, and expansion needs.",
     terms: `BUSINESS LOAN TERMS
 
 Interest Rate: 9% - 18%
 Loan Term: 1-10 years
-Minimum Loan Amount: $500,000
+Minimum Loan Amount: $200,000
 
 Loan Types:
 - Working capital loans
@@ -2330,7 +2330,7 @@ Processing Time: 14-30 days`
     id: "residential-investment-loan",
     name: "Private Residential Mortgage",
     interestRate: "Starting at 5.00%",
-    minimumLoanAmount: "$500,000.00",
+    minimumLoanAmount: "$200,000.00",
     description: "Asset-based private lending providing flexible financing solutions for residential mortgage whether it's a primary residence or an investment property.",
     terms: `
 <div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: clamp(1rem, 4vw, 2rem); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
@@ -2692,7 +2692,7 @@ Processing Time: 14-30 days`
     id: "mobile-home-park-financing",
     name: "Mobile Home Park Financing",
     interestRate: "6.00% - 7.25%",
-    minimumLoanAmount: "$500,000.00",
+    minimumLoanAmount: "$200,000.00",
     description: "Specialized private loans tailored for mobile home park acquisitions, refinances, and expansions with an asset-based approach focused on property performance.",
     terms: `<div class="space-y-8 bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl">
   <div class="text-center">
@@ -2966,7 +2966,7 @@ Processing Time: 14-30 days`
     id: "business-acquisition",
     name: "Business Acquisition Financing",
     interestRate: "7.25% – 9.00%",
-    minimumLoanAmount: "$500,000",
+    minimumLoanAmount: "$200,000",
     description: "Flexible funding solutions for business acquisitions, management buyouts, and partner buy-ins. Asset-based approach focused on business income strength rather than personal credit history.",
     terms: `
 <div style="background: linear-gradient(135deg, #166534 0%, #16a34a 50%, #22c55e 100%); color: white; padding: clamp(1rem, 4vw, 2rem); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
