@@ -8,9 +8,9 @@ interface LoanProgramTermsProps {
 export default function LoanProgramTerms({ terms, className = "" }: LoanProgramTermsProps) {
   const sanitizedTerms = DOMPurify.sanitize(terms, {
     ALLOWED_TAGS: ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'ul', 'ol', 'li', 'span', 'strong', 'em', 'br'],
-    ALLOWED_ATTR: ['class'],
+    ALLOWED_ATTR: ['class', 'style'],
     FORBID_TAGS: ['script', 'object', 'embed', 'form', 'input', 'iframe'],
-    FORBID_ATTR: ['onclick', 'onload', 'onerror', 'style']
+    FORBID_ATTR: ['onclick', 'onload', 'onerror']
   });
 
   return (
