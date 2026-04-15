@@ -168,8 +168,7 @@ export default function DSCRLoanForm({ onSubmitSuccess }: DSCRLoanFormProps = {}
   };
 
   const getLoanTypeOptions = () => [
-    { value: 'standard-dscr', label: 'Standard Commercial DSCR Loan' },
-    { value: '100-financing', label: '100% Financing Option' }
+    { value: 'standard-dscr', label: 'Standard Commercial DSCR Loan' }
   ];
 
   return (
