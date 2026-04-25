@@ -69,7 +69,7 @@ export default function ApplicantSignup() {
         return;
       }
 
-      const { error } = await supabase.auth.signUp({
+      const { data: signUpData, error } = await supabase.auth.signUp({
         email: normalizedEmail,
         password,
         options: {
@@ -78,16 +78,44 @@ export default function ApplicantSignup() {
       });
 
       if (error) {
-        setErrorMessage(error.message);
-      } else {
-        setIsSigningUp(true);
-        setStep('otp');
-        toast({
-          title: 'Verification Code Sent',
-          description: 'Please check your email for a 6-digit verification code.',
-          className: 'bg-green-50 border-green-200 text-green-800',
-        });
+        // If account already exists, surface clear message
+        if (error.message?.toLowerCase().includes('registered') || error.message?.toLowerCase().includes('already')) {
+          setErrorMessage('An account with this email already exists. Please sign in instead, or use "Resend code" if you have not verified yet.');
+        } else {
+          setErrorMessage(error.message);
+        }
+        setLoading(false);
+        return;
       }
+
+      // Detect "user_repeated_signup" — Supabase returns 200 with a fake user object
+      // identities array will be empty when the email already exists
+      const isExistingUser =
+        signUpData?.user &&
+        Array.isArray(signUpData.user.identities) &&
+        signUpData.user.identities.length === 0;
+
+      if (isExistingUser) {
+        // Account exists but unconfirmed — manually trigger OTP resend
+        const { error: resendError } = await supabase.auth.resend({
+          type: 'signup',
+          email: normalizedEmail,
+        });
+
+        if (resendError) {
+          setErrorMessage('This account already exists and appears to be confirmed. Please sign in instead.');
+          setLoading(false);
+          return;
+        }
+      }
+
+      setIsSigningUp(true);
+      setStep('otp');
+      toast({
+        title: 'Verification Code Sent',
+        description: 'Please check your email for a 6-digit verification code.',
+        className: 'bg-green-50 border-green-200 text-green-800',
+      });
     } catch {
       setErrorMessage('An unexpected error occurred. Please try again.');
     } finally {
