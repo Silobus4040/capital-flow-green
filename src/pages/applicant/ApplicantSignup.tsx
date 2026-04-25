@@ -294,9 +294,6 @@ export default function ApplicantSignup() {
                   required
                   placeholder="e.g. CCIF-2026-0042"
                 />
-                <p className="text-xs text-muted-foreground">
-                  Your Loan ID was provided by your account executive.
-                </p>
               </div>
 
               <Button type="submit" className="w-full" disabled={loading}>
