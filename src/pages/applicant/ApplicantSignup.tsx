@@ -217,6 +217,30 @@ export default function ApplicantSignup() {
     navigate('/applicant-login');
   };
 
+  const handleResendCode = async () => {
+    setResending(true);
+    setErrorMessage('');
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email: email.trim().toLowerCase(),
+      });
+      if (error) {
+        setErrorMessage(error.message || 'Could not resend code. Please try again.');
+      } else {
+        toast({
+          title: 'Code Resent',
+          description: 'A new 6-digit verification code has been sent to your email.',
+          className: 'bg-green-50 border-green-200 text-green-800',
+        });
+      }
+    } catch {
+      setErrorMessage('Could not resend code. Please try again.');
+    } finally {
+      setResending(false);
+    }
+  };
+
   const getDaysInProcess = (createdAt: string) => {
     const created = new Date(createdAt);
     const now = new Date();
