@@ -40,6 +40,7 @@ export default function ApplicantSignup() {
   const [otpCode, setOtpCode] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [resending, setResending] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [loanDetails, setLoanDetails] = useState<LoanDetails | null>(null);
@@ -69,7 +70,7 @@ export default function ApplicantSignup() {
         return;
       }
 
-      const { error } = await supabase.auth.signUp({
+      const { data: signUpData, error } = await supabase.auth.signUp({
         email: normalizedEmail,
         password,
         options: {
@@ -78,16 +79,44 @@ export default function ApplicantSignup() {
       });
 
       if (error) {
-        setErrorMessage(error.message);
-      } else {
-        setIsSigningUp(true);
-        setStep('otp');
-        toast({
-          title: 'Verification Code Sent',
-          description: 'Please check your email for a 6-digit verification code.',
-          className: 'bg-green-50 border-green-200 text-green-800',
-        });
+        // If account already exists, surface clear message
+        if (error.message?.toLowerCase().includes('registered') || error.message?.toLowerCase().includes('already')) {
+          setErrorMessage('An account with this email already exists. Please sign in instead, or use "Resend code" if you have not verified yet.');
+        } else {
+          setErrorMessage(error.message);
+        }
+        setLoading(false);
+        return;
       }
+
+      // Detect "user_repeated_signup" — Supabase returns 200 with a fake user object
+      // identities array will be empty when the email already exists
+      const isExistingUser =
+        signUpData?.user &&
+        Array.isArray(signUpData.user.identities) &&
+        signUpData.user.identities.length === 0;
+
+      if (isExistingUser) {
+        // Account exists but unconfirmed — manually trigger OTP resend
+        const { error: resendError } = await supabase.auth.resend({
+          type: 'signup',
+          email: normalizedEmail,
+        });
+
+        if (resendError) {
+          setErrorMessage('This account already exists and appears to be confirmed. Please sign in instead.');
+          setLoading(false);
+          return;
+        }
+      }
+
+      setIsSigningUp(true);
+      setStep('otp');
+      toast({
+        title: 'Verification Code Sent',
+        description: 'Please check your email for a 6-digit verification code.',
+        className: 'bg-green-50 border-green-200 text-green-800',
+      });
     } catch {
       setErrorMessage('An unexpected error occurred. Please try again.');
     } finally {
@@ -186,6 +215,30 @@ export default function ApplicantSignup() {
   const handleCancel = async () => {
     await supabase.auth.signOut();
     navigate('/applicant-login');
+  };
+
+  const handleResendCode = async () => {
+    setResending(true);
+    setErrorMessage('');
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email: email.trim().toLowerCase(),
+      });
+      if (error) {
+        setErrorMessage(error.message || 'Could not resend code. Please try again.');
+      } else {
+        toast({
+          title: 'Code Resent',
+          description: 'A new 6-digit verification code has been sent to your email.',
+          className: 'bg-green-50 border-green-200 text-green-800',
+        });
+      }
+    } catch {
+      setErrorMessage('Could not resend code. Please try again.');
+    } finally {
+      setResending(false);
+    }
   };
 
   const getDaysInProcess = (createdAt: string) => {
@@ -436,6 +489,16 @@ export default function ApplicantSignup() {
 
               <Button type="submit" className="w-full" disabled={loading || otpCode.length !== 6}>
                 {loading ? 'Verifying...' : 'Verify Email'}
+              </Button>
+
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full text-sm"
+                onClick={handleResendCode}
+                disabled={resending}
+              >
+                {resending ? 'Resending...' : "Didn't get a code? Resend"}
               </Button>
 
               <Button
