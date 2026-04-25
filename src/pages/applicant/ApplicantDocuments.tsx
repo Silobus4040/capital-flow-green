@@ -253,9 +253,6 @@ export default function ApplicantDocuments() {
               <div><h4 className="font-semibold mb-2">File Requirements:</h4><ul className="text-sm text-muted-foreground space-y-1"><li>• Maximum file size: 10MB</li><li>• Files must be clear and readable</li></ul></div>
             </CardContent>
           </Card>
-          <Card><CardHeader><CardTitle>Post Closing Documents</CardTitle></CardHeader>
-            <CardContent><ul className="space-y-2 text-sm"><li>• Recorded Deed</li><li>• Recorded Mortgage/Deed of Trust</li><li>• Final Title Insurance Policy</li><li>• ALTA Settlement Statement</li><li>• UCC Financing Statements</li><li>• Recorded Assignment of Leases/Rents</li><li>• Hazard/Liability Insurance Certificates</li><li>• Flood Insurance Certificate</li></ul></CardContent>
-          </Card>
         </div>
       </div>
     </div>
