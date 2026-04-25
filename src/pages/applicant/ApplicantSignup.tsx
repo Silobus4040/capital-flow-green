@@ -493,6 +493,16 @@ export default function ApplicantSignup() {
 
               <Button
                 type="button"
+                variant="outline"
+                className="w-full text-sm"
+                onClick={handleResendCode}
+                disabled={resending}
+              >
+                {resending ? 'Resending...' : "Didn't get a code? Resend"}
+              </Button>
+
+              <Button
+                type="button"
                 variant="ghost"
                 className="w-full text-sm"
                 onClick={() => { setStep('credentials'); setOtpCode(''); setErrorMessage(''); }}
