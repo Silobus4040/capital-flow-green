@@ -40,6 +40,7 @@ export default function ApplicantSignup() {
   const [otpCode, setOtpCode] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [resending, setResending] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [loanDetails, setLoanDetails] = useState<LoanDetails | null>(null);
