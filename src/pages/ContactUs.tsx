@@ -94,7 +94,7 @@ export default function ContactUs() {
               <CardContent className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <Phone className="h-6 w-6 text-primary mt-1" />
-                  <div><h3 className="font-semibold mb-1">Phone</h3><p className="text-muted-foreground">619 343 3609</p><p className="text-sm text-muted-foreground">Monday - Friday, 8 AM - 6 PM EST</p></div>
+                  <div><h3 className="font-semibold mb-1">Phone</h3><p className="text-muted-foreground">619 612 8456</p><p className="text-sm text-muted-foreground">Monday - Friday, 8 AM - 6 PM EST</p></div>
                 </div>
                 <div className="flex items-start space-x-4">
                   <Mail className="h-6 w-6 text-primary mt-1" />
