@@ -130,104 +130,65 @@ async function handlePreview(req: Request): Promise<Response> {
   })
 }
 
-// Webhook handler - verifies signature and sends email
+// Webhook handler - handles Native Supabase hooks and Lovable proxy hooks
 async function handleWebhook(req: Request): Promise<Response> {
-  const apiKey = Deno.env.get('LOVABLE_API_KEY')
-
-  if (!apiKey) {
-    console.error('LOVABLE_API_KEY not configured')
-    return new Response(
-      JSON.stringify({ error: 'Server configuration error' }),
-      { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-    )
-  }
-
-  // Verify signature + timestamp, then parse payload.
-  let payload: any
-  let run_id = ''
+  let body: any;
   try {
-    const verified = await verifyWebhookRequest({
-      req,
-      secret: apiKey,
-      parser: parseEmailWebhookPayload,
-    })
-    payload = verified.payload
-    run_id = payload.run_id
+    body = await req.json();
   } catch (error) {
-    if (error instanceof WebhookError) {
-      switch (error.code) {
-        case 'invalid_signature':
-        case 'missing_timestamp':
-        case 'invalid_timestamp':
-        case 'stale_timestamp':
-          console.error('Invalid webhook signature', { error: error.message })
-          return new Response(JSON.stringify({ error: 'Invalid signature' }), {
-            status: 401,
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          })
-        case 'invalid_payload':
-        case 'invalid_json':
-          console.error('Invalid webhook payload', { error: error.message })
-          return new Response(
-            JSON.stringify({ error: 'Invalid webhook payload' }),
-            { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-          )
-      }
-    }
-
-    console.error('Webhook verification failed', { error })
-    return new Response(
-      JSON.stringify({ error: 'Invalid webhook payload' }),
-      { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-    )
+    console.error('Invalid JSON payload', { error });
+    return new Response(JSON.stringify({ error: 'Invalid JSON payload' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   }
 
-  if (!run_id) {
-    console.error('Webhook payload missing run_id')
-    return new Response(
-      JSON.stringify({ error: 'Invalid webhook payload' }),
-      {
-        status: 400,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      }
-    )
+  let emailType: string;
+  let recipientEmail: string;
+  let confirmationUrl: string;
+  let token: string;
+  let newEmail: string | undefined;
+  let run_id = 'native';
+
+  // Check if it's a Lovable payload
+  if (body.type === 'auth' && body.data) {
+    emailType = body.data.action_type;
+    recipientEmail = body.data.email;
+    confirmationUrl = body.data.url || `https://${ROOT_DOMAIN}`;
+    token = body.data.token;
+    newEmail = body.data.new_email;
+    run_id = body.run_id || 'lovable';
+  } 
+  // Native Supabase Custom Email Hook
+  else if (body.user && body.email_data) {
+    emailType = body.email_data.email_action_type;
+    recipientEmail = body.user.email;
+    confirmationUrl = body.email_data.redirect_to || `https://${ROOT_DOMAIN}`;
+    token = body.email_data.token;
+  } 
+  else {
+    console.error('Unknown payload format', body);
+    return new Response(JSON.stringify({ error: 'Unknown payload format' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   }
 
-  if (payload.version !== '1') {
-    console.error('Unsupported payload version', { version: payload.version, run_id })
-    return new Response(
-      JSON.stringify({ error: `Unsupported payload version: ${payload.version}` }),
-      {
-        status: 400,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      }
-    )
-  }
+  console.log('Received auth event', { emailType, recipientEmail, run_id });
 
-  // The email action type is in payload.data.action_type (e.g., "signup", "recovery")
-  // payload.type is the hook event type ("auth")
-  const emailType = payload.data.action_type
-  console.log('Received auth event', { emailType, email: payload.data.email, run_id })
-
-  const EmailTemplate = EMAIL_TEMPLATES[emailType]
+  const EmailTemplate = EMAIL_TEMPLATES[emailType];
   if (!EmailTemplate) {
-    console.error('Unknown email type', { emailType, run_id })
+    console.error('Unknown email type', { emailType, run_id });
     return new Response(
       JSON.stringify({ error: `Unknown email type: ${emailType}` }),
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-    )
+    );
   }
 
-  // Build template props from payload.data (HookData structure)
+  // Build template props
   const templateProps = {
     siteName: SITE_NAME,
     siteUrl: `https://${ROOT_DOMAIN}`,
-    recipient: payload.data.email,
-    confirmationUrl: payload.data.url,
-    token: payload.data.token,
-    email: payload.data.email,
-    newEmail: payload.data.new_email,
-  }
+    recipient: recipientEmail,
+    confirmationUrl: confirmationUrl,
+    token: token,
+    email: recipientEmail,
+    newEmail: newEmail,
+  };
 
   // Render React Email to HTML and plain text
   const html = await renderAsync(React.createElement(EmailTemplate, templateProps))
@@ -244,7 +205,7 @@ async function handleWebhook(req: Request): Promise<Response> {
       const resend = new Resend(resendApiKey);
       const resendResult = await resend.emails.send({
         from: "CCIF Support <applications@ccif-inc.com>",
-        to: payload.data.email,
+        to: recipientEmail,
         subject: EMAIL_SUBJECTS[emailType] || 'Notification',
         html,
         text,
