@@ -2,6 +2,7 @@ import * as React from 'npm:react@18.3.1'
 import { renderAsync } from 'npm:@react-email/components@0.0.22'
 import { sendLovableEmail, parseEmailWebhookPayload } from 'npm:@lovable.dev/email-js'
 import { WebhookError, verifyWebhookRequest } from 'npm:@lovable.dev/webhooks-js'
+import { Resend } from "npm:resend@2.0.0"
 import { SignupEmail } from '../_shared/email-templates/signup.tsx'
 import { InviteEmail } from '../_shared/email-templates/invite.tsx'
 import { MagicLinkEmail } from '../_shared/email-templates/magic-link.tsx'
@@ -234,33 +235,34 @@ async function handleWebhook(req: Request): Promise<Response> {
     plainText: true,
   })
 
-  // Send email via Lovable Email API
-  // The callback URL is provided in the payload by Lovable, ensuring correct routing
-  // for both production and local development
-  const callbackUrl = payload.data.callback_url
-  if (!callbackUrl) {
-    console.error('No callback_url in payload', { run_id })
-    return new Response(JSON.stringify({ error: 'Missing callback_url in payload' }), {
-      status: 400,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    })
-  }
+  // Send email via Resend
+  const resendApiKey = Deno.env.get("RESEND_API_KEY");
+  let result: { message_id?: string } = {};
 
-  let result: { message_id?: string }
   try {
-    result = await sendLovableEmail(
-      {
-        run_id,
+    if (resendApiKey) {
+      const resend = new Resend(resendApiKey);
+      const resendResult = await resend.emails.send({
+        from: "CCIF Support <applications@ccif-inc.com>",
         to: payload.data.email,
-        from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
-        sender_domain: SENDER_DOMAIN,
         subject: EMAIL_SUBJECTS[emailType] || 'Notification',
         html,
         text,
-        purpose: 'transactional',
-      },
-      { apiKey, sendUrl: callbackUrl }
-    )
+      });
+      const returnedId = resendResult.data?.id || (resendResult as any).id;
+      if (resendResult.error) {
+        console.error("Resend error:", resendResult.error);
+        throw new Error(resendResult.error.message);
+      }
+      result = { message_id: returnedId };
+      console.log('Email sent successfully via Resend', { message_id: result.message_id, run_id })
+    } else {
+      console.error("RESEND_API_KEY is not configured.");
+      return new Response(JSON.stringify({ error: "Email service not configured" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
+      });
+    }
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to send email'
     console.error('Email API error', { error: message, run_id })
@@ -269,8 +271,6 @@ async function handleWebhook(req: Request): Promise<Response> {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })
   }
-
-  console.log('Email sent successfully', { message_id: result.message_id, run_id })
 
   return new Response(
     JSON.stringify({ success: true, message_id: result.message_id }),
