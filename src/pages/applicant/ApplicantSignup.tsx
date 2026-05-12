@@ -196,12 +196,11 @@ export default function ApplicantSignup() {
     setResending(true);
     setErrorMessage('');
     try {
-      const { error } = await supabase.auth.resend({
-        type: 'signup',
-        email: email.trim().toLowerCase(),
+      const { data, error } = await supabase.functions.invoke('send-signup-otp', {
+        body: { email: email.trim().toLowerCase() },
       });
-      if (error) {
-        setErrorMessage(error.message || 'Could not resend code. Please try again.');
+      if (error || (data && data.error)) {
+        setErrorMessage((data && data.error) || error?.message || 'Could not resend code. Please try again.');
       } else {
         toast({
           title: 'Code Resent',
