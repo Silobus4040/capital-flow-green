@@ -60,54 +60,15 @@ export default function ApplicantSignup() {
     try {
       const normalizedEmail = email.trim().toLowerCase();
 
-      const { data: emailExists, error: checkError } = await supabase.rpc('check_application_email', {
-        _email: normalizedEmail,
+      const { data, error } = await supabase.functions.invoke('send-signup-otp', {
+        body: { email: normalizedEmail },
       });
 
-      if (checkError || !emailExists) {
-        setErrorMessage('This email is not associated with any loan application. Please use the email provided during your loan application or contact your account executive.');
+      if (error || (data && data.error)) {
+        const msg = (data && data.error) || error?.message || 'Could not send verification code.';
+        setErrorMessage(msg);
         setLoading(false);
         return;
-      }
-
-      const { data: signUpData, error } = await supabase.auth.signUp({
-        email: normalizedEmail,
-        password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/applicant-dashboard`,
-        }
-      });
-
-      if (error) {
-        // If account already exists, surface clear message
-        if (error.message?.toLowerCase().includes('registered') || error.message?.toLowerCase().includes('already')) {
-          setErrorMessage('An account with this email already exists. Please sign in instead, or use "Resend code" if you have not verified yet.');
-        } else {
-          setErrorMessage(error.message);
-        }
-        setLoading(false);
-        return;
-      }
-
-      // Detect "user_repeated_signup" — Supabase returns 200 with a fake user object
-      // identities array will be empty when the email already exists
-      const isExistingUser =
-        signUpData?.user &&
-        Array.isArray(signUpData.user.identities) &&
-        signUpData.user.identities.length === 0;
-
-      if (isExistingUser) {
-        // Account exists but unconfirmed — manually trigger OTP resend
-        const { error: resendError } = await supabase.auth.resend({
-          type: 'signup',
-          email: normalizedEmail,
-        });
-
-        if (resendError) {
-          setErrorMessage('This account already exists and appears to be confirmed. Please sign in instead.');
-          setLoading(false);
-          return;
-        }
       }
 
       setIsSigningUp(true);
@@ -130,17 +91,31 @@ export default function ApplicantSignup() {
     setErrorMessage('');
 
     try {
-      const { error } = await supabase.auth.verifyOtp({
-        email: email.trim().toLowerCase(),
-        token: otpCode,
-        type: 'signup',
+      const normalizedEmail = email.trim().toLowerCase();
+
+      const { data, error } = await supabase.functions.invoke('verify-signup-otp', {
+        body: { email: normalizedEmail, code: otpCode, password },
       });
 
-      if (error) {
-        setErrorMessage('Invalid or expired verification code. Please try again.');
-      } else {
-        setStep('loan-id');
+      if (error || (data && data.error)) {
+        setErrorMessage((data && data.error) || error?.message || 'Verification failed.');
+        setLoading(false);
+        return;
       }
+
+      // Sign the user in now that the account is created and confirmed
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: normalizedEmail,
+        password,
+      });
+
+      if (signInError) {
+        setErrorMessage('Account created. Please sign in to continue.');
+        setLoading(false);
+        return;
+      }
+
+      setStep('loan-id');
     } catch {
       setErrorMessage('Verification failed. Please try again.');
     } finally {
