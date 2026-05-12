@@ -19,7 +19,7 @@ Deno.serve(async (req) => {
     const normalized = String(email || '').trim().toLowerCase();
     if (!normalized || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) {
       return new Response(JSON.stringify({ error: 'Invalid email' }), {
-        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
@@ -38,7 +38,7 @@ Deno.serve(async (req) => {
 
     if (!app) {
       return new Response(JSON.stringify({ error: 'This email is not associated with any loan application.' }), {
-        status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
@@ -79,7 +79,7 @@ Deno.serve(async (req) => {
     if (sendRes.error) {
       console.error('Resend error', sendRes.error);
       return new Response(JSON.stringify({ error: 'Failed to send email', details: sendRes.error.message }), {
-        status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
@@ -89,7 +89,7 @@ Deno.serve(async (req) => {
   } catch (e) {
     console.error('send-signup-otp error', e);
     return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Unknown error' }), {
-      status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
 });

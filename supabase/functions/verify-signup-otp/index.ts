@@ -21,7 +21,7 @@ Deno.serve(async (req) => {
 
     if (!normalized || !/^\d{6}$/.test(codeStr) || pw.length < 8) {
       return new Response(JSON.stringify({ error: 'Invalid input' }), {
-        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
@@ -40,19 +40,19 @@ Deno.serve(async (req) => {
 
     if (otpErr || !otp) {
       return new Response(JSON.stringify({ error: 'No verification code found. Please request a new one.' }), {
-        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
     if (new Date(otp.expires_at) < new Date()) {
       return new Response(JSON.stringify({ error: 'Verification code expired. Please request a new one.' }), {
-        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
     if (otp.attempts >= 5) {
       return new Response(JSON.stringify({ error: 'Too many attempts. Please request a new code.' }), {
-        status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
@@ -60,7 +60,7 @@ Deno.serve(async (req) => {
     if (codeHash !== otp.code_hash) {
       await supabase.from('signup_otps').update({ attempts: otp.attempts + 1 }).eq('id', otp.id);
       return new Response(JSON.stringify({ error: 'Invalid verification code.' }), {
-        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
@@ -77,7 +77,7 @@ Deno.serve(async (req) => {
       if (msg.includes('already') || msg.includes('registered') || msg.includes('exists')) {
         await supabase.from('signup_otps').delete().eq('id', otp.id);
         return new Response(JSON.stringify({ error: 'An account with this email already exists. Please sign in instead.' }), {
-          status: 409, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
       }
       throw new Error(createErr.message);
@@ -92,7 +92,7 @@ Deno.serve(async (req) => {
   } catch (e) {
     console.error('verify-signup-otp error', e);
     return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Unknown error' }), {
-      status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
 });
