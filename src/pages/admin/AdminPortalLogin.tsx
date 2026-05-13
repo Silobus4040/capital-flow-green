@@ -15,7 +15,7 @@ export default function AdminPortalLogin() {
   const [loading, setLoading] = useState(false);
   const [redirectAfterLogin, setRedirectAfterLogin] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  const { adminSignIn, user, profile } = useAuth();
+  const { adminSignIn, resetPassword, user, profile } = useAuth();
   const { toast } = useToast();
 
   // Monitor auth state changes for redirection
