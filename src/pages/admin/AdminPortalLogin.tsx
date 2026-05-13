@@ -129,6 +129,24 @@ export default function AdminPortalLogin() {
                 />
                 <span className="text-muted-foreground">Remember me</span>
               </label>
+              <button
+                type="button"
+                onClick={async () => {
+                  if (!email) {
+                    toast({ title: 'Enter your email first', description: 'Type your admin email above, then click Forgot password.', variant: 'destructive' });
+                    return;
+                  }
+                  const { error } = await resetPassword(email);
+                  if (error) {
+                    toast({ title: 'Reset failed', description: error.message, variant: 'destructive' });
+                  } else {
+                    toast({ title: 'Reset email sent', description: `Check ${email} for a password reset link.` });
+                  }
+                }}
+                className="text-sm text-red-600 hover:text-red-700 hover:underline"
+              >
+                Forgot password?
+              </button>
             </div>
 
             <Button 
