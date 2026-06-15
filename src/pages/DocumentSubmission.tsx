@@ -170,29 +170,41 @@ export default function DocumentSubmission() {
         {!applicant ? (
           <Card>
             <CardHeader>
-              <CardTitle>Verify Your Application</CardTitle>
+              <CardTitle>Submit Documents</CardTitle>
               <CardDescription>
-                Enter the email and Loan ID you received when you submitted your application.
+                Enter your name and email to upload documents securely. Loan ID is optional — include it if you have one so we can attach the files to your application.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleVerify} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Full Name</Label>
+                  <Input
+                    id="name"
+                    required
+                    maxLength={120}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Jane Doe"
+                  />
+                </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address</Label>
                   <Input
                     id="email"
                     type="email"
                     required
+                    maxLength={255}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="loanId">Loan ID</Label>
+                  <Label htmlFor="loanId">Loan ID <span className="text-muted-foreground font-normal">(optional)</span></Label>
                   <Input
                     id="loanId"
-                    required
+                    maxLength={50}
                     value={loanId}
                     onChange={(e) => setLoanId(e.target.value)}
                     placeholder="e.g. CCIF-2025-XXXXXX"
@@ -202,22 +214,12 @@ export default function DocumentSubmission() {
                   {verifying ? (
                     <>
                       <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                      Verifying...
+                      Continuing...
                     </>
                   ) : (
-                    "Verify & Continue"
+                    "Continue"
                   )}
                 </Button>
-                <p className="text-sm text-muted-foreground text-center pt-2">
-                  Don't have a Loan ID yet?{" "}
-                  <button
-                    type="button"
-                    className="text-primary underline"
-                    onClick={() => navigate("/loan-programs")}
-                  >
-                    Apply for a loan first
-                  </button>
-                </p>
               </form>
             </CardContent>
           </Card>
