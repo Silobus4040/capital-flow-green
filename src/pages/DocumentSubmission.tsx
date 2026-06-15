@@ -92,7 +92,8 @@ export default function DocumentSubmission() {
     try {
       for (const file of files) {
         const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-        const filePath = `public/${applicant.loanId}/${Date.now()}_${safeName}`;
+        const folder = applicant.loanId || "unlinked";
+        const filePath = `public/${folder}/${Date.now()}_${safeName}`;
 
         const { error: uploadError } = await supabase.storage
           .from("documents")
@@ -108,7 +109,7 @@ export default function DocumentSubmission() {
           file_path: filePath,
           file_size: file.size,
           file_type: file.type,
-          notes: `Loan ID: ${applicant.loanId} | Borrower: ${applicant.borrowerName} | Email: ${applicant.email}`,
+          notes: `Borrower: ${applicant.borrowerName} | Email: ${applicant.email}${applicant.loanId ? ` | Loan ID: ${applicant.loanId}` : ""}`,
         } as any);
 
         if (insertError) throw insertError;
