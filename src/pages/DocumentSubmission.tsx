@@ -34,37 +34,41 @@ export default function DocumentSubmission() {
     e.preventDefault();
     setVerifying(true);
     try {
-      const { data, error } = await supabase
-        .from("loan_program_applications")
-        .select("id, borrower_name, borrower_email, loan_id")
-        .eq("borrower_email", email.trim().toLowerCase())
-        .eq("loan_id", loanId.trim())
-        .maybeSingle();
+      const trimmedEmail = email.trim().toLowerCase();
+      const trimmedName = name.trim();
+      const trimmedLoanId = loanId.trim();
 
-      if (error) throw error;
-      if (!data) {
-        toast({
-          title: "Verification failed",
-          description: "We couldn't find an application with that email and Loan ID. Please check and try again.",
-          variant: "destructive",
-        });
+      if (!trimmedName || !trimmedEmail) {
+        toast({ title: "Missing info", description: "Name and email are required.", variant: "destructive" });
         return;
       }
 
+      let matched: { id: string; borrower_name: string; borrower_email: string; loan_id: string | null } | null = null;
+
+      // Best-effort lookup: if a Loan ID was provided, try matching email + loan_id; otherwise try email only
+      let query = supabase
+        .from("loan_program_applications")
+        .select("id, borrower_name, borrower_email, loan_id")
+        .eq("borrower_email", trimmedEmail);
+      if (trimmedLoanId) query = query.eq("loan_id", trimmedLoanId);
+
+      const { data } = await query.maybeSingle();
+      if (data) matched = data as any;
+
       setApplicant({
-        borrowerName: data.borrower_name,
-        email: data.borrower_email,
-        loanId: data.loan_id || loanId,
-        applicationId: data.id,
+        borrowerName: matched?.borrower_name || trimmedName,
+        email: matched?.borrower_email || trimmedEmail,
+        loanId: matched?.loan_id || (trimmedLoanId || null),
+        applicationId: matched?.id || null,
       });
       toast({
-        title: "Verified",
-        description: `Welcome ${data.borrower_name}. You can now upload your documents.`,
+        title: "Ready",
+        description: `Welcome ${matched?.borrower_name || trimmedName}. You can now upload your documents.`,
       });
     } catch (err: any) {
       toast({
         title: "Error",
-        description: err.message || "Verification failed. Please try again.",
+        description: err.message || "Something went wrong. Please try again.",
         variant: "destructive",
       });
     } finally {
