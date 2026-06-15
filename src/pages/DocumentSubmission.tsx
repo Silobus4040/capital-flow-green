@@ -229,7 +229,10 @@ export default function DocumentSubmission() {
               <CardTitle>Upload Documents</CardTitle>
               <CardDescription>
                 <span className="block">Borrower: <span className="font-semibold text-foreground">{applicant.borrowerName}</span></span>
-                <span className="block">Loan ID: <span className="font-semibold text-foreground">{applicant.loanId}</span></span>
+                <span className="block">Email: <span className="font-semibold text-foreground">{applicant.email}</span></span>
+                {applicant.loanId && (
+                  <span className="block">Loan ID: <span className="font-semibold text-foreground">{applicant.loanId}</span></span>
+                )}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
