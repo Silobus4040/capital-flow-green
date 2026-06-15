@@ -11,8 +11,8 @@ import { Loader2, Upload, FileText, CheckCircle2, X } from "lucide-react";
 interface VerifiedApplicant {
   borrowerName: string;
   email: string;
-  loanId: string;
-  applicationId: string;
+  loanId: string | null;
+  applicationId: string | null;
 }
 
 export default function DocumentSubmission() {
@@ -23,6 +23,7 @@ export default function DocumentSubmission() {
   const [uploading, setUploading] = useState(false);
   const [applicant, setApplicant] = useState<VerifiedApplicant | null>(null);
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [loanId, setLoanId] = useState("");
 
@@ -33,37 +34,41 @@ export default function DocumentSubmission() {
     e.preventDefault();
     setVerifying(true);
     try {
-      const { data, error } = await supabase
-        .from("loan_program_applications")
-        .select("id, borrower_name, borrower_email, loan_id")
-        .eq("borrower_email", email.trim().toLowerCase())
-        .eq("loan_id", loanId.trim())
-        .maybeSingle();
+      const trimmedEmail = email.trim().toLowerCase();
+      const trimmedName = name.trim();
+      const trimmedLoanId = loanId.trim();
 
-      if (error) throw error;
-      if (!data) {
-        toast({
-          title: "Verification failed",
-          description: "We couldn't find an application with that email and Loan ID. Please check and try again.",
-          variant: "destructive",
-        });
+      if (!trimmedName || !trimmedEmail) {
+        toast({ title: "Missing info", description: "Name and email are required.", variant: "destructive" });
         return;
       }
 
+      let matched: { id: string; borrower_name: string; borrower_email: string; loan_id: string | null } | null = null;
+
+      // Best-effort lookup: if a Loan ID was provided, try matching email + loan_id; otherwise try email only
+      let query = supabase
+        .from("loan_program_applications")
+        .select("id, borrower_name, borrower_email, loan_id")
+        .eq("borrower_email", trimmedEmail);
+      if (trimmedLoanId) query = query.eq("loan_id", trimmedLoanId);
+
+      const { data } = await query.maybeSingle();
+      if (data) matched = data as any;
+
       setApplicant({
-        borrowerName: data.borrower_name,
-        email: data.borrower_email,
-        loanId: data.loan_id || loanId,
-        applicationId: data.id,
+        borrowerName: matched?.borrower_name || trimmedName,
+        email: matched?.borrower_email || trimmedEmail,
+        loanId: matched?.loan_id || (trimmedLoanId || null),
+        applicationId: matched?.id || null,
       });
       toast({
-        title: "Verified",
-        description: `Welcome ${data.borrower_name}. You can now upload your documents.`,
+        title: "Ready",
+        description: `Welcome ${matched?.borrower_name || trimmedName}. You can now upload your documents.`,
       });
     } catch (err: any) {
       toast({
         title: "Error",
-        description: err.message || "Verification failed. Please try again.",
+        description: err.message || "Something went wrong. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -87,7 +92,8 @@ export default function DocumentSubmission() {
     try {
       for (const file of files) {
         const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-        const filePath = `public/${applicant.loanId}/${Date.now()}_${safeName}`;
+        const folder = applicant.loanId || "unlinked";
+        const filePath = `public/${folder}/${Date.now()}_${safeName}`;
 
         const { error: uploadError } = await supabase.storage
           .from("documents")
@@ -103,7 +109,7 @@ export default function DocumentSubmission() {
           file_path: filePath,
           file_size: file.size,
           file_type: file.type,
-          notes: `Loan ID: ${applicant.loanId} | Borrower: ${applicant.borrowerName} | Email: ${applicant.email}`,
+          notes: `Borrower: ${applicant.borrowerName} | Email: ${applicant.email}${applicant.loanId ? ` | Loan ID: ${applicant.loanId}` : ""}`,
         } as any);
 
         if (insertError) throw insertError;
@@ -134,8 +140,7 @@ export default function DocumentSubmission() {
             <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-4" />
             <CardTitle className="text-2xl">Documents Submitted</CardTitle>
             <CardDescription>
-              Thank you, {applicant?.borrowerName}. Your documents for Loan ID{" "}
-              <span className="font-semibold">{applicant?.loanId}</span> have been received.
+              Thank you, {applicant?.borrowerName}. Your documents{applicant?.loanId ? <> for Loan ID <span className="font-semibold">{applicant.loanId}</span></> : null} have been received.
               Our team will review them shortly.
             </CardDescription>
           </CardHeader>
@@ -165,29 +170,41 @@ export default function DocumentSubmission() {
         {!applicant ? (
           <Card>
             <CardHeader>
-              <CardTitle>Verify Your Application</CardTitle>
+              <CardTitle>Submit Documents</CardTitle>
               <CardDescription>
-                Enter the email and Loan ID you received when you submitted your application.
+                Enter your name and email to upload documents securely. Loan ID is optional — include it if you have one so we can attach the files to your application.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleVerify} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Full Name</Label>
+                  <Input
+                    id="name"
+                    required
+                    maxLength={120}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Jane Doe"
+                  />
+                </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address</Label>
                   <Input
                     id="email"
                     type="email"
                     required
+                    maxLength={255}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="loanId">Loan ID</Label>
+                  <Label htmlFor="loanId">Loan ID <span className="text-muted-foreground font-normal">(optional)</span></Label>
                   <Input
                     id="loanId"
-                    required
+                    maxLength={50}
                     value={loanId}
                     onChange={(e) => setLoanId(e.target.value)}
                     placeholder="e.g. CCIF-2025-XXXXXX"
@@ -197,22 +214,12 @@ export default function DocumentSubmission() {
                   {verifying ? (
                     <>
                       <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                      Verifying...
+                      Continuing...
                     </>
                   ) : (
-                    "Verify & Continue"
+                    "Continue"
                   )}
                 </Button>
-                <p className="text-sm text-muted-foreground text-center pt-2">
-                  Don't have a Loan ID yet?{" "}
-                  <button
-                    type="button"
-                    className="text-primary underline"
-                    onClick={() => navigate("/loan-programs")}
-                  >
-                    Apply for a loan first
-                  </button>
-                </p>
               </form>
             </CardContent>
           </Card>
@@ -222,7 +229,10 @@ export default function DocumentSubmission() {
               <CardTitle>Upload Documents</CardTitle>
               <CardDescription>
                 <span className="block">Borrower: <span className="font-semibold text-foreground">{applicant.borrowerName}</span></span>
-                <span className="block">Loan ID: <span className="font-semibold text-foreground">{applicant.loanId}</span></span>
+                <span className="block">Email: <span className="font-semibold text-foreground">{applicant.email}</span></span>
+                {applicant.loanId && (
+                  <span className="block">Loan ID: <span className="font-semibold text-foreground">{applicant.loanId}</span></span>
+                )}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
