@@ -151,11 +151,17 @@ export default function ApplicantLogin() {
             </Button>
           </form>
 
-          <div className="mt-4 lg:mt-6 text-center">
+          <div className="mt-4 lg:mt-6 text-center space-y-2">
             <p className="text-sm text-muted-foreground">
               Don't have an account?{' '}
               <Link to="/applicant-signup" className="text-primary hover:text-primary/80 font-medium">
                 Create account
+              </Link>
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Just need to send documents?{' '}
+              <Link to="/document-submission" className="text-primary hover:text-primary/80 font-medium">
+                Submit documents without signing in
               </Link>
             </p>
           </div>

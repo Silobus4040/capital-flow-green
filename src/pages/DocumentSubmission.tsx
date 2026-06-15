@@ -97,13 +97,14 @@ export default function DocumentSubmission() {
 
         const { error: insertError } = await supabase.from("document_uploads").insert({
           user_id: null,
+          application_id: applicant.applicationId,
           document_name: file.name,
           file_name: file.name,
           file_path: filePath,
           file_size: file.size,
           file_type: file.type,
           notes: `Loan ID: ${applicant.loanId} | Borrower: ${applicant.borrowerName} | Email: ${applicant.email}`,
-        });
+        } as any);
 
         if (insertError) throw insertError;
       }

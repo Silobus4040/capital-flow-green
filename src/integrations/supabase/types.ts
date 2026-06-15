@@ -287,6 +287,7 @@ export type Database = {
       }
       document_uploads: {
         Row: {
+          application_id: string | null
           created_at: string
           document_name: string
           file_name: string
@@ -298,6 +299,7 @@ export type Database = {
           user_id: string | null
         }
         Insert: {
+          application_id?: string | null
           created_at?: string
           document_name: string
           file_name: string
@@ -309,6 +311,7 @@ export type Database = {
           user_id?: string | null
         }
         Update: {
+          application_id?: string | null
           created_at?: string
           document_name?: string
           file_name?: string
@@ -319,7 +322,15 @@ export type Database = {
           notes?: string | null
           user_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "document_uploads_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "loan_program_applications"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       draw_schedules: {
         Row: {
