@@ -140,8 +140,7 @@ export default function DocumentSubmission() {
             <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-4" />
             <CardTitle className="text-2xl">Documents Submitted</CardTitle>
             <CardDescription>
-              Thank you, {applicant?.borrowerName}. Your documents for Loan ID{" "}
-              <span className="font-semibold">{applicant?.loanId}</span> have been received.
+              Thank you, {applicant?.borrowerName}. Your documents{applicant?.loanId ? <> for Loan ID <span className="font-semibold">{applicant.loanId}</span></> : null} have been received.
               Our team will review them shortly.
             </CardDescription>
           </CardHeader>
