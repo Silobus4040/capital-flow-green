@@ -11,8 +11,8 @@ import { Loader2, Upload, FileText, CheckCircle2, X } from "lucide-react";
 interface VerifiedApplicant {
   borrowerName: string;
   email: string;
-  loanId: string;
-  applicationId: string;
+  loanId: string | null;
+  applicationId: string | null;
 }
 
 export default function DocumentSubmission() {
@@ -23,6 +23,7 @@ export default function DocumentSubmission() {
   const [uploading, setUploading] = useState(false);
   const [applicant, setApplicant] = useState<VerifiedApplicant | null>(null);
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [loanId, setLoanId] = useState("");
 
