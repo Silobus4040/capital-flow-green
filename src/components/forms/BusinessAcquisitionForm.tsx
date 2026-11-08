@@ -460,7 +460,7 @@ export default function BusinessAcquisitionForm({ onSubmitSuccess }: BusinessAcq
                 </Label>
               </div>
               <p className="text-xs text-muted-foreground mt-2">
-                📧 Contact: Insuranceunderwriter@ccif-inc.com
+                📧 Contact: Insuranceunderwriter@ccif-g.com
               </p>
             </div>
           </div>

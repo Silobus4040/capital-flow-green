@@ -37,9 +37,9 @@ const EMAIL_TEMPLATES: Record<string, React.ComponentType<any>> = {
 
 // Configuration
 const SITE_NAME = "Commercial Capital & Investment Inc"
-const SENDER_DOMAIN = "notify.ccif-inc.com"
-const ROOT_DOMAIN = "ccif-inc.com"
-const FROM_DOMAIN = "ccif-inc.com" // Domain shown in From address (may be root or sender subdomain)
+const SENDER_DOMAIN = "notify.ccif-g.com"
+const ROOT_DOMAIN = "ccif-g.com"
+const FROM_DOMAIN = "ccif-g.com" // Domain shown in From address (may be root or sender subdomain)
 
 // Sample data for preview mode ONLY (not used in actual email sending).
 // URLs are baked in at scaffold time from the project's real data.
@@ -204,7 +204,7 @@ async function handleWebhook(req: Request): Promise<Response> {
     if (resendApiKey) {
       const resend = new Resend(resendApiKey);
       const resendResult = await resend.emails.send({
-        from: "CCIF Support <applications@ccif-inc.com>",
+        from: "CCIF Support <applications@ccif-g.com>",
         to: recipientEmail,
         subject: EMAIL_SUBJECTS[emailType] || 'Notification',
         html,

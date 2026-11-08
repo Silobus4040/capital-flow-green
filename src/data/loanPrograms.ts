@@ -693,7 +693,7 @@ export const loanPrograms: LoanProgram[] = [
     </div>
     <div style="background: rgba(31, 41, 55, 0.1); padding: 1rem; border-radius: 8px;">
       <div style="font-weight: 700; font-size: 1.1rem;">📧 EMAIL</div>
-      <div style="font-size: 1.2rem; font-weight: 800;">admin@ccif-inc.com</div>
+      <div style="font-size: 1.2rem; font-weight: 800;">admin@ccif-g.com</div>
     </div>
   </div>
   
@@ -1010,7 +1010,7 @@ export const loanPrograms: LoanProgram[] = [
     </div>
     <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
       <div style="font-weight: 700; font-size: 1.1rem; color: #16a34a;">📧 EMAIL</div>
-      <div style="font-size: 1.2rem; font-weight: 800; color: white;">admin@ccif-inc.com</div>
+      <div style="font-size: 1.2rem; font-weight: 800; color: white;">admin@ccif-g.com</div>
     </div>
   </div>
   
@@ -1371,7 +1371,7 @@ export const loanPrograms: LoanProgram[] = [
     </div>
     <div style="background: rgba(31, 41, 55, 0.1); padding: 1rem; border-radius: 8px;">
       <div style="font-weight: 700; font-size: 1.1rem;">📧 EMAIL</div>
-      <div style="font-size: 1.2rem; font-weight: 800;">admin@ccif-inc.com</div>
+      <div style="font-size: 1.2rem; font-weight: 800;">admin@ccif-g.com</div>
     </div>
   </div>
   
@@ -3113,7 +3113,7 @@ Processing Time: 14-30 days`
         
         <div style="background: linear-gradient(45deg, #059669, #10b981); padding: 1rem; border-radius: 6px;">
           <div style="color: white; font-weight: 700;">📧 CONTACT FOR QUOTE:</div>
-          <div style="color: #86efac;">Insuranceunderwriter@ccif-inc.com</div>
+          <div style="color: #86efac;">Insuranceunderwriter@ccif-g.com</div>
         </div>
       </div>
     </div>

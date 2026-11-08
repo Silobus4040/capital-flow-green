@@ -229,7 +229,7 @@ export default function AdminTestLogin() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  placeholder="admin@ccif-inc.com"
+                  placeholder="admin@ccif-g.com"
                   className="border-blue-200 focus:border-blue-400"
                 />
               </div>

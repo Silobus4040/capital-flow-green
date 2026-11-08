@@ -70,7 +70,7 @@ Deno.serve(async (req) => {
       </div>`;
 
     const sendRes = await resend.emails.send({
-      from: 'CCIF Support <applications@ccif-inc.com>',
+      from: 'CCIF Support <applications@ccif-g.com>',
       to: normalized,
       subject: `Your CCIF verification code: ${code}`,
       html,

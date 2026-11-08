@@ -49,7 +49,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log(`📝 Sending bid notification to ${borrowerEmail}: ${investorLabel} placed a bid`);
 
     await sendWithRetry(resend, {
-      from: "CCIF Notifications <notifications@ccif-inc.com>",
+      from: "CCIF Notifications <notifications@ccif-g.com>",
       to: [borrowerEmail],
       subject: `🎉 New Investor Bid Received on Your Loan Application`,
       html: `
@@ -68,7 +68,7 @@ const handler = async (req: Request): Promise<Response> => {
             ${programName ? `<p style="font-size: 14px; color: #718096;"><strong>Program:</strong> ${programName}</p>` : ''}
             <p style="font-size: 14px; color: #4a5568;">Log in to your borrower portal to view all bids and track your funding progress in real-time.</p>
             <div style="text-align: center; margin: 30px 0;">
-              <a href="https://ccif-inc.com/applicant-dashboard" style="background: #1a6b3c; color: white; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">View My Dashboard</a>
+              <a href="https://ccif-g.com/applicant-dashboard" style="background: #1a6b3c; color: white; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">View My Dashboard</a>
             </div>
           </div>
           <div style="background: #1a6b3c; color: white; padding: 16px; text-align: center; font-size: 12px;">

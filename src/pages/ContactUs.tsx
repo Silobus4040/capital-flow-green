@@ -98,7 +98,7 @@ export default function ContactUs() {
                 </div>
                 <div className="flex items-start space-x-4">
                   <Mail className="h-6 w-6 text-primary mt-1" />
-                  <div><h3 className="font-semibold mb-1">Email</h3><p className="text-muted-foreground">admin@ccif-inc.com</p><p className="text-sm text-muted-foreground">We respond within 24 hours</p></div>
+                  <div><h3 className="font-semibold mb-1">Email</h3><p className="text-muted-foreground">admin@ccif-g.com</p><p className="text-sm text-muted-foreground">We respond within 24 hours</p></div>
                 </div>
                 <div className="flex items-start space-x-4">
                   <MapPin className="h-6 w-6 text-primary mt-1" />
