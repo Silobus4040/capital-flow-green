@@ -51,7 +51,7 @@ const handler = async (req: Request): Promise<Response> => {
         console.log(`📝 Sending message notification to ${borrowerEmail}`);
 
         await sendWithRetry(resend, {
-            from: "CCIF Notifications <notifications@ccif-inc.com>",
+            from: "CCIF Notifications <notifications@ccif-g.com>",
             to: [borrowerEmail],
             subject: isVoice ? `🎧 New Voice Note from CCIF` : `💬 New Message from CCIF`,
             html: `
@@ -65,7 +65,7 @@ const handler = async (req: Request): Promise<Response> => {
             <p style="font-size: 16px; color: #2d3748;">Dear ${borrowerName || 'Borrower'},</p>
             <p style="font-size: 16px; color: #2d3748;">${preview}</p>
             <div style="text-align: center; margin: 30px 0;">
-              <a href="https://ccif-inc.com/applicant-messages" style="background: #1a6b3c; color: white; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">View Messages</a>
+              <a href="https://ccif-g.com/applicant-messages" style="background: #1a6b3c; color: white; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">View Messages</a>
             </div>
           </div>
           <div style="background: #1a6b3c; color: white; padding: 16px; text-align: center; font-size: 12px;">

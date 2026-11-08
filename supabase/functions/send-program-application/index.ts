@@ -121,7 +121,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send email with retry logic
     const emailResult = await sendWithRetry(resend, {
-      from: "CCIF Applications <applications@ccif-inc.com>",
+      from: "CCIF Applications <applications@ccif-g.com>",
       to: [adminEmail],
       subject: `🆕 New ${sanitizedProgram} Application - ${sanitizedName}`,
       html: `

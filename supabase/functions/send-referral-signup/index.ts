@@ -93,7 +93,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send admin notification with retry
     await sendWithRetry(resend, {
-      from: "CCIF Referrals <referrals@ccif-inc.com>",
+      from: "CCIF Referrals <referrals@ccif-g.com>",
       to: [adminEmail],
       subject: `🤝 New Referral Program Signup - ${sanitizedName}`,
       html: `
@@ -119,7 +119,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send welcome email to new referral partner
     await sendWithRetry(resend, {
-      from: "CCIF Referrals <referrals@ccif-inc.com>",
+      from: "CCIF Referrals <referrals@ccif-g.com>",
       to: [sanitizedEmail],
       subject: `Welcome to the CCIF Referral Network`,
       html: `

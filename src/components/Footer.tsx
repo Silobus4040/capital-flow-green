@@ -61,7 +61,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
-                <span>admin@ccif-inc.com</span>
+                <span>admin@ccif-g.com</span>
               </div>
             </div>
 

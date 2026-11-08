@@ -86,7 +86,7 @@ export default function AdminPortalLogin() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                placeholder="admin@ccif-inc.com"
+                placeholder="admin@ccif-g.com"
                 className="border-red-200 focus:border-red-400"
               />
             </div>
